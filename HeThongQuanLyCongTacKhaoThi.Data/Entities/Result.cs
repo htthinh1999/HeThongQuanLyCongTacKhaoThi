@@ -8,7 +8,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
     {
         public int ID { get; set; }
         public string Username { get; set; }
-        public int SubjectID { get; set; }
+        public string SubjectID { get; set; }
         public int ScoreID { get; set; }
         public int ExamID { get; set; }
         public int StudentAnswerID { get; set; }

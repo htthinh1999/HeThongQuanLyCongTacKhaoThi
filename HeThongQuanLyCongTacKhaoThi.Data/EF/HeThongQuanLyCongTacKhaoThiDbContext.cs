@@ -1,5 +1,6 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.Configurations;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
+using HeThongQuanLyCongTacKhaoThi.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols;
 using System;
@@ -16,8 +17,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
-
+            // Configuration using Fluent API
             modelBuilder.ApplyConfiguration(new ClassConfiguration());
             modelBuilder.ApplyConfiguration(new SubjectConfiguration());
             modelBuilder.ApplyConfiguration(new ScoreConfiguration());
@@ -28,6 +28,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
             modelBuilder.ApplyConfiguration(new StudentAnswerConfiguration());
             modelBuilder.ApplyConfiguration(new StudentAnswerDetailConfiguration());
             modelBuilder.ApplyConfiguration(new ResultConfiguration());
+
+            // Data seeding
+            modelBuilder.Seed();
         }
 
         public DbSet<Class> Classes { get; set; }

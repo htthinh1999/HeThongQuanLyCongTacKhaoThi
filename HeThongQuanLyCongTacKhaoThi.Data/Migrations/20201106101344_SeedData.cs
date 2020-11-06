@@ -2,7 +2,7 @@
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class SeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,8 +10,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 name: "CLASS",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     StudentCount = table.Column<int>(nullable: false, defaultValue: 0)
                 },
@@ -50,13 +49,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 name: "SUBJECT",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    AssiduousScorePercent = table.Column<float>(nullable: false),
-                    FrequentScorePercent = table.Column<float>(nullable: false),
-                    MiddleScorePercent = table.Column<float>(nullable: false),
-                    FinalScorePercent = table.Column<float>(nullable: false),
+                    AssiduousScorePercent = table.Column<float>(nullable: false, defaultValue: 0.1f),
+                    FrequentScorePercent = table.Column<float>(nullable: false, defaultValue: 0.2f),
+                    MiddleScorePercent = table.Column<float>(nullable: false, defaultValue: 0.2f),
+                    FinalScorePercent = table.Column<float>(nullable: false, defaultValue: 0.5f),
                     CreditCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -90,7 +88,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectID = table.Column<int>(nullable: false),
+                    SubjectID = table.Column<string>(nullable: false),
                     Content = table.Column<string>(nullable: false),
                     IsMultipleChoice = table.Column<bool>(nullable: false)
                 },
@@ -112,7 +110,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(nullable: false),
-                    SubjectID = table.Column<int>(nullable: false),
+                    SubjectID = table.Column<string>(nullable: false),
                     ScoreID = table.Column<int>(nullable: false),
                     ExamID = table.Column<int>(nullable: false),
                     StudentAnswerID = table.Column<int>(nullable: false),
@@ -223,6 +221,54 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         principalTable: "STUDENT_ANSWER",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "CLASS",
+                columns: new[] { "ID", "Name" },
+                values: new object[,]
+                {
+                    { "DHCN1A", "Đại học công nghệ 1A" },
+                    { "DHCN1B", "Đại học công nghệ 1B" },
+                    { "DHCN1C", "Đại học công nghệ 1C" },
+                    { "DHCN1D", "Đại học công nghệ 1D" },
+                    { "DHCN2A", "Đại học công nghệ 2A" },
+                    { "DHCN2B", "Đại học công nghệ 2B" },
+                    { "DHCN3A", "Đại học công nghệ 3A" },
+                    { "DHCN3B", "Đại học công nghệ 3B" },
+                    { "DHCN3C", "Đại học công nghệ 3C" },
+                    { "DHCN4A", "Đại học công nghệ 4A" },
+                    { "DHCN4B", "Đại học công nghệ 4B" },
+                    { "DHVT1", "Đại học viễn thông 1" },
+                    { "DHVT2", "Đại học viễn thông 2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SCORE",
+                columns: new[] { "ID", "Name" },
+                values: new object[,]
+                {
+                    { 4, "Điểm kết thúc môn" },
+                    { 3, "Điểm giữa môn" },
+                    { 1, "Điểm chuyên cần" },
+                    { 2, "Điểm thường xuyên" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SUBJECT",
+                columns: new[] { "ID", "CreditCount", "Name" },
+                values: new object[,]
+                {
+                    { "DT4205", 4, "SQL Server" },
+                    { "CC4206", 3, "Nhập môn lập trình" },
+                    { "DH4202", 3, "Kỹ thuật lập trình" },
+                    { "DH4203", 4, "Cấu trúc dữ liệu & giải thuật" },
+                    { "TC4209", 4, "Lập trình hướng đối tượng" },
+                    { "DC4204", 4, "Cơ sở dữ liệu" },
+                    { "DC4106", 4, "Kiến trúc máy tính" },
+                    { "DT4208", 4, "Lập trình Java" },
+                    { "DT4315", 4, "Công nghệ phần mềm" },
+                    { "DT4301", 4, "Mạng máy tính" }
                 });
 
             migrationBuilder.CreateIndex(

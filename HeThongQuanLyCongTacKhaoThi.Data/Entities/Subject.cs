@@ -7,7 +7,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
 {
     public class Subject
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string Name { get; set; }
         public float AssiduousScorePercent { get; set; }
         public float FrequentScorePercent { get; set; }

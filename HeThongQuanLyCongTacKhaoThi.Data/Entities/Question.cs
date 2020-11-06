@@ -7,7 +7,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
     public class Question
     {
         public int ID { get; set; }
-        public int SubjectID { get; set; }
+        public string SubjectID { get; set; }
         public string Content { get; set; }
         public bool IsMultipleChoice { get; set; }
 

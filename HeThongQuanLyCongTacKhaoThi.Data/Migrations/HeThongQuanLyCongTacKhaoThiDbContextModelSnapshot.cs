@@ -45,10 +45,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Class", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -63,6 +61,86 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("CLASS");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "DHCN1A",
+                            Name = "Đại học công nghệ 1A",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN1B",
+                            Name = "Đại học công nghệ 1B",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN1C",
+                            Name = "Đại học công nghệ 1C",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN1D",
+                            Name = "Đại học công nghệ 1D",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN2A",
+                            Name = "Đại học công nghệ 2A",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN2B",
+                            Name = "Đại học công nghệ 2B",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN3A",
+                            Name = "Đại học công nghệ 3A",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN3B",
+                            Name = "Đại học công nghệ 3B",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN3C",
+                            Name = "Đại học công nghệ 3C",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN4A",
+                            Name = "Đại học công nghệ 4A",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHCN4B",
+                            Name = "Đại học công nghệ 4B",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHVT1",
+                            Name = "Đại học viễn thông 1",
+                            StudentCount = 0
+                        },
+                        new
+                        {
+                            ID = "DHVT2",
+                            Name = "Đại học viễn thông 2",
+                            StudentCount = 0
+                        });
                 });
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Exam", b =>
@@ -112,8 +190,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.Property<bool>("IsMultipleChoice")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SubjectID")
-                        .HasColumnType("int");
+                    b.Property<string>("SubjectID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
@@ -141,8 +220,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.Property<int>("StudentAnswerID")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubjectID")
-                        .HasColumnType("int");
+                    b.Property<string>("SubjectID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Time")
                         .HasColumnType("int");
@@ -179,6 +259,28 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("SCORE");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Điểm chuyên cần"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "Điểm thường xuyên"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Điểm giữa môn"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Name = "Điểm kết thúc môn"
+                        });
                 });
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.StudentAnswer", b =>
@@ -235,25 +337,31 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Subject", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<float>("AssiduousScorePercent")
-                        .HasColumnType("real");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("real")
+                        .HasDefaultValue(0.1f);
 
                     b.Property<int>("CreditCount")
                         .HasColumnType("int");
 
                     b.Property<float>("FinalScorePercent")
-                        .HasColumnType("real");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("real")
+                        .HasDefaultValue(0.5f);
 
                     b.Property<float>("FrequentScorePercent")
-                        .HasColumnType("real");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("real")
+                        .HasDefaultValue(0.2f);
 
                     b.Property<float>("MiddleScorePercent")
-                        .HasColumnType("real");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("real")
+                        .HasDefaultValue(0.2f);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -263,6 +371,108 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("SUBJECT");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "CC4206",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 3,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "Nhập môn lập trình"
+                        },
+                        new
+                        {
+                            ID = "DH4202",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 3,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "Kỹ thuật lập trình"
+                        },
+                        new
+                        {
+                            ID = "DH4203",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 4,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "Cấu trúc dữ liệu & giải thuật"
+                        },
+                        new
+                        {
+                            ID = "TC4209",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 4,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "Lập trình hướng đối tượng"
+                        },
+                        new
+                        {
+                            ID = "DC4204",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 4,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "Cơ sở dữ liệu"
+                        },
+                        new
+                        {
+                            ID = "DC4106",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 4,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "Kiến trúc máy tính"
+                        },
+                        new
+                        {
+                            ID = "DT4208",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 4,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "Lập trình Java"
+                        },
+                        new
+                        {
+                            ID = "DT4315",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 4,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "Công nghệ phần mềm"
+                        },
+                        new
+                        {
+                            ID = "DT4205",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 4,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "SQL Server"
+                        },
+                        new
+                        {
+                            ID = "DT4301",
+                            AssiduousScorePercent = 0f,
+                            CreditCount = 4,
+                            FinalScorePercent = 0f,
+                            FrequentScorePercent = 0f,
+                            MiddleScorePercent = 0f,
+                            Name = "Mạng máy tính"
+                        });
                 });
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Answer", b =>
