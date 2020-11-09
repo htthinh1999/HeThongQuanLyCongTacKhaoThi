@@ -13,7 +13,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
         {
             builder.ToTable("SCORE");
             builder.HasKey(x => x.ID);
-            builder.Property(x => x.Name).IsRequired().IsUnicode();
+            builder.Property(x => x.Name).IsRequired().IsUnicode().HasMaxLength(20);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.Configurations;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.Data.Extensions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols;
 using System;
@@ -9,7 +11,7 @@ using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.EF
 {
-    public class HeThongQuanLyCongTacKhaoThiDbContext : DbContext
+    public class HeThongQuanLyCongTacKhaoThiDbContext : IdentityDbContext<Account, RoleAccount, Guid>
     {
         public HeThongQuanLyCongTacKhaoThiDbContext(DbContextOptions options) : base(options)
         {
@@ -28,6 +30,15 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
             modelBuilder.ApplyConfiguration(new StudentAnswerConfiguration());
             modelBuilder.ApplyConfiguration(new StudentAnswerDetailConfiguration());
             modelBuilder.ApplyConfiguration(new ResultConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleAccountConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountConfiguration());
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("USER_CLAIM");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("USER_ROLE").HasKey(x=>new { x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("USER_LOGIN").HasKey(x => x.UserId);
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("ROLE_CLAIM");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("USER_TOKEN").HasKey(x => x.UserId);
+
 
             // Data seeding
             modelBuilder.Seed();

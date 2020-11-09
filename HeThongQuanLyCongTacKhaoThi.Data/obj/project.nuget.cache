@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "yRgw+mDT7x455lnRIEAHrOF2NHqIxUZt9CDzdE/NH039lH3a0JP4RyOcIojYCzNqQYUB4SWjp3XEmZ5cZapuGw==",
+  "dgSpecHash": "wJlba3R90YcTw5g+jepDyuqrbaA/Z4yQhCWFBHkJR/egWnBM4rNwKkTVslBvBlTvARe0jISNNpnc9+9YEfNPxA==",
   "success": true,
   "projectFilePath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.9\\microsoft.aspnetcore.cryptography.internal.3.1.9.nupkg.sha512",
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.9\\microsoft.aspnetcore.cryptography.keyderivation.3.1.9.nupkg.sha512",
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.9\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.9.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
@@ -29,6 +32,8 @@
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\3.1.9\\microsoft.extensions.fileproviders.abstractions.3.1.9.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\3.1.9\\microsoft.extensions.fileproviders.physical.3.1.9.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\3.1.9\\microsoft.extensions.filesystemglobbing.3.1.9.nupkg.sha512",
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.extensions.identity.core\\3.1.9\\microsoft.extensions.identity.core.3.1.9.nupkg.sha512",
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.extensions.identity.stores\\3.1.9\\microsoft.extensions.identity.stores.3.1.9.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.extensions.logging\\3.1.9\\microsoft.extensions.logging.3.1.9.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.9\\microsoft.extensions.logging.abstractions.3.1.9.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.extensions.options\\3.1.9\\microsoft.extensions.options.3.1.9.nupkg.sha512",

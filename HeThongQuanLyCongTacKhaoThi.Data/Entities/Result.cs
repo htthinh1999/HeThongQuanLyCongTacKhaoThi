@@ -7,7 +7,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
     public class Result
     {
         public int ID { get; set; }
-        public string Username { get; set; }
+        public Guid UserID { get; set; }
         public string SubjectID { get; set; }
         public int ScoreID { get; set; }
         public int ExamID { get; set; }
@@ -19,6 +19,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
         public Score Score { get; set; }
         public Exam Exam { get; set; }
         public StudentAnswer StudentAnswer { get; set; }
-
+        public Account Account { get; set; }
     }
 }

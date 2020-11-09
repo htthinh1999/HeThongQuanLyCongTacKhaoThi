@@ -1,12 +1,12 @@
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.deps.json
-F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.dll
-F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.AssemblyInfoInputs.cache
-F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.AssemblyInfo.cs
-F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.csprojAssemblyReference.cache
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.runtimeconfig.json
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.runtimeconfig.dev.json
-F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.genruntimeconfig.cache
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.dll
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.pdb
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.AssemblyInfoInputs.cache
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.AssemblyInfo.cs
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.csproj.CoreCompileInputs.cache
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.dll
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.pdb
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.genruntimeconfig.cache
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.csprojAssemblyReference.cache

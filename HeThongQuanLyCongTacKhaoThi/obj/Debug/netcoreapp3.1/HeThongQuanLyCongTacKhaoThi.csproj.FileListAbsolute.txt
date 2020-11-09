@@ -9,7 +9,6 @@ F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bin\
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.pdb
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Views.dll
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Views.pdb
-F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.csprojAssemblyReference.cache
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AssemblyInfoInputs.cache
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AssemblyInfo.cs
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.csproj.CoreCompileInputs.cache
@@ -35,3 +34,4 @@ F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.pdb
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.genruntimeconfig.cache
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.csproj.CopyComplete
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.csprojAssemblyReference.cache

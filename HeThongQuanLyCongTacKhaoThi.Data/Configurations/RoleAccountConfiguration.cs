@@ -7,13 +7,12 @@ using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
 {
-    public class ExamConfiguration : IEntityTypeConfiguration<Exam>
+    public class RoleAccountConfiguration : IEntityTypeConfiguration<RoleAccount>
     {
-        public void Configure(EntityTypeBuilder<Exam> builder)
+        public void Configure(EntityTypeBuilder<RoleAccount> builder)
         {
-            builder.ToTable("EXAM");
-            builder.HasKey(x => x.ID);
-            builder.Property(x => x.Name).IsRequired().IsUnicode().HasMaxLength(50);
+            builder.ToTable("RoleAccount");
+            builder.Property(x => x.Description).IsRequired().IsUnicode().HasMaxLength(100);
         }
     }
 }

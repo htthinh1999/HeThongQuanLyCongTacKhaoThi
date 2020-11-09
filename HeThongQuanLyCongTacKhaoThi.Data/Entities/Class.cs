@@ -9,5 +9,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
         public string ID { get; set; }
         public string Name { get; set; }
         public int StudentCount { get; set; }
+
+        public List<Account> Accounts { get; set; }
+        public List<SubjectTeacher> SubjectTeachers { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,40 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 new Score() { ID = 4, Name = "Điểm kết thúc môn" }
                 );
 
+            Guid ADMIN_ID = new Guid("EFE5C78C-BBC5-40E5-A106-1F07D4B4FCDB");
+            Guid ROLE_ID = ADMIN_ID;
+            modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
+            {
+                Id = ROLE_ID,
+                Name = "admin",
+                NormalizedName = "admin",
+                Description = "Vai trò quản trị viên"
+            });
+
+            var hasher = new PasswordHasher<Account>();
+            modelBuilder.Entity<Account>().HasData(new Account
+            {
+                Id = ADMIN_ID,
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "keycodemon@gmail.com",
+                NormalizedEmail = "keycodemon@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "admin123"),
+                SecurityStamp = string.Empty,
+                Student_TeacherID = null,
+                Name = "Keycode Mon",
+                Gender = true,
+                Birthday = new DateTime(1999, 09, 27),
+                ClassID = null,
+                Address = null
+            });
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                RoleId = ROLE_ID,
+                UserId = ADMIN_ID
+            });
         }
     }
 }

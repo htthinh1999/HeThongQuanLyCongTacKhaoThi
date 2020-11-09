@@ -13,7 +13,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
         {
             builder.ToTable("QUESTION");
             builder.HasKey(x => x.ID);
-            builder.Property(x => x.SubjectID).IsRequired();
+            builder.Property(x => x.SubjectID).IsRequired().HasMaxLength(10);
             builder.Property(x => x.Content).IsRequired().IsUnicode();
             builder.Property(x => x.IsMultipleChoice).IsRequired();
 
