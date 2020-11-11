@@ -2235,6 +2235,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "HeThongQuanLyCongTacKhaoThi.Utilities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/HeThongQuanLyCongTacKhaoThi.Utilities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HeThongQuanLyCongTacKhaoThi.Utilities.dll": {}
+        }
       }
     }
   },
@@ -7559,10 +7569,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "HeThongQuanLyCongTacKhaoThi.Utilities/1.0.0": {
+      "type": "project",
+      "path": "../HeThongQuanLyCongTacKhaoThi.Utilities/HeThongQuanLyCongTacKhaoThi.Utilities.csproj",
+      "msbuildProject": "../HeThongQuanLyCongTacKhaoThi.Utilities/HeThongQuanLyCongTacKhaoThi.Utilities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "HeThongQuanLyCongTacKhaoThi.Utilities >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.9",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.9",
       "Microsoft.EntityFrameworkCore.SqlServer.Design >= 1.1.6",
@@ -7598,7 +7614,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj": {
+              "projectPath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

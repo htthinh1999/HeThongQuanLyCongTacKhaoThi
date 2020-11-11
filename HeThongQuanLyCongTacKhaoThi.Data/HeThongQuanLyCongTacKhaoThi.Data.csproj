@@ -25,4 +25,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HeThongQuanLyCongTacKhaoThi.Utilities\HeThongQuanLyCongTacKhaoThi.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>

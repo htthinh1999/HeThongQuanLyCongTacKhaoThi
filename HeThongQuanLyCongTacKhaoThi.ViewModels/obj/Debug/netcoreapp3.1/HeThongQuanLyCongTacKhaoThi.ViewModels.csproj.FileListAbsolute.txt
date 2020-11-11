@@ -1,0 +1,9 @@
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.deps.json
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.dll
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.pdb
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csprojAssemblyReference.cache
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.AssemblyInfoInputs.cache
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.AssemblyInfo.cs
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj.CoreCompileInputs.cache
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.dll
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.pdb

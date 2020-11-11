@@ -10,3 +10,6 @@ F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.pdb
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.genruntimeconfig.cache
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.csprojAssemblyReference.cache
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.dll
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.pdb
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.csproj.CopyComplete

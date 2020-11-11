@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HeThongQuanLyCongTacKhaoThi.Data\HeThongQuanLyCongTacKhaoThi.Data.csproj" />
+    <ProjectReference Include="..\HeThongQuanLyCongTacKhaoThi.ViewModels\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>

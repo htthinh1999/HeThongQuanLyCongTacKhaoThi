@@ -7,3 +7,10 @@ F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Appl
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Application.dll
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Application.pdb
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Application.csprojAssemblyReference.cache
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.dll
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.dll
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.dll
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.pdb
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.pdb
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.pdb
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Application.csproj.CopyComplete
