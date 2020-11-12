@@ -21,11 +21,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes
             _context = context;
         }
 
-        public async Task<int> Create(ClassCreateRequest request)
+        public async Task<string> Create(ClassCreateRequest request)
         {
             var _class = new Class() { ID = request.ID, Name = request.Name };
             _context.Classes.Add(_class);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return _class.ID;
         }
 
         public async Task<int> Delete(string classID)
@@ -81,6 +82,21 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes
                 Items = data
             };
             return pagedResult;
+        }
+
+        public async Task<ClassViewModel> GetByID(string classID)
+        {
+            var _class = await _context.Classes.FindAsync(classID);
+            if (_class == null) throw new Exception($"Cannot find Class with ID = {classID}");
+
+            ClassViewModel classViewModel = new ClassViewModel()
+            {
+                ID = classID,
+                Name = _class.Name,
+                StudentCount = _class.StudentCount
+            };
+
+            return classViewModel;
         }
     }
 }

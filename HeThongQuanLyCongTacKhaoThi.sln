@@ -9,11 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.Application", "HeThongQuanLyCongTacKhaoThi.Application\HeThongQuanLyCongTacKhaoThi.Application.csproj", "{5A7D8374-C61C-45B3-ACDC-9500C694DAC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeThongQuanLyCongTacKhaoThi.ViewModels", "HeThongQuanLyCongTacKhaoThi.ViewModels\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj", "{54A73D2C-2B28-411D-A1F3-593628FE3FA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.ViewModels", "HeThongQuanLyCongTacKhaoThi.ViewModels\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj", "{54A73D2C-2B28-411D-A1F3-593628FE3FA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeThongQuanLyCongTacKhaoThi.BackendAPI", "HeThongQuanLyCongTacKhaoThi.BackendAPI\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj", "{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.BackendAPI", "HeThongQuanLyCongTacKhaoThi.BackendAPI\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj", "{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeThongQuanLyCongTacKhaoThi.Utilities", "HeThongQuanLyCongTacKhaoThi.Utilities\HeThongQuanLyCongTacKhaoThi.Utilities.csproj", "{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.Utilities", "HeThongQuanLyCongTacKhaoThi.Utilities\HeThongQuanLyCongTacKhaoThi.Utilities.csproj", "{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Infrastructure", "1. Infrastructure", "{442FEB35-B834-44D5-91DD-206AE8EC883D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domain", "2. Domain", "{436B4A22-058D-48BA-B5FE-2DC071F27D70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Hosts", "3. Hosts", "{D7CE9111-B6A9-4114-897F-8295430AE14B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +54,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F4DF8FB6-167E-435A-921A-F2378F178BDC} = {D7CE9111-B6A9-4114-897F-8295430AE14B}
+		{F463C6E4-8351-4AA8-8492-1F5B56B1B67B} = {436B4A22-058D-48BA-B5FE-2DC071F27D70}
+		{5A7D8374-C61C-45B3-ACDC-9500C694DAC9} = {436B4A22-058D-48BA-B5FE-2DC071F27D70}
+		{54A73D2C-2B28-411D-A1F3-593628FE3FA5} = {442FEB35-B834-44D5-91DD-206AE8EC883D}
+		{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5} = {D7CE9111-B6A9-4114-897F-8295430AE14B}
+		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF} = {442FEB35-B834-44D5-91DD-206AE8EC883D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8436CEF2-F018-4EC6-8644-4DD75822E80C}
