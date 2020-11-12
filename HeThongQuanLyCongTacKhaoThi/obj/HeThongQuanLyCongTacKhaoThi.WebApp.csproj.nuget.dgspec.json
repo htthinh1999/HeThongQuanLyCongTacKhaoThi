@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj": {}
+    "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.WebApp.csproj": {}
   },
   "projects": {
-    "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj": {
+    "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj",
-        "projectName": "HeThongQuanLyCongTacKhaoThi.Utilities",
-        "projectPath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj",
+        "projectUniqueName": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.WebApp.csproj",
+        "projectName": "HeThongQuanLyCongTacKhaoThi.WebApp",
+        "projectPath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.WebApp.csproj",
         "packagesPath": "C:\\Users\\MON_MINA\\.nuget\\packages\\",
-        "outputPath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\obj\\",
+        "outputPath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MON_MINA\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -52,6 +52,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

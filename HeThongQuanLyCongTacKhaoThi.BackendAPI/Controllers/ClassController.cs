@@ -19,7 +19,8 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _classService.GetAllPaging(new ViewModels.Catalog.Classes.ClassPagingRequest() { Keyword = "Đại học công nghệ", PageIndex = 1, PageSize = 20 }));
+            var classes = await _classService.GetAllPaging(new ViewModels.Catalog.Classes.ClassPagingRequest() { Keyword = "Đại học công nghệ", PageIndex = 1, PageSize = 20 });
+            return Ok(classes);
         }
     }
 }
