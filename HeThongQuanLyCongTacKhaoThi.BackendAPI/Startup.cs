@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
+using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
 using HeThongQuanLyCongTacKhaoThi.Data.EF;
+using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,8 +34,18 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddDbContext<HeThongQuanLyCongTacKhaoThiDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MAIN_CONNECTION_STRING)));
 
+            // Add Identity
+            services.AddIdentity<Account, RoleAccount>()
+                .AddEntityFrameworkStores<HeThongQuanLyCongTacKhaoThiDbContext>()
+                .AddDefaultTokenProviders();
+
             // Declare DI
             services.AddTransient<IClassService, ClassService>();
+            services.AddTransient<UserManager<Account>, UserManager<Account>>();
+            services.AddTransient<SignInManager<Account>, SignInManager<Account>>();
+            services.AddTransient<RoleManager<RoleAccount>, RoleManager<RoleAccount>>();
+            services.AddTransient<IAccountService, AccountService>();
+
 
             services.AddControllersWithViews();
 
