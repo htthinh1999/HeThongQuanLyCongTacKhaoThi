@@ -11,7 +11,6 @@ using System.Linq;
 
 namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes
 {
-
     public class ClassService : IClassService
     {
         private readonly HeThongQuanLyCongTacKhaoThiDbContext _context;

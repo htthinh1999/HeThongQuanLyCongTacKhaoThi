@@ -99,3 +99,4 @@ F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Back
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.BackendAPI.MvcApplicationPartsAssemblyInfo.cs
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.BackendAPI.MvcApplicationPartsAssemblyInfo.cache
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\obj\Debug\netcoreapp3.1\scopedcss\bundle\HeThongQuanLyCongTacKhaoThi.BackendAPI.styles.css
+F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
