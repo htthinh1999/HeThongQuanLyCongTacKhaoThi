@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
 using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -48,9 +48,12 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<RoleManager<RoleAccount>, RoleManager<RoleAccount>>();
             services.AddTransient<IAccountService, AccountService>();
 
+            // Declare Fluent Validator
+            //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 
             //services.AddControllersWithViews();
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+
 
             // Declare Swagger
             services.AddSwaggerGen(c =>

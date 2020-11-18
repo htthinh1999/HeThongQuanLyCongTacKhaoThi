@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ijKXSxor8mQWXjBXmL9dSCJL5wrc4Ifuv6BHHnCOsUw2ylAIaNyCg4EVuWYa+gCzt9t3BcxLuRwaPuWRb2OY1w==",
+  "dgSpecHash": "dyUO1OXESFQPncaRw5Vpni0b/oouK2FvqV4wfabPT/6/07/M8NgEW2SWsAtvDShaqGdlCMMPE5ulZGDktNipog==",
   "success": true,
   "projectFilePath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.BackendAPI\\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\fluentvalidation\\9.3.0\\fluentvalidation.9.3.0.nupkg.sha512",
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\fluentvalidation.aspnetcore\\9.3.0\\fluentvalidation.aspnetcore.9.3.0.nupkg.sha512",
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\9.3.0\\fluentvalidation.dependencyinjectionextensions.9.3.0.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",

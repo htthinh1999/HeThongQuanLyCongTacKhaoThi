@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "XrrwU3If5yKG++jduWiMj0RVtAA5/mZeB+58ORL8nSket+loP+DcZsLw8TuYdXsKgQ2gAJH57MmD5a0nGJsqBQ==",
+  "dgSpecHash": "X/VwSFANro39hv27ZE5+/kLEvhpWLmSOPppoPQlO/b/eKVs08Q9c0AX/ZbW1OMwvHiktvlbYC4/81/vHlJBgvA==",
   "success": true,
   "projectFilePath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\fluentvalidation\\9.3.0\\fluentvalidation.9.3.0.nupkg.sha512",
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\fluentvalidation.aspnetcore\\9.3.0\\fluentvalidation.aspnetcore.9.3.0.nupkg.sha512",
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\9.3.0\\fluentvalidation.dependencyinjectionextensions.9.3.0.nupkg.sha512",
+    "C:\\Users\\MON_MINA\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512"
+  ],
   "logs": []
 }
