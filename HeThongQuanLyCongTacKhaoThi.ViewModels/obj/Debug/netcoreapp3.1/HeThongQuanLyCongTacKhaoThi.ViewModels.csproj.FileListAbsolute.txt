@@ -7,3 +7,12 @@ F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.View
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj.CoreCompileInputs.cache
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.dll
 F:\ASP.NET_Projects\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.pdb
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.deps.json
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.dll
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.pdb
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csprojAssemblyReference.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.AssemblyInfoInputs.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.AssemblyInfo.cs
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj.CoreCompileInputs.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.dll
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.pdb

@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\MON_MINA\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\MON_MINA\\.nuget\\packages"
+    ]
+  }
+}

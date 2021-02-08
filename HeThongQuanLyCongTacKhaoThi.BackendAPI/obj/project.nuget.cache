@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dyUO1OXESFQPncaRw5Vpni0b/oouK2FvqV4wfabPT/6/07/M8NgEW2SWsAtvDShaqGdlCMMPE5ulZGDktNipog==",
+  "dgSpecHash": "ULDmDyj+CNnzAmSljxUmiqTqhZvuGryszCKOLorh3YJWZDX4dKQGaTrmzt9X9xszp7vvD8CNwAP1OlsWvXXaOg==",
   "success": true,
-  "projectFilePath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.BackendAPI\\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj",
+  "projectFilePath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.BackendAPI\\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MON_MINA\\.nuget\\packages\\fluentvalidation\\9.3.0\\fluentvalidation.9.3.0.nupkg.sha512",
     "C:\\Users\\MON_MINA\\.nuget\\packages\\fluentvalidation.aspnetcore\\9.3.0\\fluentvalidation.aspnetcore.9.3.0.nupkg.sha512",

@@ -8255,22 +8255,20 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\HeThongQuanLyCongTacKhaoThi.Application.csproj",
+      "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\HeThongQuanLyCongTacKhaoThi.Application.csproj",
       "projectName": "HeThongQuanLyCongTacKhaoThi.Application",
-      "projectPath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\HeThongQuanLyCongTacKhaoThi.Application.csproj",
+      "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\HeThongQuanLyCongTacKhaoThi.Application.csproj",
       "packagesPath": "C:\\Users\\MON_MINA\\.nuget\\packages\\",
-      "outputPath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\obj\\",
+      "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MON_MINA\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -8278,11 +8276,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj": {
-              "projectPath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj"
+            "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj": {
+              "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj"
             },
-            "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj": {
-              "projectPath": "F:\\ASP.NET_Projects\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj"
+            "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj": {
+              "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj"
             }
           }
         }
@@ -8320,7 +8318,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

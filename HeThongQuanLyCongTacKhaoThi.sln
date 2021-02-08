@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domain", "2. Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Hosts", "3. Hosts", "{D7CE9111-B6A9-4114-897F-8295430AE14B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeThongQuanLyCongTacKhaoThi.AdminApp", "HeThongQuanLyCongTacKhaoThi.AdminApp\HeThongQuanLyCongTacKhaoThi.AdminApp.csproj", "{832A189C-57A2-41B8-BD97-67143E6C36FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{832A189C-57A2-41B8-BD97-67143E6C36FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832A189C-57A2-41B8-BD97-67143E6C36FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832A189C-57A2-41B8-BD97-67143E6C36FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832A189C-57A2-41B8-BD97-67143E6C36FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{54A73D2C-2B28-411D-A1F3-593628FE3FA5} = {442FEB35-B834-44D5-91DD-206AE8EC883D}
 		{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5} = {D7CE9111-B6A9-4114-897F-8295430AE14B}
 		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF} = {442FEB35-B834-44D5-91DD-206AE8EC883D}
+		{832A189C-57A2-41B8-BD97-67143E6C36FE} = {D7CE9111-B6A9-4114-897F-8295430AE14B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8436CEF2-F018-4EC6-8644-4DD75822E80C}

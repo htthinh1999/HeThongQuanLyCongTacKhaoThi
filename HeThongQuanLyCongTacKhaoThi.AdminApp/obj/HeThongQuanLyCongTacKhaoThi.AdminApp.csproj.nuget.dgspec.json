@@ -1,0 +1,154 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.AdminApp\\HeThongQuanLyCongTacKhaoThi.AdminApp.csproj": {}
+  },
+  "projects": {
+    "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.AdminApp\\HeThongQuanLyCongTacKhaoThi.AdminApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.AdminApp\\HeThongQuanLyCongTacKhaoThi.AdminApp.csproj",
+        "projectName": "HeThongQuanLyCongTacKhaoThi.AdminApp",
+        "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.AdminApp\\HeThongQuanLyCongTacKhaoThi.AdminApp.csproj",
+        "packagesPath": "C:\\Users\\MON_MINA\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.AdminApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MON_MINA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj": {
+                "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.IdentityModel.Logging": {
+              "target": "Package",
+              "version": "[6.8.0, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.8.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.8.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj",
+        "projectName": "HeThongQuanLyCongTacKhaoThi.ViewModels",
+        "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj",
+        "packagesPath": "C:\\Users\\MON_MINA\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MON_MINA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[9.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
