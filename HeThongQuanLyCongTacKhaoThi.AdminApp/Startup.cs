@@ -1,3 +1,7 @@
+using FluentValidation.AspNetCore;
+using HeThongQuanLyCongTacKhaoThi.AdminApp.Services;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,7 +27,29 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddHttpClient();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    //options.AccessDeniedPath = "/Account/Forbiden";
+                });
+
+            services.AddControllersWithViews()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+
+            services.AddTransient<IAccountApiClient, AccountApiClient>();
+
+            IMvcBuilder builder = services.AddRazorPages();
+            var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");
+
+#if DEBUG
+            if(enviroment == Environments.Development)
+            {
+                builder.AddRazorRuntimeCompilation();
+            }
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +67,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 
