@@ -39,6 +39,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             services.AddControllersWithViews()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
+            services.AddSession(option => option.IdleTimeout = TimeSpan.FromMinutes(30));
+
             services.AddTransient<IAccountApiClient, AccountApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
@@ -73,6 +75,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
