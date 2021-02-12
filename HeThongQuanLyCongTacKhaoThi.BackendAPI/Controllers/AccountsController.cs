@@ -46,5 +46,12 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             }
             return Ok();
         }
+
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetAccountPagingRequest request)
+        {
+            var accounts = await _accountService.GetAccountPaging(request);
+            return Ok(accounts);
+        }
     }
 }

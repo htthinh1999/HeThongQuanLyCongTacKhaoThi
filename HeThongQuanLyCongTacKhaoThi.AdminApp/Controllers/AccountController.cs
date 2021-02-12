@@ -2,6 +2,8 @@
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
@@ -16,6 +18,7 @@ using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly IAccountApiClient _accountApiClient;
@@ -27,20 +30,28 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             _configuration = configuration;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 10)
         {
-            return View();
+            var token = HttpContext.Session.GetString("Token");
+            var request = new GetAccountPagingRequest
+            {
+                BearerToken = token,
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+            var data = await _accountApiClient.GetAccountPaging(request);
+            return View(data);
         }
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public async Task<IActionResult> Login()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> Login(LoginRequest request)
         {
             if (!ModelState.IsValid)
@@ -57,11 +68,11 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 IsPersistent = true
             };
 
+            HttpContext.Session.SetString("Token", token);
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 accountPrincipal,
                 authProperties);
-
 
             return RedirectToAction("Index", "Home");
         }
@@ -86,6 +97,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         public async Task<ActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.Session.Remove("Token");
             return RedirectToAction("Login", "Account");
         }
     }

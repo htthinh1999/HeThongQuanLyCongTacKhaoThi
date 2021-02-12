@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[3.1.9, )"
             },
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.IdentityModel.Logging": {
               "target": "Package",
               "version": "[6.8.0, )"
@@ -55,6 +59,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[6.8.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.5, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

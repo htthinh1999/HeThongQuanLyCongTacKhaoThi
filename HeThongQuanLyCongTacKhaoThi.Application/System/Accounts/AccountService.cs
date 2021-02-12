@@ -1,11 +1,14 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.Entities;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,6 +81,42 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
                 return true;
             }
             return false;
+        }
+
+        public async Task<PagedResult<AccountViewModel>> GetAccountPaging(GetAccountPagingRequest request)
+        {
+            var query = _userManager.Users;
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(
+                    x => x.UserName.Contains(request.Keyword)
+                        || x.Name.Contains(request.Keyword)
+                        || x.Birthday.ToString().Contains(request.Keyword)
+                        || x.Email.Contains(request.Keyword)
+                        || (x.Gender == request.Keyword.Equals("Nam"))
+                        || x.PhoneNumber.Contains(request.Keyword)
+                    );
+            }
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .Select(x => new AccountViewModel()
+            {
+                Username = x.UserName,
+                Name = x.Name,
+                Email = x.Email,
+                Birthday = x.Birthday,
+                Gender = x.Gender,
+                PhoneNumber = x.PhoneNumber
+            }).ToListAsync();
+            var totalRow = await query.CountAsync();
+            var pagedResult = new PagedResult<AccountViewModel>()
+            {
+                TotalRecord = totalRow,
+                Items = data
+            };
+            return pagedResult;
         }
     }
 }
