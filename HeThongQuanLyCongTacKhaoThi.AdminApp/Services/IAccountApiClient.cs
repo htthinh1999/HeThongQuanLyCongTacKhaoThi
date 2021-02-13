@@ -11,5 +11,6 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
     {
         Task<string> Authenticate(LoginRequest request);
         Task<PagedResult<AccountViewModel>> GetAccountPaging(GetAccountPagingRequest request);
+        Task<bool> RegisterAccount(RegisterRequest request);
     }
 }

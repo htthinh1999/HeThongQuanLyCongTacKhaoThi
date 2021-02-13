@@ -43,7 +43,19 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
             var response = await client.GetAsync($"/api/accounts/paging?pageIndex={request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
             var body = await response.Content.ReadAsStringAsync();
             var accounts = JsonConvert.DeserializeObject<PagedResult<AccountViewModel>>(body);
+
             return accounts;
+        }
+
+        public async Task<bool> RegisterAccount(RegisterRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var response = await client.PostAsync("/api/accounts/register", httpContent);
+
+            return response.IsSuccessStatusCode;
         }
     }
 }

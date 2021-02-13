@@ -72,7 +72,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
                 Email = request.Email,
                 Student_TeacherID = request.Student_TeacherID,
                 ClassID = request.ClassID,
-                Address = request.Address
+                Address = request.Address,
+                PhoneNumber = request.PhoneNumber
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
