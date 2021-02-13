@@ -44,6 +44,27 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             return View(data);
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(RegisterRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _accountApiClient.RegisterAccount(request);
+            if (result)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
         [HttpGet, AllowAnonymous]
         public async Task<IActionResult> Login()
         {
