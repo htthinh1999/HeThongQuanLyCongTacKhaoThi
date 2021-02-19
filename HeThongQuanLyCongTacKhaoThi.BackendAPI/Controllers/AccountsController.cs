@@ -27,9 +27,9 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var resultToken = await _accountService.Authenticate(request);
-            if (string.IsNullOrEmpty(resultToken))
+            if (!resultToken.IsSuccessed)
             {
-                return BadRequest("Username or Password incorrect!");
+                return BadRequest(resultToken.Message);
             }
             return Ok(resultToken);
         }
@@ -40,18 +40,41 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var result = await _accountService.Register(request);
-            if (!result)
+            if (!result.IsSuccessed)
             {
-                return BadRequest("Register unsuccessfull!");
+                return BadRequest(result.Message);
             }
             return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] AccountUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _accountService.Update(id, request);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
         }
 
         [HttpGet("paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetAccountPagingRequest request)
         {
-            var accounts = await _accountService.GetAccountPaging(request);
-            return Ok(accounts);
+            var result = await _accountService.GetAccountPaging(request);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByID(Guid id)
+        {
+            var result = await _accountService.GetByID(id);
+            return Ok(result);
         }
     }
 }

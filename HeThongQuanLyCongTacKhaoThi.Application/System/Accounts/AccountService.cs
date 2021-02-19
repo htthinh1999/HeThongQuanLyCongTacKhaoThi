@@ -30,14 +30,17 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             _configuration = configuration;
         }
 
-        public async Task<string> Authenticate(LoginRequest request)
+        public async Task<ApiResult<string>> Authenticate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.Username);
-            if (user == null)   return null;
+            if (user == null)
+            {
+                return new ApiErrorResult<string>("Tên tài khoản hoặc mật khẩu không đúng");
+            }
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
             if (!result.Succeeded)
             {
-                return null;
+                return new ApiErrorResult<string>("Tên tài khoản hoặc mật khẩu không đúng");
             }
 
             var roles = await _userManager.GetRolesAsync(user);
@@ -58,12 +61,23 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
                 expires: DateTime.Now,
                 signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
         }
 
-        public async Task<bool> Register(RegisterRequest request)
+        public async Task<ApiResult<bool>> Register(RegisterRequest request)
         {
-            var user = new Account()
+            var user = await _userManager.FindByNameAsync(request.Username);
+            if (user != null)
+            {
+                return new ApiErrorResult<bool>("Lỗi trùng tên đăng nhập");
+            }
+
+            if(_userManager.FindByEmailAsync(request.Email) != null)
+            {
+                return new ApiErrorResult<bool>("Lỗi trùng địa chỉ email");
+            }
+
+            user = new Account()
             {
                 UserName = request.Username,
                 Name = request.Name,
@@ -79,12 +93,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
-                return true;
+                return new ApiSuccessResult<bool>();
             }
-            return false;
+            return new ApiErrorResult<bool>("Đăng ký không thành công");
         }
 
-        public async Task<PagedResult<AccountViewModel>> GetAccountPaging(GetAccountPagingRequest request)
+        public async Task<ApiResult<PagedResult<AccountViewModel>>> GetAccountPaging(GetAccountPagingRequest request)
         {
             var query = _userManager.Users;
 
@@ -104,12 +118,16 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             .Take(request.PageSize)
             .Select(x => new AccountViewModel()
             {
+                Id = x.Id,
                 Username = x.UserName,
                 Name = x.Name,
                 Email = x.Email,
                 Birthday = x.Birthday,
                 Gender = x.Gender,
-                PhoneNumber = x.PhoneNumber
+                PhoneNumber = x.PhoneNumber,
+                Student_TeacherID = x.Student_TeacherID,
+                Address = x.Address,
+                ClassID = x.ClassID
             }).ToListAsync();
             var totalRow = await query.CountAsync();
             var pagedResult = new PagedResult<AccountViewModel>()
@@ -117,7 +135,54 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
                 TotalRecord = totalRow,
                 Items = data
             };
-            return pagedResult;
+            return new ApiSuccessResult<PagedResult<AccountViewModel>>(pagedResult);
+        }
+
+        public async Task<ApiResult<bool>> Update(Guid id, AccountUpdateRequest request)
+        {
+            if (await _userManager.Users.AnyAsync(x => x.Email == request.Email && x.Id != id))
+            {
+                return new ApiErrorResult<bool>("Lỗi trùng tên đăng nhập");
+            }
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
+            user.Name = request.Name;
+            user.Email = request.Email;
+            user.Gender = request.Gender;
+            user.Birthday = request.Birthday;
+            user.Student_TeacherID = request.Student_TeacherID;
+            user.ClassID = request.ClassID;
+            user.Address = request.Address;
+            user.PhoneNumber = request.PhoneNumber;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+            }
+            return new ApiErrorResult<bool>("Cập nhật không thành công");
+        }
+
+        public async Task<ApiResult<AccountViewModel>> GetByID(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if(user == null)
+            {
+                return new ApiErrorResult<AccountViewModel>("Tài khoản không tồn tại");
+            }
+            var accountViewModel = new AccountViewModel()
+            {
+                Email = user.Email,
+                Birthday = user.Birthday,
+                Gender = user.Gender,
+                Name = user.Name,
+                PhoneNumber = user.PhoneNumber,
+                Username = user.UserName,
+                Student_TeacherID = user.Student_TeacherID,
+                Address = user.Address,
+                ClassID = user.ClassID
+            };
+            return new ApiSuccessResult<AccountViewModel>(accountViewModel);
         }
     }
 }

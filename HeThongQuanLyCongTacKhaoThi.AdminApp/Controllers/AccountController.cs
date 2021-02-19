@@ -32,16 +32,14 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 
         public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 10)
         {
-            var token = HttpContext.Session.GetString("Token");
             var request = new GetAccountPagingRequest
             {
-                BearerToken = token,
                 Keyword = keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
             var data = await _accountApiClient.GetAccountPaging(request);
-            return View(data);
+            return View(data.ResultObj);
         }
 
         [HttpGet]
@@ -58,11 +56,53 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return View();
             }
             var result = await _accountApiClient.RegisterAccount(request);
-            if (result)
+            if (result.IsSuccessed)
             {
                 return RedirectToAction("Index");
             }
-            return View();
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var result = await _accountApiClient.GetByID(id);
+            if (result.IsSuccessed)
+            {
+                var user = result.ResultObj;
+                var updateResquest = new AccountUpdateRequest()
+                {
+                    Birthday = user.Birthday,
+                    Email = user.Email,
+                    Gender = user.Gender,
+                    Name = user.Name,
+                    PhoneNumber = user.PhoneNumber,
+                    Address = user.Address,
+                    ClassID = user.ClassID,
+                    Student_TeacherID = user.Student_TeacherID,
+                    Id = id
+                };
+                return View(updateResquest);
+            }
+
+            return RedirectToAction("Error", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(AccountUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _accountApiClient.UpdateAccount(request.Id, request);
+            if (result.IsSuccessed)
+            {
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", result.Message);
+            return View(request);
         }
 
         [HttpGet, AllowAnonymous]
@@ -80,16 +120,16 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return View(ModelState);
             }
 
-            var token = await _accountApiClient.Authenticate(request);
+            var result = await _accountApiClient.Authenticate(request);
 
-            var accountPrincipal = ValidateToken(token);
+            var accountPrincipal = ValidateToken(result.ResultObj);
             var authProperties = new AuthenticationProperties
             {
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                 IsPersistent = true
             };
 
-            HttpContext.Session.SetString("Token", token);
+            HttpContext.Session.SetString("Token", result.ResultObj);
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 accountPrincipal,

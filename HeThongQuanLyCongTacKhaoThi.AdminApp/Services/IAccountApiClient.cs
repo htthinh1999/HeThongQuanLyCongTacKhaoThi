@@ -9,8 +9,10 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
 {
     public interface IAccountApiClient
     {
-        Task<string> Authenticate(LoginRequest request);
-        Task<PagedResult<AccountViewModel>> GetAccountPaging(GetAccountPagingRequest request);
-        Task<bool> RegisterAccount(RegisterRequest request);
+        Task<ApiResult<string>> Authenticate(LoginRequest request);
+        Task<ApiResult<PagedResult<AccountViewModel>>> GetAccountPaging(GetAccountPagingRequest request);
+        Task<ApiResult<bool>> RegisterAccount(RegisterRequest request);
+        Task<ApiResult<bool>> UpdateAccount(Guid id, AccountUpdateRequest request);
+        Task<ApiResult<AccountViewModel>> GetByID(Guid id);
     }
 }
