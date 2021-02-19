@@ -20,6 +20,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts
         [Display(Name = "Giới tính nam")]
         public bool Gender { get; set; }
         [Display(Name = "Ngày sinh")]
+        [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
         [Display(Name = "Email")]
         public string Email { get; set; }
