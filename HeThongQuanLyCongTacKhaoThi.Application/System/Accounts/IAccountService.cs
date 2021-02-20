@@ -12,6 +12,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
         Task<ApiResult<string>> Authenticate(LoginRequest request);
         Task<ApiResult<bool>> Register(RegisterRequest request);
         Task<ApiResult<bool>> Update(Guid id, AccountUpdateRequest request);
+        Task<ApiResult<bool>> Delete(Guid id);
         Task<ApiResult<PagedResult<AccountViewModel>>> GetAccountPaging(GetAccountPagingRequest request);
         Task<ApiResult<AccountViewModel>> GetByID(Guid id);
     }

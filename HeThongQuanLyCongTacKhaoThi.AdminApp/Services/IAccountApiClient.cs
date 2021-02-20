@@ -13,6 +13,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
         Task<ApiResult<PagedResult<AccountViewModel>>> GetAccountPaging(GetAccountPagingRequest request);
         Task<ApiResult<bool>> RegisterAccount(RegisterRequest request);
         Task<ApiResult<bool>> UpdateAccount(Guid id, AccountUpdateRequest request);
+        Task<ApiResult<bool>> DeleteAccount(Guid id);
         Task<ApiResult<AccountViewModel>> GetByID(Guid id);
     }
 }

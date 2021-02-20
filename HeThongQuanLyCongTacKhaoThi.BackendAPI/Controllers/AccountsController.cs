@@ -40,11 +40,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var result = await _accountService.Register(request);
-            if (!result.IsSuccessed)
-            {
-                return BadRequest(result.Message);
-            }
-            return Ok();
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
@@ -60,6 +56,13 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             {
                 return BadRequest(result.Message);
             }
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _accountService.Delete(id);
             return Ok(result);
         }
 
