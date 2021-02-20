@@ -105,6 +105,39 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             return View(request);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _accountApiClient.GetByID(id);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+            return View(result.ResultObj);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _accountApiClient.GetByID(id);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+            return View(result.ResultObj);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(AccountViewModel request)
+        {
+            var result = await _accountApiClient.DeleteAccount(request.Id);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+            return RedirectToAction("Index");
+        }
+
         [HttpGet, AllowAnonymous]
         public async Task<IActionResult> Login()
         {

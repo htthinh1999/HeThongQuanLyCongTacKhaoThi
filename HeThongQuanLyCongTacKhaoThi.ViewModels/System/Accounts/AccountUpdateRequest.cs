@@ -8,7 +8,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts
     public class AccountUpdateRequest
     {
         public Guid Id { get; set; }
-        [Display(Name = "Mã học viên / giảng viên")]
+        [Display(Name = "Mã giảng viên / học viên")]
         public string Student_TeacherID { get; set; }
         [Display(Name = "Tên hiển thị")]
         public string Name { get; set; }

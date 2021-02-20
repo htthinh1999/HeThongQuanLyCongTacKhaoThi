@@ -72,7 +72,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
                 return new ApiErrorResult<bool>("Lỗi trùng tên đăng nhập");
             }
 
-            if(_userManager.FindByEmailAsync(request.Email) != null)
+            if(await _userManager.FindByEmailAsync(request.Email) != null)
             {
                 return new ApiErrorResult<bool>("Lỗi trùng địa chỉ email");
             }
@@ -163,6 +163,22 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             return new ApiErrorResult<bool>("Cập nhật không thành công");
         }
 
+        public async Task<ApiResult<bool>> Delete(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
+            if (user == null)
+            {
+                return new ApiErrorResult<bool>("Không tìm thấy tài khoản");
+            }
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+            }
+            return new ApiErrorResult<bool>("Không thể xoá tài khoản");
+        }
+
         public async Task<ApiResult<AccountViewModel>> GetByID(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
@@ -172,6 +188,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             }
             var accountViewModel = new AccountViewModel()
             {
+                Id = id,
                 Email = user.Email,
                 Birthday = user.Birthday,
                 Gender = user.Gender,
