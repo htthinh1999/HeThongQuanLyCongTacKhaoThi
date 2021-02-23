@@ -10,81 +10,142 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Tạo tài khoản</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Mã giảng viên / học viên
-            </th>
-            <th>
-                Tên đăng nhập
-            </th>
-            <th>
-                Tên hiển thị
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Ngày sinh
-            </th>
-            <th>
-                Giới tính
-            </th>
-            <th>
-                Số điện thoại
-            </th>
-            <th>
-                Mã lớp
-            </th>
-            <th>
-                Địa chỉ
-            </th>
-            <th>
-                Hành động
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student_TeacherID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Birthday)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClassID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Xoá", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
-@await Component.InvokeAsync("Pager", Model)
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách tài khoản</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <form id="dataTable_filter" class="col-sm-12 form-inline" asp-action="Index" method="get">
+                        <div class="form-group mr-sm-3 mb-2">
+                            <label for="keyword" class="sr-only">Tìm kiếm:</label>
+                            <input type="search" id="keyword" name="keyword" class="form-control form-control-sm" placeholder="Tìm kiếm" aria-controls="dataTable">
+                        </div>
+                        <input class="btn btn-primary mb-2" type="submit" value="Tìm kiếm" />
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Mã giảng viên / học viên
+                                    </th>
+                                    <th>
+                                        Tên đăng nhập
+                                    </th>
+                                    <th>
+                                        Tên hiển thị
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Ngày sinh
+                                    </th>
+                                    <th>
+                                        Giới tính
+                                    </th>
+                                    <th>
+                                        Số điện thoại
+                                    </th>
+                                    <th>
+                                        Mã lớp
+                                    </th>
+                                    <th>
+                                        Địa chỉ
+                                    </th>
+                                    <th>
+                                        Hành động
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        Mã giảng viên / học viên
+                                    </th>
+                                    <th>
+                                        Tên đăng nhập
+                                    </th>
+                                    <th>
+                                        Tên hiển thị
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Ngày sinh
+                                    </th>
+                                    <th>
+                                        Giới tính
+                                    </th>
+                                    <th>
+                                        Số điện thoại
+                                    </th>
+                                    <th>
+                                        Mã lớp
+                                    </th>
+                                    <th>
+                                        Địa chỉ
+                                    </th>
+                                    <th>
+                                        Hành động
+                                    </th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student_TeacherID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Username)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Birthday)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Gender)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ClassID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Address)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                                            @Html.ActionLink("Xoá", "Delete", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    @await Component.InvokeAsync("Pager", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

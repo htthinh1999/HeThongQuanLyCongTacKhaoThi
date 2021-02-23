@@ -27,10 +27,10 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var resultToken = await _accountService.Authenticate(request);
-            if (!resultToken.IsSuccessed)
-            {
-                return BadRequest(resultToken.Message);
-            }
+            //if (!resultToken.IsSuccessed)
+            //{
+            //    return BadRequest(resultToken.Message);
+            //}
             return Ok(resultToken);
         }
 
