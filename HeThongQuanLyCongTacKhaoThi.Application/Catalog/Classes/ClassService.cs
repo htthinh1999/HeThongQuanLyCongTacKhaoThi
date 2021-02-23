@@ -77,7 +77,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes
             var totalRow = await query.CountAsync();
             var pagedResult = new PagedResult<ClassViewModel>()
             {
-                TotalRecord = totalRow,
+                TotalRecords = totalRow,
                 Items = data
             };
             return pagedResult;

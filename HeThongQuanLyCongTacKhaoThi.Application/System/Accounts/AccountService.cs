@@ -132,7 +132,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             var totalRow = await query.CountAsync();
             var pagedResult = new PagedResult<AccountViewModel>()
             {
-                TotalRecord = totalRow,
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
                 Items = data
             };
             return new ApiSuccessResult<PagedResult<AccountViewModel>>(pagedResult);
