@@ -4,6 +4,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
+using HeThongQuanLyCongTacKhaoThi.Application.System.Roles;
 using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
@@ -47,6 +48,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<SignInManager<Account>, SignInManager<Account>>();
             services.AddTransient<RoleManager<RoleAccount>, RoleManager<RoleAccount>>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IRoleService, RoleService>();
 
             // Declare Fluent Validator
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();

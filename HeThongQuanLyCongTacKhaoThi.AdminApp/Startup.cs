@@ -44,6 +44,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddTransient<IAccountApiClient, AccountApiClient>();
+            services.AddTransient<IRoleApiClient, RoleApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");

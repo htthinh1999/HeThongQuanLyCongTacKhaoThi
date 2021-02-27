@@ -410,3 +410,4 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Ad
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AdminApp.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AdminApp.pdb
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AdminApp.genruntimeconfig.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\RoleAssign.cshtml.g.cs

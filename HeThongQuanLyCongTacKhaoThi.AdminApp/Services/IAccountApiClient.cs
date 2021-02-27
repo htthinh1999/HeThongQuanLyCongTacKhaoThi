@@ -14,6 +14,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
         Task<ApiResult<bool>> RegisterAccount(RegisterRequest request);
         Task<ApiResult<bool>> UpdateAccount(Guid id, AccountUpdateRequest request);
         Task<ApiResult<bool>> DeleteAccount(Guid id);
+        Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
         Task<ApiResult<AccountViewModel>> GetByID(Guid id);
     }
 }

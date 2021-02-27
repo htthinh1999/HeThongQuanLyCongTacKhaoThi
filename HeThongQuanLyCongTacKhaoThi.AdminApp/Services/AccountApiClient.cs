@@ -118,5 +118,22 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
 
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
+
+        public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.PutAsync($"/api/accounts/{id}/roles", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
     }
 }
