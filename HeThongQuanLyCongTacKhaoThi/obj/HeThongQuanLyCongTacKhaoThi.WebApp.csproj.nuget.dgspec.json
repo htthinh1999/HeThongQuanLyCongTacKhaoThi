@@ -10,11 +10,11 @@
         "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.WebApp.csproj",
         "projectName": "HeThongQuanLyCongTacKhaoThi.WebApp",
         "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.WebApp.csproj",
-        "packagesPath": "C:\\Users\\MON_MINA\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Keycode_Mon\\.nuget\\packages\\",
         "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MON_MINA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Keycode_Mon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

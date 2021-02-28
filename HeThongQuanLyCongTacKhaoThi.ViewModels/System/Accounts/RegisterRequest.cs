@@ -9,9 +9,9 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts
     {
         [Display(Name = "Tên đăng nhập")]
         public string Username { get; set; }
-        [Display(Name = "Mật khẩu")]
+        [Display(Name = "Mật khẩu"), DataType(DataType.Password)]
         public string Password { get; set; }
-        [Display(Name = "Xác nhận mật khẩu")]
+        [Display(Name = "Xác nhận mật khẩu"), DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
         [Display(Name = "Mã học viên / giảng viên")]
         public string Student_TeacherID { get; set; }
