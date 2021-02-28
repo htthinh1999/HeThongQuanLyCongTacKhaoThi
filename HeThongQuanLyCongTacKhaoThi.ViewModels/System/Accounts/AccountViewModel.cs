@@ -16,7 +16,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts
         public string Email { get; set; }
         [Display(Name = "Ngày sinh")]
         public DateTime Birthday { get; set; }
-        [Display(Name = "Giới tính")]
+        [Display(Name = "Giới tính nam")]
         public bool Gender { get; set; }
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
@@ -26,6 +26,6 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts
         public string Address { get; set; }
         [Display(Name = "Mã lớp")]
         public string ClassID { get; set; }
-
+        public IList<string> Roles { get; set; }
     }
 }

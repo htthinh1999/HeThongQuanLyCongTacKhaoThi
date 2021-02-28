@@ -23,11 +23,13 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
     {
         private readonly IAccountApiClient _accountApiClient;
         private readonly IConfiguration _configuration;
+        private readonly IRoleApiClient _roleApiClient;
 
-        public AccountController(IAccountApiClient accountApiClient, IConfiguration configuration)
+        public AccountController(IAccountApiClient accountApiClient, IConfiguration configuration, IRoleApiClient roleApiClient)
         {
             _accountApiClient = accountApiClient;
             _configuration = configuration;
+            _roleApiClient = roleApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 1)
@@ -39,6 +41,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 PageSize = pageSize
             };
             var data = await _accountApiClient.GetAccountPaging(request);
+
+            ViewBag.SuccessMsg = TempData["SuccessMsg"];
             return View(data.ResultObj);
         }
 
@@ -58,6 +62,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             var result = await _accountApiClient.RegisterAccount(request);
             if (result.IsSuccessed)
             {
+                TempData["SuccessMsg"] = "Tạo tài khoản thành công";
                 return RedirectToAction("Index");
             }
             ModelState.AddModelError("", result.Message);
@@ -83,6 +88,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                     Student_TeacherID = user.Student_TeacherID,
                     Id = id
                 };
+
                 return View(updateResquest);
             }
 
@@ -99,6 +105,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             var result = await _accountApiClient.UpdateAccount(request.Id, request);
             if (result.IsSuccessed)
             {
+                TempData["SuccessMsg"] = "Cập nhật tài khoản thành công";
                 return RedirectToAction("Index");
             }
             ModelState.AddModelError("", result.Message);
@@ -135,7 +142,52 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             {
                 return BadRequest(result.Message);
             }
+            TempData["SuccessMsg"] = "Xoá tài khoản thành công";
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RoleAssign(Guid id)
+        {
+            var roleAssignRequest = await GetRoleAssignRequest(id);
+            return View(roleAssignRequest);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RoleAssign(RoleAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            var result = await _accountApiClient.RoleAssign(request.Id, request);
+            if (result.IsSuccessed)
+            {
+                TempData["SuccessMsg"] = "Cập nhật quyền tài khoản thành công";
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", result.Message);
+            var roleAssignRequest = await GetRoleAssignRequest(request.Id);
+
+            return View(roleAssignRequest);
+        }
+
+        private async Task<RoleAssignRequest> GetRoleAssignRequest(Guid id)
+        {
+            var accountObj = await _accountApiClient.GetByID(id);
+            var roleObj = await _roleApiClient.GetAll();
+            var roleAssignRequest = new RoleAssignRequest();
+            foreach (var role in roleObj.ResultObj)
+            {
+                roleAssignRequest.Roles.Add(new SelectItem()
+                {
+                    Id = role.Id.ToString(),
+                    Name = role.Name,
+                    Selected = accountObj.ResultObj.Roles.Contains(role.Name)
+                }); ;
+            }
+
+            return roleAssignRequest;
         }
 
         [HttpGet, AllowAnonymous]

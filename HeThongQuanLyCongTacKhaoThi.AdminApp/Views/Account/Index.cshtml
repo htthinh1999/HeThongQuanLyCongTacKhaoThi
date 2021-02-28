@@ -13,6 +13,21 @@
     <a asp-action="Create">Tạo tài khoản</a>
 </p>
 
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $("#alert-msg").fadeOut('slow');
+        }, 1500);
+    </script>
+}
+
+@if (ViewBag.SuccessMsg != null)
+{
+    <div id="alert-msg" class="alert alert-success" role="alert">
+        @ViewBag.SuccessMsg
+    </div>
+}
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách tài khoản</h6>
@@ -120,7 +135,7 @@
                                             @Html.DisplayFor(modelItem => item.Birthday)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Gender)
+                                            @((item.Gender == true) ? "Nam" : "Nữ")
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.PhoneNumber)
@@ -134,7 +149,8 @@
                                         <td>
                                             @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
                                             @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
-                                            @Html.ActionLink("Xoá", "Delete", new { id = item.Id })
+                                            @Html.ActionLink("Xoá", "Delete", new { id = item.Id }) |
+                                            @Html.ActionLink("Gán quyền", "RoleAssign", new { id = item.Id })
                                         </td>
                                     </tr>
                                 }

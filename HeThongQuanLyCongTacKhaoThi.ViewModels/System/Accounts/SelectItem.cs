@@ -4,8 +4,10 @@ using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts
 {
-    public class AccountDeleteRequest
+    public class SelectItem
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public bool Selected { get; set; }
     }
 }

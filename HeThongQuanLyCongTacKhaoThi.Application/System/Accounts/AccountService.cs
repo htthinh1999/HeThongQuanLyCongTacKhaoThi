@@ -109,8 +109,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
                         || x.Name.Contains(request.Keyword)
                         || x.Birthday.ToString().Contains(request.Keyword)
                         || x.Email.Contains(request.Keyword)
-                        || (x.Gender == request.Keyword.Equals("Nam"))
+                        || ((request.Keyword.Equals("Nam") || request.Keyword.Equals("Nữ")) && (x.Gender == request.Keyword.Equals("Nam")))
                         || x.PhoneNumber.Contains(request.Keyword)
+                        || x.ClassID.Contains(request.Keyword)
+                        || x.Student_TeacherID.Contains(request.Keyword)
+                        || x.Address.Contains(request.Keyword)
                     );
             }
 
@@ -188,6 +191,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             {
                 return new ApiErrorResult<AccountViewModel>("Tài khoản không tồn tại");
             }
+            var roles = await _userManager.GetRolesAsync(user);
+
             var accountViewModel = new AccountViewModel()
             {
                 Id = id,
@@ -199,9 +204,39 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
                 Username = user.UserName,
                 Student_TeacherID = user.Student_TeacherID,
                 Address = user.Address,
-                ClassID = user.ClassID
+                ClassID = user.ClassID,
+                Roles = roles
             };
             return new ApiSuccessResult<AccountViewModel>(accountViewModel);
+        }
+
+        public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<bool>("Tài khoản không tồn tại");
+            }
+
+            var removedRoles = request.Roles.Where(x => x.Selected == false).Select(x => x.Name).ToList();
+            foreach (var roleName in removedRoles)
+            {
+                if (await _userManager.IsInRoleAsync(user, roleName) == true)
+                {
+                    await _userManager.RemoveFromRoleAsync(user, roleName);
+                }
+            }
+
+            var addedRoles = request.Roles.Where(x => x.Selected == true).Select(x => x.Name).ToList();
+            foreach(var roleName in addedRoles)
+            {
+                if(await _userManager.IsInRoleAsync(user, roleName) == false)
+                {
+                    await _userManager.AddToRoleAsync(user, roleName);
+                }
+            }
+
+            return new ApiSuccessResult<bool>();
         }
     }
 }
