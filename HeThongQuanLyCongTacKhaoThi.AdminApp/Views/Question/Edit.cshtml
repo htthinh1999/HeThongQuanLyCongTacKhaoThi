@@ -1,0 +1,42 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions.QuestionCreateUpdateRequest
+
+@{
+    ViewData["Title"] = "Sửa thông tin câu hỏi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Sửa thông tin câu hỏi</h1>
+
+<h4>Mẫu biểu sửa thông tin câu hỏi</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SubjectID" class="control-label"></label>
+                <input asp-for="SubjectID" class="form-control" />
+                <span asp-validation-for="SubjectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GroupID" class="control-label"></label>
+                <input asp-for="GroupID" class="form-control" />
+                <span asp-validation-for="GroupID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <input asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsMultipleChoice" /> @Html.DisplayNameFor(model => model.IsMultipleChoice)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" /> |
+                <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách câu hỏi</a>
+            </div>
+        </form>
+    </div>
+</div>

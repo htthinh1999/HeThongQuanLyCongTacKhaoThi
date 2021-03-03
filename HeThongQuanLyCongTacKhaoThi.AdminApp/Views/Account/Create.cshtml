@@ -1,16 +1,12 @@
 ﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts.RegisterRequest
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo tài khoản";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Tạo tài khoản</h1>
 
-<h4>RegisterRequest</h4>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<h4>Mẫu biểu tạo tài khoản</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -41,10 +37,21 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Gender" /> @Html.DisplayNameFor(model => model.Gender)
-                </label>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <div class="form-group">
+                    <div class="form-check form-check-inline">
+                        <label>
+                            @Html.RadioButtonFor(m => m.Gender, true) Nam
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label>
+                            @Html.RadioButtonFor(m => m.Gender, false) Nữ
+                        </label>
+                    </div>
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Birthday" class="control-label"></label>
@@ -72,7 +79,8 @@
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Tạo tài khoản" class="btn btn-primary" /> |
+                <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách tài khoản</a>
             </div>
         </form>
     </div>

@@ -23,6 +23,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
             modelBuilder.ApplyConfiguration(new ClassConfiguration());
             modelBuilder.ApplyConfiguration(new SubjectConfiguration());
             modelBuilder.ApplyConfiguration(new ScoreConfiguration());
+            modelBuilder.ApplyConfiguration(new QuestionGroupConfiguration());
             modelBuilder.ApplyConfiguration(new QuestionConfiguration());
             modelBuilder.ApplyConfiguration(new AnswerConfiguration());
             modelBuilder.ApplyConfiguration(new ExamConfiguration());
@@ -34,7 +35,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("USER_CLAIM");
-            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("USER_ROLE").HasKey(x=>new { x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("USER_ROLE").HasKey(x => new { x.UserId, x.RoleId });
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("USER_LOGIN").HasKey(x => x.UserId);
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("ROLE_CLAIM");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("USER_TOKEN").HasKey(x => x.UserId);
@@ -47,6 +48,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
         public DbSet<Class> Classes { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Score> Scores { get; set; }
+        public DbSet<QuestionGroup> QuestionGroups { get; set;}
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Exam> Exams { get; set; }

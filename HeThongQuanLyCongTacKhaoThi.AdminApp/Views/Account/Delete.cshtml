@@ -1,15 +1,15 @@
 ﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts.AccountViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Xoá tài khoản";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>Xoá thông tin tài khoản</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn có chắc chắn muốn xoá tài khoản này?</h3>
 <div>
-    <h4>AccountDeleteRequest</h4>
+    <h4>Thông tin tài khoản sẽ xoá</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -40,7 +40,7 @@
             @Html.DisplayNameFor(model => model.Gender)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
+            @(Model.Gender ? "Nam" : "Nữ")
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PhoneNumber)
@@ -69,7 +69,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Xoá" class="btn btn-danger" /> |
+        <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách tài khoản</a>
     </form>
 </div>

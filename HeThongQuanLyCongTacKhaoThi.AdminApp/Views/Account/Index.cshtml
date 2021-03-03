@@ -3,14 +3,14 @@
 @model PagedResult<AccountViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách tài khoản";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Danh sách tài khoản</h1>
 
 <p>
-    <a asp-action="Create">Tạo tài khoản</a>
+    <a class="btn btn-primary" asp-action="Create">Tạo tài khoản</a>
 </p>
 
 @section Scripts{
@@ -39,9 +39,10 @@
                     <form id="dataTable_filter" class="col-sm-12 form-inline" asp-action="Index" method="get">
                         <div class="form-group mr-sm-3 mb-2">
                             <label for="keyword" class="sr-only">Tìm kiếm:</label>
-                            <input type="search" id="keyword" name="keyword" class="form-control form-control-sm" placeholder="Tìm kiếm" aria-controls="dataTable">
+                            <input type="search" id="keyword" name="keyword" class="form-control form-control-sm" placeholder="Nội dung" aria-controls="dataTable">
                         </div>
-                        <input class="btn btn-primary mb-2" type="submit" value="Tìm kiếm" />
+                        <input class="btn btn-primary mb-2 mr-2" type="submit" value="Tìm kiếm" />
+                        <input type="submit" class="btn btn-outline-primary mb-2" value="Tải lại" />
                     </form>
                 </div>
                 <div class="row">
@@ -158,7 +159,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="row">
+                <div>
                     @await Component.InvokeAsync("Pager", Model)
                 </div>
             </div>

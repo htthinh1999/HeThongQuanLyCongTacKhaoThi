@@ -17,7 +17,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts
         public string Student_TeacherID { get; set; }
         [Display(Name = "Tên hiển thị")]
         public string Name { get; set; }
-        [Display(Name = "Giới tính nam")]
+        [Display(Name = "Giới tính")]
         public bool Gender { get; set; }
         [Display(Name = "Ngày sinh")]
         [DataType(DataType.Date)]

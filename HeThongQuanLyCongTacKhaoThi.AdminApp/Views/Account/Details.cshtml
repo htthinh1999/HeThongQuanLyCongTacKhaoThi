@@ -1,14 +1,14 @@
 ﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts.AccountViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chi tiết tài khoản";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Chi tiết</h1>
 
 <div>
-    <h4>AccountViewModel</h4>
+    <h4>Chi tiết thông tin tài khoản</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -39,7 +39,7 @@
             @Html.DisplayNameFor(model => model.Gender)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
+            @(Model.Gender ? "Nam" : "Nữ")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PhoneNumber)
@@ -68,6 +68,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary"}) |
+    <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách tài khoản</a>
 </div>

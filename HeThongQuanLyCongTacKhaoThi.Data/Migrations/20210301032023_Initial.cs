@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 {
-    public partial class AspNetCoreIdentityDatabase : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,6 +31,19 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EXAM", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "QUESTION_GROUP",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QUESTION_GROUP", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,12 +205,19 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SubjectID = table.Column<string>(maxLength: 10, nullable: false),
+                    GroupID = table.Column<int>(nullable: false),
                     Content = table.Column<string>(nullable: false),
                     IsMultipleChoice = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_QUESTION", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_QUESTION_QUESTION_GROUP_GroupID",
+                        column: x => x.GroupID,
+                        principalTable: "QUESTION_GROUP",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_QUESTION_SUBJECT_SubjectID",
                         column: x => x.SubjectID,
@@ -395,7 +415,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Account",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "Birthday", "ClassID", "ConcurrencyStamp", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Student_TeacherID", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"), 0, null, new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "5bebaa42-d9ec-437c-8df0-3a1ddaf7b484", "keycodemon@gmail.com", true, true, false, null, "Keycode Mon", "keycodemon@gmail.com", "admin", "AQAAAAEAACcQAAAAEGiqIB+QVWW41PFjxVzZsOVdT5cnv+hggGGwXn8j/RAgQ+qunI3YQDCJ2BK/SFzNiw==", null, false, "", null, false, "admin" });
+                values: new object[] { new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"), 0, null, new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "fa4c55b9-688a-4d82-80af-e6a403885087", "keycodemon@gmail.com", true, true, false, null, "Keycode Mon", "keycodemon@gmail.com", "admin", "AQAAAAEAACcQAAAAEDy7FFxkjRPQXyFn4C7EApvz2WorGocdQm1qfwe6FMcJQDS6lSMunaB3X0QNmEBH9w==", null, false, "", null, false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "CLASS",
@@ -418,9 +438,25 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "QUESTION_GROUP",
+                columns: new[] { "ID", "Name" },
+                values: new object[,]
+                {
+                    { 4, "Nhóm câu hỏi chương 4" },
+                    { 3, "Nhóm câu hỏi chương 3" },
+                    { 5, "Nhóm câu hỏi chương 5" },
+                    { 1, "Nhóm câu hỏi chương 1" },
+                    { 2, "Nhóm câu hỏi chương 2" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "RoleAccount",
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
-                values: new object[] { new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"), "84fe7a07-bf7b-48e7-8e6b-782c9c294b2c", "Vai trò quản trị viên", "admin", "admin" });
+                values: new object[,]
+                {
+                    { new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f"), "175505e6-11d1-436f-b19a-847adfd678e3", "Vai trò quản trị viên", "admin", "admin" },
+                    { new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94"), "97cd9aef-e947-41e0-967d-7eda86759b3a", "Vai trò giảng viên", "teacher", "teacher" }
+                });
 
             migrationBuilder.InsertData(
                 table: "SCORE",
@@ -438,22 +474,60 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 columns: new[] { "ID", "CreditCount", "Name" },
                 values: new object[,]
                 {
-                    { "CC4206", 3, "Nhập môn lập trình" },
-                    { "DH4202", 3, "Kỹ thuật lập trình" },
-                    { "DH4203", 4, "Cấu trúc dữ liệu & giải thuật" },
-                    { "TC4209", 4, "Lập trình hướng đối tượng" },
-                    { "DC4204", 4, "Cơ sở dữ liệu" },
-                    { "DC4106", 4, "Kiến trúc máy tính" },
-                    { "DT4208", 4, "Lập trình Java" },
-                    { "DT4315", 4, "Công nghệ phần mềm" },
+                    { "DT4301", 4, "Mạng máy tính" },
                     { "DT4205", 4, "SQL Server" },
-                    { "DT4301", 4, "Mạng máy tính" }
+                    { "DT4315", 4, "Công nghệ phần mềm" },
+                    { "DT4208", 4, "Lập trình Java" },
+                    { "DC4106", 4, "Kiến trúc máy tính" },
+                    { "DH4202", 3, "Kỹ thuật lập trình" },
+                    { "TC4209", 4, "Lập trình hướng đối tượng" },
+                    { "DH4203", 4, "Cấu trúc dữ liệu & giải thuật" },
+                    { "CC4206", 3, "Nhập môn lập trình" },
+                    { "DC4204", 4, "Cơ sở dữ liệu" }
                 });
 
             migrationBuilder.InsertData(
                 table: "USER_ROLE",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"), new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb") });
+                values: new object[,]
+                {
+                    { new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"), new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f") },
+                    { new Guid("4a2d9b6e-97c4-41bd-a929-f778972db109"), new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Account",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "Birthday", "ClassID", "ConcurrencyStamp", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Student_TeacherID", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("4a2d9b6e-97c4-41bd-a929-f778972db109"), 0, "Số 80 - Hai Bà Trưng - Vạn Giã - Vạn Ninh - Khánh Hoà", new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "43c2adb3-80be-4cc6-ae8c-68233053dcc3", "htthinh1999@gmail.com", true, true, false, null, "Huỳnh Tấn Thịnh", "htthinh1999@gmail.com", "htthinh", "AQAAAAEAACcQAAAAEHv/cxlIU0LNYGA/yspmX3uevvFpavHz6ATsrLqBBqZY27F78UEoq5vz3/VAlQH4Ww==", "0977393641", false, "", "17ĐC027", false, "htthinh" });
+
+            migrationBuilder.InsertData(
+                table: "QUESTION",
+                columns: new[] { "ID", "Content", "GroupID", "IsMultipleChoice", "SubjectID" },
+                values: new object[,]
+                {
+                    { 1, "Những tên biến nào dưới đây được viết đúng theo quy tắc đặt tên của ngôn ngữ lập trình C?", 1, true, "CC4206" },
+                    { 2, "Một biến được gọi là biến toàn cục nếu:", 1, true, "CC4206" },
+                    { 3, "Một biến được gọi là biến cục bộ nếu:", 1, true, "CC4206" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ANSWER",
+                columns: new[] { "ID", "Content", "IsCorrect", "QuestionID" },
+                values: new object[,]
+                {
+                    { 1, "diem toan", false, 1 },
+                    { 2, "3diemtoan", false, 1 },
+                    { 3, "_diemtoan", true, 1 },
+                    { 4, "-diemtoan", false, 1 },
+                    { 5, "Nó được khai báo tất cả các hàm, ngoại trừ hàm main()", false, 2 },
+                    { 6, "Nó được khai báo ngoài tất cả các hàm kể cả hàm main()", true, 2 },
+                    { 7, "Nó được khai báo bên ngoài hàm main()", false, 2 },
+                    { 8, "Nó được khai báo bên trong hàm main()", false, 2 },
+                    { 9, "Nó được khai báo bên trong các hàm hoặc thủ tục, kể cả hàm main()", true, 3 },
+                    { 10, "Nó được khai báo bên trong các hàm ngoại trừ hàm main()", false, 3 },
+                    { 11, "Nó được khai báo bên trong hàm main()", false, 3 },
+                    { 12, "Nó được khai báo bên ngoài các hàm kể cả hàm main()", false, 3 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Account_ClassID",
@@ -469,6 +543,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 name: "IX_EXAM_DETAIL_QuestionID",
                 table: "EXAM_DETAIL",
                 column: "QuestionID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QUESTION_GroupID",
+                table: "QUESTION",
+                column: "GroupID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_QUESTION_SubjectID",
@@ -590,6 +669,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Account");
+
+            migrationBuilder.DropTable(
+                name: "QUESTION_GROUP");
 
             migrationBuilder.DropTable(
                 name: "SUBJECT");

@@ -411,3 +411,6 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Ad
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AdminApp.pdb
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AdminApp.genruntimeconfig.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\RoleAssign.cshtml.g.cs
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Question\Index.cshtml.g.cs
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Question\Create.cshtml.g.cs
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Question\Edit.cshtml.g.cs

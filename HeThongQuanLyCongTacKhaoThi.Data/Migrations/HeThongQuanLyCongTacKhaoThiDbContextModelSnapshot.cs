@@ -104,7 +104,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Id = new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"),
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "5bebaa42-d9ec-437c-8df0-3a1ddaf7b484",
+                            ConcurrencyStamp = "fa4c55b9-688a-4d82-80af-e6a403885087",
                             Email = "keycodemon@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -112,11 +112,34 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Keycode Mon",
                             NormalizedEmail = "keycodemon@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGiqIB+QVWW41PFjxVzZsOVdT5cnv+hggGGwXn8j/RAgQ+qunI3YQDCJ2BK/SFzNiw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDy7FFxkjRPQXyFn4C7EApvz2WorGocdQm1qfwe6FMcJQDS6lSMunaB3X0QNmEBH9w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("4a2d9b6e-97c4-41bd-a929-f778972db109"),
+                            AccessFailedCount = 0,
+                            Address = "Số 80 - Hai Bà Trưng - Vạn Giã - Vạn Ninh - Khánh Hoà",
+                            Birthday = new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClassID = "DHCN4A",
+                            ConcurrencyStamp = "43c2adb3-80be-4cc6-ae8c-68233053dcc3",
+                            Email = "htthinh1999@gmail.com",
+                            EmailConfirmed = true,
+                            Gender = true,
+                            LockoutEnabled = false,
+                            Name = "Huỳnh Tấn Thịnh",
+                            NormalizedEmail = "htthinh1999@gmail.com",
+                            NormalizedUserName = "htthinh",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHv/cxlIU0LNYGA/yspmX3uevvFpavHz6ATsrLqBBqZY27F78UEoq5vz3/VAlQH4Ww==",
+                            PhoneNumber = "0977393641",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            Student_TeacherID = "17ĐC027",
+                            TwoFactorEnabled = false,
+                            UserName = "htthinh"
                         });
                 });
 
@@ -143,6 +166,92 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.HasIndex("QuestionID");
 
                     b.ToTable("ANSWER");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Content = "diem toan",
+                            IsCorrect = false,
+                            QuestionID = 1
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Content = "3diemtoan",
+                            IsCorrect = false,
+                            QuestionID = 1
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Content = "_diemtoan",
+                            IsCorrect = true,
+                            QuestionID = 1
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Content = "-diemtoan",
+                            IsCorrect = false,
+                            QuestionID = 1
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Content = "Nó được khai báo tất cả các hàm, ngoại trừ hàm main()",
+                            IsCorrect = false,
+                            QuestionID = 2
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Content = "Nó được khai báo ngoài tất cả các hàm kể cả hàm main()",
+                            IsCorrect = true,
+                            QuestionID = 2
+                        },
+                        new
+                        {
+                            ID = 7,
+                            Content = "Nó được khai báo bên ngoài hàm main()",
+                            IsCorrect = false,
+                            QuestionID = 2
+                        },
+                        new
+                        {
+                            ID = 8,
+                            Content = "Nó được khai báo bên trong hàm main()",
+                            IsCorrect = false,
+                            QuestionID = 2
+                        },
+                        new
+                        {
+                            ID = 9,
+                            Content = "Nó được khai báo bên trong các hàm hoặc thủ tục, kể cả hàm main()",
+                            IsCorrect = true,
+                            QuestionID = 3
+                        },
+                        new
+                        {
+                            ID = 10,
+                            Content = "Nó được khai báo bên trong các hàm ngoại trừ hàm main()",
+                            IsCorrect = false,
+                            QuestionID = 3
+                        },
+                        new
+                        {
+                            ID = 11,
+                            Content = "Nó được khai báo bên trong hàm main()",
+                            IsCorrect = false,
+                            QuestionID = 3
+                        },
+                        new
+                        {
+                            ID = 12,
+                            Content = "Nó được khai báo bên ngoài các hàm kể cả hàm main()",
+                            IsCorrect = false,
+                            QuestionID = 3
+                        });
                 });
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Class", b =>
@@ -292,6 +401,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .IsUnicode(true);
 
+                    b.Property<int>("GroupID")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsMultipleChoice")
                         .HasColumnType("bit");
 
@@ -302,9 +414,80 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("GroupID");
+
                     b.HasIndex("SubjectID");
 
                     b.ToTable("QUESTION");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Content = "Những tên biến nào dưới đây được viết đúng theo quy tắc đặt tên của ngôn ngữ lập trình C?",
+                            GroupID = 1,
+                            IsMultipleChoice = true,
+                            SubjectID = "CC4206"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Content = "Một biến được gọi là biến toàn cục nếu:",
+                            GroupID = 1,
+                            IsMultipleChoice = true,
+                            SubjectID = "CC4206"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Content = "Một biến được gọi là biến cục bộ nếu:",
+                            GroupID = 1,
+                            IsMultipleChoice = true,
+                            SubjectID = "CC4206"
+                        });
+                });
+
+            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.QuestionGroup", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("QUESTION_GROUP");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Nhóm câu hỏi chương 1"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "Nhóm câu hỏi chương 2"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Nhóm câu hỏi chương 3"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Name = "Nhóm câu hỏi chương 4"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Name = "Nhóm câu hỏi chương 5"
+                        });
                 });
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Result", b =>
@@ -380,11 +563,19 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"),
-                            ConcurrencyStamp = "84fe7a07-bf7b-48e7-8e6b-782c9c294b2c",
+                            Id = new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f"),
+                            ConcurrencyStamp = "175505e6-11d1-436f-b19a-847adfd678e3",
                             Description = "Vai trò quản trị viên",
                             Name = "admin",
                             NormalizedName = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94"),
+                            ConcurrencyStamp = "97cd9aef-e947-41e0-967d-7eda86759b3a",
+                            Description = "Vai trò giảng viên",
+                            Name = "teacher",
+                            NormalizedName = "teacher"
                         });
                 });
 
@@ -731,7 +922,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         new
                         {
                             UserId = new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"),
-                            RoleId = new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb")
+                            RoleId = new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f")
+                        },
+                        new
+                        {
+                            UserId = new Guid("4a2d9b6e-97c4-41bd-a929-f778972db109"),
+                            RoleId = new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94")
                         });
                 });
 
@@ -788,6 +984,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Question", b =>
                 {
+                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.QuestionGroup", "Group")
+                        .WithMany("Questions")
+                        .HasForeignKey("GroupID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Subject", "Subject")
                         .WithMany("Questions")
                         .HasForeignKey("SubjectID")

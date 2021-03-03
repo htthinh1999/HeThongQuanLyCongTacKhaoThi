@@ -1,13 +1,13 @@
 ﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts.RoleAssignRequest
 
 @{
-    ViewData["Title"] = "RoleAssign";
+    ViewData["Title"] = "Cấp quyền";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>RoleAssign</h1>
+<h1>Cấp quyền</h1>
 
-<h4>RoleAssignRequest</h4>
+<h4>Cấp quyền cho tài khoản</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,13 +27,10 @@
                 <span asp-validation-for="Roles[i].Name" class="text-danger"></span>
             }
             <div class="form-group">
-                <input type="submit" value="Lưu lại" class="btn btn-primary" />
+                <input type="submit" value="Lưu lại" class="btn btn-primary" /> | 
+                <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách tài khoản</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
