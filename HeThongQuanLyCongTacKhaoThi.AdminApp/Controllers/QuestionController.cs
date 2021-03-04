@@ -95,6 +95,39 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             return View(request);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var result = await _questionApiClient.GetByID(id);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+            return View(result.ResultObj);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _questionApiClient.GetByID(id);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+            return View(result.ResultObj);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(QuestionViewModel request)
+        {
+            var result = await _questionApiClient.Delete(request.ID);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+            TempData["SuccessMsg"] = "Xoá câu hỏi thành công";
+            return RedirectToAction("Index");
+        }
 
     }
 }

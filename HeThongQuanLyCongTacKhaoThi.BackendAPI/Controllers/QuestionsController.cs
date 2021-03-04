@@ -59,7 +59,12 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             return Ok(result);
         }
 
-
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _questionService.Delete(id);
+            return Ok(result);
+        }
 
     }
 }

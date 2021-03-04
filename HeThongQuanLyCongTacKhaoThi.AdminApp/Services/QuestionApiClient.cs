@@ -39,6 +39,22 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
             return questions;
         }
 
+        public async Task<ApiResult<QuestionViewModel>> GetByID(int id)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/questions/{id}");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<QuestionViewModel>>(body);
+            }
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<QuestionViewModel>>(body);
+        }
+
         public async Task<ApiResult<bool>> Create(QuestionCreateUpdateRequest request)
         {
             var client = _httpClientFactory.CreateClient();
@@ -71,20 +87,20 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-        public async Task<ApiResult<QuestionViewModel>> GetByID(int id)
+        public async Task<ApiResult<bool>> Delete(int id)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var response = await client.GetAsync($"/api/questions/{id}");
-            var body = await response.Content.ReadAsStringAsync();
+            var response = await client.DeleteAsync($"/api/questions/{id}");
+            var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject<ApiSuccessResult<QuestionViewModel>>(body);
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
             }
 
-            return JsonConvert.DeserializeObject<ApiErrorResult<QuestionViewModel>>(body);
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
     }
 }
