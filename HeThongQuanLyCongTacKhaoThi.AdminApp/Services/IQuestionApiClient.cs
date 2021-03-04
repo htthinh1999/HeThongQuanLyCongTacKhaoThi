@@ -13,5 +13,6 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
         Task<ApiResult<QuestionViewModel>> GetByID(int id);
         Task<ApiResult<bool>> Create(QuestionCreateUpdateRequest request);
         Task<ApiResult<bool>> Update(int id, QuestionCreateUpdateRequest request);
+        Task<ApiResult<bool>> Delete(int id);
     }
 }

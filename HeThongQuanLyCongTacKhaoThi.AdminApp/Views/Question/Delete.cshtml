@@ -1,0 +1,45 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions.QuestionViewModel
+
+@{
+    ViewData["Title"] = "Xoá câu hỏi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Xoá câu hỏi</h1>
+
+<h3>Bạn có chắc chắn muốn xoá câu hỏi này?</h3>
+<div>
+    <h4>Thông tin câu hỏi sẽ xoá</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SubjectID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SubjectID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GroupID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GroupID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsMultipleChoice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsMultipleChoice)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Xoá" class="btn btn-danger" /> |
+        <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách câu hỏi</a>
+    </form>
+</div>

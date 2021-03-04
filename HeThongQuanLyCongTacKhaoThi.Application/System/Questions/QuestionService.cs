@@ -60,9 +60,20 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Questions
 
             return new ApiSuccessResult<bool>();
         }
-        public Task<ApiResult<bool>> Delete(int id)
+
+        public async Task<ApiResult<bool>> Delete(int id)
         {
-            throw new NotImplementedException();
+            var _question = await _context.Questions.FindAsync(id);
+            if (_question == null) return new ApiErrorResult<bool>("Không thể tìm thấy câu hỏi");
+            _context.Questions.Remove(_question);
+            
+            var result = await _context.SaveChangesAsync();
+            if(result == 0)
+            {
+                return new ApiErrorResult<bool>("Không thể xoá câu hỏi");
+            }
+
+            return new ApiSuccessResult<bool>();
         }
 
         public async Task<ApiResult<QuestionViewModel>> GetByID(int id)
