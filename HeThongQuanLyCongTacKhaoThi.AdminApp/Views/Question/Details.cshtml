@@ -11,29 +11,56 @@
     <h4>Chi tiết thông tin câu hỏi</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SubjectID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SubjectID)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.GroupID)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.GroupID)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Content)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Content)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsMultipleChoice)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IsMultipleChoice)
+        </dd>
+        @{ 
+            List<int> correctAnswers = new List<int>();
+        }
+        @for (int i = 0; i < Model.Answers.Count; i++)
+        {
+            <dt class="col-sm-2">
+                Nội dung đáp án thứ @(i+1)
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Answers[i].Content
+            </dd>
+
+            if (Model.Answers[i].IsCorrect)
+            {
+                correctAnswers.Add(i);
+            }
+        }
+        <dt class="col-sm-2">
+            Đáp án đúng
+        </dt>
+        <dd class="col-sm-10">
+            Đáp án thứ @(correctAnswers[0]+1)
+            @for(int i=1; i<correctAnswers.Count; i++)
+            {
+                <span>, đáp án thứ @(correctAnswers[i]+1)</span>
+            }
         </dd>
     </dl>
 </div>

@@ -1,4 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.AdminApp.Services;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,13 +41,33 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(QuestionCreateUpdateRequest request)
+        public async Task<IActionResult> Create(QuestionCreateUpdateRequest request, List<AnswerCreateUpdateRequest> answerCreateUpdateRequests)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            var result = await _questionApiClient.Create(request);
+
+            // Check has min one right answer if question is multiple choice
+            if (request.IsMultipleChoice)
+            {
+                int wrongAnscount = 0;
+                foreach (var ans in answerCreateUpdateRequests)
+                {
+                    if (!ans.IsCorrect)
+                    {
+                        wrongAnscount++;
+                    }
+                }
+
+                if (wrongAnscount == answerCreateUpdateRequests.Count)
+                {
+                    ModelState.AddModelError("", "Bạn cần chọn 1 đáp án đúng");
+                    return View(request);
+                }
+            }
+
+            var result = await _questionApiClient.Create(request, answerCreateUpdateRequests);
             if (result.IsSuccessed)
             {
                 TempData["SuccessMsg"] = "Tạo câu hỏi thành công";
@@ -69,7 +90,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                     SubjectID = question.SubjectID,
                     GroupID = question.GroupID,
                     Content = question.Content,
-                    IsMultipleChoice = question.IsMultipleChoice
+                    IsMultipleChoice = question.IsMultipleChoice,
+                    answerCreateUpdateRequests = question.Answers.ToList()
                 };
 
                 return View(updateResquest);
@@ -79,13 +101,33 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(QuestionCreateUpdateRequest request)
+        public async Task<IActionResult> Edit(QuestionCreateUpdateRequest request, List<AnswerCreateUpdateRequest> answerCreateUpdateRequests)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
-            var result = await _questionApiClient.Update(request.ID, request);
+
+            // Check has min one right answer if question is multiple choice
+            if (request.IsMultipleChoice)
+            {
+                int wrongAnscount = 0;
+                foreach (var ans in answerCreateUpdateRequests)
+                {
+                    if (!ans.IsCorrect)
+                    {
+                        wrongAnscount++;
+                    }
+                }
+
+                if (wrongAnscount == answerCreateUpdateRequests.Count)
+                {
+                    ModelState.AddModelError("", "Bạn cần chọn 1 đáp án đúng");
+                    return View(request);
+                }
+            }
+
+            var result = await _questionApiClient.Update(request.ID, request, answerCreateUpdateRequests);
             if (result.IsSuccessed)
             {
                 TempData["SuccessMsg"] = "Cập nhật câu hỏi thành công";

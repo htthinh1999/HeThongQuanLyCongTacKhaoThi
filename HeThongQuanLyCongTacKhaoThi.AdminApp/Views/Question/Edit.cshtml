@@ -10,9 +10,9 @@
 <h4>Mẫu biểu sửa thông tin câu hỏi</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="SubjectID" class="control-label"></label>
                 <input asp-for="SubjectID" class="form-control" />
@@ -25,13 +25,29 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
+                <textarea asp-for="Content" rows="5" class="form-control" ></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsMultipleChoice" /> @Html.DisplayNameFor(model => model.IsMultipleChoice)
                 </label>
+            </div>
+            <div class="form-group" id="AnswerCountDiv">
+                <label class="control-label">Số lượng đáp án</label>
+                <input class="form-control" id="AnswerCount" type="number" value="2" min="2" max="6" />
+            </div>
+            <div id="answers">
+                @for (int i = 0; i < Model.answerCreateUpdateRequests.Count; i++)
+                {
+                    <div class="form-group">
+                        <label class="control-label">Nội dung đáp án thứ @(i+1)</label>
+                        <div class="row mx-0">
+                            <input asp-for="answerCreateUpdateRequests[i].Content" class="col-md-11 form-control" />
+                            <input class="col-md-1 form-check-input position-static mx-0 mt-auto mb-auto" asp-for="answerCreateUpdateRequests[i].IsCorrect" />
+                        </div>
+                    </div>
+                }
             </div>
             <div class="form-group">
                 <input type="submit" value="Lưu" class="btn btn-primary" /> |
@@ -40,3 +56,61 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+        $(document).ready(function () {
+
+            if (!$("#IsMultipleChoice").prop("checked")) {
+                $("#AnswerCountDiv").hide();
+                $("#answers").hide();
+                var answerCount = $("#answers > div").length;
+                if (answerCount == 0) {
+                    for (var i = 0; i < 2; i++) {
+                        var answer =
+                            "<div class='form-group'>" +
+                                "<label class='control-label'> Nội dung đáp án thứ " + (i + 1) + "</label>" +
+                                "<div class='row mx-0'>" +
+                                    "<input class='col-md-11 form-control' type='text' name='answerCreateUpdateRequests[" + i + "].Content' value=''>" +
+                                    "<input class='col-md-1 form-check-input position-static mx-0 mt-auto mb-auto' type='checkbox' data-val='true' name='answerCreateUpdateRequests[" + i + "].IsCorrect' value='true'>" +
+                                "</div>"+
+                            "</div>";
+                        $("#answers").append(answer);
+                    }
+                }
+            } else {
+                $("#AnswerCount").val(@Model.answerCreateUpdateRequests.Count);
+            }
+
+            $("#IsMultipleChoice").change(function () {
+                if (this.checked) {
+                    $("#AnswerCountDiv").show();
+                    $("#answers").show();
+                } else {
+                    $("#AnswerCountDiv").hide();
+                    $("#answers").hide();
+                }
+            });
+
+            $("#AnswerCount").change(function () {
+                $("#answers").empty();
+
+                var answerCount = $(this).val();
+                for (var i = 0; i < answerCount; i++) {
+                    var answer =
+                        "<div class='form-group'>" +
+                            "<label class='control-label'> Nội dung đáp án thứ " + (i + 1) + "</label>" +
+                            "<div class='row mx-0'>" +
+                                "<input class='col-md-11 form-control' type='text' name='answerCreateUpdateRequests[" + i + "].Content' value=''>" +
+                                "<input class='col-md-1 form-check-input position-static mx-0 mt-auto mb-auto' type='checkbox' data-val='true' name='answerCreateUpdateRequests[" + i + "].IsCorrect' value='true'>" +
+                            "</div>" +
+                        "</div>";
+                    $("#answers").append(answer);
+                }
+
+            });
+        });
+</script>
+}

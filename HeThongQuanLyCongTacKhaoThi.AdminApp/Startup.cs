@@ -46,9 +46,10 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             services.AddTransient<IAccountApiClient, AccountApiClient>();
             services.AddTransient<IRoleApiClient, RoleApiClient>();
             services.AddTransient<IQuestionApiClient, QuestionApiClient>();
+            services.AddTransient<IAnswerApiClient, AnswerApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
-            var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIROMENT");
+            var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
 #if DEBUG
             if(enviroment == Environments.Development)

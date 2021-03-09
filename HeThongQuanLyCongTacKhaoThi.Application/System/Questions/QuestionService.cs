@@ -1,6 +1,7 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,14 +21,15 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Questions
             _context = context;
         }
 
-        public async Task<ApiResult<bool>> Create(QuestionCreateUpdateRequest request)
+        public async Task<ApiResult<int>> Create(QuestionCreateUpdateRequest request)
         {
             var question = new Question()
             {
                 SubjectID = request.SubjectID,
                 GroupID = request.GroupID,
                 Content = request.Content,
-                IsMultipleChoice = request.IsMultipleChoice
+                IsMultipleChoice = request.IsMultipleChoice,
+                Answers = new List<Answer>()
             };
 
             _context.Questions.Add(question);
@@ -35,27 +37,38 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Questions
 
             if (result == 0)
             {
-                return new ApiErrorResult<bool>("Không thể thêm câu hỏi");
+                return new ApiErrorResult<int>("Không thể thêm câu hỏi");
             }
 
-            return new ApiSuccessResult<bool>();
+            return new ApiSuccessResult<int>(question.ID);
         }
 
         public async Task<ApiResult<bool>> Update(int id, QuestionCreateUpdateRequest request)
         {
-            var _question = await _context.Questions.FindAsync(id);
-            if (_question == null) return new ApiErrorResult<bool>("Không thể tìm thấy câu hỏi");
+            var question = await _context.Questions.FindAsync(id);
+            if (question == null) return new ApiErrorResult<bool>("Không thể tìm thấy câu hỏi");
 
-            _question.SubjectID = request.SubjectID;
-            _question.GroupID = request.GroupID;
-            _question.Content = request.Content;
-            _question.IsMultipleChoice = request.IsMultipleChoice;
-
-            var result = await _context.SaveChangesAsync();
-
-            if (result == 0)
+            // If no data change, result will get 0
+            if(question.SubjectID != request.SubjectID || question.GroupID != request.GroupID
+                || question.Content != request.Content || question.IsMultipleChoice != request.IsMultipleChoice)
             {
-                return new ApiErrorResult<bool>("Không thể sửa câu hỏi");
+                question.SubjectID = request.SubjectID;
+                question.GroupID = request.GroupID;
+                question.Content = request.Content;
+                question.IsMultipleChoice = request.IsMultipleChoice;
+                question.Answers = new List<Answer>();
+
+                var result = await _context.SaveChangesAsync();
+
+                if (result == 0)
+                {
+                    return new ApiErrorResult<bool>("Không thể sửa câu hỏi");
+                }
+            }
+            else
+            {
+                question.Answers = new List<Answer>();
+                await _context.SaveChangesAsync();
             }
 
             return new ApiSuccessResult<bool>();
@@ -63,9 +76,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Questions
 
         public async Task<ApiResult<bool>> Delete(int id)
         {
-            var _question = await _context.Questions.FindAsync(id);
-            if (_question == null) return new ApiErrorResult<bool>("Không thể tìm thấy câu hỏi");
-            _context.Questions.Remove(_question);
+            var question = await _context.Questions.FindAsync(id);
+            if (question == null) return new ApiErrorResult<bool>("Không thể tìm thấy câu hỏi");
+            _context.Questions.Remove(question);
             
             var result = await _context.SaveChangesAsync();
             if(result == 0)
@@ -92,6 +105,28 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Questions
                 Content = question.Content,
                 IsMultipleChoice = question.IsMultipleChoice
             };
+
+            // Get all answer of question if question is multiple choice
+            if (questionViewModel.IsMultipleChoice)
+            {
+                var answers = from q in _context.Questions
+                              join a in _context.Answers on q.ID equals a.QuestionID
+                              where q.ID == id
+                              select a;
+
+                foreach (var ans in answers)
+                {
+                    var answer = new AnswerCreateUpdateRequest()
+                    {
+                        ID = ans.ID,
+                        QuestionID = ans.QuestionID,
+                        Content = ans.Content,
+                        IsCorrect = ans.IsCorrect
+                    };
+                    questionViewModel.Answers.Add(answer);
+                }
+            }
+
             return new ApiSuccessResult<QuestionViewModel>(questionViewModel);
         }
 

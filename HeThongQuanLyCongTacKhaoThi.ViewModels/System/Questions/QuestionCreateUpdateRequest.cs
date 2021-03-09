@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -16,5 +17,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions
         public string Content { get; set; }
         [DisplayName("Câu hỏi trắc nghiệm")]
         public bool IsMultipleChoice { get; set; }
+
+        public List<AnswerCreateUpdateRequest> answerCreateUpdateRequests = new List<AnswerCreateUpdateRequest>();
     }
 }
