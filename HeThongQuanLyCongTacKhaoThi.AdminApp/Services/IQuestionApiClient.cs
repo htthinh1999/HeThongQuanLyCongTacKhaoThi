@@ -1,4 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
     {
         Task<ApiResult<PagedResult<QuestionViewModel>>> GetQuestionPaging(GetQuestionPagingRequest request);
         Task<ApiResult<QuestionViewModel>> GetByID(int id);
-        Task<ApiResult<bool>> Create(QuestionCreateUpdateRequest request);
-        Task<ApiResult<bool>> Update(int id, QuestionCreateUpdateRequest request);
+        Task<ApiResult<int>> Create(QuestionCreateUpdateRequest request, List<AnswerCreateUpdateRequest> answerCreateUpdateRequests);
+        Task<ApiResult<bool>> Update(int id, QuestionCreateUpdateRequest request, List<AnswerCreateUpdateRequest> answerCreateUpdateRequests);
         Task<ApiResult<bool>> Delete(int id);
     }
 }

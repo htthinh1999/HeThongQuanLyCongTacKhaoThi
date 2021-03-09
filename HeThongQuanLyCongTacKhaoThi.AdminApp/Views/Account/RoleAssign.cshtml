@@ -16,15 +16,17 @@
             <input type="hidden" asp-for="Id" />
             @for (var i = 0; i < Model.Roles.Count; i++)
             {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" asp-for="Roles[i].Selected">
-                    <label class="form-check-label" asp-for="Roles[i].Selected">
-                        @Model.Roles[i].Name
-                    </label>
-                    <input type="hidden" asp-for="Roles[i].Id" class="form-control" />
-                    <input type="hidden" asp-for="Roles[i].Name" class="form-control" />
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" asp-for="Roles[i].Selected">
+                        <label class="form-check-label" asp-for="Roles[i].Selected">
+                            @Model.Roles[i].Name
+                        </label>
+                        <input type="hidden" asp-for="Roles[i].Id" class="form-control" />
+                        <input type="hidden" asp-for="Roles[i].Name" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Roles[i].Name" class="text-danger"></span>
                 </div>
-                <span asp-validation-for="Roles[i].Name" class="text-danger"></span>
             }
             <div class="form-group">
                 <input type="submit" value="Lưu lại" class="btn btn-primary" /> | 

@@ -1,4 +1,7 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.System;
+using HeThongQuanLyCongTacKhaoThi.Application.System.Answers;
+using HeThongQuanLyCongTacKhaoThi.Application.System.Questions;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +17,12 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
     public class QuestionsController : ControllerBase
     {
         private readonly IQuestionService _questionService;
+        private readonly IAnswerService _answerService;
 
-        public QuestionsController(IQuestionService questionService)
+        public QuestionsController(IQuestionService questionService, IAnswerService answerService)
         {
             _questionService = questionService;
+            _answerService = answerService;
         }
 
         [HttpGet("paging")]
@@ -36,15 +41,27 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] QuestionCreateUpdateRequest request)
+        public async Task<IActionResult> Create([FromBody] QuestionCreateUpdateRequest request, [FromQuery] List<AnswerCreateUpdateRequest> answers)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            request.answerCreateUpdateRequests = answers;
             var result = await _questionService.Create(request);
+
+            if (result.IsSuccessed && request.IsMultipleChoice)
+            {
+                foreach(var ans in request.answerCreateUpdateRequests)
+                {
+                    ans.QuestionID = result.ResultObj;
+                    await _answerService.Create(ans);
+                }
+            }
+
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] QuestionCreateUpdateRequest request)
+        public async Task<IActionResult> Update(int id, [FromBody] QuestionCreateUpdateRequest request, [FromQuery] List<AnswerCreateUpdateRequest> answers)
         {
             if (!ModelState.IsValid)
             {
@@ -56,12 +73,33 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             {
                 return BadRequest(result.Message);
             }
+
+            // Remove all old answers
+            await _answerService.DeleteAllAnswersByQuestionID(id);
+
+            if (request.IsMultipleChoice)
+            {
+
+                // Create answers was updated
+                foreach (var ans in answers)
+                {
+                    if (!string.IsNullOrEmpty(ans.Content))
+                    {
+                        ans.QuestionID = id;
+                        await _answerService.Create(ans);
+                    }
+                }
+            }
+
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
+            // Remove all answers of question
+            await _answerService.DeleteAllAnswersByQuestionID(id);
+
             var result = await _questionService.Delete(id);
             return Ok(result);
         }
