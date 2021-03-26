@@ -1,5 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -55,7 +55,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
             return JsonConvert.DeserializeObject<ApiErrorResult<AnswerViewModel>>(body);
         }
 
-        public async Task<ApiResult<bool>> Create(AnswerCreateUpdateRequest request)
+        public async Task<ApiResult<bool>> Create(AnswerCURequest request)
         {
             var client = _httpClientFactory.CreateClient();
             var json = JsonConvert.SerializeObject(request);
@@ -71,7 +71,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-        public async Task<ApiResult<bool>> Update(int id, AnswerCreateUpdateRequest request)
+        public async Task<ApiResult<bool>> Update(int id, AnswerCURequest request)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();

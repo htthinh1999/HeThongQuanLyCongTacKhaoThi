@@ -66,7 +66,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
 
         public async Task<ApiResult<bool>> Register(RegisterRequest request)
         {
-            var user = await _userManager.FindByNameAsync(request.Username);
+            var user = await _userManager.FindByLoginAsync("", request.Username);
             if (user != null)
             {
                 return new ApiErrorResult<bool>("Lỗi trùng tên đăng nhập");

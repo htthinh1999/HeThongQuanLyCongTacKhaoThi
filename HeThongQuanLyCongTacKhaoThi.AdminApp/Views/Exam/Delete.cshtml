@@ -1,0 +1,54 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams.ExamViewModel
+
+@{
+    ViewData["Title"] = "Xoá đề thi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Xoá đề thi</h1>
+<h3>Bạn có chắc chắn muốn xoá đề thi này?</h3>
+
+<div>
+    <h4>Thông tin đề thi sẽ xoá</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubjectID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubjectID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MultipleChoiceQuestionCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MultipleChoiceQuestionCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EssayQuestionCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EssayQuestionCount)
+        </dd>
+    </dl>
+    <h4>Chi tiết các câu hỏi trong đề thi</h4>
+    <dl class="row">
+        @foreach (var examDetail in Model.ExamDetails)
+        {
+            var question = examDetail.Question;
+
+            @await Html.PartialAsync("_QuestionDetail", question);
+        }
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Xoá" class="btn btn-danger" /> |
+        <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách đề thi</a>
+    </form>
+</div>

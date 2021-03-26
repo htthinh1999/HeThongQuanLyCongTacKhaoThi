@@ -1,6 +1,6 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -56,30 +56,14 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
             return JsonConvert.DeserializeObject<ApiErrorResult<QuestionViewModel>>(body);
         }
 
-        public async Task<ApiResult<int>> Create(QuestionCreateUpdateRequest request, List<AnswerCreateUpdateRequest> answerCreateUpdateRequests)
+        public async Task<ApiResult<int>> Create(QuestionCURequest request)
         {
             var client = _httpClientFactory.CreateClient();
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
 
-            string subUri = "";
-            if (request.IsMultipleChoice)
-            {
-                if (answerCreateUpdateRequests.Count > 0)
-                {
-                    subUri += $"?answers[{0}].Content={answerCreateUpdateRequests[0].Content}";
-                    subUri += $"&answers[{0}].IsCorrect={answerCreateUpdateRequests[0].IsCorrect}";
-                }
-
-                for (int i = 1; i < answerCreateUpdateRequests.Count; i++)
-                {
-                    subUri += $"&answers[{i}].Content={answerCreateUpdateRequests[i].Content}";
-                    subUri += $"&answers[{i}].IsCorrect={answerCreateUpdateRequests[i].IsCorrect}";
-                }
-            }
-
-            var response = await client.PostAsync("/api/questions/create" + subUri, httpContent);
+            var response = await client.PostAsync("/api/questions/create", httpContent);
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
@@ -88,7 +72,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
             return JsonConvert.DeserializeObject<ApiErrorResult<int>>(result);
         }
 
-        public async Task<ApiResult<bool>> Update(int id, QuestionCreateUpdateRequest request, List<AnswerCreateUpdateRequest> answerCreateUpdateRequests)
+        public async Task<ApiResult<bool>> Update(int id, QuestionCURequest request)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
@@ -97,23 +81,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Services
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            string subUri = "";
-            if (request.IsMultipleChoice)
-            {
-                if (answerCreateUpdateRequests.Count > 0)
-                {
-                    subUri += $"?answers[{0}].Content={answerCreateUpdateRequests[0].Content}";
-                    subUri += $"&answers[{0}].IsCorrect={answerCreateUpdateRequests[0].IsCorrect}";
-                }
-
-                for (int i = 1; i < answerCreateUpdateRequests.Count; i++)
-                {
-                    subUri += $"&answers[{i}].Content={answerCreateUpdateRequests[i].Content}";
-                    subUri += $"&answers[{i}].IsCorrect={answerCreateUpdateRequests[i].IsCorrect}";
-                }
-            }
-
-            var response = await client.PutAsync($"/api/questions/{id}" + subUri, httpContent);
+            var response = await client.PutAsync($"/api/questions/{id}", httpContent);
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {

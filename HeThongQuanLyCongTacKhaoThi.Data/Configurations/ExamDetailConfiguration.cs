@@ -15,7 +15,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
             builder.HasKey(x => new { x.ExamID, x.QuestionID });
 
             builder.HasOne(x => x.Exam).WithMany(e => e.ExamDetails).HasForeignKey(x => x.ExamID);
-            builder.HasOne(x => x.Question).WithMany(e => e.ExamDetails).HasForeignKey(x => x.QuestionID);
+            builder.HasOne(x => x.Question).WithMany(e => e.ExamDetails).HasForeignKey(x => x.QuestionID).OnDelete(DeleteBehavior.Restrict); ;
         }
     }
 }

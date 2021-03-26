@@ -1,4 +1,4 @@
-﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions.QuestionCreateUpdateRequest
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions.QuestionCURequest
 
 @{
     ViewData["Title"] = "Sửa thông tin câu hỏi";
@@ -38,15 +38,18 @@
                 <input class="form-control" id="AnswerCount" type="number" value="2" min="2" max="6" />
             </div>
             <div id="answers">
-                @for (int i = 0; i < Model.answerCreateUpdateRequests.Count; i++)
+                @if (Model.IsMultipleChoice)
                 {
-                    <div class="form-group">
-                        <label class="control-label">Nội dung đáp án thứ @(i+1)</label>
-                        <div class="row mx-0">
-                            <input asp-for="answerCreateUpdateRequests[i].Content" class="col-md-11 form-control" />
-                            <input class="col-md-1 form-check-input position-static mx-0 mt-auto mb-auto" asp-for="answerCreateUpdateRequests[i].IsCorrect" />
+                    @for (int i = 0; i < Model.Answers.Count; i++)
+                    {
+                        <div class="form-group">
+                            <label class="control-label">Nội dung đáp án thứ @(i+1)</label>
+                            <div class="row mx-0">
+                                <input asp-for="Answers[i].Content" class="col-md-11 form-control" />
+                                <input class="col-md-1 form-check-input position-static mx-0 mt-auto mb-auto" asp-for="Answers[i].IsCorrect" />
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
             </div>
             <div class="form-group">
@@ -81,7 +84,7 @@
                     }
                 }
             } else {
-                $("#AnswerCount").val(@Model.answerCreateUpdateRequests.Count);
+                $("#AnswerCount").val(@Model.Answers.Count);
             }
 
             $("#IsMultipleChoice").change(function () {

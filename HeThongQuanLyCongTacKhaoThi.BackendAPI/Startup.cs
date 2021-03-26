@@ -5,8 +5,8 @@ using FluentValidation.AspNetCore;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
 using HeThongQuanLyCongTacKhaoThi.Application.System;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
-using HeThongQuanLyCongTacKhaoThi.Application.System.Answers;
-using HeThongQuanLyCongTacKhaoThi.Application.System.Questions;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Roles;
 using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
@@ -22,6 +22,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
 {
@@ -39,7 +42,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
         {
             services.AddDbContext<HeThongQuanLyCongTacKhaoThiDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MAIN_CONNECTION_STRING)));
-
+            
             // Add Identity
             services.AddIdentity<Account, RoleAccount>()
                 .AddEntityFrameworkStores<HeThongQuanLyCongTacKhaoThiDbContext>()
@@ -53,7 +56,10 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IQuestionService, QuestionService>();
+            services.AddTransient<IQuestionGroupService, QuestionGroupService>();
             services.AddTransient<IAnswerService, AnswerService>();
+            services.AddTransient<IExamService, ExamService>();
+            services.AddTransient<IExamDetailService, ExamDetailService>();
 
             // Declare Fluent Validator
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
@@ -125,6 +131,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

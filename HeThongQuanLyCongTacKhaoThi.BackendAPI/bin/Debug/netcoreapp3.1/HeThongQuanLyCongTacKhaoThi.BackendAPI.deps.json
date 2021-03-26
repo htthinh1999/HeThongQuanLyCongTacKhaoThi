@@ -2144,7 +2144,8 @@
       },
       "HeThongQuanLyCongTacKhaoThi.ViewModels/1.0.0": {
         "dependencies": {
-          "FluentValidation.AspNetCore": "9.3.0"
+          "FluentValidation.AspNetCore": "9.3.0",
+          "HeThongQuanLyCongTacKhaoThi.Data": "1.0.0"
         },
         "runtime": {
           "HeThongQuanLyCongTacKhaoThi.ViewModels.dll": {}

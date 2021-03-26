@@ -8,7 +8,6 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bi
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.pdb
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.Views.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.Views.pdb
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.csprojAssemblyReference.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.AssemblyInfoInputs.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.AssemblyInfo.cs
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.csproj.CoreCompileInputs.cache
@@ -17,7 +16,6 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\ob
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.RazorAssemblyInfo.cs
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\staticwebassets\HeThongQuanLyCongTacKhaoThi.WebApp.StaticWebAssets.Manifest.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\staticwebassets\HeThongQuanLyCongTacKhaoThi.WebApp.StaticWebAssets.xml
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\scopedcss\bundle\HeThongQuanLyCongTacKhaoThi.WebApp.styles.css
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.TagHelpers.input.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.TagHelpers.output.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.RazorCoreGenerate.cache
@@ -35,3 +33,5 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\ob
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.pdb
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.genruntimeconfig.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.csproj.CopyComplete
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.csprojAssemblyReference.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bin\Debug\netcoreapp3.1\Properties\launchSettings.json

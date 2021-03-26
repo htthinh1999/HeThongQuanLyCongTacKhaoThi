@@ -1,0 +1,36 @@
+﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class QuestionGroupsController : ControllerBase
+    {
+        private readonly IQuestionGroupService _questionGroupService;
+
+        public QuestionGroupsController(IQuestionGroupService questionGroupService)
+        {
+            _questionGroupService = questionGroupService;
+        }
+
+        [HttpGet("get-all")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _questionGroupService.GetAll();
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByID(int id)
+        {
+            var result = await _questionGroupService.GetByID(id);
+            return Ok(result);
+        }
+    }
+}

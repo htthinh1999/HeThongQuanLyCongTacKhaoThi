@@ -7588,7 +7588,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Keycode_Mon\\.nuget\\packages\\": {}
+    "C:\\Users\\htthi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -7596,11 +7596,11 @@
       "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj",
       "projectName": "HeThongQuanLyCongTacKhaoThi.Data",
       "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj",
-      "packagesPath": "C:\\Users\\Keycode_Mon\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\htthi\\.nuget\\packages\\",
       "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Keycode_Mon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\htthi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7674,7 +7674,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
       }
     }
   }

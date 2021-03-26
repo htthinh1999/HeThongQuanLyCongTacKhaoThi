@@ -5,12 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20201109085323_AspNetCoreIdentityDatabase.cs" />
-    <Compile Remove="Migrations\20201109085323_AspNetCoreIdentityDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20201109085545_AspNetCoreIdentityDatabase.cs" />
-    <Compile Remove="Migrations\20201109085545_AspNetCoreIdentityDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20201109091206_SeedIdentityAccount.cs" />
-    <Compile Remove="Migrations\20201109091206_SeedIdentityAccount.Designer.cs" />
+    <Compile Remove="Migrations\20210317072443_Tesstttt.cs" />
+    <Compile Remove="Migrations\20210317072443_Tesstttt.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("b4b6d277-cd2a-4314-a7a9-69d819331b35")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("HeThongQuanLyCongTacKhaoThi.AdminApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

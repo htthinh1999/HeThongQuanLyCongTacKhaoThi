@@ -46,13 +46,16 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             services.AddTransient<IAccountApiClient, AccountApiClient>();
             services.AddTransient<IRoleApiClient, RoleApiClient>();
             services.AddTransient<IQuestionApiClient, QuestionApiClient>();
+            services.AddTransient<IQuestionGroupApiClient, QuestionGroupApiClient>();
             services.AddTransient<IAnswerApiClient, AnswerApiClient>();
+            services.AddTransient<IExamApiClient, ExamApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
+            builder.AddRazorRuntimeCompilation();
 #if DEBUG
-            if(enviroment == Environments.Development)
+            if (enviroment == Environments.Development)
             {
                 builder.AddRazorRuntimeCompilation();
             }
@@ -62,6 +65,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -73,6 +77,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseAuthentication();

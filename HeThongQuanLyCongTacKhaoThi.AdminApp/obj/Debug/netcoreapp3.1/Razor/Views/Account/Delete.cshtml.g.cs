@@ -26,8 +26,15 @@ using HeThongQuanLyCongTacKhaoThi.AdminApp.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\Views\_ViewImports.cshtml"
+using HtmlHelpers.BeginCollectionItemCore;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"893c94204aeedd0c7e7517cec348bc9245508b54", @"/Views/Account/Delete.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"661a494f297b12d153d796cf927a0da9a8e40a81", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5910865ffb358072aba93cf5a00a1fab298974dc", @"/Views/_ViewImports.cshtml")]
     public class Views_Account_Delete : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts.AccountViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-outline-primary"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -214,9 +221,9 @@ using HeThongQuanLyCongTacKhaoThi.AdminApp.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n    \r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "893c94204aeedd0c7e7517cec348bc9245508b5411448", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "893c94204aeedd0c7e7517cec348bc9245508b5411685", async() => {
                 WriteLiteral("\r\n        <input type=\"submit\" value=\"Xoá\" class=\"btn btn-danger\" /> |\r\n        ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "893c94204aeedd0c7e7517cec348bc9245508b5411793", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "893c94204aeedd0c7e7517cec348bc9245508b5412030", async() => {
                     WriteLiteral("Quay lại danh sách tài khoản");
                 }
                 );
