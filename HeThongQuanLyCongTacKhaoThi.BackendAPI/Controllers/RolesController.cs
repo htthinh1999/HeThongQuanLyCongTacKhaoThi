@@ -23,6 +23,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             _roleService = roleService;
         }
 
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAll()
         {
             var roles = await _roleService.GetAll();

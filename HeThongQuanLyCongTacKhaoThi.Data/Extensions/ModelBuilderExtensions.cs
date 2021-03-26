@@ -48,9 +48,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 new Score() { ID = 4, Name = "Điểm kết thúc môn" }
                 );
 
-            /***************************** SEED ACCOUNT & ROLE ACCOUNT *****************************/
-            // Create admin account
-            Guid ADMIN_ID = new Guid("EFE5C78C-BBC5-40E5-A106-1F07D4B4FCDB");
+            /***************************** SEED ROLE ACCOUNT *****************************/
+            // Admin Role
             Guid ADMIN_ROLE_ID = new Guid("61A4FAD5-402C-4CE0-845D-1FBD2B91956F");
             modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
             {
@@ -60,6 +59,31 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 Description = "Vai trò quản trị viên"
             });
 
+            // Teacher Role
+            Guid TEACHER_ROLE_ID = new Guid("1E6D489F-1DF4-4DAB-B873-CE3224D87F94");
+
+            modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
+            {
+                Id = TEACHER_ROLE_ID,
+                Name = "teacher",
+                NormalizedName = "teacher",
+                Description = "Vai trò giảng viên"
+            });
+
+            // Student Role
+            Guid STUDENT_ROLE_ID = new Guid("9A34BDD4-FA97-4E2F-9960-B19A68826BE9");
+
+            modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
+            {
+                Id = STUDENT_ROLE_ID,
+                Name = "teacher",
+                NormalizedName = "teacher",
+                Description = "Vai trò giảng viên"
+            });
+
+            /***************************** SEED ACCOUNT *****************************/
+            // Create admin account
+            Guid ADMIN_ID = new Guid("EFE5C78C-BBC5-40E5-A106-1F07D4B4FCDB");
             var hasher = new PasswordHasher<Account>();
             modelBuilder.Entity<Account>().HasData(new Account
             {
@@ -87,21 +111,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
 
 
             // Create htthinh account
-            Guid TEACHER_ID = new Guid("4A2D9B6E-97C4-41BD-A929-F778972DB109");
-            Guid TEACHER_ROLE_ID = new Guid("1E6D489F-1DF4-4DAB-B873-CE3224D87F94");
-
-            modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
-            {
-                Id = TEACHER_ROLE_ID,
-                Name = "teacher",
-                NormalizedName = "teacher",
-                Description = "Vai trò giảng viên"
-            });
-
+            Guid HTTHINH_ID = new Guid("4A2D9B6E-97C4-41BD-A929-F778972DB109");
             hasher = new PasswordHasher<Account>();
             modelBuilder.Entity<Account>().HasData(new Account
             {
-                Id = TEACHER_ID,
+                Id = HTTHINH_ID,
                 UserName = "htthinh",
                 NormalizedUserName = "htthinh",
                 Email = "htthinh1999@gmail.com",
@@ -121,7 +135,64 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
             {
                 RoleId = TEACHER_ROLE_ID,
-                UserId = TEACHER_ID
+                UserId = HTTHINH_ID
+            });
+
+
+            // Create sinhvien 1 account
+            Guid STUDENT1_ID = new Guid("9E7773EF-083C-4A8E-8ED2-9E36CD704913");
+            hasher = new PasswordHasher<Account>();
+            modelBuilder.Entity<Account>().HasData(new Account
+            {
+                Id = STUDENT1_ID,
+                UserName = "sv1",
+                NormalizedUserName = "sv1",
+                Email = "sv1@gmail.com",
+                NormalizedEmail = "sv1@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "sinhvien123"),
+                SecurityStamp = string.Empty,
+                Student_TeacherID = "17ĐC028",
+                Name = "Sinh viên 1",
+                Gender = true,
+                Birthday = new DateTime(2000, 10, 27),
+                ClassID = "DHCN4A",
+                Address = "Khánh Hoà",
+                PhoneNumber = "0987333644"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                RoleId = STUDENT_ROLE_ID,
+                UserId = STUDENT1_ID
+            });
+
+            // Create sinhvien 2 account
+            Guid STUDENT2_ID = new Guid("8BC30F33-6382-45FD-A54A-0DEC677631D9");
+            hasher = new PasswordHasher<Account>();
+            modelBuilder.Entity<Account>().HasData(new Account
+            {
+                Id = STUDENT2_ID,
+                UserName = "sv2",
+                NormalizedUserName = "sv2",
+                Email = "sv2@gmail.com",
+                NormalizedEmail = "sv2@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "sinhvien123"),
+                SecurityStamp = string.Empty,
+                Student_TeacherID = "17ĐC023",
+                Name = "Sinh viên 2",
+                Gender = true,
+                Birthday = new DateTime(2000, 03, 20),
+                ClassID = "DHCN4A",
+                Address = "Khánh Hoà",
+                PhoneNumber = "0987666644"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                RoleId = STUDENT_ROLE_ID,
+                UserId = STUDENT2_ID
             });
 
 
@@ -183,6 +254,33 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 GroupID = 1,
                 Content = "Một biến được gọi là biến cục bộ nếu:",
                 IsMultipleChoice = true
+            });
+
+            modelBuilder.Entity<Question>().HasData(new Question
+            {
+                ID = 4,
+                SubjectID = "CC4206",
+                GroupID = 2,
+                Content = "Nhận định nào sau đây KHÔNG ĐÚNG về đệ quy vô hạn?",
+                IsMultipleChoice = true
+            });
+
+            modelBuilder.Entity<Question>().HasData(new Question
+            {
+                ID = 5,
+                SubjectID = "CC4206",
+                GroupID = 2,
+                Content = "Trong các phương pháp sắp xếp: lựa chọn, chèn, đổi chỗ(nổi bọt), quicksort (sắp xếp nhanh), mergesort (sắp xếp trộn), thì phương pháp nào là phù hợp nhất để sắp xếp trên danh sách liên kết đơn ? Giải thích ? ",
+                IsMultipleChoice = false
+            });
+
+            modelBuilder.Entity<Question>().HasData(new Question
+            {
+                ID = 6,
+                SubjectID = "CC4206",
+                GroupID = 2,
+                Content = "Trình bày sự khác biệt giữa mảng cấp phát bộ nhớ động và mảng cấp phát tĩnh? Khi nào dùng mảng cấp phát động, mảng cấp phát tĩnh ? Cho ví dụ ?",
+                IsMultipleChoice = false
             });
 
             /***************************** SEED ANSWER *****************************/
@@ -282,6 +380,37 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 IsCorrect = false
             });
 
+            modelBuilder.Entity<Answer>().HasData(new Answer
+            {
+                ID = 13,
+                QuestionID = 4,
+                Content = "Đệ quy khiến chương trình bị treo.",
+                IsCorrect = false
+            });
+
+            modelBuilder.Entity<Answer>().HasData(new Answer
+            {
+                ID = 14,
+                QuestionID = 4,
+                Content = "Đệ quy vô hạn tiêu tốn toàn bộ bộ nhớ của hệ thống dành cho chương trình và khiến cho chương trình kết thúc một cách bất thường.",
+                IsCorrect = false
+            });
+
+            modelBuilder.Entity<Answer>().HasData(new Answer
+            {
+                ID = 15,
+                QuestionID = 4,
+                Content = "	Gọi đệ quy gián tiếp luôn gây ra đệ quy vô hạn.",
+                IsCorrect = true
+            });
+
+            modelBuilder.Entity<Answer>().HasData(new Answer
+            {
+                ID = 16,
+                QuestionID = 4,
+                Content = "Nếu lời gọi đệ quy không đi đến điểm dừng (base case) thì đệ quy vô hạn sẽ xuất hiện.",
+                IsCorrect = false
+            });
 
         }
     }

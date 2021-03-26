@@ -26,8 +26,15 @@ using HeThongQuanLyCongTacKhaoThi.AdminApp.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\Views\_ViewImports.cshtml"
+using HtmlHelpers.BeginCollectionItemCore;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"97ccf310ed7f66e25390972aec5bc4143691b967", @"/Views/Shared/Components/Pager/Default.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"661a494f297b12d153d796cf927a0da9a8e40a81", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5910865ffb358072aba93cf5a00a1fab298974dc", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Components_Pager_Default : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<HeThongQuanLyCongTacKhaoThi.ViewModels.Common.PagedResultBase>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("form-control form-control-sm mx-2"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -287,11 +294,11 @@ WriteAttributeValue(" ", 1966, Model.PageCount.ToString(), 1967, 27, false);
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(" class=\"page-link\">Cuối</a></li>\r\n\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96715169", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96715406", async() => {
                 WriteLiteral("\r\n        <div class=\"form-group\">\r\n\r\n            <label>Hiển thị </label>\r\n            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96715522", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96715759", async() => {
                     WriteLiteral("\r\n                ");
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96715807", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96716044", async() => {
                         WriteLiteral("5");
                     }
                     );
@@ -308,7 +315,7 @@ WriteAttributeValue(" ", 1966, Model.PageCount.ToString(), 1967, 27, false);
                     Write(__tagHelperExecutionContext.Output);
                     __tagHelperExecutionContext = __tagHelperScopeManager.End();
                     WriteLiteral("\r\n                ");
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96717224", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96717461", async() => {
                         WriteLiteral("10");
                     }
                     );
@@ -322,7 +329,7 @@ WriteAttributeValue(" ", 1966, Model.PageCount.ToString(), 1967, 27, false);
                     Write(__tagHelperExecutionContext.Output);
                     __tagHelperExecutionContext = __tagHelperScopeManager.End();
                     WriteLiteral("\r\n                ");
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96718307", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ccf310ed7f66e25390972aec5bc4143691b96718544", async() => {
                         WriteLiteral("15");
                     }
                     );

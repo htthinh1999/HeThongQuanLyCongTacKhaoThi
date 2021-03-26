@@ -11,6 +11,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
         public int QuestionID { get; set; }
         public int AnswerID { get; set; }
         public string EssayPath { get; set; }
+        public float? Mark { get; set; }
 
         public StudentAnswer StudentAnswer { get; set; }
         public Question Question { get; set; }

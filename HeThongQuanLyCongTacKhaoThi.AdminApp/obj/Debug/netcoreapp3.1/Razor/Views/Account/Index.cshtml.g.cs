@@ -27,6 +27,13 @@ using HeThongQuanLyCongTacKhaoThi.AdminApp.Models;
 #line hidden
 #nullable disable
 #nullable restore
+#line 3 "F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\Views\_ViewImports.cshtml"
+using HtmlHelpers.BeginCollectionItemCore;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\Views\Account\Index.cshtml"
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 
@@ -41,7 +48,7 @@ using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2649623a971b0b3a0bb78ce985b8c34f0f0e108b", @"/Views/Account/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"661a494f297b12d153d796cf927a0da9a8e40a81", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5910865ffb358072aba93cf5a00a1fab298974dc", @"/Views/_ViewImports.cshtml")]
     public class Views_Account_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PagedResult<AccountViewModel>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-primary"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -87,7 +94,7 @@ using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<h1>Danh sách tài khoản</h1>\r\n\r\n<p>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2649623a971b0b3a0bb78ce985b8c34f0f0e108b6375", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2649623a971b0b3a0bb78ce985b8c34f0f0e108b6612", async() => {
                 WriteLiteral("Tạo tài khoản");
             }
             );
@@ -143,7 +150,7 @@ using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
             <div id=""dataTable_wrapper"" class=""dataTables_wrapper dt-bootstrap4"">
                 <div class=""row"">
                     ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2649623a971b0b3a0bb78ce985b8c34f0f0e108b9166", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2649623a971b0b3a0bb78ce985b8c34f0f0e108b9403", async() => {
                 WriteLiteral(@"
                         <div class=""form-group mr-sm-3 mb-2"">
                             <label for=""keyword"" class=""sr-only"">Tìm kiếm:</label>

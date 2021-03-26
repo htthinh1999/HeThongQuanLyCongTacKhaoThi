@@ -1,5 +1,5 @@
-﻿using HeThongQuanLyCongTacKhaoThi.Application.System.Answers;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
+﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] AnswerCreateUpdateRequest request, [FromQuery] List<AnswerCreateUpdateRequest> answers)
+        public async Task<IActionResult> Create([FromBody] AnswerCURequest request, [FromQuery] List<AnswerCURequest> answers)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -44,7 +44,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] AnswerCreateUpdateRequest request)
+        public async Task<IActionResult> Update(int id, [FromBody] AnswerCURequest request)
         {
             if (!ModelState.IsValid)
             {

@@ -39,7 +39,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" asp-action="Index" asp-controller="Account">
+                <a class="nav-link" asp-action="Index" asp-controller="Home">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Trang chủ</span>
                 </a>
@@ -74,14 +74,18 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                    aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Ngân hàng câu hỏi</span>
+                    <span>Ngân hàng đề thi</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Quản lý đề thi:</h6>
+                        <a class="collapse-item" asp-action="Index" asp-controller="Exam">Danh sách đề thi</a>
+                        <a class="collapse-item" asp-action="Create" asp-controller="Exam">Tạo đề thi</a>
+                        <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Quản lý câu hỏi:</h6>
-                        <a class="collapse-item" asp-action="Index" asp-controller="Question">Danh sách</a>
-                        <a class="collapse-item" asp-action="Create" asp-controller="Question">Thêm mới</a>
+                        <a class="collapse-item" asp-action="Index" asp-controller="Question">Danh sách câu hỏi</a>
+                        <a class="collapse-item" asp-action="Create" asp-controller="Question">Tạo câu hỏi</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Quản lý đáp án:</h6>
                         <a class="collapse-item" asp-action="Index" asp-controller="Answer">Danh sách</a>
@@ -161,7 +165,7 @@
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
                                    aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
@@ -186,7 +190,7 @@
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                               placeholder="Search for..." aria-label="Search"
+                                               placeholder="Tìm kiếm..." aria-label="Search"
                                                aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">

@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class AccountController : Controller
     {
         private readonly IAccountApiClient _accountApiClient;

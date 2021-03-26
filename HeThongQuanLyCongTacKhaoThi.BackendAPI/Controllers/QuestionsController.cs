@@ -1,14 +1,15 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.System;
-using HeThongQuanLyCongTacKhaoThi.Application.System.Answers;
-using HeThongQuanLyCongTacKhaoThi.Application.System.Questions;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
@@ -41,16 +42,15 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] QuestionCreateUpdateRequest request, [FromQuery] List<AnswerCreateUpdateRequest> answers)
+        public async Task<IActionResult> Create([FromBody] QuestionCURequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            request.answerCreateUpdateRequests = answers;
             var result = await _questionService.Create(request);
 
             if (result.IsSuccessed && request.IsMultipleChoice)
             {
-                foreach(var ans in request.answerCreateUpdateRequests)
+                foreach(var ans in request.Answers)
                 {
                     ans.QuestionID = result.ResultObj;
                     await _answerService.Create(ans);
@@ -61,17 +61,34 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] QuestionCreateUpdateRequest request, [FromQuery] List<AnswerCreateUpdateRequest> answers)
+        public async Task<IActionResult> Update(int id, [FromBody] QuestionCURequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            // Cannot update question when it was existed in an exam
+            // Only allow update when it's same old question's type and group id
+            // (do NOT change type: multiple choice question <-/-> essay question)
+            // (do NOT change group id)
+            var existQuestionInExam = _questionService.ExistQuestionInExam(id);
+            if (existQuestionInExam.ResultObj)
+            {
+                var getQuestion = await _questionService.GetByID(id);
+                var question = getQuestion.ResultObj;
+                if (question.IsMultipleChoice != request.IsMultipleChoice
+                    || question.GroupID != request.GroupID)
+                {
+                    existQuestionInExam.Message = "Không thể thay đổi loại câu hỏi hoặc nhóm câu hỏi! Câu hỏi này đã được sử dụng trong đề thi!";
+                    return Ok(existQuestionInExam);
+                }
+            }
+
             var result = await _questionService.Update(id, request);
             if (!result.IsSuccessed)
             {
-                return BadRequest(result.Message);
+                return Ok(result);
             }
 
             // Remove all old answers
@@ -81,7 +98,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             {
 
                 // Create answers was updated
-                foreach (var ans in answers)
+                foreach (var ans in request.Answers)
                 {
                     if (!string.IsNullOrEmpty(ans.Content))
                     {
@@ -97,11 +114,20 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            // Remove all answers of question
-            await _answerService.DeleteAllAnswersByQuestionID(id);
+            var existQuestionInExam = _questionService.ExistQuestionInExam(id);
 
-            var result = await _questionService.Delete(id);
-            return Ok(result);
+            // Cannot delete question when it was existed in an exam
+            if (!existQuestionInExam.ResultObj)
+            {
+                // Remove all answers of question
+                await _answerService.DeleteAllAnswersByQuestionID(id);
+
+                var result = await _questionService.Delete(id);
+                return Ok(result);
+            }
+
+            existQuestionInExam.Message = "Không thể xoá câu hỏi! Câu hỏi đã được sử dụng trong đề thi!";
+            return Ok(existQuestionInExam);
         }
 
     }

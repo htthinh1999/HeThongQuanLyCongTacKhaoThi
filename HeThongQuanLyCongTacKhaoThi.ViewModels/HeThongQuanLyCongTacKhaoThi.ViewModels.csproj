@@ -8,4 +8,8 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HeThongQuanLyCongTacKhaoThi.Data\HeThongQuanLyCongTacKhaoThi.Data.csproj" />
+  </ItemGroup>
+
 </Project>

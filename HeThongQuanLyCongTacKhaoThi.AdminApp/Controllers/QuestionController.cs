@@ -1,6 +1,6 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.AdminApp.Services;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Questions;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -41,7 +41,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(QuestionCreateUpdateRequest request, List<AnswerCreateUpdateRequest> answerCreateUpdateRequests)
+        public async Task<IActionResult> Create(QuestionCURequest request, List<AnswerCURequest> answerCreateUpdateRequests)
         {
             if (!ModelState.IsValid)
             {
@@ -67,7 +67,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 }
             }
 
-            var result = await _questionApiClient.Create(request, answerCreateUpdateRequests);
+            request.Answers = answerCreateUpdateRequests.ToList();
+            var result = await _questionApiClient.Create(request);
             if (result.IsSuccessed)
             {
                 TempData["SuccessMsg"] = "Tạo câu hỏi thành công";
@@ -84,14 +85,14 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             if (result.IsSuccessed)
             {
                 var question = result.ResultObj;
-                var updateResquest = new QuestionCreateUpdateRequest()
+                var updateResquest = new QuestionCURequest()
                 {
                     ID = question.ID,
                     SubjectID = question.SubjectID,
                     GroupID = question.GroupID,
                     Content = question.Content,
                     IsMultipleChoice = question.IsMultipleChoice,
-                    answerCreateUpdateRequests = question.Answers.ToList()
+                    Answers = question.Answers.ToList()
                 };
 
                 return View(updateResquest);
@@ -101,7 +102,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(QuestionCreateUpdateRequest request, List<AnswerCreateUpdateRequest> answerCreateUpdateRequests)
+        public async Task<IActionResult> Edit(QuestionCURequest request, List<AnswerCURequest> Answers)
         {
             if (!ModelState.IsValid)
             {
@@ -112,7 +113,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             if (request.IsMultipleChoice)
             {
                 int wrongAnscount = 0;
-                foreach (var ans in answerCreateUpdateRequests)
+                foreach (var ans in Answers)
                 {
                     if (!ans.IsCorrect)
                     {
@@ -120,21 +121,28 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                     }
                 }
 
-                if (wrongAnscount == answerCreateUpdateRequests.Count)
+                if (wrongAnscount == Answers.Count)
                 {
                     ModelState.AddModelError("", "Bạn cần chọn 1 đáp án đúng");
                     return View(request);
                 }
             }
 
-            var result = await _questionApiClient.Update(request.ID, request, answerCreateUpdateRequests);
-            if (result.IsSuccessed)
+            request.Answers = Answers.ToList();
+            var result = await _questionApiClient.Update(request.ID, request);
+            if (!result.IsSuccessed)
             {
-                TempData["SuccessMsg"] = "Cập nhật câu hỏi thành công";
-                return RedirectToAction("Index");
+                ModelState.AddModelError("", result.Message);
+                return View(request);
             }
-            ModelState.AddModelError("", result.Message);
-            return View(request);
+
+            if (result.ResultObj)
+            {
+                return BadRequest(result.Message);
+            }
+
+            TempData["SuccessMsg"] = "Cập nhật câu hỏi thành công";
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -167,6 +175,12 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             {
                 return BadRequest(result.Message);
             }
+
+            if (result.ResultObj)
+            {
+                return BadRequest(result.Message);
+            }
+
             TempData["SuccessMsg"] = "Xoá câu hỏi thành công";
             return RedirectToAction("Index");
         }

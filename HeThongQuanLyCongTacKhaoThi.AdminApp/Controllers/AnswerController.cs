@@ -1,5 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.AdminApp.Services;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Answers;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
