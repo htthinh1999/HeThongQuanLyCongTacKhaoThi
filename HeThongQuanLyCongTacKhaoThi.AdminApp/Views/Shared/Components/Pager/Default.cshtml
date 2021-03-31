@@ -1,5 +1,5 @@
 ﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Common.PagedResultBase
-@{ 
+@{
     var urlTemplate = Url.Action() + "?pageIndex={0}";
     var request = ViewContext.HttpContext.Request;
     foreach(var key in request.Query.Keys)
@@ -56,6 +56,4 @@
             bản ghi
         </div>
     </form>
-
 </ul>
-

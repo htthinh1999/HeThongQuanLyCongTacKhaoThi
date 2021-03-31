@@ -1,17 +1,17 @@
-﻿using HeThongQuanLyCongTacKhaoThi.AdminApp.Services;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.QuestionGroups;
+﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
+    [Authorize(Policy = Policy.Manager)]
     public class QuestionGroupController : Controller
     {
         private readonly IQuestionGroupApiClient _questionGroupApiClient;
+
         public QuestionGroupController(IQuestionGroupApiClient questionGroupApiClient)
         {
             _questionGroupApiClient = questionGroupApiClient;
@@ -21,7 +21,6 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         {
             return View();
         }
-
 
         public async Task<IActionResult> GetAllQuestionGroup(int id)
         {

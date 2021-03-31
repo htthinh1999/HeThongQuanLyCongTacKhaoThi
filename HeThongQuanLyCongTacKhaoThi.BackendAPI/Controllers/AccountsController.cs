@@ -1,11 +1,8 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
@@ -93,6 +90,13 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         public async Task<IActionResult> GetByID(Guid id)
         {
             var result = await _accountService.GetByID(id);
+            return Ok(result);
+        }
+
+        [HttpGet("username/{username}")]
+        public async Task<IActionResult> GetByUserName(string username)
+        {
+            var result = await _accountService.GetByUserName(username);
             return Ok(result);
         }
     }

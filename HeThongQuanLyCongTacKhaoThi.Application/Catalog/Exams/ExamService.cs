@@ -5,10 +5,8 @@ using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
@@ -101,16 +99,16 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
 
             // Get multiple choice question count
             var multipleChoiceQuestions = from ed in _context.ExamDetails
-                                              join q in _context.Questions on ed.QuestionID equals q.ID
-                                              where ed.ExamID == id && q.IsMultipleChoice
-                                              select q;
+                                          join q in _context.Questions on ed.QuestionID equals q.ID
+                                          where ed.ExamID == id && q.IsMultipleChoice
+                                          select q;
             examViewModel.MultipleChoiceQuestionCount = await multipleChoiceQuestions.CountAsync();
 
             // Get essay question count
             var essayQuestions = from ed in _context.ExamDetails
-                                          join q in _context.Questions on ed.QuestionID equals q.ID
-                                          where ed.ExamID == id && !q.IsMultipleChoice
-                                          select q;
+                                 join q in _context.Questions on ed.QuestionID equals q.ID
+                                 where ed.ExamID == id && !q.IsMultipleChoice
+                                 select q;
             examViewModel.EssayQuestionCount = await essayQuestions.CountAsync();
 
             // Get all question of exam
@@ -159,12 +157,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
 
             // Get question group ids
             var questionGroups = await (from ed in _context.ExamDetails
-                                          join q in _context.Questions on ed.QuestionID equals q.ID
-                                          join qg in _context.QuestionGroups on q.GroupID equals qg.ID
-                                          where ed.ExamID == id
-                                          select qg).Distinct().ToListAsync();
+                                        join q in _context.Questions on ed.QuestionID equals q.ID
+                                        join qg in _context.QuestionGroups on q.GroupID equals qg.ID
+                                        where ed.ExamID == id
+                                        select qg).Distinct().ToListAsync();
 
-            foreach(var questionGroup in questionGroups)
+            foreach (var questionGroup in questionGroups)
             {
                 examViewModel.QuestionGroups.Add(questionGroup.ID);
             }
@@ -181,6 +179,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
             }
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
+                .AsNoTracking()
                 .Select(x => new ExamViewModel()
                 {
                     ID = x.ID,

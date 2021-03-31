@@ -1,5 +1,3 @@
-using System;
-
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Models
 {
     public class ErrorViewModel

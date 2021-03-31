@@ -1,13 +1,11 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions
@@ -49,7 +47,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions
             if (question == null) return new ApiErrorResult<bool>("Không thể tìm thấy câu hỏi");
 
             // If no data change, result will get 0
-            if(question.SubjectID != request.SubjectID || question.GroupID != request.GroupID
+            if (question.SubjectID != request.SubjectID || question.GroupID != request.GroupID
                 || question.Content != request.Content || question.IsMultipleChoice != request.IsMultipleChoice)
             {
                 question.SubjectID = request.SubjectID;
@@ -79,9 +77,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions
             var question = await _context.Questions.FindAsync(id);
             if (question == null) return new ApiErrorResult<bool>("Không thể tìm thấy câu hỏi");
             _context.Questions.Remove(question);
-            
+
             var result = await _context.SaveChangesAsync();
-            if(result == 0)
+            if (result == 0)
             {
                 return new ApiErrorResult<bool>("Không thể xoá câu hỏi");
             }
@@ -139,6 +137,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions
             }
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
+                .AsNoTracking()
                 .Select(x => new QuestionViewModel()
                 {
                     ID = x.ID,

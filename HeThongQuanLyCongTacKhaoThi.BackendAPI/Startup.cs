@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using FluentValidation;
 using FluentValidation.AspNetCore;
-using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
-using HeThongQuanLyCongTacKhaoThi.Application.System;
-using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects;
+using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Roles;
 using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
@@ -22,9 +22,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams;
-using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails;
-using HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups;
+using System;
+using System.Collections.Generic;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
 {
@@ -42,7 +41,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
         {
             services.AddDbContext<HeThongQuanLyCongTacKhaoThiDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MAIN_CONNECTION_STRING)));
-            
+
             // Add Identity
             services.AddIdentity<Account, RoleAccount>()
                 .AddEntityFrameworkStores<HeThongQuanLyCongTacKhaoThiDbContext>()
@@ -60,13 +59,13 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<IAnswerService, AnswerService>();
             services.AddTransient<IExamService, ExamService>();
             services.AddTransient<IExamDetailService, ExamDetailService>();
+            services.AddTransient<ISubjectService, SubjectService>();
 
             // Declare Fluent Validator
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
 
             //services.AddControllersWithViews();
             services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
-
 
             // Declare Swagger
             services.AddSwaggerGen(c =>
@@ -127,7 +126,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
                 };
             });
         }
-        
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HeThongQuanLyCongTacKhaoThi.Utilities.Constants
+﻿namespace HeThongQuanLyCongTacKhaoThi.Utilities.Constants
 {
     public class SystemConstants
     {

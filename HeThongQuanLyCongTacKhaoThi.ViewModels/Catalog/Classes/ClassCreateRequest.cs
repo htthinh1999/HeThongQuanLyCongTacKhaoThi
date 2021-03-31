@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Classes
+﻿namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Classes
 {
     public class ClassCreateRequest
     {

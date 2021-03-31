@@ -54,7 +54,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
             modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
             {
                 Id = ADMIN_ROLE_ID,
-                Name = "admin",
+                Name = "Admin",
                 NormalizedName = "admin",
                 Description = "Vai trò quản trị viên"
             });
@@ -65,7 +65,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
             modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
             {
                 Id = TEACHER_ROLE_ID,
-                Name = "teacher",
+                Name = "Teacher",
                 NormalizedName = "teacher",
                 Description = "Vai trò giảng viên"
             });
@@ -76,9 +76,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
             modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
             {
                 Id = STUDENT_ROLE_ID,
-                Name = "teacher",
-                NormalizedName = "teacher",
-                Description = "Vai trò giảng viên"
+                Name = "Student",
+                NormalizedName = "student",
+                Description = "Vai trò học viên"
             });
 
             /***************************** SEED ACCOUNT *****************************/
@@ -109,7 +109,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 UserId = ADMIN_ID
             });
 
-
             // Create htthinh account
             Guid HTTHINH_ID = new Guid("4A2D9B6E-97C4-41BD-A929-F778972DB109");
             hasher = new PasswordHasher<Account>();
@@ -137,7 +136,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 RoleId = TEACHER_ROLE_ID,
                 UserId = HTTHINH_ID
             });
-
 
             // Create sinhvien 1 account
             Guid STUDENT1_ID = new Guid("9E7773EF-083C-4A8E-8ED2-9E36CD704913");
@@ -195,7 +193,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 UserId = STUDENT2_ID
             });
 
-
             /***************************** SEED QUESTION GROUP *****************************/
             modelBuilder.Entity<QuestionGroup>().HasData(new QuestionGroup
             {
@@ -226,7 +223,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 ID = 5,
                 Name = "Nhóm câu hỏi chương 5"
             });
-
 
             /***************************** SEED QUESTION *****************************/
             modelBuilder.Entity<Question>().HasData(new Question
@@ -411,7 +407,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
                 Content = "Nếu lời gọi đệ quy không đi đến điểm dừng (base case) thì đệ quy vô hạn sẽ xuất hiện.",
                 IsCorrect = false
             });
-
         }
     }
 }

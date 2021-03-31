@@ -1,13 +1,10 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
 {
-    class ResultConfiguration : IEntityTypeConfiguration<Result>
+    internal class ResultConfiguration : IEntityTypeConfiguration<Result>
     {
         public void Configure(EntityTypeBuilder<Result> builder)
         {

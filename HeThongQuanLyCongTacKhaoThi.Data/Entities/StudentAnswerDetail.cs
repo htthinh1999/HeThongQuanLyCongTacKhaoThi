@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
+﻿namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
 {
     public class StudentAnswerDetail
     {

@@ -1,28 +1,33 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.AdminApp.Models;
+using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = Policy.Manager)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IAccountApiClient _accountApiClient;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IAccountApiClient accountApiClient)
         {
             _logger = logger;
+            _accountApiClient = accountApiClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var username = User.Identity.Name;
+            var getUser = await _accountApiClient.GetByUserName(User.Identity.Name);
+            var user = getUser.ResultObj;
+            (User.Identity as ClaimsIdentity).AddClaim(new Claim("FullName", user.Name));
+
             return View();
         }
 

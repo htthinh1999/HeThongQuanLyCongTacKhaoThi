@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
 {
@@ -14,6 +12,5 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
         public Account Account { get; set; }
         public Subject Subject { get; set; }
         public Class Class { get; set; }
-
     }
 }

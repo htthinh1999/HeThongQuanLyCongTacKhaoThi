@@ -1,13 +1,11 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.EF;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Classes;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes
 {
@@ -35,6 +33,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes
             _context.Classes.Remove(_class);
             return await _context.SaveChangesAsync();
         }
+
         public async Task<bool> UpdateName(string classID, string name)
         {
             var _class = await _context.Classes.FindAsync(classID);
