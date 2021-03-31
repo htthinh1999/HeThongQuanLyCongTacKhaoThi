@@ -1,9 +1,7 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
@@ -32,7 +30,6 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _answerService.GetByID(id);
             return Ok(result);
         }
-
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] AnswerCURequest request, [FromQuery] List<AnswerCURequest> answers)
@@ -65,6 +62,5 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _answerService.Delete(id);
             return Ok(result);
         }
-
     }
 }

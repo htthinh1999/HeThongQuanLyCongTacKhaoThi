@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
 {
@@ -9,7 +7,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
         public int ID { get; set; }
         public string SubjectID { get; set; }
         public string Name { get; set; }
-
 
         public Subject Subject { get; set; }
         public List<ExamDetail> ExamDetails { get; set; }

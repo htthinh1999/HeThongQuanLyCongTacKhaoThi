@@ -1,4 +1,5 @@
-﻿using HeThongQuanLyCongTacKhaoThi.AdminApp.Services;
+﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -9,16 +10,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = Role.Admin)]
     public class AccountController : Controller
     {
         private readonly IAccountApiClient _accountApiClient;
@@ -207,7 +206,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 
             var result = await _accountApiClient.Authenticate(request);
 
-            if(result.ResultObj == null)
+            if (result.ResultObj == null)
             {
                 ModelState.AddModelError("", result.Message);
                 return View();

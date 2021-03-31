@@ -1,10 +1,7 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,7 +33,6 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _examService.GetByID(id);
             return Ok(result);
         }
-
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] ExamCreateRequest request)

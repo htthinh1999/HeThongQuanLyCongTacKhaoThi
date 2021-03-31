@@ -2,12 +2,10 @@
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails
 {
@@ -32,7 +30,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails
 
             var result = await _context.SaveChangesAsync();
 
-            if(result == 0)
+            if (result == 0)
             {
                 return new ApiErrorResult<bool>("Không thể tạo chi tiết đề thi");
             }
@@ -44,10 +42,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails
         {
             // Get & filter multiple choice questions
             var multipleChoiceQuestionsInDB = await (from q in _context.Questions
-                                               where request.QuestionGroups.Contains(q.GroupID)
-                                                     && q.SubjectID == request.SubjectID
-                                                     && q.IsMultipleChoice == true
-                                               select q).ToListAsync();
+                                                     where request.QuestionGroups.Contains(q.GroupID)
+                                                           && q.SubjectID == request.SubjectID
+                                                           && q.IsMultipleChoice == true
+                                                     select q).ToListAsync();
 
             // Take random from filtered multiple choice questions
             var randomMultipleChoiceQuestions = multipleChoiceQuestionsInDB
@@ -67,10 +65,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails
 
             // Get & filter essay questions
             var essayQuestionsInDB = await (from q in _context.Questions
-                                      where request.QuestionGroups.Contains(q.GroupID)
-                                            && q.SubjectID == request.SubjectID
-                                            && q.IsMultipleChoice == false
-                                      select q).ToListAsync();
+                                            where request.QuestionGroups.Contains(q.GroupID)
+                                                  && q.SubjectID == request.SubjectID
+                                                  && q.IsMultipleChoice == false
+                                            select q).ToListAsync();
 
             // Take random from filtered essay questions
             var randomEssayQuestions = essayQuestionsInDB
@@ -100,21 +98,19 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails
             var questions = from ed in _context.ExamDetails
                             where ed.ExamID == id
                             select ed;
-            foreach(var quest in questions)
+            foreach (var quest in questions)
             {
                 _context.ExamDetails.Remove(quest);
             }
 
             var result = await _context.SaveChangesAsync();
 
-            if(result == 0)
+            if (result == 0)
             {
                 return new ApiErrorResult<bool>("Không thể xoá câu hỏi");
             }
 
             return new ApiSuccessResult<bool>();
         }
-
-
     }
 }

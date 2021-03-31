@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Common
+﻿namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Common
 {
     public class PagingRequestBase
     {

@@ -1,16 +1,16 @@
-﻿using HeThongQuanLyCongTacKhaoThi.AdminApp.Services;
+﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = Policy.Manager)]
     public class QuestionController : Controller
     {
         private readonly IQuestionApiClient _questionApiClient;
@@ -184,6 +184,5 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             TempData["SuccessMsg"] = "Xoá câu hỏi thành công";
             return RedirectToAction("Index");
         }
-
     }
 }

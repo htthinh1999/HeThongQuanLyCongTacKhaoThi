@@ -1,15 +1,8 @@
-﻿using HeThongQuanLyCongTacKhaoThi.Application.System;
-using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
+﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
@@ -40,7 +33,6 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             return Ok(result);
         }
 
-
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] QuestionCURequest request)
         {
@@ -50,7 +42,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 
             if (result.IsSuccessed && request.IsMultipleChoice)
             {
-                foreach(var ans in request.Answers)
+                foreach (var ans in request.Answers)
                 {
                     ans.QuestionID = result.ResultObj;
                     await _answerService.Create(ans);
@@ -96,7 +88,6 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 
             if (request.IsMultipleChoice)
             {
-
                 // Create answers was updated
                 foreach (var ans in request.Answers)
                 {
@@ -129,6 +120,5 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             existQuestionInExam.Message = "Không thể xoá câu hỏi! Câu hỏi đã được sử dụng trong đề thi!";
             return Ok(existQuestionInExam);
         }
-
     }
 }

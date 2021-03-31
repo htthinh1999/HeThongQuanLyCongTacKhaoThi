@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
+﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Classes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
@@ -18,9 +18,8 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             _classService = classService;
         }
 
-
         [HttpGet]
-        public async Task<IActionResult> GetAllPaging([FromQuery]ClassPagingRequest request)
+        public async Task<IActionResult> GetAllPaging([FromQuery] ClassPagingRequest request)
         {
             var classes = await _classService.GetAllPaging(request);
             return Ok(classes);
@@ -30,7 +29,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         public async Task<IActionResult> GetByID(string classID)
         {
             var _class = await _classService.GetByID(classID);
-            if(_class == null)
+            if (_class == null)
             {
                 return BadRequest("Cannot find product");
             }
@@ -88,8 +87,6 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             }
             return Ok();
         }
-
-
 
         [HttpDelete("{classID}")]
         public async Task<IActionResult> Delete(string classID)

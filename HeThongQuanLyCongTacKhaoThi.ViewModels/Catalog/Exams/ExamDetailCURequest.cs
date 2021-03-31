@@ -1,7 +1,4 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams
 {

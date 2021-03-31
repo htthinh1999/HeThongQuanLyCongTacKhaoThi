@@ -1,5 +1,3 @@
-using System;
-
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Models
 {
     public class ErrorViewModel

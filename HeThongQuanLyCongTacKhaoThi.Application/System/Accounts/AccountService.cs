@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -72,7 +71,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
                 return new ApiErrorResult<bool>("Lỗi trùng tên đăng nhập");
             }
 
-            if(await _userManager.FindByEmailAsync(request.Email) != null)
+            if (await _userManager.FindByEmailAsync(request.Email) != null)
             {
                 return new ApiErrorResult<bool>("Lỗi trùng địa chỉ email");
             }
@@ -187,7 +186,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
         public async Task<ApiResult<AccountViewModel>> GetByID(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
-            if(user == null)
+            if (user == null)
             {
                 return new ApiErrorResult<AccountViewModel>("Tài khoản không tồn tại");
             }
@@ -228,15 +227,41 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             }
 
             var addedRoles = request.Roles.Where(x => x.Selected == true).Select(x => x.Name).ToList();
-            foreach(var roleName in addedRoles)
+            foreach (var roleName in addedRoles)
             {
-                if(await _userManager.IsInRoleAsync(user, roleName) == false)
+                if (await _userManager.IsInRoleAsync(user, roleName) == false)
                 {
                     await _userManager.AddToRoleAsync(user, roleName);
                 }
             }
 
             return new ApiSuccessResult<bool>();
+        }
+
+        public async Task<ApiResult<AccountViewModel>> GetByUserName(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return new ApiErrorResult<AccountViewModel>("Tài khoản không tồn tại");
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var accountViewModel = new AccountViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Birthday = user.Birthday,
+                Gender = user.Gender,
+                Name = user.Name,
+                PhoneNumber = user.PhoneNumber,
+                Username = user.UserName,
+                Student_TeacherID = user.Student_TeacherID,
+                Address = user.Address,
+                ClassID = user.ClassID,
+                Roles = roles
+            };
+            return new ApiSuccessResult<AccountViewModel>(accountViewModel);
         }
     }
 }

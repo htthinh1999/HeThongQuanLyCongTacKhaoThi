@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BeginCollectionItemCore" Version="1.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.13">
@@ -29,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HeThongQuanLyCongTacKhaoThi.ApiIntegration\HeThongQuanLyCongTacKhaoThi.ApiIntegration.csproj" />
     <ProjectReference Include="..\HeThongQuanLyCongTacKhaoThi.ViewModels\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj" />
   </ItemGroup>
 

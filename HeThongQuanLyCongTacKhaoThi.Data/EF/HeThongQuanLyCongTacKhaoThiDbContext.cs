@@ -4,10 +4,7 @@ using HeThongQuanLyCongTacKhaoThi.Data.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.EF
 {
@@ -40,7 +37,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("ROLE_CLAIM");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("USER_TOKEN").HasKey(x => x.UserId);
 
-
             // Data seeding
             modelBuilder.Seed();
         }
@@ -48,7 +44,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
         public DbSet<Class> Classes { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Score> Scores { get; set; }
-        public DbSet<QuestionGroup> QuestionGroups { get; set;}
+        public DbSet<QuestionGroup> QuestionGroups { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Exam> Exams { get; set; }

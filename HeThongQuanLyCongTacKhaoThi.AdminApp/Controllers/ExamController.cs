@@ -1,24 +1,25 @@
-﻿using HeThongQuanLyCongTacKhaoThi.AdminApp.Services;
+﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.QuestionGroups;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = Policy.Manager)]
     public class ExamController : Controller
     {
         private readonly IExamApiClient _examApiClient;
+        private readonly ISubjectApiClient _subjectApiClient;
 
-        public ExamController(IExamApiClient examApiClient)
+        public ExamController(IExamApiClient examApiClient, ISubjectApiClient subjectApiClient)
         {
             _examApiClient = examApiClient;
+            _subjectApiClient = subjectApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 5)
@@ -36,12 +37,18 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var examCreateRequest = new ExamCreateRequest()
             {
                 QuestionGroupViewModels = new List<QuestionGroupViewModel>()
             };
+
+            // Get subjects
+            var getSubjects = await _subjectApiClient.GetAll();
+            var subjects = getSubjects.ResultObj;
+            examCreateRequest.Subjects = subjects.ToList();
+
             return View(examCreateRequest);
         }
 
@@ -50,22 +57,26 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(request);
             }
 
-            // Remove all null item and add to request
+            if(QuestionGroups.Count == 0)
+            {
+                return BadRequest("Bạn cần chọn nhóm câu hỏi");
+            }
+
             request.QuestionGroups = QuestionGroups.ToList();
-            
+
             var result = await _examApiClient.Create(request);
             if (result.IsSuccessed)
             {
                 TempData["SuccessMsg"] = "Tạo đề thi thành công";
                 return RedirectToAction("Index");
             }
+
             ModelState.AddModelError("", result.Message);
             return View(request);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -85,6 +96,11 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                     QuestionGroups = exam.QuestionGroups.ToList()
                 };
 
+                // Get subjects
+                var getSubjects = await _subjectApiClient.GetAll();
+                var subjects = getSubjects.ResultObj;
+                updateResquest.Subjects = subjects.ToList();
+
                 return View(updateResquest);
             }
 
@@ -99,9 +115,14 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return View();
             }
 
+            if (QuestionGroups.Count == 0)
+            {
+                return BadRequest("Bạn cần chọn nhóm câu hỏi");
+            }
+
             request.QuestionGroups = QuestionGroups.ToList();
             var result = await _examApiClient.Update(request.ID, request);
-            
+
             if (!result.IsSuccessed)
             {
                 ModelState.AddModelError("", result.Message);

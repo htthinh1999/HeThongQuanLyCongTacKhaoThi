@@ -14,9 +14,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SubjectID" class="control-label"></label>
-                <input asp-for="SubjectID" class="form-control" />
-                <span asp-validation-for="SubjectID" class="text-danger"></span>
+                <label class="control-label">Môn học</label>
+                <select asp-for="SubjectID" class="form-control" asp-items="@(new SelectList(Model.Subjects, "ID", "Name"))">
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -34,7 +34,6 @@
                 <span asp-validation-for="EssayQuestionCount" class="text-danger"></span>
             </div>
             <div class="form-group" id="question-groups">
-                
             </div>
             <button type="button" id="add-question-group" class="btn btn-primary mb-3">
                 <i class="fa fa-plus"></i> Thêm nhóm câu hỏi

@@ -1,18 +1,15 @@
 using FluentValidation.AspNetCore;
-using HeThongQuanLyCongTacKhaoThi.AdminApp.Services;
+using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp
 {
@@ -49,6 +46,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             services.AddTransient<IQuestionGroupApiClient, QuestionGroupApiClient>();
             services.AddTransient<IAnswerApiClient, AnswerApiClient>();
             services.AddTransient<IExamApiClient, ExamApiClient>();
+            services.AddTransient<ISubjectApiClient, SubjectApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -59,7 +57,12 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             {
                 builder.AddRazorRuntimeCompilation();
             }
-#endif
+# endif
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Policy.Manager, policy =>
+                       policy.RequireRole(Role.Admin, Role.Teacher));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,7 +94,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
+                    name: "default1",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }

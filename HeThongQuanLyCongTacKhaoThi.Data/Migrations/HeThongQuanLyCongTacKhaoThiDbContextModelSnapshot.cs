@@ -104,7 +104,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Id = new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"),
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "441e82b5-80cb-40b3-b96e-72315bab6ded",
+                            ConcurrencyStamp = "06bf8ca7-e685-4594-8452-1d52bad27382",
                             Email = "keycodemon@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -112,7 +112,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Keycode Mon",
                             NormalizedEmail = "keycodemon@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKAFDN/+G8PuwX4QdgOCh05TCbuOJPYH9Vyh+Ef7No+qdXugZVgXdCni9t9VNZhuHw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJMx5EeDZ3kba4mNFAYnSzA6qbES5Q9RN5VpKkoBKMbRTgSrcccIUK5vkjWVB7l1Hg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -125,7 +125,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Address = "Số 80 - Hai Bà Trưng - Vạn Giã - Vạn Ninh - Khánh Hoà",
                             Birthday = new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ClassID = "DHCN4A",
-                            ConcurrencyStamp = "7c5e693a-1816-45cc-b055-ddbd7ce693ad",
+                            ConcurrencyStamp = "3a292ac9-3b45-41c3-9849-90936b64af4f",
                             Email = "htthinh1999@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -133,13 +133,59 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Huỳnh Tấn Thịnh",
                             NormalizedEmail = "htthinh1999@gmail.com",
                             NormalizedUserName = "htthinh",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAQ1FIOr3R0CvTBjjrVK/6vMTclUmn5XOWITvyA7H1ffN46W62/LVJ6qXCc90kvmdg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEKP0a9PXpQDrMmb4EYx9tEZPf8D4Uo20isfVoA1zHDf5Dpf1vV2ONxGpZJYaK5imw==",
                             PhoneNumber = "0977393641",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             Student_TeacherID = "17ĐC027",
                             TwoFactorEnabled = false,
                             UserName = "htthinh"
+                        },
+                        new
+                        {
+                            Id = new Guid("9e7773ef-083c-4a8e-8ed2-9e36cd704913"),
+                            AccessFailedCount = 0,
+                            Address = "Khánh Hoà",
+                            Birthday = new DateTime(2000, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClassID = "DHCN4A",
+                            ConcurrencyStamp = "67f5609b-09b7-44d4-803e-4d0325142704",
+                            Email = "sv1@gmail.com",
+                            EmailConfirmed = true,
+                            Gender = true,
+                            LockoutEnabled = false,
+                            Name = "Sinh viên 1",
+                            NormalizedEmail = "sv1@gmail.com",
+                            NormalizedUserName = "sv1",
+                            PasswordHash = "AQAAAAEAACcQAAAAELFS5/+kHbkcidGmqZ22DiHQhD+DzxIgAIv4q/3+T9HMafmgYvPJKU70HMmaQKtkxg==",
+                            PhoneNumber = "0987333644",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            Student_TeacherID = "17ĐC028",
+                            TwoFactorEnabled = false,
+                            UserName = "sv1"
+                        },
+                        new
+                        {
+                            Id = new Guid("8bc30f33-6382-45fd-a54a-0dec677631d9"),
+                            AccessFailedCount = 0,
+                            Address = "Khánh Hoà",
+                            Birthday = new DateTime(2000, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ClassID = "DHCN4A",
+                            ConcurrencyStamp = "4864b73b-e662-44b9-a27d-a9601bd9193a",
+                            Email = "sv2@gmail.com",
+                            EmailConfirmed = true,
+                            Gender = true,
+                            LockoutEnabled = false,
+                            Name = "Sinh viên 2",
+                            NormalizedEmail = "sv2@gmail.com",
+                            NormalizedUserName = "sv2",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDFzwmGEjhupPnATo+95UGmvC0SxKQ9T3ScbJy9R4WIYdtXVwvjozl3SZfeShIcbEg==",
+                            PhoneNumber = "0987666644",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            Student_TeacherID = "17ĐC023",
+                            TwoFactorEnabled = false,
+                            UserName = "sv2"
                         });
                 });
 
@@ -251,6 +297,34 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Content = "Nó được khai báo bên ngoài các hàm kể cả hàm main()",
                             IsCorrect = false,
                             QuestionID = 3
+                        },
+                        new
+                        {
+                            ID = 13,
+                            Content = "Đệ quy khiến chương trình bị treo.",
+                            IsCorrect = false,
+                            QuestionID = 4
+                        },
+                        new
+                        {
+                            ID = 14,
+                            Content = "Đệ quy vô hạn tiêu tốn toàn bộ bộ nhớ của hệ thống dành cho chương trình và khiến cho chương trình kết thúc một cách bất thường.",
+                            IsCorrect = false,
+                            QuestionID = 4
+                        },
+                        new
+                        {
+                            ID = 15,
+                            Content = "	Gọi đệ quy gián tiếp luôn gây ra đệ quy vô hạn.",
+                            IsCorrect = true,
+                            QuestionID = 4
+                        },
+                        new
+                        {
+                            ID = 16,
+                            Content = "Nếu lời gọi đệ quy không đi đến điểm dừng (base case) thì đệ quy vô hạn sẽ xuất hiện.",
+                            IsCorrect = false,
+                            QuestionID = 4
                         });
                 });
 
@@ -451,6 +525,30 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             GroupID = 1,
                             IsMultipleChoice = true,
                             SubjectID = "CC4206"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Content = "Nhận định nào sau đây KHÔNG ĐÚNG về đệ quy vô hạn?",
+                            GroupID = 2,
+                            IsMultipleChoice = true,
+                            SubjectID = "CC4206"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Content = "Trong các phương pháp sắp xếp: lựa chọn, chèn, đổi chỗ(nổi bọt), quicksort (sắp xếp nhanh), mergesort (sắp xếp trộn), thì phương pháp nào là phù hợp nhất để sắp xếp trên danh sách liên kết đơn ? Giải thích ? ",
+                            GroupID = 2,
+                            IsMultipleChoice = false,
+                            SubjectID = "CC4206"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Content = "Trình bày sự khác biệt giữa mảng cấp phát bộ nhớ động và mảng cấp phát tĩnh? Khi nào dùng mảng cấp phát động, mảng cấp phát tĩnh ? Cho ví dụ ?",
+                            GroupID = 2,
+                            IsMultipleChoice = false,
+                            SubjectID = "CC4206"
                         });
                 });
 
@@ -571,18 +669,26 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         new
                         {
                             Id = new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f"),
-                            ConcurrencyStamp = "a7e19840-e048-416c-81f2-96d69ebee2d3",
+                            ConcurrencyStamp = "c247bd83-2a9d-4364-b750-0a6cc45cd41b",
                             Description = "Vai trò quản trị viên",
-                            Name = "admin",
+                            Name = "Admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
                             Id = new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94"),
-                            ConcurrencyStamp = "c60c4428-f557-4848-9b2a-4c2be25b25fd",
+                            ConcurrencyStamp = "a862cc78-c4f6-4da5-b6fb-82375c3c53e7",
                             Description = "Vai trò giảng viên",
-                            Name = "teacher",
+                            Name = "Teacher",
                             NormalizedName = "teacher"
+                        },
+                        new
+                        {
+                            Id = new Guid("9a34bdd4-fa97-4e2f-9960-b19a68826be9"),
+                            ConcurrencyStamp = "81fff613-cdcf-4adb-bdf3-b518cf7064d6",
+                            Description = "Vai trò học viên",
+                            Name = "Student",
+                            NormalizedName = "student"
                         });
                 });
 
@@ -938,6 +1044,16 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         {
                             UserId = new Guid("4a2d9b6e-97c4-41bd-a929-f778972db109"),
                             RoleId = new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94")
+                        },
+                        new
+                        {
+                            UserId = new Guid("9e7773ef-083c-4a8e-8ed2-9e36cd704913"),
+                            RoleId = new Guid("9a34bdd4-fa97-4e2f-9960-b19a68826be9")
+                        },
+                        new
+                        {
+                            UserId = new Guid("8bc30f33-6382-45fd-a54a-0dec677631d9"),
+                            RoleId = new Guid("9a34bdd4-fa97-4e2f-9960-b19a68826be9")
                         });
                 });
 

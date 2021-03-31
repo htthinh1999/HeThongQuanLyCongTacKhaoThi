@@ -1,12 +1,10 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.QuestionGroups;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups
 {
@@ -21,11 +19,13 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups
 
         public async Task<ApiResult<List<QuestionGroupViewModel>>> GetAll()
         {
-            var questionGroups = await _context.QuestionGroups.Select(x => new QuestionGroupViewModel()
-            {
-                ID = x.ID,
-                Name = x.Name
-            }).ToListAsync();
+            var questionGroups = await _context.QuestionGroups
+                                .AsNoTracking()
+                                .Select(x => new QuestionGroupViewModel()
+                                {
+                                    ID = x.ID,
+                                    Name = x.Name
+                                }).ToListAsync();
             return new ApiSuccessResult<List<QuestionGroupViewModel>>(questionGroups);
         }
 
@@ -38,7 +38,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups
                 ID = questionGroup.ID,
                 Name = questionGroup.Name
             };
-            
+
             if (questionGroup == null)
             {
                 return new ApiErrorResult<QuestionGroupViewModel>("Nhóm câu hỏi không tồn tại");

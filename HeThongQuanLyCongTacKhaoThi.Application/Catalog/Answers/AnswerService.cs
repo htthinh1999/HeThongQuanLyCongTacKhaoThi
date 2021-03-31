@@ -1,12 +1,9 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
-using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers
@@ -120,6 +117,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers
             }
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
+                .AsNoTracking()
                 .Select(x => new AnswerViewModel()
                 {
                     ID = x.ID,
