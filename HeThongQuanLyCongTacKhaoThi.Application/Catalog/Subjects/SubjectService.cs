@@ -3,6 +3,7 @@ using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -132,6 +133,46 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
             if (result == 0)
             {
                 return new ApiErrorResult<bool>("Không thể xoá môn học");
+            }
+
+            return new ApiSuccessResult<bool>();
+        }
+
+        public async Task<ApiResult<List<SubjectViewModel>>> GetSubjectsByAccountID(Guid accountID)
+        {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            var subjects = await (from sa in _context.SubjectAccounts
+                                  join s in _context.Subjects on sa.SubjectID equals s.ID
+                                  where sa.UserID.ToString() == accountID.ToString()
+                                  select new SubjectViewModel()
+                                  {
+                                      ID = s.ID,
+                                      Name = s.Name,
+                                      AssiduousScorePercent = s.AssiduousScorePercent,
+                                      FrequentScorePercent = s.FrequentScorePercent,
+                                      MiddleScorePercent = s.MiddleScorePercent,
+                                      FinalScorePercent = s.FinalScorePercent,
+                                      CreditCount = s.CreditCount
+                                  })
+                                  .ToListAsync();
+
+            return new ApiSuccessResult<List<SubjectViewModel>>(subjects);
+        }
+
+        public async Task<ApiResult<bool>> SubjectAssign(string subjectID, SubjectAssignRequest request)
+        {
+            var subjectAccount = new SubjectAccount()
+            {
+                UserID = request.AccountID,
+                SubjectID = subjectID,
+                ClassID = request.ClassID
+            };
+            _context.SubjectAccounts.Add(subjectAccount);
+            _context.Entry(subjectAccount).State = EntityState.Added;
+            var result = await _context.SaveChangesAsync();
+            if (result == 0)
+            {
+                return new ApiErrorResult<bool>("Không thể gán môn học cho người dùng");
             }
 
             return new ApiSuccessResult<bool>();

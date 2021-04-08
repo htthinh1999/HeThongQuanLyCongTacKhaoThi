@@ -84,6 +84,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
 
         public async Task<ApiResult<ExamViewModel>> GetByID(int id)
         {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
             var exam = await _context.Exams.FindAsync(id);
             if (exam == null)
             {
@@ -172,6 +174,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
 
         public async Task<ApiResult<PagedResult<ExamViewModel>>> GetExamPaging(GetExamPagingRequest request)
         {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
             var query = _context.Exams.Where(q => q.Name.Contains(""));
             if (!string.IsNullOrEmpty(request.Keyword))
             {
@@ -195,6 +199,29 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
                 Items = data
             };
             return new ApiSuccessResult<PagedResult<ExamViewModel>>(pagedResult);
+        }
+
+        public async Task<ApiResult<List<ExamViewModel>>> GetAllExamsBySubjectID(string subjectID)
+        {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+
+            var exams = await (from e in _context.Exams
+                               join ed in _context.ExamDetails on e.ID equals ed.ExamID
+                               join q in _context.Questions on ed.QuestionID equals q.ID
+                               where e.SubjectID == subjectID
+                               group new { e, q } by new { e.ID, e.Name } into exam
+                               select new ExamViewModel()
+                               {
+                                   ID = exam.Key.ID,
+                                   Name = exam.Key.Name,
+                                   MultipleChoiceQuestionCount = exam.Sum(x => (x.q.IsMultipleChoice) ? 1 : 0),
+                                   EssayQuestionCount = exam.Sum(x => (!x.q.IsMultipleChoice) ? 1 : 0)
+                               }
+                        )
+                        .ToListAsync();
+
+            return new ApiSuccessResult<List<ExamViewModel>>(exams);
         }
     }
 }

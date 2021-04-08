@@ -7,5 +7,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Utilities.Constants
     public class Policy
     {
         public const string Manager = "Manager";
+        public const string Student = "Student";
     }
 }

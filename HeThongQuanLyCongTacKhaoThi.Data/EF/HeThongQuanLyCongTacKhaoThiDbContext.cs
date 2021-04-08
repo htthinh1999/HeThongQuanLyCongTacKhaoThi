@@ -30,6 +30,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
             modelBuilder.ApplyConfiguration(new ResultConfiguration());
             modelBuilder.ApplyConfiguration(new RoleAccountConfiguration());
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
+            modelBuilder.ApplyConfiguration(new SubjectAccountConfiguration());
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("USER_CLAIM");
             modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("USER_ROLE").HasKey(x => new { x.UserId, x.RoleId });
@@ -52,5 +53,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
         public DbSet<StudentAnswer> StudentAnswers { get; set; }
         public DbSet<StudentAnswerDetail> StudentAnswerDetails { get; set; }
         public DbSet<Result> Results { get; set; }
+        public DbSet<SubjectAccount> SubjectAccounts { get; set; }
+        public DbSet<RoleAccount> RoleAccounts { get; set; }
+        public DbSet<Account> Accounts { get; set; }
     }
 }

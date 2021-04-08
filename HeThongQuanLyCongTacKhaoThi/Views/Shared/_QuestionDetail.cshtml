@@ -1,0 +1,38 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions.QuestionViewModel
+
+<dt class="col-12"><hr></dt>
+<dt class="col-sm-2">
+    @Html.DisplayNameFor(model => model.Content)
+</dt>
+<dd class="col-sm-10">
+    <textarea rows="5" class="form-control" disabled>@Html.DisplayFor(model => model.Content)</textarea>
+</dd>
+
+@if (Model.IsMultipleChoice)
+{
+    <dt class="col-sm-2">
+        Chọn đáp án đúng
+    </dt>
+    <dd class="col-sm-10">
+        @for (int i = 0; i < Model.Answers.Count; i++)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="AnswerOfStudent[@Model.ID]" id="Answer[@Model.ID@i]" value="@Model.Answers[i].ID">
+                <label class="form-check-label" for="Answer[@Model.ID@i]">
+                    @Model.Answers[i].Content
+                </label>
+            </div>
+        }
+        <input name="IsMultipleChoice" type="hidden" value="true">
+    </dd>
+}
+else
+{
+    <dt class="col-sm-2">
+        Nhập câu trả lời
+    </dt>
+    <dd class="col-sm-10">
+        <textarea rows="5" class="form-control" name="AnswerOfStudent[@Model.ID]"></textarea>
+        <input name="IsMultipleChoice" type="hidden" value="false">
+    </dd>
+}

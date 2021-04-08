@@ -244,7 +244,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             return principal;
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Authorize(Policy = Policy.Manager)]
         public async Task<ActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

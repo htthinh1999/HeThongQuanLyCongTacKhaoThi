@@ -1,5 +1,6 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
@@ -15,5 +16,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
         Task<ApiResult<bool>> Update(int id, ExamUpdateRequest request);
 
         Task<ApiResult<bool>> Delete(int id);
+
+        Task<ApiResult<List<ExamViewModel>>> GetAllExamsBySubjectID(string subjectID);
     }
 }

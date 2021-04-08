@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System;
 using System.Security.Claims;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace HeThongQuanLyCongTacKhaoThi.Controllers
 {
@@ -24,27 +25,37 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IAccountApiClient _accountApiClient;
         private readonly IConfiguration _configuration;
-        private readonly IRoleApiClient _roleApiClient;
+        private readonly ISubjectApiClient _subjectApiClient;
 
         public HomeController(ILogger<HomeController> logger,
             IAccountApiClient accountApiClient,
             IConfiguration configuration,
-            IRoleApiClient roleApiClient)
+            ISubjectApiClient subjectApiClient)
         {
             _logger = logger;
             _accountApiClient = accountApiClient;
             _configuration = configuration;
-            _roleApiClient = roleApiClient;
+            _subjectApiClient = subjectApiClient;
         }
 
         public async Task<IActionResult> Index()
         {
-            if(User.Identity.Name != null)
+            if(User.Identity.Name == null)
             {
-                var getUser = await _accountApiClient.GetByUserName(User.Identity.Name);
-                var user = getUser.ResultObj;
-                (User.Identity as ClaimsIdentity).AddClaim(new Claim("FullName", user.Name));
+                return View();
             }
+
+            // Get user's full name
+            var getUser = await _accountApiClient.GetByUserName(User.Identity.Name);
+            var user = getUser.ResultObj;
+            (User.Identity as ClaimsIdentity).AddClaim(new Claim("FullName", user.Name));
+            HttpContext.Session.SetString("UserID", user.Id.ToString());
+            HttpContext.Session.SetString("UserFullName", user.Name);
+
+            // Get student' subject
+            var getSubjectsByAccountID = await _subjectApiClient.GetSubjectsByAccountID(user.Id);
+            var subjects = getSubjectsByAccountID.ResultObj;
+            HttpContext.Session.SetString("AccoutSubjects", JsonConvert.SerializeObject(subjects));
 
             return View();
         }
@@ -99,12 +110,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<ActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("Token");
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index");
         }
 
         private ClaimsPrincipal ValidateToken(string jwtToken)

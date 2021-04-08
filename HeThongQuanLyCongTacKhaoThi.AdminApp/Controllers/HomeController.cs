@@ -2,6 +2,7 @@
 using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -24,9 +25,14 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (User.Identity.Name == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var getUser = await _accountApiClient.GetByUserName(User.Identity.Name);
             var user = getUser.ResultObj;
             (User.Identity as ClaimsIdentity).AddClaim(new Claim("FullName", user.Name));
+            HttpContext.Session.SetString("UserFullName", user.Name);
 
             return View();
         }

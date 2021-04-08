@@ -1,9 +1,4 @@
-﻿@using System.Security.Claims
-
-@{
-    var claims = User.Identity as ClaimsIdentity;
-    string fullName = claims.FindFirst("FullName").Value;
-}
+﻿@using Microsoft.AspNetCore.Http
 
 <!DOCTYPE html>
 <html lang="en">
@@ -354,7 +349,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@fullName</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@Context.Session.GetString("UserFullName")</span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
@@ -418,7 +413,7 @@
                 <div class="modal-body">Chọn đăng xuất nếu bạn muốn kết thúc phiên làm việc.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Huỷ</button>
-                    <a class="btn btn-primary" href="/Account/Login">Đăng xuất</a>
+                    <a class="btn btn-primary" href="/Account/Logout">Đăng xuất</a>
                 </div>
             </div>
         </div>

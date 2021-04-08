@@ -84,5 +84,12 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _examService.Delete(id);
             return Ok(result);
         }
+
+        [HttpGet("subjects/{subjectID}")]
+        public async Task<IActionResult> GetAllExamsBySubjectID(string subjectID)
+        {
+            var result = await _examService.GetAllExamsBySubjectID(subjectID);
+            return Ok(result);
+        }
     }
 }

@@ -1,0 +1,27 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams.ExamViewModel
+@{
+    ViewData["Title"] = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">@Model.Name</h1>
+</div>
+
+<div>
+    <h4>Chi tiết các câu hỏi trong đề thi</h4>
+    <form asp-action="Details">
+        <dl class="row">
+            @foreach (var examDetail in Model.ExamDetails)
+            {
+                var question = examDetail.Question;
+
+                @await Html.PartialAsync("_QuestionDetail", question);
+            }
+        </dl>
+        <input type="hidden" asp-for="ID"/>
+        <div class="form-group">
+            <input type="submit" value="Nộp bài" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

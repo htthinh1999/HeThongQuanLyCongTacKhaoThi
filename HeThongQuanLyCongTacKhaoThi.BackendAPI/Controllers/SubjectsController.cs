@@ -69,5 +69,28 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _subjectService.Delete(id);
             return Ok(result);
         }
+
+        [HttpGet("accounts/{accountID}")]
+        public async Task<IActionResult> GetSubjectsByAccountID(Guid accountID)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _subjectService.GetSubjectsByAccountID(accountID);
+            return Ok(result);
+        }
+
+        [HttpPost("{subjectID}/assign")]
+        public async Task<IActionResult> SubjectAssign(string subjectID, [FromBody]SubjectAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _subjectService.SubjectAssign(subjectID, request);
+            return Ok(result);
+        }
     }
 }

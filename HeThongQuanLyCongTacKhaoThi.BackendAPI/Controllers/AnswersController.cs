@@ -32,7 +32,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] AnswerCURequest request, [FromQuery] List<AnswerCURequest> answers)
+        public async Task<IActionResult> Create([FromBody] AnswerCURequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 

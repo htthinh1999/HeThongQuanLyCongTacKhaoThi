@@ -1,0 +1,42 @@
+﻿@using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams
+@model List<ExamViewModel>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Danh sách các đề thi của môn "@ViewData["SubjectName"]"</h1>
+</div>
+<h2 class="h4 mb-0 text-gray-800">Kỳ thi chưa hoàn tất</h2>
+<hr />
+<div class="row mt-4">
+    @foreach (ExamViewModel exam in Model)
+    {
+        <div class="col-md-6 col-lg-3">
+            <a class="text-decoration-none" asp-action="Details"
+               asp-controller="Exam"
+               asp-all-route-data="@(new Dictionary<string, string> { { "ExamID", exam.ID.ToString() } })">
+                <div class="exam" style="cursor:pointer">
+                    <div class="card border-left-primary shadow mb-4">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">@exam.Name</div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 mt-3">
+                                        Số lượng câu hỏi trắc nghiệm: @exam.MultipleChoiceQuestionCount
+                                    </div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Số lượng câu hỏi tự luận: @exam.EssayQuestionCount
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+<h2 class="h4 mb-0 text-gray-800">Kỳ thi đã hoàn tất</h2>
+<hr />

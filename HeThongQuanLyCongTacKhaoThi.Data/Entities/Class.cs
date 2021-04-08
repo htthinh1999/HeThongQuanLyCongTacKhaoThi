@@ -9,6 +9,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
         public int StudentCount { get; set; }
 
         public List<Account> Accounts { get; set; }
-        public List<SubjectTeacher> SubjectTeachers { get; set; }
+        public List<SubjectAccount> SubjectAccounts { get; set; }
     }
 }
