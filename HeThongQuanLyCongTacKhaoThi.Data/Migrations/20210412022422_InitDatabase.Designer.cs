@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 {
     [DbContext(typeof(HeThongQuanLyCongTacKhaoThiDbContext))]
-    [Migration("20210407071318_InitDatabase")]
+    [Migration("20210412022422_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,7 +106,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Id = new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"),
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "3b8e53da-d596-4a45-9a6d-b231d1e2a0d0",
+                            ConcurrencyStamp = "d09a07fc-ada2-45f7-a747-edf25517df1a",
                             Email = "keycodemon@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -114,7 +114,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Keycode Mon",
                             NormalizedEmail = "keycodemon@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJpX4qMUp4/UmCWCnY3Fc09I4qJ7QiHZkdinU6p/oYYfk7xX6mc9CcJ3CiitgU1omA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECBgc/mB57ZYrqrR2PA8T1ji1nPHYvyTcpw0epVWCkvXpTPvoFGsSbvG8tOXZWVYDA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -127,7 +127,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Address = "Số 80 - Hai Bà Trưng - Vạn Giã - Vạn Ninh - Khánh Hoà",
                             Birthday = new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ClassID = "DHCN4A",
-                            ConcurrencyStamp = "b8bd2aae-6f73-4a5e-b72e-d1a8f5437f69",
+                            ConcurrencyStamp = "7e3082af-7fdc-41c4-9128-891a87ccc2be",
                             Email = "htthinh1999@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -135,7 +135,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Huỳnh Tấn Thịnh",
                             NormalizedEmail = "htthinh1999@gmail.com",
                             NormalizedUserName = "htthinh",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJA8yDkn2cjJyZajR9U3VQdj33y51C90RGJQRiK9HRm7f1lT7EWzKUFWvVbZ1s7Z/w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP1e5s/qXgzc4haN/YGfjRWebImF0L/SEPWaIsJ/WVT8PraOraj+Vq7redQoJTaaFg==",
                             PhoneNumber = "0977393641",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -150,7 +150,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Address = "Khánh Hoà",
                             Birthday = new DateTime(2000, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ClassID = "DHCN4A",
-                            ConcurrencyStamp = "dd87c983-dbde-4111-9b27-9224dc3ba0b1",
+                            ConcurrencyStamp = "0beadb3b-f0f9-4df4-a1ab-f28e71db5171",
                             Email = "sv1@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -158,7 +158,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Sinh viên 1",
                             NormalizedEmail = "sv1@gmail.com",
                             NormalizedUserName = "sv1",
-                            PasswordHash = "AQAAAAEAACcQAAAAENFrISsti66cm2VZX0fpbQDxJSFk4Ke8skUkgZ9kqjWba7zZF3Y0pvb7hOVAnQKt6w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEMN9vtPt+dYJh2Le32iEleuCijhI1zGlF5xVIoJy5QPwOeHEuXTy3eZ6nW5N6vnow==",
                             PhoneNumber = "0987333644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -173,7 +173,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Address = "Khánh Hoà",
                             Birthday = new DateTime(2000, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ClassID = "DHCN4A",
-                            ConcurrencyStamp = "74f8961b-d5e5-4128-9dcb-d3f4ff46fa7f",
+                            ConcurrencyStamp = "fdeeb8be-8b35-4a95-9ac1-34a3787d3149",
                             Email = "sv2@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -181,7 +181,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Sinh viên 2",
                             NormalizedEmail = "sv2@gmail.com",
                             NormalizedUserName = "sv2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEt7H8QzR+73LRFsAUKk0CxuPY8kgmomfhoYg41NWso0QvCPgKW2hnMRspnGvbxWBQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAfu4mzjCLuswQ23UcciEV8S3e82OkX04KE6VfgwWHPP6jXj1M9pcluoZ0V1RsOolA==",
                             PhoneNumber = "0987666644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -432,7 +432,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Exam", b =>
+            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Contest", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -447,10 +447,39 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
                     b.Property<string>("SubjectID")
                         .IsRequired()
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("SubjectID");
+
+                    b.ToTable("CONTEST");
+                });
+
+            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Exam", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ContestID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50)
+                        .IsUnicode(true);
+
+                    b.Property<string>("SubjectID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ContestID");
 
                     b.HasIndex("SubjectID");
 
@@ -604,13 +633,16 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ContestID")
+                        .HasColumnType("int");
+
                     b.Property<int>("ExamID")
                         .HasColumnType("int");
 
                     b.Property<float>("Mark")
                         .HasColumnType("real");
 
-                    b.Property<int>("ScoreID")
+                    b.Property<int>("ScoreTypeID")
                         .HasColumnType("int");
 
                     b.Property<int>("StudentAnswerID")
@@ -629,9 +661,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ContestID");
+
                     b.HasIndex("ExamID");
 
-                    b.HasIndex("ScoreID");
+                    b.HasIndex("ScoreTypeID");
 
                     b.HasIndex("StudentAnswerID");
 
@@ -671,7 +705,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         new
                         {
                             Id = new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f"),
-                            ConcurrencyStamp = "1a3e4d69-869f-4407-ab99-6b407b830ee7",
+                            ConcurrencyStamp = "dd9f6c36-e617-4252-97c6-021204159baf",
                             Description = "Vai trò quản trị viên",
                             Name = "Admin",
                             NormalizedName = "admin"
@@ -679,7 +713,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         new
                         {
                             Id = new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94"),
-                            ConcurrencyStamp = "5b2b009e-478d-46e9-b4c4-3e89ae270abf",
+                            ConcurrencyStamp = "1980f04e-444f-48db-ba4d-51bf1719c6bd",
                             Description = "Vai trò giảng viên",
                             Name = "Teacher",
                             NormalizedName = "teacher"
@@ -687,14 +721,14 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         new
                         {
                             Id = new Guid("9a34bdd4-fa97-4e2f-9960-b19a68826be9"),
-                            ConcurrencyStamp = "be9fe581-1b06-495e-a5f0-d82d3d915b7a",
+                            ConcurrencyStamp = "68e694cf-08c3-4f91-b6d6-5f768cfcef7f",
                             Description = "Vai trò học viên",
                             Name = "Student",
                             NormalizedName = "student"
                         });
                 });
 
-            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Score", b =>
+            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.ScoreType", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -707,30 +741,300 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         .HasMaxLength(20)
                         .IsUnicode(true);
 
+                    b.Property<float>("Percent")
+                        .HasColumnType("real");
+
+                    b.Property<string>("SubjectID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
+
                     b.HasKey("ID");
 
-                    b.ToTable("SCORE");
+                    b.HasIndex("SubjectID");
+
+                    b.ToTable("SCORE_TYPE");
 
                     b.HasData(
                         new
                         {
                             ID = 1,
-                            Name = "Điểm chuyên cần"
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "CC4206"
                         },
                         new
                         {
                             ID = 2,
-                            Name = "Điểm thường xuyên"
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "CC4206"
                         },
                         new
                         {
                             ID = 3,
-                            Name = "Điểm giữa môn"
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "CC4206"
                         },
                         new
                         {
                             ID = 4,
-                            Name = "Điểm kết thúc môn"
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "CC4206"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "DH4202"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "DH4202"
+                        },
+                        new
+                        {
+                            ID = 7,
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "DH4202"
+                        },
+                        new
+                        {
+                            ID = 8,
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "DH4202"
+                        },
+                        new
+                        {
+                            ID = 9,
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "DH4203"
+                        },
+                        new
+                        {
+                            ID = 10,
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "DH4203"
+                        },
+                        new
+                        {
+                            ID = 11,
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "DH4203"
+                        },
+                        new
+                        {
+                            ID = 12,
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "DH4203"
+                        },
+                        new
+                        {
+                            ID = 13,
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "TC4209"
+                        },
+                        new
+                        {
+                            ID = 14,
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "TC4209"
+                        },
+                        new
+                        {
+                            ID = 15,
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "TC4209"
+                        },
+                        new
+                        {
+                            ID = 16,
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "TC4209"
+                        },
+                        new
+                        {
+                            ID = 17,
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "DC4204"
+                        },
+                        new
+                        {
+                            ID = 18,
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "DC4204"
+                        },
+                        new
+                        {
+                            ID = 19,
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "DC4204"
+                        },
+                        new
+                        {
+                            ID = 20,
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "DC4204"
+                        },
+                        new
+                        {
+                            ID = 21,
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "DC4106"
+                        },
+                        new
+                        {
+                            ID = 22,
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "DC4106"
+                        },
+                        new
+                        {
+                            ID = 23,
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "DC4106"
+                        },
+                        new
+                        {
+                            ID = 24,
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "DC4106"
+                        },
+                        new
+                        {
+                            ID = 25,
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "DT4208"
+                        },
+                        new
+                        {
+                            ID = 26,
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "DT4208"
+                        },
+                        new
+                        {
+                            ID = 27,
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "DT4208"
+                        },
+                        new
+                        {
+                            ID = 28,
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "DT4208"
+                        },
+                        new
+                        {
+                            ID = 29,
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "DT4315"
+                        },
+                        new
+                        {
+                            ID = 30,
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "DT4315"
+                        },
+                        new
+                        {
+                            ID = 31,
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "DT4315"
+                        },
+                        new
+                        {
+                            ID = 32,
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "DT4315"
+                        },
+                        new
+                        {
+                            ID = 33,
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "DT4205"
+                        },
+                        new
+                        {
+                            ID = 34,
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "DT4205"
+                        },
+                        new
+                        {
+                            ID = 35,
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "DT4205"
+                        },
+                        new
+                        {
+                            ID = 36,
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "DT4205"
+                        },
+                        new
+                        {
+                            ID = 37,
+                            Name = "Điểm chuyên cần",
+                            Percent = 0.1f,
+                            SubjectID = "DT4301"
+                        },
+                        new
+                        {
+                            ID = 38,
+                            Name = "Điểm thường xuyên",
+                            Percent = 0.2f,
+                            SubjectID = "DT4301"
+                        },
+                        new
+                        {
+                            ID = 39,
+                            Name = "Điểm giữa môn",
+                            Percent = 0.2f,
+                            SubjectID = "DT4301"
+                        },
+                        new
+                        {
+                            ID = 40,
+                            Name = "Điểm kết thúc môn",
+                            Percent = 0.5f,
+                            SubjectID = "DT4301"
                         });
                 });
 
@@ -776,6 +1080,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.Property<float?>("Mark")
                         .HasColumnType("real");
 
+                    b.Property<float?>("Mark1")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("Mark2")
+                        .HasColumnType("real");
+
                     b.Property<int>("QuestionID")
                         .HasColumnType("int");
 
@@ -798,34 +1108,37 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.ToTable("STUDENT_ANSWER_DETAIL");
                 });
 
+            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.StudentContest", b =>
+                {
+                    b.Property<Guid>("AccountID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ContestID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExamID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AccountID", "ContestID", "ExamID");
+
+                    b.HasIndex("ContestID");
+
+                    b.HasIndex("ExamID");
+
+                    b.ToTable("STUDENT_CONTEST");
+                });
+
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Subject", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.Property<float>("AssiduousScorePercent")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0.1f);
-
                     b.Property<int>("CreditCount")
                         .HasColumnType("int");
 
-                    b.Property<float>("FinalScorePercent")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0.5f);
-
-                    b.Property<float>("FrequentScorePercent")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0.2f);
-
-                    b.Property<float>("MiddleScorePercent")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0.2f);
+                    b.Property<int>("LessonCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -841,101 +1154,71 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         new
                         {
                             ID = "CC4206",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 3,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "Nhập môn lập trình"
                         },
                         new
                         {
                             ID = "DH4202",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 3,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "Kỹ thuật lập trình"
                         },
                         new
                         {
                             ID = "DH4203",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 4,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "Cấu trúc dữ liệu & giải thuật"
                         },
                         new
                         {
                             ID = "TC4209",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 4,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "Lập trình hướng đối tượng"
                         },
                         new
                         {
                             ID = "DC4204",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 4,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "Cơ sở dữ liệu"
                         },
                         new
                         {
                             ID = "DC4106",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 4,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "Kiến trúc máy tính"
                         },
                         new
                         {
                             ID = "DT4208",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 4,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "Lập trình Java"
                         },
                         new
                         {
                             ID = "DT4315",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 4,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "Công nghệ phần mềm"
                         },
                         new
                         {
                             ID = "DT4205",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 4,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "SQL Server"
                         },
                         new
                         {
                             ID = "DT4301",
-                            AssiduousScorePercent = 0f,
                             CreditCount = 4,
-                            FinalScorePercent = 0f,
-                            FrequentScorePercent = 0f,
-                            MiddleScorePercent = 0f,
+                            LessonCount = 45,
                             Name = "Mạng máy tính"
                         });
                 });
@@ -1104,8 +1387,23 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Contest", b =>
+                {
+                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Subject", "Subject")
+                        .WithMany("Contests")
+                        .HasForeignKey("SubjectID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Exam", b =>
                 {
+                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Contest", "Contest")
+                        .WithMany("Exams")
+                        .HasForeignKey("ContestID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Subject", "Subject")
                         .WithMany("Exams")
                         .HasForeignKey("SubjectID")
@@ -1145,16 +1443,22 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Result", b =>
                 {
+                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Contest", "Contest")
+                        .WithMany("Results")
+                        .HasForeignKey("ContestID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Exam", "Exam")
                         .WithMany("Results")
                         .HasForeignKey("ExamID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Score", "Score")
+                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.ScoreType", "ScoreType")
                         .WithMany("Results")
-                        .HasForeignKey("ScoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("ScoreTypeID")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.StudentAnswer", "StudentAnswer")
@@ -1166,12 +1470,21 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Subject", "Subject")
                         .WithMany("Results")
                         .HasForeignKey("SubjectID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Account", "Account")
                         .WithMany("Results")
                         .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.ScoreType", b =>
+                {
+                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Subject", "Subject")
+                        .WithMany("ScoreTypes")
+                        .HasForeignKey("SubjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1207,6 +1520,27 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         .WithMany("StudentAnswerDetails")
                         .HasForeignKey("StudentAnswerID")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.StudentContest", b =>
+                {
+                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Account", "Account")
+                        .WithMany("StudentContests")
+                        .HasForeignKey("AccountID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Contest", "Contest")
+                        .WithMany("StudentContests")
+                        .HasForeignKey("ContestID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Exam", "Exam")
+                        .WithMany("StudentContests")
+                        .HasForeignKey("ExamID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

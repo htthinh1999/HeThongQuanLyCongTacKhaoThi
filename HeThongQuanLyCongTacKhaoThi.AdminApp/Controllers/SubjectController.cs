@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
-    [Authorize(Roles = Role.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public class SubjectController : Controller
     {
         private readonly ISubjectApiClient _subjectApiClient;
@@ -58,13 +58,6 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return View();
             }
 
-            if(request.AssiduousScorePercent + request.FrequentScorePercent
-                + request.MiddleScorePercent + request.FinalScorePercent != 1)
-            {
-                ModelState.AddModelError("", "Tổng các hệ số phải bằng 1");
-                return View();
-            }
-
             var result = await _subjectApiClient.Create(request);
             if (result.IsSuccessed)
             {
@@ -87,10 +80,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 {
                     ID = subject.ID,
                     Name = subject.Name,
-                    AssiduousScorePercent = subject.AssiduousScorePercent,
-                    FrequentScorePercent = subject.FrequentScorePercent,
-                    MiddleScorePercent = subject.MiddleScorePercent,
-                    FinalScorePercent = subject.FinalScorePercent,
+                    LessonCount = subject.LessonCount,
                     CreditCount = subject.CreditCount
                 };
 

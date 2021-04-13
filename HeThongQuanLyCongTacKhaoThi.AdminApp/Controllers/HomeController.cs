@@ -25,11 +25,17 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (User.Identity.Name == null)
+            if (string.IsNullOrEmpty(User.Identity.Name))
             {
                 return RedirectToAction("Login", "Account");
             }
             var getUser = await _accountApiClient.GetByUserName(User.Identity.Name);
+
+            if(getUser == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var user = getUser.ResultObj;
             (User.Identity as ClaimsIdentity).AddClaim(new Claim("FullName", user.Name));
             HttpContext.Session.SetString("UserFullName", user.Name);

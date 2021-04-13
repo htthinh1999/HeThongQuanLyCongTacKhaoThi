@@ -1,4 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Classes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
+    [Authorize(Policy = Policy.All)]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ClassesController : ControllerBase
     {
         private readonly IClassService _classService;

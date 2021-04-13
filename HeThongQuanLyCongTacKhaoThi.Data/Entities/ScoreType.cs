@@ -2,10 +2,14 @@
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
 {
-    public class Score
+    public class ScoreType
     {
         public int ID { get; set; }
+        public string SubjectID { get; set; }
         public string Name { get; set; }
+        public float Percent { get; set; }
+
+        public Subject Subject { get; set; }
 
         public List<Result> Results { get; set; }
     }

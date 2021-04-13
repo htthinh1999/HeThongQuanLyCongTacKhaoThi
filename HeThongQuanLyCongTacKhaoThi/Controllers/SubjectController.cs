@@ -12,28 +12,28 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
     [Authorize(Policy = Policy.Student)]
     public class SubjectController : Controller
     {
-        private readonly IExamApiClient _examApiClient;
+        private readonly IContestApiClient _contestApiClient;
         private readonly ISubjectApiClient _subjectApiClient;
 
-        public SubjectController(IExamApiClient examApiClient, ISubjectApiClient subjectApiClient)
+        public SubjectController(IContestApiClient contestApiClient, ISubjectApiClient subjectApiClient)
         {
-            _examApiClient = examApiClient;
+            _contestApiClient = contestApiClient;
             _subjectApiClient = subjectApiClient;
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(string subjectID)
         {
-            var getExamsBySubjectID = await _examApiClient.GetAllExamsBySubjectID(subjectID);
-            if (!getExamsBySubjectID.IsSuccessed)
+            var getContestsBySubjectID = await _contestApiClient.GetAllContestsBySubjectID(subjectID);
+            if (!getContestsBySubjectID.IsSuccessed)
             {
-                return BadRequest(getExamsBySubjectID.Message);
+                return BadRequest(getContestsBySubjectID.Message);
             }
 
             var getSubject = await _subjectApiClient.GetByID(subjectID);
             ViewData["SubjectName"] = getSubject.ResultObj.Name;
 
-            return View(getExamsBySubjectID.ResultObj);
+            return View(getContestsBySubjectID.ResultObj);
         }
 
 

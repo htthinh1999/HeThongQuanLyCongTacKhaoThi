@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
-    [Authorize(Roles = Role.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public class AccountController : Controller
     {
         private readonly IAccountApiClient _accountApiClient;
@@ -215,7 +215,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             var accountPrincipal = ValidateToken(result.ResultObj);
             var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(90),
                 IsPersistent = true
             };
 
@@ -245,7 +245,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = Policy.Manager)]
+        [AllowAnonymous]
         public async Task<ActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

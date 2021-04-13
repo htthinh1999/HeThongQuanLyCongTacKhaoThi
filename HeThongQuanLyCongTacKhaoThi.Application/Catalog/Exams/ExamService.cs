@@ -24,6 +24,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
         {
             var exam = new Exam()
             {
+                ContestID = request.ContestID,
                 Name = request.Name,
                 SubjectID = request.SubjectID,
                 ExamDetails = new List<ExamDetail>()
@@ -45,23 +46,17 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
             var exam = await _context.Exams.FindAsync(id);
             if (exam == null) return new ApiErrorResult<bool>("Không thể tìm thấy đề thi");
 
-            // If no data change, result will get 0
-            if (exam.Name != request.Name)
-            {
-                exam.Name = request.Name;
-                exam.ExamDetails = new List<ExamDetail>();
+            _context.Entry(exam).State = EntityState.Modified;
 
-                var result = await _context.SaveChangesAsync();
+            exam.ContestID = request.ContestID;
+            exam.Name = request.Name;
+            exam.ExamDetails = new List<ExamDetail>();
 
-                if (result == 0)
-                {
-                    return new ApiErrorResult<bool>("Không thể chỉnh sửa đề thi");
-                }
-            }
-            else
+            var result = await _context.SaveChangesAsync();
+
+            if (result == 0)
             {
-                exam.ExamDetails = new List<ExamDetail>();
-                await _context.SaveChangesAsync();
+                return new ApiErrorResult<bool>("Không thể chỉnh sửa đề thi");
             }
 
             return new ApiSuccessResult<bool>();
@@ -95,6 +90,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
             var examViewModel = new ExamViewModel()
             {
                 ID = id,
+                ContestID = exam.ContestID,
                 SubjectID = exam.SubjectID,
                 Name = exam.Name
             };
@@ -187,6 +183,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
                 .Select(x => new ExamViewModel()
                 {
                     ID = x.ID,
+                    ContestID = x.ContestID,
                     SubjectID = x.SubjectID,
                     Name = x.Name
                 }).ToListAsync();
@@ -201,7 +198,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
             return new ApiSuccessResult<PagedResult<ExamViewModel>>(pagedResult);
         }
 
-        public async Task<ApiResult<List<ExamViewModel>>> GetAllExamsBySubjectID(string subjectID)
+        public async Task<ApiResult<List<ExamViewModel>>> GetAllExamsByContestID(int contestID)
         {
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
@@ -209,7 +206,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
             var exams = await (from e in _context.Exams
                                join ed in _context.ExamDetails on e.ID equals ed.ExamID
                                join q in _context.Questions on ed.QuestionID equals q.ID
-                               where e.SubjectID == subjectID
+                               where e.ContestID == contestID
                                group new { e, q } by new { e.ID, e.Name } into exam
                                select new ExamViewModel()
                                {

@@ -9,19 +9,10 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects
         [DisplayName("Tên môn học")]
         public string Name { get; set; }
 
-        [DisplayName("Hệ số điểm chuyên cần")]
-        public float AssiduousScorePercent { get; set; }
+        [DisplayName("Số lượng tiết học")]
+        public int LessonCount { get; set; }
 
-        [DisplayName("Hệ số điểm thường xuyên")]
-        public float FrequentScorePercent { get; set; }
-
-        [DisplayName("Hệ số điểm giữa môn")]
-        public float MiddleScorePercent { get; set; }
-
-        [DisplayName("Hệ số điểm kết thúc môn")]
-        public float FinalScorePercent { get; set; }
-
-        [DisplayName("Số lượng tín chỉ")]
+        [DisplayName("Số lượng đơn vị học trình")]
         public int CreditCount { get; set; }
     }
 }

@@ -17,6 +17,6 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         Task<ApiResult<bool>> Delete(int id);
 
-        Task<ApiResult<List<ExamViewModel>>> GetAllExamsBySubjectID(string subjectID);
+        Task<ApiResult<List<ExamViewModel>>> GetAllExamsByContestID(int contestID);
     }
 }

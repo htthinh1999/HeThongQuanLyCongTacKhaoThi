@@ -33,6 +33,11 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
             var getExam = await _examApiClient.GetByID(examID);
             var exam = getExam.ResultObj;
 
+            if(exam == null)
+            {
+                return BadRequest("Không thể tìm thấy đề thi");
+            }
+
             questionIDs = new List<int>();
             for (int i = 0; i < exam.ExamDetails.Count; i++)
             {

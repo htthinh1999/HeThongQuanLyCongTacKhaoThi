@@ -1,6 +1,8 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswerDetails;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswers;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.StudentAnswers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
+    [Authorize(Policy = Policy.All)]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentAnswersController : ControllerBase

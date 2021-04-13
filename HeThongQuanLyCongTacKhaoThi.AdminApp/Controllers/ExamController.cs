@@ -15,11 +15,13 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
     {
         private readonly IExamApiClient _examApiClient;
         private readonly ISubjectApiClient _subjectApiClient;
+        private readonly IContestApiClient _contestApiClient;
 
-        public ExamController(IExamApiClient examApiClient, ISubjectApiClient subjectApiClient)
+        public ExamController(IExamApiClient examApiClient, ISubjectApiClient subjectApiClient, IContestApiClient contestApiClient)
         {
             _examApiClient = examApiClient;
             _subjectApiClient = subjectApiClient;
+            _contestApiClient = contestApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 5)
@@ -44,10 +46,15 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 QuestionGroupViewModels = new List<QuestionGroupViewModel>()
             };
 
-            // Get subjects
-            var getSubjects = await _subjectApiClient.GetAll();
-            var subjects = getSubjects.ResultObj;
-            examCreateRequest.Subjects = subjects.ToList();
+            // Get all contests
+            var getContests = await _contestApiClient.GetAll();
+            if (!getContests.IsSuccessed)
+            {
+                BadRequest("Không thể lấy danh sách kỳ kiểm tra");
+            }
+            examCreateRequest.Contests = getContests.ResultObj.ToList();
+
+            examCreateRequest.SubjectID = getContests.ResultObj[0].SubjectID;
 
             return View(examCreateRequest);
         }
@@ -90,16 +97,22 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                     ID = exam.ID,
                     Name = exam.Name,
                     ReRandom = false,
+                    ContestID = exam.ContestID,
                     SubjectID = exam.SubjectID,
                     MultipleChoiceQuestionCount = exam.MultipleChoiceQuestionCount,
                     EssayQuestionCount = exam.EssayQuestionCount,
                     QuestionGroups = exam.QuestionGroups.ToList()
                 };
 
-                // Get subjects
-                var getSubjects = await _subjectApiClient.GetAll();
-                var subjects = getSubjects.ResultObj;
-                updateResquest.Subjects = subjects.ToList();
+                // Get all contests
+                var getContests = await _contestApiClient.GetAll();
+                if (!getContests.IsSuccessed)
+                {
+                    BadRequest("Không thể lấy danh sách kỳ kiểm tra");
+                }
+                updateResquest.Contests = getContests.ResultObj.ToList();
+
+                updateResquest.SubjectID = getContests.ResultObj[0].SubjectID;
 
                 return View(updateResquest);
             }
@@ -115,7 +128,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return View();
             }
 
-            if (QuestionGroups.Count == 0)
+            if (request.ReRandom && QuestionGroups.Count == 0)
             {
                 return BadRequest("Bạn cần chọn nhóm câu hỏi");
             }

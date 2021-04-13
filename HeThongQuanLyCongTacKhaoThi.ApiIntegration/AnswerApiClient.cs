@@ -55,10 +55,12 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         public async Task<ApiResult<bool>> Create(AnswerCURequest request)
         {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
             var json = JsonConvert.SerializeObject(request);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
             var response = await client.PostAsync("/api/answers/create", httpContent);
             var result = await response.Content.ReadAsStringAsync();

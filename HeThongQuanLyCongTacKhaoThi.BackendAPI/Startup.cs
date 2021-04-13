@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups;
@@ -76,6 +77,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<ISubjectService, SubjectService>();
             services.AddTransient<IStudentAnswerService, StudentAnswerService>();
             services.AddTransient<IStudentAnswerDetailService, StudentAnswerDetailService>();
+            services.AddTransient<IContestService, ContestService>();
 
             // Declare Fluent Validator
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
@@ -141,6 +143,14 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
                     IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                 };
             });
+
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Policy.All,
+                     policy => policy.RequireRole(Roles.Admin, Roles.Teacher, Roles.Student));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

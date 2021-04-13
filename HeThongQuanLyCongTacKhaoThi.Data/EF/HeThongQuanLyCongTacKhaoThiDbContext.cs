@@ -19,7 +19,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
             // Configuration using Fluent API
             modelBuilder.ApplyConfiguration(new ClassConfiguration());
             modelBuilder.ApplyConfiguration(new SubjectConfiguration());
-            modelBuilder.ApplyConfiguration(new ScoreConfiguration());
+            modelBuilder.ApplyConfiguration(new ContestConfiguration());
+            modelBuilder.ApplyConfiguration(new ScoreTypeConfiguration());
             modelBuilder.ApplyConfiguration(new QuestionGroupConfiguration());
             modelBuilder.ApplyConfiguration(new QuestionConfiguration());
             modelBuilder.ApplyConfiguration(new AnswerConfiguration());
@@ -31,6 +32,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
             modelBuilder.ApplyConfiguration(new RoleAccountConfiguration());
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
             modelBuilder.ApplyConfiguration(new SubjectAccountConfiguration());
+            modelBuilder.ApplyConfiguration(new StudentContestConfiguration());
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("USER_CLAIM");
             modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("USER_ROLE").HasKey(x => new { x.UserId, x.RoleId });
@@ -44,7 +46,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
 
         public DbSet<Class> Classes { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<Score> Scores { get; set; }
+        public DbSet<ScoreType> Scores { get; set; }
         public DbSet<QuestionGroup> QuestionGroups { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
@@ -56,5 +58,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
         public DbSet<SubjectAccount> SubjectAccounts { get; set; }
         public DbSet<RoleAccount> RoleAccounts { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Contest> Contests { get; set; }
+        public DbSet<StudentContest> StudentContests { get; set; }
     }
 }

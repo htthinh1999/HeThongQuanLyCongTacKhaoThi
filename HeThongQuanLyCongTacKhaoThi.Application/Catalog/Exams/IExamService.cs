@@ -17,6 +17,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
 
         Task<ApiResult<ExamViewModel>> GetByID(int id);
 
-        Task<ApiResult<List<ExamViewModel>>> GetAllExamsBySubjectID(string subjectID);
+        Task<ApiResult<List<ExamViewModel>>> GetAllExamsByContestID(int contestID);
     }
 }

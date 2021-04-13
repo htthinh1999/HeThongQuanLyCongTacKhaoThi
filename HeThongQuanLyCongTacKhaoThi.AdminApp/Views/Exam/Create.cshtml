@@ -14,9 +14,14 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Môn học</label>
-                <select asp-for="SubjectID" class="form-control" asp-items="@(new SelectList(Model.Subjects, "ID", "Name"))">
+                <label class="control-label">Kỳ kiểm tra</label>
+                <select asp-for="ContestID" class="form-control" asp-items="@(new SelectList(Model.Contests, "ID", "Name"))">
                 </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubjectID" class="control-label"></label>
+                <input asp-for="SubjectID" class="form-control" readonly />
+                <span asp-validation-for="SubjectID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -52,6 +57,16 @@
 
         $(document).ready(function () {
 
+            // Get Subject ID follow Contest ID
+            $("#ContestID").on('change', function () {
+                var contestID = $(this).val();
+                var url = '@Url.Action("GetSubjectIDByContestID", "Contest")?contestID=' + contestID;
+                $.get(url, function (data) {
+                    $("#SubjectID").val(data.subjectID);
+                });
+            });
+
+            // Init & get Question Groups
             var questionGroupID = 0;
             $("#add-question-group").on('click', function () {
                 var url = '@Url.Action("GetAllQuestionGroup", "QuestionGroup")/' + questionGroupID++;

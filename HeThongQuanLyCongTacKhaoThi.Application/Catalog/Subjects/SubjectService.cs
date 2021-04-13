@@ -47,10 +47,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
                 {
                     ID = x.ID,
                     Name = x.Name,
-                    AssiduousScorePercent = x.AssiduousScorePercent,
-                    FrequentScorePercent = x.FrequentScorePercent,
-                    MiddleScorePercent = x.MiddleScorePercent,
-                    FinalScorePercent = x.FinalScorePercent,
+                    LessonCount = x.LessonCount,
                     CreditCount = x.CreditCount
                 }).ToListAsync();
             var totalRow = await query.CountAsync();
@@ -76,10 +73,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
             {
                 ID = subject.ID,
                 Name = subject.Name,
-                AssiduousScorePercent = subject.AssiduousScorePercent,
-                FrequentScorePercent = subject.FrequentScorePercent,
-                MiddleScorePercent = subject.MiddleScorePercent,
-                FinalScorePercent = subject.FinalScorePercent,
+                LessonCount = subject.LessonCount,
                 CreditCount = subject.CreditCount
             };
 
@@ -91,10 +85,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
             var subject = new Subject()
             {
                 Name = request.Name,
-                AssiduousScorePercent = request.AssiduousScorePercent,
-                FrequentScorePercent = request.FrequentScorePercent,
-                MiddleScorePercent = request.MiddleScorePercent,
-                FinalScorePercent = request.FinalScorePercent,
+                LessonCount = request.LessonCount,
                 CreditCount = request.CreditCount
             };
 
@@ -113,6 +104,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
         {
             var subject = await _context.Subjects.FindAsync(id);
             if (subject == null) return new ApiErrorResult<bool>("Không thể tìm thấy môn học");
+
+            subject.Name = request.Name;
+            subject.LessonCount = request.LessonCount;
+            subject.CreditCount = request.CreditCount;
 
             _context.Entry(subject).State = EntityState.Modified;
             var result = await _context.SaveChangesAsync();
@@ -148,10 +143,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
                                   {
                                       ID = s.ID,
                                       Name = s.Name,
-                                      AssiduousScorePercent = s.AssiduousScorePercent,
-                                      FrequentScorePercent = s.FrequentScorePercent,
-                                      MiddleScorePercent = s.MiddleScorePercent,
-                                      FinalScorePercent = s.FinalScorePercent,
+                                      LessonCount = s.LessonCount,
                                       CreditCount = s.CreditCount
                                   })
                                   .ToListAsync();

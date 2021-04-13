@@ -1,6 +1,6 @@
 ﻿namespace HeThongQuanLyCongTacKhaoThi.Utilities.Constants
 {
-    public class Role
+    public class Roles
     {
         public const string Admin = "Admin";
         public const string Teacher = "Teacher";

@@ -1,4 +1,5 @@
-﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects;
+﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Contests;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -8,6 +9,9 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams
     {
         [DisplayName("Mã đề thi")]
         public int ID { get; set; }
+
+        [DisplayName("Mã cuộc thi")]
+        public int ContestID { get; set; }
 
         [DisplayName("Mã môn học")]
         public string SubjectID { get; set; }
@@ -24,8 +28,10 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams
         [DisplayName("Nhóm câu hỏi")]
         public List<int> QuestionGroups { get; set; } = new List<int>();
 
+        public SubjectViewModel Subject;
+
+        public List<ContestViewModel> Contests;
+
         public List<ExamDetailCURequest> ExamDetails { get; set; } = new List<ExamDetailCURequest>();
-        
-        public List<SubjectViewModel> Subjects { get; set; }
     }
 }
