@@ -64,28 +64,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SCORE",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SCORE", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SUBJECT",
                 columns: table => new
                 {
                     ID = table.Column<string>(maxLength: 10, nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
-                    AssiduousScorePercent = table.Column<float>(nullable: false, defaultValue: 0.1f),
-                    FrequentScorePercent = table.Column<float>(nullable: false, defaultValue: 0.2f),
-                    MiddleScorePercent = table.Column<float>(nullable: false, defaultValue: 0.2f),
-                    FinalScorePercent = table.Column<float>(nullable: false, defaultValue: 0.5f),
+                    LessonCount = table.Column<int>(nullable: false),
                     CreditCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -186,23 +170,23 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EXAM",
+                name: "CONTEST",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectID = table.Column<string>(maxLength: 10, nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    SubjectID = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EXAM", x => x.ID);
+                    table.PrimaryKey("PK_CONTEST", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_EXAM_SUBJECT_SubjectID",
+                        name: "FK_CONTEST_SUBJECT_SubjectID",
                         column: x => x.SubjectID,
                         principalTable: "SUBJECT",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -234,63 +218,84 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubjectTeacher",
+                name: "SCORE_TYPE",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<Guid>(nullable: false),
-                    SubjectID = table.Column<string>(nullable: true),
-                    ClassID = table.Column<string>(nullable: true),
-                    AccountId = table.Column<Guid>(nullable: true)
+                    SubjectID = table.Column<string>(maxLength: 10, nullable: false),
+                    Name = table.Column<string>(maxLength: 20, nullable: false),
+                    Percent = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubjectTeacher", x => x.ID);
+                    table.PrimaryKey("PK_SCORE_TYPE", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_SubjectTeacher_Account_AccountId",
-                        column: x => x.AccountId,
-                        principalTable: "Account",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SubjectTeacher_CLASS_ClassID",
-                        column: x => x.ClassID,
-                        principalTable: "CLASS",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SubjectTeacher_SUBJECT_SubjectID",
+                        name: "FK_SCORE_TYPE_SUBJECT_SubjectID",
                         column: x => x.SubjectID,
                         principalTable: "SUBJECT",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "STUDENT_ANSWER",
+                name: "SUBJECT_ACCOUNT",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<Guid>(nullable: false),
-                    ExamID = table.Column<int>(nullable: false)
+                    SubjectID = table.Column<string>(maxLength: 10, nullable: false),
+                    ClassID = table.Column<string>(maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_STUDENT_ANSWER", x => x.ID);
+                    table.PrimaryKey("PK_SUBJECT_ACCOUNT", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_STUDENT_ANSWER_EXAM_ExamID",
-                        column: x => x.ExamID,
-                        principalTable: "EXAM",
+                        name: "FK_SUBJECT_ACCOUNT_CLASS_ClassID",
+                        column: x => x.ClassID,
+                        principalTable: "CLASS",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_STUDENT_ANSWER_Account_UserID",
+                        name: "FK_SUBJECT_ACCOUNT_SUBJECT_SubjectID",
+                        column: x => x.SubjectID,
+                        principalTable: "SUBJECT",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SUBJECT_ACCOUNT_Account_UserID",
                         column: x => x.UserID,
                         principalTable: "Account",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EXAM",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubjectID = table.Column<string>(maxLength: 10, nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    ContestID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EXAM", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_EXAM_CONTEST_ContestID",
+                        column: x => x.ContestID,
+                        principalTable: "CONTEST",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_EXAM_SUBJECT_SubjectID",
+                        column: x => x.SubjectID,
+                        principalTable: "SUBJECT",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -339,6 +344,63 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "STUDENT_ANSWER",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<Guid>(nullable: false),
+                    ExamID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_STUDENT_ANSWER", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_STUDENT_ANSWER_EXAM_ExamID",
+                        column: x => x.ExamID,
+                        principalTable: "EXAM",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_STUDENT_ANSWER_Account_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Account",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "STUDENT_CONTEST",
+                columns: table => new
+                {
+                    ContestID = table.Column<int>(nullable: false),
+                    AccountID = table.Column<Guid>(nullable: false),
+                    ExamID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_STUDENT_CONTEST", x => new { x.AccountID, x.ContestID, x.ExamID });
+                    table.ForeignKey(
+                        name: "FK_STUDENT_CONTEST_Account_AccountID",
+                        column: x => x.AccountID,
+                        principalTable: "Account",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_STUDENT_CONTEST_CONTEST_ContestID",
+                        column: x => x.ContestID,
+                        principalTable: "CONTEST",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_STUDENT_CONTEST_EXAM_ExamID",
+                        column: x => x.ExamID,
+                        principalTable: "EXAM",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RESULT",
                 columns: table => new
                 {
@@ -346,7 +408,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<Guid>(nullable: false),
                     SubjectID = table.Column<string>(maxLength: 10, nullable: false),
-                    ScoreID = table.Column<int>(nullable: false),
+                    ScoreTypeID = table.Column<int>(nullable: false),
+                    ContestID = table.Column<int>(nullable: false),
                     ExamID = table.Column<int>(nullable: false),
                     StudentAnswerID = table.Column<int>(nullable: false),
                     Mark = table.Column<float>(nullable: false),
@@ -356,17 +419,20 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 {
                     table.PrimaryKey("PK_RESULT", x => x.ID);
                     table.ForeignKey(
+                        name: "FK_RESULT_CONTEST_ContestID",
+                        column: x => x.ContestID,
+                        principalTable: "CONTEST",
+                        principalColumn: "ID");
+                    table.ForeignKey(
                         name: "FK_RESULT_EXAM_ExamID",
                         column: x => x.ExamID,
                         principalTable: "EXAM",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                     table.ForeignKey(
-                        name: "FK_RESULT_SCORE_ScoreID",
-                        column: x => x.ScoreID,
-                        principalTable: "SCORE",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_RESULT_SCORE_TYPE_ScoreTypeID",
+                        column: x => x.ScoreTypeID,
+                        principalTable: "SCORE_TYPE",
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_RESULT_STUDENT_ANSWER_StudentAnswerID",
                         column: x => x.StudentAnswerID,
@@ -376,14 +442,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         name: "FK_RESULT_SUBJECT_SubjectID",
                         column: x => x.SubjectID,
                         principalTable: "SUBJECT",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_RESULT_Account_UserID",
                         column: x => x.UserID,
                         principalTable: "Account",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -394,8 +458,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentAnswerID = table.Column<int>(nullable: false),
                     QuestionID = table.Column<int>(nullable: false),
-                    AnswerID = table.Column<int>(nullable: false),
-                    EssayPath = table.Column<string>(nullable: false),
+                    AnswerID = table.Column<int>(nullable: true),
+                    EssayPath = table.Column<string>(nullable: true),
+                    StudentAnswerContent = table.Column<string>(nullable: true),
+                    Mark1 = table.Column<float>(nullable: true),
+                    Mark2 = table.Column<float>(nullable: true),
                     Mark = table.Column<float>(nullable: true)
                 },
                 constraints: table =>
@@ -406,7 +473,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         column: x => x.AnswerID,
                         principalTable: "ANSWER",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_STUDENT_ANSWER_DETAIL_QUESTION_QuestionID",
                         column: x => x.QuestionID,
@@ -423,26 +490,26 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Account",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "Birthday", "ClassID", "ConcurrencyStamp", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Student_TeacherID", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"), 0, null, new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "06bf8ca7-e685-4594-8452-1d52bad27382", "keycodemon@gmail.com", true, true, false, null, "Keycode Mon", "keycodemon@gmail.com", "admin", "AQAAAAEAACcQAAAAEJMx5EeDZ3kba4mNFAYnSzA6qbES5Q9RN5VpKkoBKMbRTgSrcccIUK5vkjWVB7l1Hg==", null, false, "", null, false, "admin" });
+                values: new object[] { new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"), 0, null, new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "d09a07fc-ada2-45f7-a747-edf25517df1a", "keycodemon@gmail.com", true, true, false, null, "Keycode Mon", "keycodemon@gmail.com", "admin", "AQAAAAEAACcQAAAAECBgc/mB57ZYrqrR2PA8T1ji1nPHYvyTcpw0epVWCkvXpTPvoFGsSbvG8tOXZWVYDA==", null, false, "", null, false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "CLASS",
                 columns: new[] { "ID", "Name" },
                 values: new object[,]
                 {
-                    { "DHVT2", "Đại học viễn thông 2" },
-                    { "DHVT1", "Đại học viễn thông 1" },
-                    { "DHCN4B", "Đại học công nghệ 4B" },
-                    { "DHCN4A", "Đại học công nghệ 4A" },
-                    { "DHCN3B", "Đại học công nghệ 3B" },
-                    { "DHCN3A", "Đại học công nghệ 3A" },
-                    { "DHCN3C", "Đại học công nghệ 3C" },
-                    { "DHCN2A", "Đại học công nghệ 2A" },
-                    { "DHCN1D", "Đại học công nghệ 1D" },
-                    { "DHCN1C", "Đại học công nghệ 1C" },
-                    { "DHCN1B", "Đại học công nghệ 1B" },
                     { "DHCN1A", "Đại học công nghệ 1A" },
-                    { "DHCN2B", "Đại học công nghệ 2B" }
+                    { "DHCN1B", "Đại học công nghệ 1B" },
+                    { "DHCN1C", "Đại học công nghệ 1C" },
+                    { "DHCN1D", "Đại học công nghệ 1D" },
+                    { "DHCN2A", "Đại học công nghệ 2A" },
+                    { "DHCN2B", "Đại học công nghệ 2B" },
+                    { "DHCN3A", "Đại học công nghệ 3A" },
+                    { "DHCN3B", "Đại học công nghệ 3B" },
+                    { "DHCN3C", "Đại học công nghệ 3C" },
+                    { "DHCN4A", "Đại học công nghệ 4A" },
+                    { "DHCN4B", "Đại học công nghệ 4B" },
+                    { "DHVT1", "Đại học viễn thông 1" },
+                    { "DHVT2", "Đại học viễn thông 2" }
                 });
 
             migrationBuilder.InsertData(
@@ -451,10 +518,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 values: new object[,]
                 {
                     { 5, "Nhóm câu hỏi chương 5" },
-                    { 1, "Nhóm câu hỏi chương 1" },
-                    { 2, "Nhóm câu hỏi chương 2" },
                     { 3, "Nhóm câu hỏi chương 3" },
-                    { 4, "Nhóm câu hỏi chương 4" }
+                    { 4, "Nhóm câu hỏi chương 4" },
+                    { 1, "Nhóm câu hỏi chương 1" },
+                    { 2, "Nhóm câu hỏi chương 2" }
                 });
 
             migrationBuilder.InsertData(
@@ -462,37 +529,26 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("9a34bdd4-fa97-4e2f-9960-b19a68826be9"), "81fff613-cdcf-4adb-bdf3-b518cf7064d6", "Vai trò học viên", "Student", "student" },
-                    { new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f"), "c247bd83-2a9d-4364-b750-0a6cc45cd41b", "Vai trò quản trị viên", "Admin", "admin" },
-                    { new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94"), "a862cc78-c4f6-4da5-b6fb-82375c3c53e7", "Vai trò giảng viên", "Teacher", "teacher" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "SCORE",
-                columns: new[] { "ID", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Điểm chuyên cần" },
-                    { 2, "Điểm thường xuyên" },
-                    { 3, "Điểm giữa môn" },
-                    { 4, "Điểm kết thúc môn" }
+                    { new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f"), "dd9f6c36-e617-4252-97c6-021204159baf", "Vai trò quản trị viên", "Admin", "admin" },
+                    { new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94"), "1980f04e-444f-48db-ba4d-51bf1719c6bd", "Vai trò giảng viên", "Teacher", "teacher" },
+                    { new Guid("9a34bdd4-fa97-4e2f-9960-b19a68826be9"), "68e694cf-08c3-4f91-b6d6-5f768cfcef7f", "Vai trò học viên", "Student", "student" }
                 });
 
             migrationBuilder.InsertData(
                 table: "SUBJECT",
-                columns: new[] { "ID", "CreditCount", "Name" },
+                columns: new[] { "ID", "CreditCount", "LessonCount", "Name" },
                 values: new object[,]
                 {
-                    { "DC4204", 4, "Cơ sở dữ liệu" },
-                    { "CC4206", 3, "Nhập môn lập trình" },
-                    { "DH4202", 3, "Kỹ thuật lập trình" },
-                    { "DH4203", 4, "Cấu trúc dữ liệu & giải thuật" },
-                    { "TC4209", 4, "Lập trình hướng đối tượng" },
-                    { "DC4106", 4, "Kiến trúc máy tính" },
-                    { "DT4208", 4, "Lập trình Java" },
-                    { "DT4315", 4, "Công nghệ phần mềm" },
-                    { "DT4205", 4, "SQL Server" },
-                    { "DT4301", 4, "Mạng máy tính" }
+                    { "DC4204", 4, 45, "Cơ sở dữ liệu" },
+                    { "CC4206", 3, 45, "Nhập môn lập trình" },
+                    { "DH4202", 3, 45, "Kỹ thuật lập trình" },
+                    { "DH4203", 4, 45, "Cấu trúc dữ liệu & giải thuật" },
+                    { "TC4209", 4, 45, "Lập trình hướng đối tượng" },
+                    { "DC4106", 4, 45, "Kiến trúc máy tính" },
+                    { "DT4208", 4, 45, "Lập trình Java" },
+                    { "DT4315", 4, 45, "Công nghệ phần mềm" },
+                    { "DT4205", 4, 45, "SQL Server" },
+                    { "DT4301", 4, 45, "Mạng máy tính" }
                 });
 
             migrationBuilder.InsertData(
@@ -511,9 +567,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "Birthday", "ClassID", "ConcurrencyStamp", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Student_TeacherID", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("4a2d9b6e-97c4-41bd-a929-f778972db109"), 0, "Số 80 - Hai Bà Trưng - Vạn Giã - Vạn Ninh - Khánh Hoà", new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "3a292ac9-3b45-41c3-9849-90936b64af4f", "htthinh1999@gmail.com", true, true, false, null, "Huỳnh Tấn Thịnh", "htthinh1999@gmail.com", "htthinh", "AQAAAAEAACcQAAAAEEKP0a9PXpQDrMmb4EYx9tEZPf8D4Uo20isfVoA1zHDf5Dpf1vV2ONxGpZJYaK5imw==", "0977393641", false, "", "17ĐC027", false, "htthinh" },
-                    { new Guid("9e7773ef-083c-4a8e-8ed2-9e36cd704913"), 0, "Khánh Hoà", new DateTime(2000, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "67f5609b-09b7-44d4-803e-4d0325142704", "sv1@gmail.com", true, true, false, null, "Sinh viên 1", "sv1@gmail.com", "sv1", "AQAAAAEAACcQAAAAELFS5/+kHbkcidGmqZ22DiHQhD+DzxIgAIv4q/3+T9HMafmgYvPJKU70HMmaQKtkxg==", "0987333644", false, "", "17ĐC028", false, "sv1" },
-                    { new Guid("8bc30f33-6382-45fd-a54a-0dec677631d9"), 0, "Khánh Hoà", new DateTime(2000, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "4864b73b-e662-44b9-a27d-a9601bd9193a", "sv2@gmail.com", true, true, false, null, "Sinh viên 2", "sv2@gmail.com", "sv2", "AQAAAAEAACcQAAAAEDFzwmGEjhupPnATo+95UGmvC0SxKQ9T3ScbJy9R4WIYdtXVwvjozl3SZfeShIcbEg==", "0987666644", false, "", "17ĐC023", false, "sv2" }
+                    { new Guid("4a2d9b6e-97c4-41bd-a929-f778972db109"), 0, "Số 80 - Hai Bà Trưng - Vạn Giã - Vạn Ninh - Khánh Hoà", new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "7e3082af-7fdc-41c4-9128-891a87ccc2be", "htthinh1999@gmail.com", true, true, false, null, "Huỳnh Tấn Thịnh", "htthinh1999@gmail.com", "htthinh", "AQAAAAEAACcQAAAAEP1e5s/qXgzc4haN/YGfjRWebImF0L/SEPWaIsJ/WVT8PraOraj+Vq7redQoJTaaFg==", "0977393641", false, "", "17ĐC027", false, "htthinh" },
+                    { new Guid("9e7773ef-083c-4a8e-8ed2-9e36cd704913"), 0, "Khánh Hoà", new DateTime(2000, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "0beadb3b-f0f9-4df4-a1ab-f28e71db5171", "sv1@gmail.com", true, true, false, null, "Sinh viên 1", "sv1@gmail.com", "sv1", "AQAAAAEAACcQAAAAEEMN9vtPt+dYJh2Le32iEleuCijhI1zGlF5xVIoJy5QPwOeHEuXTy3eZ6nW5N6vnow==", "0987333644", false, "", "17ĐC028", false, "sv1" },
+                    { new Guid("8bc30f33-6382-45fd-a54a-0dec677631d9"), 0, "Khánh Hoà", new DateTime(2000, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "fdeeb8be-8b35-4a95-9ac1-34a3787d3149", "sv2@gmail.com", true, true, false, null, "Sinh viên 2", "sv2@gmail.com", "sv2", "AQAAAAEAACcQAAAAEAfu4mzjCLuswQ23UcciEV8S3e82OkX04KE6VfgwWHPP6jXj1M9pcluoZ0V1RsOolA==", "0987666644", false, "", "17ĐC023", false, "sv2" }
                 });
 
             migrationBuilder.InsertData(
@@ -521,12 +577,59 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 columns: new[] { "ID", "Content", "GroupID", "IsMultipleChoice", "SubjectID" },
                 values: new object[,]
                 {
-                    { 1, "Những tên biến nào dưới đây được viết đúng theo quy tắc đặt tên của ngôn ngữ lập trình C?", 1, true, "CC4206" },
-                    { 2, "Một biến được gọi là biến toàn cục nếu:", 1, true, "CC4206" },
-                    { 3, "Một biến được gọi là biến cục bộ nếu:", 1, true, "CC4206" },
-                    { 4, "Nhận định nào sau đây KHÔNG ĐÚNG về đệ quy vô hạn?", 2, true, "CC4206" },
                     { 5, "Trong các phương pháp sắp xếp: lựa chọn, chèn, đổi chỗ(nổi bọt), quicksort (sắp xếp nhanh), mergesort (sắp xếp trộn), thì phương pháp nào là phù hợp nhất để sắp xếp trên danh sách liên kết đơn ? Giải thích ? ", 2, false, "CC4206" },
-                    { 6, "Trình bày sự khác biệt giữa mảng cấp phát bộ nhớ động và mảng cấp phát tĩnh? Khi nào dùng mảng cấp phát động, mảng cấp phát tĩnh ? Cho ví dụ ?", 2, false, "CC4206" }
+                    { 4, "Nhận định nào sau đây KHÔNG ĐÚNG về đệ quy vô hạn?", 2, true, "CC4206" },
+                    { 6, "Trình bày sự khác biệt giữa mảng cấp phát bộ nhớ động và mảng cấp phát tĩnh? Khi nào dùng mảng cấp phát động, mảng cấp phát tĩnh ? Cho ví dụ ?", 2, false, "CC4206" },
+                    { 2, "Một biến được gọi là biến toàn cục nếu:", 1, true, "CC4206" },
+                    { 1, "Những tên biến nào dưới đây được viết đúng theo quy tắc đặt tên của ngôn ngữ lập trình C?", 1, true, "CC4206" },
+                    { 3, "Một biến được gọi là biến cục bộ nếu:", 1, true, "CC4206" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SCORE_TYPE",
+                columns: new[] { "ID", "Name", "Percent", "SubjectID" },
+                values: new object[,]
+                {
+                    { 28, "Điểm kết thúc môn", 0.5f, "DT4208" },
+                    { 22, "Điểm thường xuyên", 0.2f, "DC4106" },
+                    { 23, "Điểm giữa môn", 0.2f, "DC4106" },
+                    { 24, "Điểm kết thúc môn", 0.5f, "DC4106" },
+                    { 25, "Điểm chuyên cần", 0.1f, "DT4208" },
+                    { 26, "Điểm thường xuyên", 0.2f, "DT4208" },
+                    { 27, "Điểm giữa môn", 0.2f, "DT4208" },
+                    { 29, "Điểm chuyên cần", 0.1f, "DT4315" },
+                    { 34, "Điểm thường xuyên", 0.2f, "DT4205" },
+                    { 31, "Điểm giữa môn", 0.2f, "DT4315" },
+                    { 32, "Điểm kết thúc môn", 0.5f, "DT4315" },
+                    { 33, "Điểm chuyên cần", 0.1f, "DT4205" },
+                    { 21, "Điểm chuyên cần", 0.1f, "DC4106" },
+                    { 35, "Điểm giữa môn", 0.2f, "DT4205" },
+                    { 36, "Điểm kết thúc môn", 0.5f, "DT4205" },
+                    { 37, "Điểm chuyên cần", 0.1f, "DT4301" },
+                    { 38, "Điểm thường xuyên", 0.2f, "DT4301" },
+                    { 30, "Điểm thường xuyên", 0.2f, "DT4315" },
+                    { 20, "Điểm kết thúc môn", 0.5f, "DC4204" },
+                    { 16, "Điểm kết thúc môn", 0.5f, "TC4209" },
+                    { 18, "Điểm thường xuyên", 0.2f, "DC4204" },
+                    { 1, "Điểm chuyên cần", 0.1f, "CC4206" },
+                    { 2, "Điểm thường xuyên", 0.2f, "CC4206" },
+                    { 3, "Điểm giữa môn", 0.2f, "CC4206" },
+                    { 4, "Điểm kết thúc môn", 0.5f, "CC4206" },
+                    { 5, "Điểm chuyên cần", 0.1f, "DH4202" },
+                    { 6, "Điểm thường xuyên", 0.2f, "DH4202" },
+                    { 7, "Điểm giữa môn", 0.2f, "DH4202" },
+                    { 8, "Điểm kết thúc môn", 0.5f, "DH4202" },
+                    { 9, "Điểm chuyên cần", 0.1f, "DH4203" },
+                    { 10, "Điểm thường xuyên", 0.2f, "DH4203" },
+                    { 11, "Điểm giữa môn", 0.2f, "DH4203" },
+                    { 12, "Điểm kết thúc môn", 0.5f, "DH4203" },
+                    { 13, "Điểm chuyên cần", 0.1f, "TC4209" },
+                    { 14, "Điểm thường xuyên", 0.2f, "TC4209" },
+                    { 15, "Điểm giữa môn", 0.2f, "TC4209" },
+                    { 39, "Điểm giữa môn", 0.2f, "DT4301" },
+                    { 17, "Điểm chuyên cần", 0.1f, "DC4204" },
+                    { 19, "Điểm giữa môn", 0.2f, "DC4204" },
+                    { 40, "Điểm kết thúc môn", 0.5f, "DT4301" }
                 });
 
             migrationBuilder.InsertData(
@@ -563,6 +666,16 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 column: "QuestionID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CONTEST_SubjectID",
+                table: "CONTEST",
+                column: "SubjectID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EXAM_ContestID",
+                table: "EXAM",
+                column: "ContestID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EXAM_SubjectID",
                 table: "EXAM",
                 column: "SubjectID");
@@ -583,14 +696,19 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 column: "SubjectID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RESULT_ContestID",
+                table: "RESULT",
+                column: "ContestID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RESULT_ExamID",
                 table: "RESULT",
                 column: "ExamID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RESULT_ScoreID",
+                name: "IX_RESULT_ScoreTypeID",
                 table: "RESULT",
-                column: "ScoreID");
+                column: "ScoreTypeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RESULT_StudentAnswerID",
@@ -606,6 +724,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 name: "IX_RESULT_UserID",
                 table: "RESULT",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SCORE_TYPE_SubjectID",
+                table: "SCORE_TYPE",
+                column: "SubjectID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_STUDENT_ANSWER_ExamID",
@@ -633,19 +756,29 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 column: "StudentAnswerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubjectTeacher_AccountId",
-                table: "SubjectTeacher",
-                column: "AccountId");
+                name: "IX_STUDENT_CONTEST_ContestID",
+                table: "STUDENT_CONTEST",
+                column: "ContestID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubjectTeacher_ClassID",
-                table: "SubjectTeacher",
+                name: "IX_STUDENT_CONTEST_ExamID",
+                table: "STUDENT_CONTEST",
+                column: "ExamID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SUBJECT_ACCOUNT_ClassID",
+                table: "SUBJECT_ACCOUNT",
                 column: "ClassID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubjectTeacher_SubjectID",
-                table: "SubjectTeacher",
+                name: "IX_SUBJECT_ACCOUNT_SubjectID",
+                table: "SUBJECT_ACCOUNT",
                 column: "SubjectID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SUBJECT_ACCOUNT_UserID",
+                table: "SUBJECT_ACCOUNT",
+                column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -666,7 +799,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 name: "STUDENT_ANSWER_DETAIL");
 
             migrationBuilder.DropTable(
-                name: "SubjectTeacher");
+                name: "STUDENT_CONTEST");
+
+            migrationBuilder.DropTable(
+                name: "SUBJECT_ACCOUNT");
 
             migrationBuilder.DropTable(
                 name: "USER_CLAIM");
@@ -681,7 +817,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 name: "USER_TOKEN");
 
             migrationBuilder.DropTable(
-                name: "SCORE");
+                name: "SCORE_TYPE");
 
             migrationBuilder.DropTable(
                 name: "ANSWER");
@@ -702,10 +838,13 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 name: "QUESTION_GROUP");
 
             migrationBuilder.DropTable(
-                name: "SUBJECT");
+                name: "CONTEST");
 
             migrationBuilder.DropTable(
                 name: "CLASS");
+
+            migrationBuilder.DropTable(
+                name: "SUBJECT");
         }
     }
 }

@@ -1,11 +1,14 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
+    [Authorize(Policy = Policy.All)]
     [Route("api/[controller]")]
     [ApiController]
     public class QuestionsController : ControllerBase

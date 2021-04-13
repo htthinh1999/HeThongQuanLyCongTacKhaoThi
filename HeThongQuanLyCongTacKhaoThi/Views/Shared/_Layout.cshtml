@@ -1,11 +1,13 @@
-﻿@using System.Security.Claims
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects;
 
-@{
-    string fullName = string.Empty;
+@{ 
+    var subjects = new List<SubjectViewModel>();
     if (User.Identity.Name != null)
     {
-        var claims = User.Identity as ClaimsIdentity;
-        fullName = claims.FindFirst("FullName").Value;
+        var subjectsJson = Context.Session.GetString("AccoutSubjects");
+        subjects = JsonConvert.DeserializeObject<List<SubjectViewModel>>(subjectsJson);
     }
 }
 
@@ -70,14 +72,18 @@
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                        aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fas fa-fw fa-wrench"></i>
-                        <span>Môn học</span>
+                        <span>Danh sách môn học</span>
                     </a>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Quản lý môn học:</h6>
-                            <a class="collapse-item" asp-action="Index" asp-controller="Subject">Danh sách môn học</a>
-                            <a class="collapse-item" asp-action="Create" asp-controller="Subject">Tạo môn học</a>
+                            <h6 class="collapse-header">Danh sách môn học:</h6>
+                            @foreach (var subject in subjects)
+                            {
+                                <a class="collapse-item" asp-action="Details"
+                                                         asp-controller="Subject"
+                                                         asp-all-route-data="@(new Dictionary<string, string> { { "SubjectID", subject.ID } })">@subject.Name</a>
+                            }
                         </div>
                     </div>
                 </li>
@@ -332,7 +338,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">@fullName</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">@Context.Session.GetString("UserFullName")</span>
                                     <img class="img-profile rounded-circle"
                                          src="img/undraw_profile.svg">
                                 </a>
@@ -404,7 +410,7 @@
                 <div class="modal-body">Chọn đăng xuất nếu bạn muốn kết thúc phiên làm việc.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Huỷ</button>
-                    <a class="btn btn-primary" href="/Home/Login">Đăng xuất</a>
+                    <a class="btn btn-primary" href="/Home/Logout">Đăng xuất</a>
                 </div>
             </div>
         </div>

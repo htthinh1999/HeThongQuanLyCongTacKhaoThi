@@ -57,16 +57,10 @@
                                         Tên môn học
                                     </th>
                                     <th>
-                                        Hệ số điểm chuyên cần
+                                        Số lượng tiết học
                                     </th>
                                     <th>
-                                        Hệ số điểm thường xuyên
-                                    </th>
-                                    <th>
-                                        Hệ số điểm giữa môn
-                                    </th>
-                                    <th>
-                                        Hệ số điểm kết thúc môn
+                                        Số lượng đơn vị học trình
                                     </th>
                                     <th>
                                         Hành động
@@ -82,16 +76,10 @@
                                         Tên môn học
                                     </th>
                                     <th>
-                                        Hệ số điểm chuyên cần
+                                        Số lượng tiết học
                                     </th>
                                     <th>
-                                        Hệ số điểm thường xuyên
-                                    </th>
-                                    <th>
-                                        Hệ số điểm giữa môn
-                                    </th>
-                                    <th>
-                                        Hệ số điểm kết thúc môn
+                                        Số lượng đơn vị học trình
                                     </th>
                                     <th>
                                         Hành động
@@ -101,31 +89,25 @@
                             <tbody>
                                 @foreach (var item in Model.Items)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ID)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.AssiduousScorePercent)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.FrequentScorePercent)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.MiddleScorePercent)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.FinalScorePercent)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
-                                            @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }) |
-                                            @Html.ActionLink("Xoá", "Delete", new { id = item.ID })
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LessonCount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreditCount)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
+                                        @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }) |
+                                        @Html.ActionLink("Xoá", "Delete", new { id = item.ID })
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

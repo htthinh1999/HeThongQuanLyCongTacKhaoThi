@@ -1,5 +1,6 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,5 +19,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
         Task<ApiResult<SubjectViewModel>> GetByID(string id);
 
         Task<ApiResult<List<SubjectViewModel>>> GetAll();
+
+        Task<ApiResult<List<SubjectViewModel>>> GetSubjectsByAccountID(Guid accountID);
+
+        Task<ApiResult<bool>> SubjectAssign(string subjectID, SubjectAssignRequest request);
     }
 }

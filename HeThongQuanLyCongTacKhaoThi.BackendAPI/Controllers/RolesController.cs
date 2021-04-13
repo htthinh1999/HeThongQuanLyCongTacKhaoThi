@@ -1,13 +1,14 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.System.Roles;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
+    [Authorize(Policy = Policy.All)]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class RolesController : ControllerBase
     {
         private readonly IRoleService _roleService;

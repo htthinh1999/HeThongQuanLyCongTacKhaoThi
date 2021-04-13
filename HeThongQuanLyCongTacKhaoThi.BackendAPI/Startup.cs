@@ -1,10 +1,13 @@
 using FluentValidation.AspNetCore;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswerDetails;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswers;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Roles;
@@ -20,6 +23,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
@@ -29,6 +33,15 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
 {
     public class Startup
     {
+        public static readonly ILoggerFactory MyLoggerFactory =
+        LoggerFactory.Create(
+            builder =>
+            {
+                builder.AddConsole()
+                       .AddFilter(level => level == LogLevel.Information);
+            }
+        );
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,7 +53,9 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HeThongQuanLyCongTacKhaoThiDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MAIN_CONNECTION_STRING)));
+                    options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MAIN_CONNECTION_STRING))
+                            .UseLoggerFactory(MyLoggerFactory)
+                            .EnableSensitiveDataLogging());
 
             // Add Identity
             services.AddIdentity<Account, RoleAccount>()
@@ -60,6 +75,9 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<IExamService, ExamService>();
             services.AddTransient<IExamDetailService, ExamDetailService>();
             services.AddTransient<ISubjectService, SubjectService>();
+            services.AddTransient<IStudentAnswerService, StudentAnswerService>();
+            services.AddTransient<IStudentAnswerDetailService, StudentAnswerDetailService>();
+            services.AddTransient<IContestService, ContestService>();
 
             // Declare Fluent Validator
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
@@ -125,6 +143,14 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
                     IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                 };
             });
+
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Policy.All,
+                     policy => policy.RequireRole(Roles.Admin, Roles.Teacher, Roles.Student));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

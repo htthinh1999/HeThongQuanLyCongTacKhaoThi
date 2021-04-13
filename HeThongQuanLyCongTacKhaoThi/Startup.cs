@@ -1,6 +1,8 @@
 using FluentValidation.AspNetCore;
 using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,7 +38,8 @@ namespace HeThongQuanLyCongTacKhaoThi
             services.AddControllersWithViews()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
-            services.AddSession(option => option.IdleTimeout = TimeSpan.FromMinutes(30));
+            services.AddSession(option => option.IdleTimeout = TimeSpan.FromMinutes(60));
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddTransient<IAccountApiClient, AccountApiClient>();
@@ -46,6 +49,8 @@ namespace HeThongQuanLyCongTacKhaoThi
             services.AddTransient<IAnswerApiClient, AnswerApiClient>();
             services.AddTransient<IExamApiClient, ExamApiClient>();
             services.AddTransient<ISubjectApiClient, SubjectApiClient>();
+            services.AddTransient<IStudentAnswerApiClient, StudentAnswerApiClient>();
+            services.AddTransient<IContestApiClient, ContestApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -57,6 +62,12 @@ namespace HeThongQuanLyCongTacKhaoThi
                 builder.AddRazorRuntimeCompilation();
             }
 #endif
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Policy.Student,
+                     policy => policy.RequireRole(Roles.Admin, Roles.Student));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

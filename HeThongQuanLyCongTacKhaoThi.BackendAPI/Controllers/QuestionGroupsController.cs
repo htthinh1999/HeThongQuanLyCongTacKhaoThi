@@ -1,9 +1,12 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
+    [Authorize(Policy = Policy.All)]
     [Route("api/[controller]")]
     [ApiController]
     public class QuestionGroupsController : ControllerBase

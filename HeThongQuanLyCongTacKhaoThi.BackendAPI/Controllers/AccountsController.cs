@@ -1,4 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
+    [Authorize(Policy = Policy.All)]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountsController : ControllerBase
@@ -56,6 +58,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -63,6 +66,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPut("{id}/roles")]
         public async Task<IActionResult> RoleAssign(Guid id, [FromBody] RoleAssignRequest request)
         {
@@ -79,13 +83,15 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet("paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetAccountPagingRequest request)
         {
             var result = await _accountService.GetAccountPaging(request);
             return Ok(result);
         }
-
+        
+        [Authorize(Roles = Roles.Admin)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByID(Guid id)
         {

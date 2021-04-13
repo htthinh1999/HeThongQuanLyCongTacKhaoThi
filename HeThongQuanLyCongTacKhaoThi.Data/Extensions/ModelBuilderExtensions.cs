@@ -28,24 +28,69 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
 
             /***************************** SEED SUBJECT *****************************/
             modelBuilder.Entity<Subject>().HasData(
-                new Subject() { ID = "CC4206", Name = "Nhập môn lập trình", CreditCount = 3 },
-                new Subject() { ID = "DH4202", Name = "Kỹ thuật lập trình", CreditCount = 3 },
-                new Subject() { ID = "DH4203", Name = "Cấu trúc dữ liệu & giải thuật", CreditCount = 4 },
-                new Subject() { ID = "TC4209", Name = "Lập trình hướng đối tượng", CreditCount = 4 },
-                new Subject() { ID = "DC4204", Name = "Cơ sở dữ liệu", CreditCount = 4 },
-                new Subject() { ID = "DC4106", Name = "Kiến trúc máy tính", CreditCount = 4 },
-                new Subject() { ID = "DT4208", Name = "Lập trình Java", CreditCount = 4 },
-                new Subject() { ID = "DT4315", Name = "Công nghệ phần mềm", CreditCount = 4 },
-                new Subject() { ID = "DT4205", Name = "SQL Server", CreditCount = 4 },
-                new Subject() { ID = "DT4301", Name = "Mạng máy tính", CreditCount = 4 }
+                new Subject() { ID = "CC4206", Name = "Nhập môn lập trình", LessonCount = 45, CreditCount = 3 },
+                new Subject() { ID = "DH4202", Name = "Kỹ thuật lập trình", LessonCount = 45, CreditCount = 3 },
+                new Subject() { ID = "DH4203", Name = "Cấu trúc dữ liệu & giải thuật", LessonCount = 45, CreditCount = 4 },
+                new Subject() { ID = "TC4209", Name = "Lập trình hướng đối tượng", LessonCount = 45, CreditCount = 4 },
+                new Subject() { ID = "DC4204", Name = "Cơ sở dữ liệu", LessonCount = 45, CreditCount = 4 },
+                new Subject() { ID = "DC4106", Name = "Kiến trúc máy tính", LessonCount = 45, CreditCount = 4 },
+                new Subject() { ID = "DT4208", Name = "Lập trình Java", LessonCount = 45, CreditCount = 4 },
+                new Subject() { ID = "DT4315", Name = "Công nghệ phần mềm", LessonCount = 45, CreditCount = 4 },
+                new Subject() { ID = "DT4205", Name = "SQL Server", LessonCount = 45, CreditCount = 4 },
+                new Subject() { ID = "DT4301", Name = "Mạng máy tính", LessonCount = 45, CreditCount = 4 }
                 );
 
             /***************************** SEED SCORE *****************************/
-            modelBuilder.Entity<Score>().HasData(
-                new Score() { ID = 1, Name = "Điểm chuyên cần" },
-                new Score() { ID = 2, Name = "Điểm thường xuyên" },
-                new Score() { ID = 3, Name = "Điểm giữa môn" },
-                new Score() { ID = 4, Name = "Điểm kết thúc môn" }
+            modelBuilder.Entity<ScoreType>().HasData(
+                new ScoreType() { ID = 1, Name = "Điểm chuyên cần", SubjectID = "CC4206", Percent = 0.1f },
+                new ScoreType() { ID = 2, Name = "Điểm thường xuyên", SubjectID = "CC4206", Percent = 0.2f },
+                new ScoreType() { ID = 3, Name = "Điểm giữa môn", SubjectID = "CC4206", Percent = 0.2f },
+                new ScoreType() { ID = 4, Name = "Điểm kết thúc môn", SubjectID = "CC4206", Percent = 0.5f },
+
+                new ScoreType() { ID = 5, Name = "Điểm chuyên cần", SubjectID = "DH4202", Percent = 0.1f },
+                new ScoreType() { ID = 6, Name = "Điểm thường xuyên", SubjectID = "DH4202", Percent = 0.2f },
+                new ScoreType() { ID = 7, Name = "Điểm giữa môn", SubjectID = "DH4202", Percent = 0.2f },
+                new ScoreType() { ID = 8, Name = "Điểm kết thúc môn", SubjectID = "DH4202", Percent = 0.5f },
+
+                new ScoreType() { ID = 9, Name = "Điểm chuyên cần", SubjectID = "DH4203", Percent = 0.1f },
+                new ScoreType() { ID = 10, Name = "Điểm thường xuyên", SubjectID = "DH4203", Percent = 0.2f },
+                new ScoreType() { ID = 11, Name = "Điểm giữa môn", SubjectID = "DH4203", Percent = 0.2f },
+                new ScoreType() { ID = 12, Name = "Điểm kết thúc môn", SubjectID = "DH4203", Percent = 0.5f },
+
+                new ScoreType() { ID = 13, Name = "Điểm chuyên cần", SubjectID = "TC4209", Percent = 0.1f },
+                new ScoreType() { ID = 14, Name = "Điểm thường xuyên", SubjectID = "TC4209", Percent = 0.2f },
+                new ScoreType() { ID = 15, Name = "Điểm giữa môn", SubjectID = "TC4209", Percent = 0.2f },
+                new ScoreType() { ID = 16, Name = "Điểm kết thúc môn", SubjectID = "TC4209", Percent = 0.5f },
+
+                new ScoreType() { ID = 17, Name = "Điểm chuyên cần", SubjectID = "DC4204", Percent = 0.1f },
+                new ScoreType() { ID = 18, Name = "Điểm thường xuyên", SubjectID = "DC4204", Percent = 0.2f },
+                new ScoreType() { ID = 19, Name = "Điểm giữa môn", SubjectID = "DC4204", Percent = 0.2f },
+                new ScoreType() { ID = 20, Name = "Điểm kết thúc môn", SubjectID = "DC4204", Percent = 0.5f },
+
+                new ScoreType() { ID = 21, Name = "Điểm chuyên cần", SubjectID = "DC4106", Percent = 0.1f },
+                new ScoreType() { ID = 22, Name = "Điểm thường xuyên", SubjectID = "DC4106", Percent = 0.2f },
+                new ScoreType() { ID = 23, Name = "Điểm giữa môn", SubjectID = "DC4106", Percent = 0.2f },
+                new ScoreType() { ID = 24, Name = "Điểm kết thúc môn", SubjectID = "DC4106", Percent = 0.5f },
+
+                new ScoreType() { ID = 25, Name = "Điểm chuyên cần", SubjectID = "DT4208", Percent = 0.1f },
+                new ScoreType() { ID = 26, Name = "Điểm thường xuyên", SubjectID = "DT4208", Percent = 0.2f },
+                new ScoreType() { ID = 27, Name = "Điểm giữa môn", SubjectID = "DT4208", Percent = 0.2f },
+                new ScoreType() { ID = 28, Name = "Điểm kết thúc môn", SubjectID = "DT4208", Percent = 0.5f },
+
+                new ScoreType() { ID = 29, Name = "Điểm chuyên cần", SubjectID = "DT4315", Percent = 0.1f },
+                new ScoreType() { ID = 30, Name = "Điểm thường xuyên", SubjectID = "DT4315", Percent = 0.2f },
+                new ScoreType() { ID = 31, Name = "Điểm giữa môn", SubjectID = "DT4315", Percent = 0.2f },
+                new ScoreType() { ID = 32, Name = "Điểm kết thúc môn", SubjectID = "DT4315", Percent = 0.5f },
+
+                new ScoreType() { ID = 33, Name = "Điểm chuyên cần", SubjectID = "DT4205", Percent = 0.1f },
+                new ScoreType() { ID = 34, Name = "Điểm thường xuyên", SubjectID = "DT4205", Percent = 0.2f },
+                new ScoreType() { ID = 35, Name = "Điểm giữa môn", SubjectID = "DT4205", Percent = 0.2f },
+                new ScoreType() { ID = 36, Name = "Điểm kết thúc môn", SubjectID = "DT4205", Percent = 0.5f },
+
+                new ScoreType() { ID = 37, Name = "Điểm chuyên cần", SubjectID = "DT4301", Percent = 0.1f },
+                new ScoreType() { ID = 38, Name = "Điểm thường xuyên", SubjectID = "DT4301", Percent = 0.2f },
+                new ScoreType() { ID = 39, Name = "Điểm giữa môn", SubjectID = "DT4301", Percent = 0.2f },
+                new ScoreType() { ID = 40, Name = "Điểm kết thúc môn", SubjectID = "DT4301", Percent = 0.5f }
                 );
 
             /***************************** SEED ROLE ACCOUNT *****************************/

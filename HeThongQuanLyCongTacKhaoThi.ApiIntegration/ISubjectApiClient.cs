@@ -15,6 +15,10 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         Task<ApiResult<SubjectViewModel>> GetByID(string id);
 
+        Task<ApiResult<List<SubjectViewModel>>> GetSubjectsByAccountID(Guid accountID);
+
+        Task<ApiResult<bool>> SubjectAssign(string subjectID, SubjectAssignRequest request);
+
         Task<ApiResult<bool>> Create(SubjectCURequest request);
 
         Task<ApiResult<bool>> Update(string id, SubjectCURequest request);

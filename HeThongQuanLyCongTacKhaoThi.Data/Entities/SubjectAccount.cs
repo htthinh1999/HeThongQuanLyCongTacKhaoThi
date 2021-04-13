@@ -2,7 +2,7 @@
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
 {
-    public class SubjectTeacher
+    public class SubjectAccount
     {
         public int ID { get; set; }
         public Guid UserID { get; set; }

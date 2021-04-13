@@ -1,12 +1,15 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
+    [Authorize(Policy = Policy.All)]
     [Route("api/[controller]")]
     [ApiController]
     public class ExamsController : ControllerBase
@@ -64,6 +67,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
                     Name = request.Name,
                     MultipleChoiceQuestionCount = request.MultipleChoiceQuestionCount,
                     EssayQuestionCount = request.EssayQuestionCount,
+                    ContestID = request.ContestID,
                     SubjectID = request.SubjectID,
                     QuestionGroups = request.QuestionGroups.ToList()
                 };
@@ -82,6 +86,13 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             await _examDetailService.DeleteAllQuestionsByExamID(id);
 
             var result = await _examService.Delete(id);
+            return Ok(result);
+        }
+
+        [HttpGet("contests/{contestID}")]
+        public async Task<IActionResult> GetAllExamsByContestID(int contestID)
+        {
+            var result = await _examService.GetAllExamsByContestID(contestID);
             return Ok(result);
         }
     }
