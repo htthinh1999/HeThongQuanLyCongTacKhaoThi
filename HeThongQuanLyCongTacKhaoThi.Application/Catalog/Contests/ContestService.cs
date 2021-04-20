@@ -25,7 +25,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
             var contest = new Contest()
             {
                 Name = request.Name,
-                SubjectID = request.SubjectID
+                SubjectID = request.SubjectID,
+                ScoreTypeID = request.ScoreTypeID
             };
 
             _context.Contests.Add(contest);
@@ -46,6 +47,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
 
             contest.Name = request.Name;
             contest.SubjectID = request.SubjectID;
+            contest.ScoreTypeID = request.ScoreTypeID;
 
             _context.Entry(contest).State = EntityState.Modified;
             var result = await _context.SaveChangesAsync();
@@ -80,7 +82,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
             {
                 ID = id,
                 Name = contest.Name,
-                SubjectID = contest.SubjectID
+                SubjectID = contest.SubjectID,
+                ScoreTypeID = contest.ScoreTypeID
             };
 
             return new ApiSuccessResult<ContestViewModel>(contestViewModel);
@@ -92,7 +95,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
                                                   {
                                                       ID = x.ID,
                                                       Name = x.Name,
-                                                      SubjectID = x.SubjectID
+                                                      SubjectID = x.SubjectID,
+                                                      ScoreTypeID = x.ScoreTypeID
                                                   }).ToListAsync();
 
             return new ApiSuccessResult<List<ContestViewModel>>(contests);
@@ -117,14 +121,18 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
             {
                 query = _context.Contests.Where(c => c.Name.Contains(request.Keyword));
             }
-            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+
+            var data = await query.Join(_context.ScoreTypes, c=>c.ScoreTypeID, st=>st.ID, (c, st) => new { c, st })
+                .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .AsNoTracking()
                 .Select(x => new ContestViewModel()
                 {
-                    ID = x.ID,
-                    Name = x.Name,
-                    SubjectID = x.SubjectID
+                    ID = x.c.ID,
+                    Name = x.c.Name,
+                    SubjectID = x.c.SubjectID,
+                    ScoreTypeID = x.c.ScoreTypeID,
+                    ScoreTypeName = x.st.Name
                 }).ToListAsync();
             var totalRow = await query.CountAsync();
             var pagedResult = new PagedResult<ContestViewModel>()
@@ -156,6 +164,37 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
             }
 
             return new ApiSuccessResult<string>(result.SubjectID);
+        }
+
+        public async Task<ApiResult<List<ContestViewModel>>> GetAllContestsDidNotJoin(Guid accountID, string subjectID)
+        {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            var contests = await (from c in _context.Contests
+                                  where !_context.Results.Any(x => x.ContestID == c.ID && x.UserID == accountID) && c.SubjectID == subjectID
+                                  select new ContestViewModel()
+                                  {
+                                      ID = c.ID,
+                                      Name = c.Name
+                                  }).ToListAsync();
+
+            return new ApiSuccessResult<List<ContestViewModel>>(contests);
+        }
+
+        public async Task<ApiResult<List<ContestViewModel>>> GetAllContestsWasJoined(Guid accountID, string subjectID)
+        {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            var contests = await (from rs in _context.Results
+                                  join c in _context.Contests on rs.ContestID equals c.ID
+                                  where rs.UserID == accountID && rs.SubjectID == subjectID
+                                  select new ContestViewModel()
+                                  {
+                                      ID = c.ID,
+                                      Name = c.Name
+                                  }).ToListAsync();
+
+            return new ApiSuccessResult<List<ContestViewModel>>(contests);
         }
 
     }

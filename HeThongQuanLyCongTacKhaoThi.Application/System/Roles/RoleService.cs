@@ -10,9 +10,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Roles
 {
     public class RoleService : IRoleService
     {
-        private readonly RoleManager<RoleAccount> _roleManager;
+        private readonly RoleManager<Role> _roleManager;
 
-        public RoleService(RoleManager<RoleAccount> roleManager)
+        public RoleService(RoleManager<Role> roleManager)
         {
             _roleManager = roleManager;
         }

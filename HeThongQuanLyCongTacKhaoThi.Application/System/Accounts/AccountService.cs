@@ -18,10 +18,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
     {
         private readonly UserManager<Account> _userManager;
         private readonly SignInManager<Account> _signInManager;
-        private readonly RoleManager<RoleAccount> _roleManager;
+        private readonly RoleManager<Role> _roleManager;
         private readonly IConfiguration _configuration;
 
-        public AccountService(UserManager<Account> userManager, SignInManager<Account> signInManager, RoleManager<RoleAccount> roleManager, IConfiguration configuration)
+        public AccountService(UserManager<Account> userManager, SignInManager<Account> signInManager, RoleManager<Role> roleManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -147,5 +147,31 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
             return contests;
         }
+
+        public async Task<ApiResult<List<ContestViewModel>>> GetAllContestsWasJoined(Guid accountID, string subjectID)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/contests/get-all-was-joined?accountID={accountID}&subjectID={subjectID}");
+            var body = await response.Content.ReadAsStringAsync();
+            var contests = JsonConvert.DeserializeObject<ApiSuccessResult<List<ContestViewModel>>>(body);
+
+            return contests;
+        }
+
+        public async Task<ApiResult<List<ContestViewModel>>> GetAllContestsDidNotJoin(Guid accountID, string subjectID)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/contests/get-all-did-not-join?accountID={accountID}&subjectID={subjectID}");
+            var body = await response.Content.ReadAsStringAsync();
+            var contests = JsonConvert.DeserializeObject<ApiSuccessResult<List<ContestViewModel>>>(body);
+
+            return contests;
+        }
     }
 }

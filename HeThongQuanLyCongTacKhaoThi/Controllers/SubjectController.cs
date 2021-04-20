@@ -1,6 +1,8 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Contests;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,18 +26,27 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string subjectID)
         {
-            var getContestsBySubjectID = await _contestApiClient.GetAllContestsBySubjectID(subjectID);
-            if (!getContestsBySubjectID.IsSuccessed)
+            var currentAccountID = new Guid(HttpContext.Session.GetString("UserID"));
+
+            var getContestsDidNotJoin = await _contestApiClient.GetAllContestsDidNotJoin(currentAccountID, subjectID);
+            if (!getContestsDidNotJoin.IsSuccessed)
             {
-                return BadRequest(getContestsBySubjectID.Message);
+                return BadRequest(getContestsDidNotJoin.Message);
+            }
+
+            var getContestsWasJoined = await _contestApiClient.GetAllContestsWasJoined(currentAccountID, subjectID);
+            if (!getContestsWasJoined.IsSuccessed)
+            {
+                return BadRequest(getContestsWasJoined.Message);
             }
 
             var getSubject = await _subjectApiClient.GetByID(subjectID);
             ViewData["SubjectName"] = getSubject.ResultObj.Name;
 
-            return View(getContestsBySubjectID.ResultObj);
-        }
+            var list2Contests = new Tuple<List<ContestViewModel>, List<ContestViewModel>>(getContestsDidNotJoin.ResultObj, getContestsWasJoined.ResultObj);
 
+            return View(list2Contests);
+        }
 
     }
 }

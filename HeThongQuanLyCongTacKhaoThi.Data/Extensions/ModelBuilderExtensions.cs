@@ -96,7 +96,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
             /***************************** SEED ROLE ACCOUNT *****************************/
             // Admin Role
             Guid ADMIN_ROLE_ID = new Guid("61A4FAD5-402C-4CE0-845D-1FBD2B91956F");
-            modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
+            modelBuilder.Entity<Role>().HasData(new Role
             {
                 Id = ADMIN_ROLE_ID,
                 Name = "Admin",
@@ -107,7 +107,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
             // Teacher Role
             Guid TEACHER_ROLE_ID = new Guid("1E6D489F-1DF4-4DAB-B873-CE3224D87F94");
 
-            modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
+            modelBuilder.Entity<Role>().HasData(new Role
             {
                 Id = TEACHER_ROLE_ID,
                 Name = "Teacher",
@@ -118,7 +118,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Extensions
             // Student Role
             Guid STUDENT_ROLE_ID = new Guid("9A34BDD4-FA97-4E2F-9960-B19A68826BE9");
 
-            modelBuilder.Entity<RoleAccount>().HasData(new RoleAccount
+            modelBuilder.Entity<Role>().HasData(new Role
             {
                 Id = STUDENT_ROLE_ID,
                 Name = "Student",

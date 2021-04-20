@@ -6,6 +6,8 @@ using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ScoreTypes;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswerDetails;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswers;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects;
@@ -58,7 +60,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
                             .EnableSensitiveDataLogging());
 
             // Add Identity
-            services.AddIdentity<Account, RoleAccount>()
+            services.AddIdentity<Account, Role>()
                 .AddEntityFrameworkStores<HeThongQuanLyCongTacKhaoThiDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -66,7 +68,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<IClassService, ClassService>();
             services.AddTransient<UserManager<Account>, UserManager<Account>>();
             services.AddTransient<SignInManager<Account>, SignInManager<Account>>();
-            services.AddTransient<RoleManager<RoleAccount>, RoleManager<RoleAccount>>();
+            services.AddTransient<RoleManager<Role>, RoleManager<Role>>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IQuestionService, QuestionService>();
@@ -78,6 +80,8 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<IStudentAnswerService, StudentAnswerService>();
             services.AddTransient<IStudentAnswerDetailService, StudentAnswerDetailService>();
             services.AddTransient<IContestService, ContestService>();
+            services.AddTransient<IScoreTypeService, ScoreTypeService>();
+            services.AddTransient<IResultService, ResultService>();
 
             // Declare Fluent Validator
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();

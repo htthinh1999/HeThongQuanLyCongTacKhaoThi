@@ -104,25 +104,22 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions
                 IsMultipleChoice = question.IsMultipleChoice
             };
 
-            // Get all answer of question if question is multiple choice
-            if (questionViewModel.IsMultipleChoice)
-            {
-                var answers = from q in _context.Questions
-                              join a in _context.Answers on q.ID equals a.QuestionID
-                              where q.ID == id
-                              select a;
+            // Get all answer of question
+            var answers = from q in _context.Questions
+                          join a in _context.Answers on q.ID equals a.QuestionID
+                          where q.ID == id
+                          select a;
 
-                foreach (var ans in answers)
+            foreach (var ans in answers)
+            {
+                var answer = new AnswerCURequest()
                 {
-                    var answer = new AnswerCURequest()
-                    {
-                        ID = ans.ID,
-                        QuestionID = ans.QuestionID,
-                        Content = ans.Content,
-                        IsCorrect = ans.IsCorrect
-                    };
-                    questionViewModel.Answers.Add(answer);
-                }
+                    ID = ans.ID,
+                    QuestionID = ans.QuestionID,
+                    Content = ans.Content,
+                    IsCorrect = ans.IsCorrect
+                };
+                questionViewModel.Answers.Add(answer);
             }
 
             return new ApiSuccessResult<QuestionViewModel>(questionViewModel);

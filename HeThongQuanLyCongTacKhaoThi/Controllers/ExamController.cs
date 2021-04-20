@@ -1,6 +1,7 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Results;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.StudentAnswers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -17,14 +18,16 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
     {
         private readonly IExamApiClient _examApiClient;
         private readonly IStudentAnswerApiClient _studentAnswerApiClient;
+        private readonly IResultApiClient _resultApiClient;
 
         // List to store all question ids of exam
         private static List<int> questionIDs = new List<int>();
 
-        public ExamController(IExamApiClient examApiClient, IStudentAnswerApiClient studentAnswerApiClient)
+        public ExamController(IExamApiClient examApiClient, IStudentAnswerApiClient studentAnswerApiClient, IResultApiClient resultApiClient)
         {
             _examApiClient = examApiClient;
             _studentAnswerApiClient = studentAnswerApiClient;
+            _resultApiClient = resultApiClient;
         }
 
         [HttpGet]
@@ -84,12 +87,35 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
             }
 
             var result = await _studentAnswerApiClient.Create(studentAnswerCreateRequest);
+
+            await _resultApiClient.Create(new ResultCURequest()
+            {
+                UserID = currentAccountID,
+                ExamID = examViewModel.ID,
+                SubjectID = examViewModel.SubjectID,
+                StudentAnswerID = result.ResultObj,
+                ContestID = examViewModel.ContestID
+            });
+
             if (!result.IsSuccessed)
             {
                 return BadRequest("Lỗi tạo đáp án học viên");
             }
 
-            return RedirectToAction("Details", "Subject", new { SubjectID = examViewModel.SubjectID });
+            return RedirectToAction("Details", "Subject", new { subjectID = examViewModel.SubjectID });
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetResult(int contestID)
+        {
+            var currentAccountID = new Guid(HttpContext.Session.GetString("UserID"));
+
+            var getExamResult = await _resultApiClient.GetExamResult(currentAccountID, contestID);
+
+            var examResult = getExamResult.ResultObj;
+
+            return View(examResult);
         }
     }
 }

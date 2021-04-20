@@ -13,6 +13,10 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         Task<ApiResult<List<ContestViewModel>>> GetAllContestsBySubjectID(string subjectID);
 
+        Task<ApiResult<List<ContestViewModel>>> GetAllContestsWasJoined(Guid accountID, string subjectID);
+
+        Task<ApiResult<List<ContestViewModel>>> GetAllContestsDidNotJoin(Guid accountID, string subjectID);
+
         Task<ApiResult<string>> GetSubjectIDByContestID(int contestID);
 
         Task<ApiResult<PagedResult<ContestViewModel>>> GetContestPaging(GetContestPagingRequest request);

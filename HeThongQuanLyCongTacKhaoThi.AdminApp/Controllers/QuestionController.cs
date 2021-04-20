@@ -3,8 +3,12 @@ using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,11 +17,13 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
     [Authorize(Policy = Policy.Manager)]
     public class QuestionController : Controller
     {
+        private readonly IWebHostEnvironment _environment;
         private readonly IQuestionApiClient _questionApiClient;
 
-        public QuestionController(IQuestionApiClient questionApiClient)
+        public QuestionController(IQuestionApiClient questionApiClient, IWebHostEnvironment environment)
         {
             _questionApiClient = questionApiClient;
+            _environment = environment;
         }
 
         public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 5)
@@ -41,7 +47,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(QuestionCURequest request, List<AnswerCURequest> answerCreateUpdateRequests)
+        public async Task<IActionResult> Create(QuestionCURequest request, List<AnswerCURequest> answerCreateUpdateRequests, IFormFile ImageAnswer)
         {
             if (!ModelState.IsValid)
             {
@@ -68,6 +74,23 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             }
 
             request.Answers = answerCreateUpdateRequests.ToList();
+
+            // Check ImageAnswer Input
+            if (ImageAnswer != null)
+            {
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(ImageAnswer.FileName)}";
+                var file = Path.Combine(_environment.ContentRootPath, "images", fileName);
+                using (var fileStream = new FileStream(file, FileMode.Create))
+                {
+                    await ImageAnswer.CopyToAsync(fileStream);
+                }
+                request.Answers.Add(new AnswerCURequest()
+                {
+                    Content = $"/images/{fileName}",
+                    IsCorrect = true
+                });
+            }
+
             var result = await _questionApiClient.Create(request);
             if (result.IsSuccessed)
             {
@@ -102,7 +125,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(QuestionCURequest request, List<AnswerCURequest> Answers)
+        public async Task<IActionResult> Edit(QuestionCURequest request, List<AnswerCURequest> Answers, IFormFile ImageAnswer)
         {
             if (!ModelState.IsValid)
             {
@@ -129,6 +152,23 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             }
 
             request.Answers = Answers.ToList();
+
+            // Check ImageAnswer Input
+            if (ImageAnswer != null)
+            {
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(ImageAnswer.FileName)}";
+                var file = Path.Combine(_environment.ContentRootPath, "images", fileName);
+                using (var fileStream = new FileStream(file, FileMode.Create))
+                {
+                    await ImageAnswer.CopyToAsync(fileStream);
+                }
+                request.Answers.Add(new AnswerCURequest()
+                {
+                    Content = $"/images/{fileName}",
+                    IsCorrect = true
+                });
+            }
+
             var result = await _questionApiClient.Update(request.ID, request);
             if (!result.IsSuccessed)
             {

@@ -215,8 +215,9 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             var accountPrincipal = ValidateToken(result.ResultObj);
             var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(90),
-                IsPersistent = true
+                ExpiresUtc = DateTimeOffset.UtcNow.AddHours(2),
+                IsPersistent = true,
+                AllowRefresh = true
             };
 
             HttpContext.Session.SetString("Token", result.ResultObj);

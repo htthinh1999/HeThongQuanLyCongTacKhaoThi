@@ -38,6 +38,20 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("get-all-was-joined")]
+        public async Task<IActionResult> GetAllContestsWasJoined([FromQuery] Guid accountID, [FromQuery] string subjectID)
+        {
+            var result = await _contestService.GetAllContestsWasJoined(accountID, subjectID);
+            return Ok(result);
+        }
+
+        [HttpGet("get-all-did-not-join")]
+        public async Task<IActionResult> GetAllContestsDidNotJoin([FromQuery] Guid accountID, [FromQuery] string subjectID)
+        {
+            var result = await _contestService.GetAllContestsDidNotJoin(accountID, subjectID);
+            return Ok(result);
+        }
+
         [HttpGet("paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetContestPagingRequest request)
         {

@@ -27,5 +27,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
         Task<ApiResult<ContestViewModel>> GetByID(int id);
 
         Task<ApiResult<bool>> ContestWasUsedInExam(int id);
+
+        Task<ApiResult<List<ContestViewModel>>> GetAllContestsDidNotJoin(Guid accountID, string subjectID);
+
+        Task<ApiResult<List<ContestViewModel>>> GetAllContestsWasJoined(Guid accountID, string subjectID);
     }
 }

@@ -43,7 +43,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 
             var result = await _questionService.Create(request);
 
-            if (result.IsSuccessed && request.IsMultipleChoice)
+            if (result.IsSuccessed)
             {
                 foreach (var ans in request.Answers)
                 {
@@ -89,16 +89,13 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             // Remove all old answers
             await _answerService.DeleteAllAnswersByQuestionID(id);
 
-            if (request.IsMultipleChoice)
+            // Create answers was updated
+            foreach (var ans in request.Answers)
             {
-                // Create answers was updated
-                foreach (var ans in request.Answers)
+                if (!string.IsNullOrEmpty(ans.Content))
                 {
-                    if (!string.IsNullOrEmpty(ans.Content))
-                    {
-                        ans.QuestionID = id;
-                        await _answerService.Create(ans);
-                    }
+                    ans.QuestionID = id;
+                    await _answerService.Create(ans);
                 }
             }
 

@@ -1,0 +1,19 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams.ExamResultViewModel
+@{
+    ViewData["Title"] = "Kết quả kiểm tra " + Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Kết quả kiểm tra @Model.Name</h1>
+</div>
+
+<div>
+    <h4>Chi tiết kết quả đề thi</h4>
+    <div class="row">
+        @foreach (var studentAnswerDetail in Model.studentAnswerDetails)
+        {
+            @await Html.PartialAsync("_QuestionResultDetail", studentAnswerDetail);
+        }
+    </div>
+</div>

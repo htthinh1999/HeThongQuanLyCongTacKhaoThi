@@ -15,6 +15,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
             builder.Property(x => x.AnswerID).HasDefaultValue();
             builder.Property(x => x.EssayPath).HasDefaultValue();
             builder.Property(x => x.StudentAnswerContent).HasDefaultValue();
+            builder.Property(x => x.Teacher1Comment).IsRequired();
+            builder.Property(x => x.Teacher2Comment).IsRequired();
 
             builder.HasOne(x => x.StudentAnswer).WithMany(sa => sa.StudentAnswerDetails).HasForeignKey(x => x.StudentAnswerID);
             builder.HasOne(x => x.Question).WithMany(sa => sa.StudentAnswerDetails).HasForeignKey(x => x.QuestionID).OnDelete(DeleteBehavior.NoAction);

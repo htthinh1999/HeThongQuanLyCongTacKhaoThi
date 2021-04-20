@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp
 {
@@ -49,6 +51,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             services.AddTransient<IExamApiClient, ExamApiClient>();
             services.AddTransient<ISubjectApiClient, SubjectApiClient>();
             services.AddTransient<IContestApiClient, ContestApiClient>();
+            services.AddTransient<IScoreTypeApiClient, ScoreTypeApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -84,6 +87,12 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "images")),
+                RequestPath = "/images"
+            });
 
             app.UseAuthentication();
 

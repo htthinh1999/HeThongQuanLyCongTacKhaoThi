@@ -42,7 +42,7 @@
             for (int i = 0; i < Model.Answers.Count; i++)
             {
                 <dt class="col-sm-2">
-                    Nội dung đáp án thứ @(i+1)
+                    Nội dung đáp án thứ @(i + 1)
                 </dt>
                 <dd class="col-sm-10">
                     @Model.Answers[i].Content
@@ -57,10 +57,27 @@
                 Đáp án đúng
             </dt>
             <dd class="col-sm-10">
-                Đáp án thứ @(correctAnswers[0]+1)
+                Đáp án thứ @(correctAnswers[0] + 1)
                 @for (int i = 1; i < correctAnswers.Count; i++)
                 {
-                    <span>, đáp án thứ @(correctAnswers[i]+1)</span>
+                    <span>, đáp án thứ @(correctAnswers[i] + 1)</span>
+                }
+            </dd>
+        }
+        else
+        {
+
+            <dt class="col-sm-2">
+                Đáp án câu hỏi
+            </dt>
+            <dd class="col-sm-10">
+                @if (Model.Answers[0].Content.Contains("/images/"))
+                {
+                    <img src="@Model.Answers[0].Content" alt="Đáp án câu hỏi" />
+                }
+                else
+                {
+                    @Model.Answers[0].Content
                 }
             </dd>
         }

@@ -15,11 +15,13 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
     {
         private readonly IContestApiClient _contestApiClient;
         private readonly ISubjectApiClient _subjectApiClient;
+        private readonly IScoreTypeApiClient _scoreTypeApiClient;
 
-        public ContestController(IContestApiClient contestApiClient, ISubjectApiClient subjectApiClient)
+        public ContestController(IContestApiClient contestApiClient, ISubjectApiClient subjectApiClient, IScoreTypeApiClient scoreTypeApiClient)
         {
             _contestApiClient = contestApiClient;
             _subjectApiClient = subjectApiClient;
+            _scoreTypeApiClient = scoreTypeApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 5)
@@ -45,6 +47,11 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             var subjects = getSubjects.ResultObj;
             request.Subjects = subjects.ToList();
 
+            // Get score types
+            var getScoreTypes = await _scoreTypeApiClient.GetAllBySubjectID(subjects[0].ID);
+            var scoreTypes = getScoreTypes.ResultObj;
+            request.ScoreTypes = scoreTypes.ToList();
+
             return View(request);
         }
 
@@ -63,7 +70,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", result.Message);
+            ModelState.AddModelError("", result.Message); 
             return View(request);
         }
 
@@ -73,18 +80,24 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             var result = await _contestApiClient.GetByID(id);
             if (result.IsSuccessed)
             {
-                var exam = result.ResultObj;
+                var contest = result.ResultObj;
                 var updateResquest = new ContestCURequest()
                 {
-                    ID = exam.ID,
-                    Name = exam.Name,
-                    SubjectID = exam.SubjectID
+                    ID = contest.ID,
+                    Name = contest.Name,
+                    SubjectID = contest.SubjectID,
+                    ScoreTypeID = contest.ScoreTypeID
                 };
 
                 // Get subjects
                 var getSubjects = await _subjectApiClient.GetAll();
                 var subjects = getSubjects.ResultObj;
                 updateResquest.Subjects = subjects.ToList();
+
+                // Get score types
+                var getScoreTypes = await _scoreTypeApiClient.GetAllBySubjectID(updateResquest.SubjectID);
+                var scoreTypes = getScoreTypes.ResultObj;
+                updateResquest.ScoreTypes = scoreTypes.ToList();
 
                 return View(updateResquest);
             }

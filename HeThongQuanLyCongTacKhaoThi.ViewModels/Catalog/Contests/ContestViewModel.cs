@@ -14,6 +14,10 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Contests
         public string Name { get; set; }
         [DisplayName("Mã môn học")]
         public string SubjectID { get; set; }
+        [DisplayName("Mã loại điểm")]
+        public int ScoreTypeID { get; set; }
+        [DisplayName("Loại điểm")]
+        public string ScoreTypeName { get; set; }
 
         public List<ExamViewModel> Exams { get; set; }
     }

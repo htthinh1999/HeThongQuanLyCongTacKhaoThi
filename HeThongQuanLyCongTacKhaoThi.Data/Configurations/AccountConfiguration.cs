@@ -8,7 +8,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Account> builder)
         {
-            builder.ToTable("Account");
+            builder.ToTable("ACCOUNT");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Student_TeacherID).IsRequired(false).HasMaxLength(10);
             builder.Property(x => x.Name).IsRequired().IsUnicode().HasMaxLength(50);

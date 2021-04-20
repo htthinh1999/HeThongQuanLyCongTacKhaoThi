@@ -172,20 +172,22 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
         {
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
-            var query = _context.Exams.Where(q => q.Name.Contains(""));
+            var query = _context.Exams.Join(_context.Contests, e => e.ContestID, c => c.ID, (e, c) => new { e, c }).Where(x => x.e.Name.Contains(""));
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = _context.Exams.Where(q => q.Name.Contains(request.Keyword));
+                query = query.Where(x => x.e.Name.Contains(request.Keyword) || x.c.Name.Contains(request.Keyword));
             }
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .AsNoTracking()
                 .Select(x => new ExamViewModel()
                 {
-                    ID = x.ID,
-                    ContestID = x.ContestID,
-                    SubjectID = x.SubjectID,
-                    Name = x.Name
+                    ID = x.e.ID,
+                    ContestID = x.c.ID,
+                    ContestName = x.c.Name,
+                    SubjectID = x.e.SubjectID,
+                    Name = x.e.Name,
+                    
                 }).ToListAsync();
             var totalRow = await query.CountAsync();
             var pagedResult = new PagedResult<ExamViewModel>()

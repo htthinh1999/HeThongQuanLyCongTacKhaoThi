@@ -11,6 +11,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
 
         public Subject Subject { get; set; }
 
-        public List<Result> Results { get; set; }
+        public List<Contest> Contests { get; set; }
     }
 }

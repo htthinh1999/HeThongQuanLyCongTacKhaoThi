@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="Create">
+        <form enctype="multipart/form-data" asp-action="Create">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="SubjectID" class="control-label"></label>
@@ -28,26 +28,21 @@
                 <textarea asp-for="Content" rows="5" class="form-control"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            @*<div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsMultipleChoice" /> @Html.DisplayNameFor(model => model.IsMultipleChoice)
                 </label>
+            </div>*@
+            <div class="custom-control custom-switch mb-2">
+                <input type="checkbox" class="custom-control-input" asp-for="IsMultipleChoice">
+                <label class="custom-control-label" for="IsMultipleChoice">@Html.DisplayNameFor(model => model.IsMultipleChoice)</label>
             </div>
             <div class="form-group" id="AnswerCountDiv">
                 <label class="control-label">Số lượng đáp án</label>
                 <input class="form-control" id="AnswerCount" type="number" value="2" min="2" max="6" />
             </div>
             <div id="answers">
-                @for (int i = 0; i < 2; i++)
-                {
-                <div class='form-group'>
-                    <label class='control-label'> Nội dung đáp án thứ @(i + 1)</label>
-                    <div class='row mx-0'>
-                        <input class='col-md-11 form-control' type='text' name='answerCreateUpdateRequests[@i].Content' value=''>
-                        <input class='col-md-1 form-check-input position-static mx-0 mt-auto mb-auto' type='checkbox' data-val='true' name='answerCreateUpdateRequests[@i].IsCorrect' value='true'>
-                    </div>
-                </div>
-                }
+
             </div>
             <div class="form-group">
                 <input type="submit" value="Tạo câu hỏi" class="btn btn-primary" /> |
@@ -63,37 +58,93 @@
     <script>
         $(document).ready(function () {
 
-            $("#AnswerCount").change(function () {
+            var createAnswers = function (x) {
                 $("#answers").empty();
 
-                var answerCount = $(this).val();
-                for (var i = 0; i < answerCount; i++) {
+                // Show answer of essay question
+                if (x == 1) {
                     var answer =
                         "<div class='form-group'>" +
+                            "<div class='form-group-inline row'>" + 
+                                "<label class='control-label col-lg-3' for='Content'>Nội dung đáp án</label>" +
+                                "<div class='custom-control-inline align-right custom-switch col-lg-8 ml-3'>" +
+                                    "<input type='checkbox' class='custom-control-input' id='ImageInput' />" +
+                                    "<label class='custom-control-label' for='ImageInput'>Hình ảnh</label>" +
+                                "</div>" +
+                            "</div>" +
+                            "<div id='answer-content'>" +
+                            "<textarea rows='5' class='form-control' data-val='true' data-val-required='Nội dung đáp án là bắt buộc' id='answerCreateUpdateRequests[0].Content' name='answerCreateUpdateRequests[0].Content'></textarea>" +
+                            "<span class='text-danger field-validation-valid' data-valmsg-for='answerCreateUpdateRequests[0].Content' data-valmsg-replace='true'></span>" +
+                            "</div>" +
+                        "</div>"
+                    $("#answers").append(answer);
+
+                    // Update when image input was chosen
+                    $("#ImageInput").change(function () {
+                        $("#answer-content").empty();
+                        if (this.checked) {
+                            var imageInput = "<div class='custom-file'>" +
+                                "<input type='file' class='custom-file-input' id='ImageAnswer' name='ImageAnswer' />" +
+                                "<label class='custom-file-label' for='ImageAnswer'>Chọn hình ảnh</label>" +
+                                "</div>";
+                            $("#answer-content").append(imageInput);
+
+                            $(".custom-file-input").on("change", function () {
+                                var fileName = $(this).val().split("\\").pop();
+                                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                            });
+                        }
+                        else {
+                            var textInput = "<textarea rows='5' class='form-control' data-val='true' data-val-required='Nội dung đáp án là bắt buộc' id='answerCreateUpdateRequests[0].Content' name='answerCreateUpdateRequests[0].Content'></textarea>" +
+                                "<span class='text-danger field-validation-valid' data-valmsg-for='answerCreateUpdateRequests[0].Content' data-valmsg-replace='true'></span>" +
+                                "<input type='hidden' data-val='true' name='answerCreateUpdateRequests[0].IsCorrect' value='true' checked>";
+                            $("#answer-content").append(textInput);
+                        }
+                    });
+                }
+                else // Show answer of multiple choice question
+                {
+                    for (var i = 0; i < x; i++) {
+                        var answer =
+                            "<div class='form-group'>" +
                             "<label class='control-label'> Nội dung đáp án thứ " + (i + 1) + "</label>" +
                             "<div class='row mx-0'>" +
-                                "<input class='col-md-11 form-control' type='text' name='answerCreateUpdateRequests[" + i + "].Content' value=''>" +
-                                "<input class='col-md-1 form-check-input position-static mx-0 mt-auto mb-auto' type='checkbox' data-val='true' name='answerCreateUpdateRequests[" + i + "].IsCorrect' value='true'>" +
+                            "<input class='col-md-11 form-control' type='text' name='answerCreateUpdateRequests[" + i + "].Content' value=''>" +
+                            "<input class='col-md-1 form-check-input position-static mx-0 mt-auto mb-auto' type='checkbox' data-val='true' name='answerCreateUpdateRequests[" + i + "].IsCorrect' value='true'>" +
                             "</div>" +
-                        "</div>";
-                    $("#answers").append(answer);
+                            "</div>";
+                        $("#answers").append(answer);
+                    }
                 }
+            }
 
+            // Update when change answer count
+            $("#AnswerCount").change(function () {
+                var answerCount = $(this).val();
+                createAnswers(answerCount);
             });
 
+            // Update when change question type
             if (!$("#IsMultipleChoice").prop("checked")) {
                 $("#AnswerCountDiv").hide();
-                $("#answers").hide();
+                createAnswers(1);
             }
+
             $("#IsMultipleChoice").change(function () {
                 if (this.checked) {
                     $("#AnswerCountDiv").show();
-                    $("#answers").show();
-                } else {
+                    var answerCount = $("#AnswerCount").val();
+                    createAnswers(answerCount);
+                }
+                else
+                {
                     $("#AnswerCountDiv").hide();
-                    $("#answers").hide();
+                    createAnswers(1);
                 }
             });
+
+
+
         });
     </script>
 }

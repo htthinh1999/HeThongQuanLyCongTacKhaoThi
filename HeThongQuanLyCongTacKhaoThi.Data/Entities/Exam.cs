@@ -15,7 +15,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
         public List<ExamDetail> ExamDetails { get; set; }
         public List<StudentAnswer> StudentAnswers { get; set; }
         public List<Result> Results { get; set; }
-        public List<StudentContest> StudentContests { get; set; }
 
     }
 }

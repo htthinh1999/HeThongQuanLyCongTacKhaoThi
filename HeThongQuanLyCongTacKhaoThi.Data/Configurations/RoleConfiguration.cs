@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
 {
-    public class RoleAccountConfiguration : IEntityTypeConfiguration<RoleAccount>
+    public class RoleConfiguration : IEntityTypeConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<RoleAccount> builder)
+        public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.ToTable("RoleAccount");
+            builder.ToTable("ROLE");
+
             builder.Property(x => x.Description).IsRequired().IsUnicode().HasMaxLength(100);
         }
     }

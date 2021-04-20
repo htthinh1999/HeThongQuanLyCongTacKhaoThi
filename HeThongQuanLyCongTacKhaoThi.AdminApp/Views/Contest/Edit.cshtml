@@ -24,9 +24,27 @@
                 </select>
             </div>
             <div class="form-group">
+                <label class="control-label">Loại điểm</label>
+                <select asp-for="ScoreTypeID" class="form-control" asp-items="@(new SelectList(Model.ScoreTypes, "ID", "Name"))">
+                </select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Lưu" class="btn btn-primary" /> |
                 <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách kỳ kiểm tra</a>
             </div>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $('#SubjectID').on('change', function () {
+            var url = '@Url.Action("GetAllBySubjectID", "ScoreType")?subjectID=' + $(this).val();
+            $.get(url, function (data) {
+                var parentDiv = $("#ScoreTypeID").parent();
+                $("#ScoreTypeID").remove();
+                parentDiv.append(data);
+            });
+        });
+    </script>
+}

@@ -13,6 +13,9 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams
         [DisplayName("Mã cuộc thi")]
         public int ContestID { get; set; }
 
+        [DisplayName("Tên cuộc thi")]
+        public string ContestName { get; set; }
+
         [DisplayName("Mã môn học")]
         public string SubjectID { get; set; }
 

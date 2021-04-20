@@ -51,6 +51,7 @@ namespace HeThongQuanLyCongTacKhaoThi
             services.AddTransient<ISubjectApiClient, SubjectApiClient>();
             services.AddTransient<IStudentAnswerApiClient, StudentAnswerApiClient>();
             services.AddTransient<IContestApiClient, ContestApiClient>();
+            services.AddTransient<IResultApiClient, ResultApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
