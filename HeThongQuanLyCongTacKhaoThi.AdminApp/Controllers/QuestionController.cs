@@ -18,11 +18,15 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
     public class QuestionController : Controller
     {
         private readonly IWebHostEnvironment _environment;
+        private readonly ISubjectApiClient _subjectApiClient;
+        private readonly IQuestionGroupApiClient _questionGroupApiClient;
         private readonly IQuestionApiClient _questionApiClient;
 
-        public QuestionController(IQuestionApiClient questionApiClient, IWebHostEnvironment environment)
+        public QuestionController(IQuestionApiClient questionApiClient, ISubjectApiClient subjectApiClient, IQuestionGroupApiClient questionGroupApiClient, IWebHostEnvironment environment)
         {
             _questionApiClient = questionApiClient;
+            _subjectApiClient = subjectApiClient;
+            _questionGroupApiClient = questionGroupApiClient;
             _environment = environment;
         }
 
@@ -41,9 +45,21 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var question = new QuestionCURequest();
+
+            // Get subjects
+            var getSubjects = await _subjectApiClient.GetAll();
+            var subjects = getSubjects.ResultObj;
+            question.Subjects = subjects.ToList();
+
+            // Get group questions
+            var getQuestionGroups = await _questionGroupApiClient.GetAll();
+            var questionGroups = getQuestionGroups.ResultObj;
+            question.QuestionGroups = questionGroups;
+
+            return View(question);
         }
 
         [HttpPost]
@@ -108,7 +124,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             if (result.IsSuccessed)
             {
                 var question = result.ResultObj;
-                var updateResquest = new QuestionCURequest()
+                var updateRequest = new QuestionCURequest()
                 {
                     ID = question.ID,
                     SubjectID = question.SubjectID,
@@ -118,7 +134,17 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                     Answers = question.Answers.ToList()
                 };
 
-                return View(updateResquest);
+                // Get subjects
+                var getSubjects = await _subjectApiClient.GetAll();
+                var subjects = getSubjects.ResultObj;
+                updateRequest.Subjects = subjects.ToList();
+
+                // Get group questions
+                var getQuestionGroups = await _questionGroupApiClient.GetAll();
+                var questionGroups = getQuestionGroups.ResultObj;
+                updateRequest.QuestionGroups = questionGroups;
+
+                return View(updateRequest);
             }
 
             return RedirectToAction("Error", "Home");

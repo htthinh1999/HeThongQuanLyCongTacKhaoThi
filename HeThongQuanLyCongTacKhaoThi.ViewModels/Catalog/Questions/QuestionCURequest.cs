@@ -1,4 +1,6 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.QuestionGroups;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -21,5 +23,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions
         public bool IsMultipleChoice { get; set; }
 
         public List<AnswerCURequest> Answers { get; set; } = new List<AnswerCURequest>();
+        public List<SubjectViewModel> Subjects { get; set; } = new List<SubjectViewModel>();
+        public List<QuestionGroupViewModel> QuestionGroups { get; set; } = new List<QuestionGroupViewModel>();
     }
 }
