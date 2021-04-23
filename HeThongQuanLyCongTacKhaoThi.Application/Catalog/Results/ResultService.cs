@@ -80,6 +80,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
                                                  QuestionID = q.ID,
                                                  EssayPath = stad.EssayPath,
                                                  StudentAnswerContent = stad.StudentAnswerContent,
+                                                 Teacher1Comment = stad.Teacher1Comment,
+                                                 Teacher2Comment = stad.Teacher2Comment,
                                                  Mark1 = stad.Mark1,
                                                  Mark2 = stad.Mark2,
                                                  Mark = stad.Mark,

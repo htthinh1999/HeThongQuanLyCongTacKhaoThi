@@ -39,9 +39,14 @@
     </dl>
     <h4>Chi tiết các câu hỏi trong đề thi</h4>
     <dl class="row">
-        @foreach (var examDetail in Model.ExamDetails)
+        @for (int i = 0; i < Model.ExamDetails.Count; i++)
         {
-            var question = examDetail.Question;
+            <dt class="col-12">
+                <hr>
+                <h3 class="text-bold h4 text-gray-700">Câu @(i+1)</h3>
+                <hr>
+            </dt>
+            var question = Model.ExamDetails[i].Question;
 
             @await Html.PartialAsync("_QuestionDetail", question);
         }
@@ -52,3 +57,36 @@
         <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách đề thi</a>
     </form>
 </div>
+
+@section Scripts{
+    <script src="/assets/vendor/ckeditor5/build/ckeditor.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var addEditor = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {})
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                            newEditor.isReadOnly = true;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+
+            }
+
+            addEditor('.content');
+            addEditor('.editor');
+        });
+    </script>
+
+}

@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 
 namespace HeThongQuanLyCongTacKhaoThi
 {
@@ -38,7 +40,7 @@ namespace HeThongQuanLyCongTacKhaoThi
             services.AddControllersWithViews()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
-            services.AddSession(option => option.IdleTimeout = TimeSpan.FromMinutes(60));
+            services.AddSession(option => option.IdleTimeout = TimeSpan.FromHours(2));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

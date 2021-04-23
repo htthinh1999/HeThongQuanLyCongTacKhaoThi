@@ -13,6 +13,8 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.StudentAnswers
         public int? AnswerID { get; set; }
         public string EssayPath { get; set; }
         public string StudentAnswerContent { get; set; }
+        public string Teacher1Comment { get; set; }
+        public string Teacher2Comment { get; set; }
         public float? Mark1 { get; set; }
         public float? Mark2 { get; set; }
         public float? Mark { get; set; }

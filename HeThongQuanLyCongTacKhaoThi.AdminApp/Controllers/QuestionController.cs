@@ -158,6 +158,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return View();
             }
 
+            request.Answers = Answers.ToList();
+
             // Check has min one right answer if question is multiple choice
             if (request.IsMultipleChoice)
             {
@@ -173,11 +175,20 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 if (wrongAnscount == Answers.Count)
                 {
                     ModelState.AddModelError("", "Bạn cần chọn 1 đáp án đúng");
+
+                    // Get subjects
+                    var getSubjects = await _subjectApiClient.GetAll();
+                    var subjects = getSubjects.ResultObj;
+                    request.Subjects = subjects.ToList();
+
+                    // Get group questions
+                    var getQuestionGroups = await _questionGroupApiClient.GetAll();
+                    var questionGroups = getQuestionGroups.ResultObj;
+                    request.QuestionGroups = questionGroups;
+
                     return View(request);
                 }
             }
-
-            request.Answers = Answers.ToList();
 
             // Check ImageAnswer Input
             if (ImageAnswer != null)

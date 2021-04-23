@@ -40,7 +40,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             services.AddControllersWithViews()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
-            services.AddSession(option => option.IdleTimeout = TimeSpan.FromMinutes(60));
+            services.AddSession(option => option.IdleTimeout = TimeSpan.FromHours(2));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddTransient<IAccountApiClient, AccountApiClient>();

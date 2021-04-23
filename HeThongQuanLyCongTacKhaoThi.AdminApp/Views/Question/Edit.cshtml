@@ -10,8 +10,8 @@
 <h4>Mẫu biểu sửa thông tin câu hỏi</h4>
 <hr />
 <div class="row">
-    <div class="col-md-6">
-        <form enctype="multipart/form-data" asp-action="Edit">
+    <div class="col-md-8">
+        <form enctype="multipart/form-data" asp-action="Edit" novalidate>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label">Môn học</label>
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <textarea asp-for="Content" rows="5" class="form-control"></textarea>
+                <textarea asp-for="Content" rows="5" class="form-control content"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="custom-control custom-switch mb-2">
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group" id="AnswerCountDiv">
                 <label class="control-label">Số lượng đáp án</label>
-                <input class="form-control" id="AnswerCount" type="number" value="2" min="2" max="6" />
+                <input class="form-control" id="AnswerCount" type="number" value="@(Model.Answers.Count==1 ? 4 : Model.Answers.Count)" min="2" max="6" />
             </div>
             <div id="answers">
                 @if (Model.IsMultipleChoice)
@@ -43,8 +43,10 @@
                     {
                         <div class="form-group">
                             <label class="control-label">Nội dung đáp án thứ @(i+1)</label>
-                            <div class="row mx-0">
-                                <input asp-for="Answers[i].Content" class="col-md-11 form-control" />
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <textarea rows='5' asp-for="Answers[i].Content" class="form-control editor"></textarea>
+                                </div>
                                 <input class="col-md-1 form-check-input position-static mx-0 mt-auto mb-auto" asp-for="Answers[i].IsCorrect" />
                             </div>
                         </div>
@@ -64,7 +66,7 @@
                     <div class="form-group">
                         <label class="control-label">Nội dung đáp án</label>
                         <div class="row mx-0">
-                            <textarea rows='5' class='form-control' asp-for="Answers[0].Content"></textarea>
+                            <textarea rows='5' class='form-control editor' asp-for="Answers[0].Content"></textarea>
                             <input type='hidden' data-val='true' name='Answers[0].IsCorrect' value='true' checked>
                         </div>
                     </div>
@@ -81,8 +83,79 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script>
+
+    <script src="/assets/vendor/ckeditor5/build/ckeditor.js"></script>
+
+    <script>
         $(document).ready(function () {
+
+            var addEditor = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {
+                            toolbar: {
+                                items: [
+                                    'heading',
+                                    '|',
+                                    'bold',
+                                    'italic',
+                                    'underline',
+                                    'alignment',
+                                    '|',
+                                    'link',
+                                    'bulletedList',
+                                    'numberedList',
+                                    '|',
+                                    'blockQuote',
+                                    'insertTable',
+                                    'undo',
+                                    'redo',
+                                    '-',
+                                    'fontBackgroundColor',
+                                    'fontColor',
+                                    'fontSize',
+                                    'fontFamily',
+                                    'highlight',
+                                    '|',
+                                    'MathType',
+                                    'specialCharacters',
+                                    'ChemType',
+                                    '|',
+                                    'codeBlock',
+                                    'code',
+                                    'htmlEmbed',
+                                    'outdent',
+                                    'indent'
+                                ],
+                                shouldNotGroupWhenFull: true
+                            },
+                            language: 'vi',
+                            table: {
+                                contentToolbar: [
+                                    'tableColumn',
+                                    'tableRow',
+                                    'mergeTableCells'
+                                ]
+                            },
+                            licenseKey: '',
+                        })
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+
+            }
+
+            addEditor('.content');
+            addEditor('.editor');
 
             var createAnswers = function (x) {
                 $("#answers").empty();
@@ -91,17 +164,17 @@
                 if (x == 1) {
                     var answer =
                         "<div class='form-group'>" +
-                            "<div class='form-group-inline row'>" +
-                                "<label class='control-label col-lg-3' for='Content'>Nội dung đáp án</label>" +
-                                "<div class='custom-control-inline align-right custom-switch col-lg-8 ml-3'>" +
-                                    "<input type='checkbox' class='custom-control-input' id='ImageInput' />" +
-                                    "<label class='custom-control-label' for='ImageInput'>Hình ảnh</label>" +
-                                "</div>" +
-                            "</div>" +
-                            "<div id='answer-content'>" +
-                            "<textarea rows='5' class='form-control' data-val='true' data-val-required='Nội dung đáp án là bắt buộc' id='Answers[0].Content' name='Answers[0].Content'></textarea>" +
-                            "<span class='text-danger field-validation-valid' data-valmsg-for='Answers[0].Content' data-valmsg-replace='true'></span>" +
-                            "</div>" +
+                        "<div class='form-group-inline row'>" +
+                        "<label class='control-label col-lg-3' for='Content'>Nội dung đáp án</label>" +
+                        "<div class='custom-control-inline align-right custom-switch col-lg-8 ml-3'>" +
+                        "<input type='checkbox' class='custom-control-input' id='ImageInput' />" +
+                        "<label class='custom-control-label' for='ImageInput'>Hình ảnh</label>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div id='answer-content'>" +
+                        "<textarea rows='5' class='form-control editor' data-val='true' data-val-required='Nội dung đáp án là bắt buộc' id='Answers[0].Content' name='Answers[0].Content'></textarea>" +
+                        "<span class='text-danger field-validation-valid' data-valmsg-for='Answers[0].Content' data-valmsg-replace='true'></span>" +
+                        "</div>" +
                         "</div>"
                     $("#answers").append(answer);
 
@@ -121,10 +194,12 @@
                             });
                         }
                         else {
-                            var textInput = "<textarea rows='5' class='form-control' data-val='true' data-val-required='Nội dung đáp án là bắt buộc' id='Answers[0].Content' name='Answers[0].Content'></textarea>" +
+                            var textInput = "<textarea rows='5' class='form-control editor' data-val='true' data-val-required='Nội dung đáp án là bắt buộc' id='Answers[0].Content' name='Answers[0].Content'></textarea>" +
                                 "<span class='text-danger field-validation-valid' data-valmsg-for='Answers[0].Content' data-valmsg-replace='true'></span>" +
                                 "<input type='hidden' data-val='true' name='Answers[0].IsCorrect' value='true' checked>";
                             $("#answer-content").append(textInput);
+
+                            addEditor('.editor');
                         }
                     });
                 }
@@ -134,14 +209,18 @@
                         var answer =
                             "<div class='form-group'>" +
                             "<label class='control-label'> Nội dung đáp án thứ " + (i + 1) + "</label>" +
-                            "<div class='row mx-0'>" +
-                            "<input class='col-md-11 form-control' type='text' name='Answers[" + i + "].Content' value=''>" +
+                            "<div class='row'>" +
+                            "<div class='col-md-11'>" +
+                            "<textarea rows='5' class='form-control editor' type='text' name='Answers[" + i + "].Content' value=''></textarea>" +
+                            "</div>" +
                             "<input class='col-md-1 form-check-input position-static mx-0 mt-auto mb-auto' type='checkbox' data-val='true' name='Answers[" + i + "].IsCorrect' value='true'>" +
                             "</div>" +
                             "</div>";
                         $("#answers").append(answer);
                     }
                 }
+
+                addEditor('.editor');
             }
 
             // Update when change answer count
@@ -161,13 +240,12 @@
                     var answerCount = $("#AnswerCount").val();
                     createAnswers(answerCount);
                 }
-                else
-                {
+                else {
                     $("#AnswerCountDiv").hide();
                     createAnswers(1);
                 }
             });
 
         });
-</script>
+    </script>
 }

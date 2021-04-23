@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="SubjectID" class="control-label"></label>
-                <input asp-for="SubjectID" class="form-control" />
+                <input asp-for="SubjectID" class="form-control" disabled/>
                 <span asp-validation-for="SubjectID" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -60,6 +60,15 @@
 
     <script>
         $(document).ready(function () {
+
+            // Get Subject ID follow Contest ID
+            $("#ContestID").on('change', function () {
+                var contestID = $(this).val();
+                var url = '@Url.Action("GetSubjectIDByContestID", "Contest")?contestID=' + contestID;
+                $.get(url, function (data) {
+                    $("#SubjectID").val(data.subjectID);
+                });
+            });
 
             $("#ReRandom").change(function () {
                 $("#MultipleChoiceQuestionCount").prop("readonly", !$("#MultipleChoiceQuestionCount").prop("readonly"));

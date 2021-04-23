@@ -47,6 +47,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
 
             // Get user's full name
             var getUser = await _accountApiClient.GetByUserName(User.Identity.Name);
+
+            if (getUser == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             var user = getUser.ResultObj;
             (User.Identity as ClaimsIdentity).AddClaim(new Claim("FullName", user.Name));
             HttpContext.Session.SetString("UserID", user.Id.ToString());
@@ -97,9 +103,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
             var accountPrincipal = ValidateToken(result.ResultObj);
             var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddHours(2),
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                 IsPersistent = true,
-                AllowRefresh = true
+                //AllowRefresh = true
             };
 
             HttpContext.Session.SetString("Token", result.ResultObj);

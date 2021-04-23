@@ -57,7 +57,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             var token = new JwtSecurityToken(_configuration["Tokens:Issuer"],
                 _configuration["Tokens:Issuer"],
                 claims,
-                expires: DateTime.Now,
+                expires: DateTime.Now.AddYears(10),
                 signingCredentials: creds);
 
             return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));

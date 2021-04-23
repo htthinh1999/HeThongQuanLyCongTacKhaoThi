@@ -49,6 +49,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
             _context.Entry(exam).State = EntityState.Modified;
 
             exam.ContestID = request.ContestID;
+            exam.SubjectID = request.SubjectID;
             exam.Name = request.Name;
             exam.ExamDetails = new List<ExamDetail>();
 

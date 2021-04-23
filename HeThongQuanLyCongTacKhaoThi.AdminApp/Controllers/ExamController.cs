@@ -112,8 +112,6 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 }
                 updateResquest.Contests = getContests.ResultObj.ToList();
 
-                updateResquest.SubjectID = getContests.ResultObj[0].SubjectID;
-
                 return View(updateResquest);
             }
 
