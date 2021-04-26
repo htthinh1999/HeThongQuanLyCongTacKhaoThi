@@ -1,4 +1,5 @@
-﻿using HeThongQuanLyCongTacKhaoThi.Data.Entities;
+﻿using HeThongQuanLyCongTacKhaoThi.Data.EF;
+using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -16,13 +18,19 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
 {
     public class AccountService : IAccountService
     {
+        private readonly HeThongQuanLyCongTacKhaoThiDbContext _context;
         private readonly UserManager<Account> _userManager;
         private readonly SignInManager<Account> _signInManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly IConfiguration _configuration;
 
-        public AccountService(UserManager<Account> userManager, SignInManager<Account> signInManager, RoleManager<Role> roleManager, IConfiguration configuration)
+        public AccountService(HeThongQuanLyCongTacKhaoThiDbContext context, 
+            UserManager<Account> userManager,
+            SignInManager<Account> signInManager,
+            RoleManager<Role> roleManager,
+            IConfiguration configuration)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
@@ -262,6 +270,23 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
                 Roles = roles
             };
             return new ApiSuccessResult<AccountViewModel>(accountViewModel);
+        }
+
+        public async Task<ApiResult<List<AccountViewModel>>> GetAllTeachers()
+        {
+            var getTeachers = from ur in _context.UserRoles
+                        join r in _context.Roles on ur.RoleId equals r.Id
+                        join a in _context.Accounts on ur.UserId equals a.Id
+                        where r.Name == "Teacher"
+                        select new AccountViewModel()
+                        {
+                            Id = a.Id,
+                            Name = a.Name
+                        };
+            var teachers = await getTeachers.ToListAsync();
+
+            return new ApiSuccessResult<List<AccountViewModel>>(teachers);
+
         }
     }
 }

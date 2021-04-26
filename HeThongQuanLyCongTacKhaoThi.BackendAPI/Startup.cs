@@ -11,6 +11,7 @@ using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ScoreTypes;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswerDetails;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswers;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.TeacherContests;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Roles;
 using HeThongQuanLyCongTacKhaoThi.Data.EF;
@@ -80,6 +81,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<IStudentAnswerService, StudentAnswerService>();
             services.AddTransient<IStudentAnswerDetailService, StudentAnswerDetailService>();
             services.AddTransient<IContestService, ContestService>();
+            services.AddTransient<ITeacherContestService, TeacherContestService>();
             services.AddTransient<IScoreTypeService, ScoreTypeService>();
             services.AddTransient<IResultService, ResultService>();
 

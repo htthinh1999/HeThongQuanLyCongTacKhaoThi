@@ -105,5 +105,12 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _accountService.GetByUserName(username);
             return Ok(result);
         }
+
+        [HttpGet("get-all-teachers")]
+        public async Task<IActionResult> GetAllTeachers()
+        {
+            var result = await _accountService.GetAllTeachers();
+            return Ok(result);
+        }
     }
 }

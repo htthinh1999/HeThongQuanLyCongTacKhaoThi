@@ -10,7 +10,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
 {
     public interface IContestService
     {
-        Task<ApiResult<bool>> Create(ContestCURequest request);
+        Task<ApiResult<int>> Create(ContestCURequest request);
 
         Task<ApiResult<bool>> Update(int id, ContestCURequest request);
 

@@ -20,13 +20,16 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
             _context = context;
         }
 
-        public async Task<ApiResult<bool>> Create(ContestCURequest request)
+        public async Task<ApiResult<int>> Create(ContestCURequest request)
         {
             var contest = new Contest()
             {
                 Name = request.Name,
                 SubjectID = request.SubjectID,
-                ScoreTypeID = request.ScoreTypeID
+                ScoreTypeID = request.ScoreTypeID,
+                StartTime = request.StartTime,
+                Duration = request.Duration,
+                Description = request.Description
             };
 
             _context.Contests.Add(contest);
@@ -34,10 +37,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
 
             if (result == 0)
             {
-                return new ApiErrorResult<bool>("Không thể thêm kỳ kiểm tra");
+                return new ApiErrorResult<int>("Không thể thêm kỳ kiểm tra");
             }
 
-            return new ApiSuccessResult<bool>();
+            return new ApiSuccessResult<int>(contest.ID);
         }
 
         public async Task<ApiResult<bool>> Update(int id, ContestCURequest request)
@@ -48,6 +51,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
             contest.Name = request.Name;
             contest.SubjectID = request.SubjectID;
             contest.ScoreTypeID = request.ScoreTypeID;
+            contest.StartTime = request.StartTime;
+            contest.Duration = request.Duration;
+            contest.Description = request.Description;
 
             _context.Entry(contest).State = EntityState.Modified;
             var result = await _context.SaveChangesAsync();
@@ -83,8 +89,18 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
                 ID = id,
                 Name = contest.Name,
                 SubjectID = contest.SubjectID,
-                ScoreTypeID = contest.ScoreTypeID
+                ScoreTypeID = contest.ScoreTypeID,
+                Description = contest.Description,
+                StartTime = contest.StartTime,
+                Duration = contest.Duration
             };
+
+            var allTeachers = await _context.TeacherContests.Where(x => x.ContestID == id).ToListAsync();
+            contestViewModel.Teacher1ID = allTeachers[0].TeacherID;
+            if (allTeachers.Count > 1)
+            {
+                contestViewModel.Teacher2ID = allTeachers[1].TeacherID;
+            }
 
             return new ApiSuccessResult<ContestViewModel>(contestViewModel);
         }
@@ -96,7 +112,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
                                                       ID = x.ID,
                                                       Name = x.Name,
                                                       SubjectID = x.SubjectID,
-                                                      ScoreTypeID = x.ScoreTypeID
+                                                      ScoreTypeID = x.ScoreTypeID,
+                                                      Description = x.Description,
+                                                      StartTime = x.StartTime,
+                                                      Duration = x.Duration
                                                   }).ToListAsync();
 
             return new ApiSuccessResult<List<ContestViewModel>>(contests);
@@ -108,7 +127,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
                                                   .Select(x => new ContestViewModel()
                                                   {
                                                       ID = x.ID,
-                                                      Name = x.Name
+                                                      Name = x.Name,
+                                                      Description = x.Description,
+                                                      StartTime = x.StartTime,
+                                                      Duration = x.Duration
                                                   }).ToListAsync();
 
             return new ApiSuccessResult<List<ContestViewModel>>(contests);
@@ -116,31 +138,66 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
 
         public async Task<ApiResult<PagedResult<ContestViewModel>>> GetContestPaging(GetContestPagingRequest request)
         {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
             var query = _context.Contests.Where(c => c.Name.Contains(""));
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = _context.Contests.Where(c => c.Name.Contains(request.Keyword));
+                query = _context.Contests.Where(c => c.Name.Contains(request.Keyword) || c.Duration.ToString().Contains(request.Keyword) ||
+                                                     c.SubjectID.Contains(request.Keyword) || c.StartTime.ToString().Contains(request.Keyword));
             }
 
-            var data = await query.Join(_context.ScoreTypes, c=>c.ScoreTypeID, st=>st.ID, (c, st) => new { c, st })
-                .Skip((request.PageIndex - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .AsNoTracking()
-                .Select(x => new ContestViewModel()
-                {
-                    ID = x.c.ID,
-                    Name = x.c.Name,
-                    SubjectID = x.c.SubjectID,
-                    ScoreTypeID = x.c.ScoreTypeID,
-                    ScoreTypeName = x.st.Name
-                }).ToListAsync();
-            var totalRow = await query.CountAsync();
+            var data = from tc in _context.TeacherContests
+                       join c in query on tc.ContestID equals c.ID
+                       join a in _context.Accounts on tc.TeacherID equals a.Id
+                       join st in _context.ScoreTypes on c.ScoreTypeID equals st.ID
+                       group new { tc, c, a, st }
+                       by new 
+                       { 
+                           ID = c.ID,
+                           SubjectID = st.SubjectID,
+                           Name = c.Name,
+                           ScoreTypeID = st.ID,
+                           ScoreTypeName = st.Name,
+                           Description = c.Description,
+                           StartTime = c.StartTime,
+                           Duration = c.Duration
+                       }
+                       into x
+                       select new ContestViewModel()
+                       {
+                           ID = x.Key.ID,
+                           SubjectID = x.Key.SubjectID,
+                           Name = x.Key.Name,
+                           ScoreTypeID = x.Key.ID,
+                           ScoreTypeName = x.Key.ScoreTypeName,
+                           Description = x.Key.Description,
+                           StartTime = x.Key.StartTime,
+                           Duration = x.Key.Duration,
+                           TeacherNames = string.Join(", ", _context.TeacherContests.Join(_context.Accounts, tc => tc.TeacherID, a => a.Id, (tc, a) => new { tc, a })
+                                                            .Where(z => z.tc.ContestID == x.Key.ID)
+                                                            .Select(x => x.a.Name)
+                                                            .ToList()),
+                           Teacher1Name = _context.TeacherContests.Join(_context.Accounts, tc => tc.TeacherID, a => a.Id, (tc, a) => new { tc, a })
+                                        .Where(z => z.tc.ContestID == x.Key.ID)
+                                        .Select(x => x.a.Name)
+                                        .FirstOrDefault(),
+                           Teacher2Name = _context.TeacherContests.Join(_context.Accounts, tc => tc.TeacherID, a => a.Id, (tc, a) => new { tc, a })
+                                        .Where(z => z.tc.ContestID == x.Key.ID)
+                                        .Select(x => x.a.Name)
+                                        .Skip(1)
+                                        .FirstOrDefault()
+                       };
+
+            var items = await data.ToListAsync();
+
+            var totalRow = items.Count;
             var pagedResult = new PagedResult<ContestViewModel>()
             {
                 TotalRecords = totalRow,
                 PageIndex = request.PageIndex,
                 PageSize = request.PageSize,
-                Items = data
+                Items = items
             };
             return new ApiSuccessResult<PagedResult<ContestViewModel>>(pagedResult);
         }
@@ -175,7 +232,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
                                   select new ContestViewModel()
                                   {
                                       ID = c.ID,
-                                      Name = c.Name
+                                      Name = c.Name,
+                                      Description = c.Description,
+                                      StartTime = c.StartTime,
+                                      Duration = c.Duration
                                   }).ToListAsync();
 
             return new ApiSuccessResult<List<ContestViewModel>>(contests);
@@ -191,7 +251,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
                                   select new ContestViewModel()
                                   {
                                       ID = c.ID,
-                                      Name = c.Name
+                                      Name = c.Name,
+                                      Description = c.Description,
+                                      StartTime = c.StartTime,
+                                      Duration = c.Duration
                                   }).ToListAsync();
 
             return new ApiSuccessResult<List<ContestViewModel>>(contests);

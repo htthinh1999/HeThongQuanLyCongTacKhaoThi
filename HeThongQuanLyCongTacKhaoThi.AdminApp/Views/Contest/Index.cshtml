@@ -55,6 +55,15 @@
                                         Loại điểm
                                     </th>
                                     <th>
+                                        Thời gian bắt đầu
+                                    </th>
+                                    <th>
+                                        Khoảng thời gian
+                                    </th>
+                                    <th>
+                                        Giáo viên chấm thi
+                                    </th>
+                                    <th>
                                         Hành động
                                     </th>
                                 </tr>
@@ -74,6 +83,15 @@
                                         Loại điểm
                                     </th>
                                     <th>
+                                        Thời gian bắt đầu
+                                    </th>
+                                    <th>
+                                        Khoảng thời gian
+                                    </th>
+                                    <th>
+                                        Giáo viên chấm thi
+                                    </th>
+                                    <th>
                                         Hành động
                                     </th>
                                 </tr>
@@ -81,25 +99,34 @@
                             <tbody>
                                 @foreach (var item in Model.Items)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ID)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.SubjectID)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ScoreTypeName)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
-                                            @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }) |
-                                            @Html.ActionLink("Xoá", "Delete", new { id = item.ID })
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SubjectID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ScoreTypeName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StartTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Duration)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TeacherNames)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
+                                        @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }) |
+                                        @Html.ActionLink("Xoá", "Delete", new { id = item.ID })
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

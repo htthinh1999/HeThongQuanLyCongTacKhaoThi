@@ -84,6 +84,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
         {
             var subject = new Subject()
             {
+                ID = request.ID,
                 Name = request.Name,
                 LessonCount = request.LessonCount,
                 CreditCount = request.CreditCount

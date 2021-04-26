@@ -51,12 +51,12 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             services.AddTransient<IExamApiClient, ExamApiClient>();
             services.AddTransient<ISubjectApiClient, SubjectApiClient>();
             services.AddTransient<IContestApiClient, ContestApiClient>();
+            services.AddTransient<ITeacherContestApiClient, TeacherContestApiClient>();
             services.AddTransient<IScoreTypeApiClient, ScoreTypeApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-            builder.AddRazorRuntimeCompilation();
 #if DEBUG
             if (enviroment == Environments.Development)
             {

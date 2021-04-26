@@ -23,7 +23,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         Task<ApiResult<ContestViewModel>> GetByID(int id);
 
-        Task<ApiResult<bool>> Create(ContestCURequest request);
+        Task<ApiResult<int>> Create(ContestCURequest request);
 
         Task<ApiResult<bool>> Update(int id, ContestCURequest request);
 

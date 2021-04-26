@@ -1,6 +1,7 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
@@ -22,5 +23,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
         Task<ApiResult<AccountViewModel>> GetByID(Guid id);
 
         Task<ApiResult<AccountViewModel>> GetByUserName(string username);
+
+        Task<ApiResult<List<AccountViewModel>>> GetAllTeachers();
     }
 }

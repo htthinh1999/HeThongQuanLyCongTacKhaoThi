@@ -29,6 +29,32 @@
                 </select>
             </div>
             <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" class="form-control" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration" class="control-label"></label>
+                <input asp-for="Duration" min="15" value="15" class="form-control" />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Giáo viên 1</label>
+                <select asp-for="Teacher1ID" class="form-control" asp-items="@(new SelectList(Model.Teachers, "Id", "Name"))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Giáo viên 2</label>
+                <select asp-for="Teacher2ID" class="form-control" asp-items="@(new SelectList(Model.Teachers, "Id", "Name"))">
+                    <option value="@Guid.Empty">Không có giáo viên 2</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Lưu" class="btn btn-primary" /> |
                 <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách kỳ kiểm tra</a>
             </div>

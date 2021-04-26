@@ -25,7 +25,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<ApiResult<bool>> Create(ContestCURequest request)
+        public async Task<ApiResult<int>> Create(ContestCURequest request)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
@@ -38,9 +38,9 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+                return JsonConvert.DeserializeObject<ApiSuccessResult<int>>(result);
             }
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+            return JsonConvert.DeserializeObject<ApiErrorResult<int>>(result);
         }
 
         public async Task<ApiResult<bool>> Update(int id, ContestCURequest request)

@@ -1,6 +1,7 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Contests;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.TeacherContests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,12 +17,20 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         private readonly IContestApiClient _contestApiClient;
         private readonly ISubjectApiClient _subjectApiClient;
         private readonly IScoreTypeApiClient _scoreTypeApiClient;
+        private readonly IAccountApiClient _accountApiClient;
+        private readonly ITeacherContestApiClient _teacherContestApiClient;
 
-        public ContestController(IContestApiClient contestApiClient, ISubjectApiClient subjectApiClient, IScoreTypeApiClient scoreTypeApiClient)
+        public ContestController(IContestApiClient contestApiClient,
+                                ISubjectApiClient subjectApiClient,
+                                IScoreTypeApiClient scoreTypeApiClient,
+                                IAccountApiClient accountApiClient,
+                                ITeacherContestApiClient teacherContestApiClient)
         {
             _contestApiClient = contestApiClient;
             _subjectApiClient = subjectApiClient;
             _scoreTypeApiClient = scoreTypeApiClient;
+            _accountApiClient = accountApiClient;
+            _teacherContestApiClient = teacherContestApiClient;
         }
 
         public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 5)
@@ -52,6 +61,11 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             var scoreTypes = getScoreTypes.ResultObj;
             request.ScoreTypes = scoreTypes.ToList();
 
+            // Get all teachers
+            var getTeachers = await _accountApiClient.GetAllTeachers();
+            var teachers = getTeachers.ResultObj;
+            request.Teachers = teachers.ToList();
+
             return View(request);
         }
 
@@ -63,14 +77,29 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return View(request);
             }
 
-            var result = await _contestApiClient.Create(request);
-            if (result.IsSuccessed)
+            var getContestID = await _contestApiClient.Create(request);
+            if (getContestID.IsSuccessed)
             {
+                await _teacherContestApiClient.Create(new TeacherContestCURequest()
+                {
+                    TeacherID = request.Teacher1ID,
+                    ContestID = getContestID.ResultObj
+                });
+
+                if (!request.Teacher2ID.Equals(Guid.Empty))
+                {
+                    await _teacherContestApiClient.Create(new TeacherContestCURequest()
+                    {
+                        TeacherID = request.Teacher2ID,
+                        ContestID = getContestID.ResultObj
+                    });
+                }
+
                 TempData["SuccessMsg"] = "Tạo kỳ kiểm tra thành công";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", result.Message); 
+            ModelState.AddModelError("", getContestID.Message); 
             return View(request);
         }
 
@@ -81,25 +110,35 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             if (result.IsSuccessed)
             {
                 var contest = result.ResultObj;
-                var updateResquest = new ContestCURequest()
+                var updateRequest = new ContestCURequest()
                 {
                     ID = contest.ID,
                     Name = contest.Name,
                     SubjectID = contest.SubjectID,
-                    ScoreTypeID = contest.ScoreTypeID
+                    ScoreTypeID = contest.ScoreTypeID,
+                    StartTime = contest.StartTime,
+                    Duration = contest.Duration,
+                    Description = contest.Description,
+                    Teacher1ID = contest.Teacher1ID,
+                    Teacher2ID = contest.Teacher2ID
                 };
 
                 // Get subjects
                 var getSubjects = await _subjectApiClient.GetAll();
                 var subjects = getSubjects.ResultObj;
-                updateResquest.Subjects = subjects.ToList();
+                updateRequest.Subjects = subjects.ToList();
 
                 // Get score types
-                var getScoreTypes = await _scoreTypeApiClient.GetAllBySubjectID(updateResquest.SubjectID);
+                var getScoreTypes = await _scoreTypeApiClient.GetAllBySubjectID(updateRequest.SubjectID);
                 var scoreTypes = getScoreTypes.ResultObj;
-                updateResquest.ScoreTypes = scoreTypes.ToList();
+                updateRequest.ScoreTypes = scoreTypes.ToList();
 
-                return View(updateResquest);
+                // Get all teachers
+                var getTeachers = await _accountApiClient.GetAllTeachers();
+                var teachers = getTeachers.ResultObj;
+                updateRequest.Teachers = teachers.ToList();
+
+                return View(updateRequest);
             }
 
             return RedirectToAction("Error", "Home");
@@ -119,6 +158,24 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             {
                 ModelState.AddModelError("", result.Message);
                 return View(request);
+            }
+
+
+            await _teacherContestApiClient.Delete(request.ID);
+
+            await _teacherContestApiClient.Create(new TeacherContestCURequest()
+            {
+                TeacherID = request.Teacher1ID,
+                ContestID = request.ID
+            });
+
+            if (!request.Teacher2ID.Equals(Guid.Empty))
+            {
+                await _teacherContestApiClient.Create(new TeacherContestCURequest()
+                {
+                    TeacherID = request.Teacher2ID,
+                    ContestID = request.ID
+                });
             }
 
             TempData["SuccessMsg"] = "Cập nhật kỳ kiểm tra thành công";

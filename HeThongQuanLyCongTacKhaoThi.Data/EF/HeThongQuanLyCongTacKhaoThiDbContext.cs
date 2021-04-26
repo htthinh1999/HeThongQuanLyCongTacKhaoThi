@@ -60,5 +60,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Contest> Contests { get; set; }
         public DbSet<TeacherContest> TeacherContests { get; set; }
+        public DbSet<IdentityUserRole<Guid>> UserRoles { get; set; }
     }
 }

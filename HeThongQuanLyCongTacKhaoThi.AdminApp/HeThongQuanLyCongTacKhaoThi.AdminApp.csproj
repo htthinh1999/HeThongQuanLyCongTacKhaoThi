@@ -1,7 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+	<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+	<!--<AspNetCoreModuleName>AspNetCoreModule</AspNetCoreModuleName>-->
     <UserSecretsId>b4b6d277-cd2a-4314-a7a9-69d819331b35</UserSecretsId>
   </PropertyGroup>
 
