@@ -85,14 +85,26 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         }
 
         [HttpPost("{subjectID}/assign")]
-        public async Task<IActionResult> SubjectAssign(string subjectID, [FromBody]SubjectAssignRequest request)
+        public async Task<IActionResult> SubjectAssign(string subjectID, [FromBody]Guid accountID)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var result = await _subjectService.SubjectAssign(subjectID, request);
+            var result = await _subjectService.SubjectAssign(subjectID, accountID);
+            return Ok(result);
+        }
+
+        [HttpPut("teachers/{teacherID}")]
+        public async Task<IActionResult> EditTeacherSubjects(Guid teacherID, List<string> subjectIDs)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _subjectService.EditTeacherSubjects(teacherID, subjectIDs);
             return Ok(result);
         }
     }

@@ -1,0 +1,73 @@
+﻿@model List<HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects.SubjectViewModel>
+
+@{
+    ViewData["Title"] = "Cập nhật môn học giảng dạy cho giáo viên " + ViewBag.TeacherName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Cập nhật môn học giảng dạy cho giảng viên @ViewBag.TeacherName</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="EditTeacherSubjects">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div id="teacher-subjects">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <div class="form-group">
+                        <label class="control-label">Môn học</label>
+                        <div class="form-inline">
+                            <select asp-for="@Model[i]" name="subjectIDs[@i]" class="form-control mr-2 col-lg-8 col-xl-10" asp-items="@(new SelectList(ViewBag.Subjects, "ID", "Name"))">
+                            </select>
+                            <button id="remover-subject" name="remover-subject" type="button" class="btn btn-primary">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <button type="button" id="add-subject" class="btn btn-primary mb-3">
+                <i class="fa fa-plus"></i> Thêm môn học
+            </button>
+
+            <input type="hidden" name="teacherID" value="@ViewBag.TeacherID" />
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-primary" /> |
+                <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách giảng viên</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+
+            // Add subject
+            var subjectIndex = @Model.Count;
+            $("#add-subject").on('click', function () {
+                var url = '@Url.Action("GetAllSubjects", "Subject")/' + subjectIndex++;
+                $.get(url, function (data) {
+                    $("#teacher-subjects").append(data);
+                });
+            });
+
+            $("body").on('click', '#remover-subject', function () {
+                $(this).parent().parent().remove();
+
+                // Fix element's index of subject to submit
+                var subjects = $('select[name^="subjectIDs"]');
+                $.each(subjects, function (index, val){
+                    $(this).prop('name', 'subjectIDs[' + index + ']');
+                });
+
+                // Fix id when add new element
+                subjectIndex = subjects.length;
+            });
+
+        });
+
+    </script>
+}

@@ -103,7 +103,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
             var accountPrincipal = ValidateToken(result.ResultObj);
             var authProperties = new AuthenticationProperties
             {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                ExpiresUtc = DateTimeOffset.UtcNow.AddYears(10),
                 IsPersistent = true,
                 //AllowRefresh = true
             };

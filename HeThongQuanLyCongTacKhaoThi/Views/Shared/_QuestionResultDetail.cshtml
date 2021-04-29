@@ -6,7 +6,7 @@
     @Html.DisplayNameFor(model => model.Question.Content)
 </dt>
 <dd class="col-sm-10">
-    <textarea rows="5" class="form-control" disabled>@Html.DisplayFor(model => model.Question.Content)</textarea>
+    <textarea rows="5" class="form-control editor">@Html.DisplayFor(model => model.Question.Content)</textarea>
 </dd>
 
 @if (Model.Question.IsMultipleChoice)
@@ -19,9 +19,11 @@
         {
             <div class="form-check">
                 <input class="form-check-input" type="radio" id="Answer[@Model.Question.ID@i]" value="@Model.Question.Answers[i].ID" @((Model.Question.Answers[i].ID == Model.AnswerID) ? "checked" : "") disabled />
-                <label class="form-check-label font-weight-bold @((Model.Question.Answers[i].IsCorrect)?"text-success":(Model.Question.Answers[i].ID == Model.AnswerID)?"text-danger":"")" for="Answer[@Model.Question.ID@i]">
-                    @Model.Question.Answers[i].Content
-                </label>
+                <div class="form-check-label editor" for="Answer[@Model.Question.ID@i]">
+                    <mark class='@((Model.Question.Answers[i].IsCorrect)?"marker-green":(Model.Question.Answers[i].ID == Model.AnswerID)?"marker-red":"")'>
+                        @Model.Question.Answers[i].Content
+                    </mark>
+                </div>
             </div>
         }
         <input name="IsMultipleChoice" type="hidden" value="true">
@@ -33,7 +35,7 @@ else
         Câu trả lời
     </dt>
     <dd class="col-sm-10">
-        <textarea rows="5" class="form-control" name="AnswerOfStudent[@Model.Question.ID]" disabled>@Model.StudentAnswerContent</textarea>
+        <textarea rows="5" class="form-control editor" name="AnswerOfStudent[@Model.Question.ID]">@Model.StudentAnswerContent</textarea>
     </dd>
     <dt class="col-sm-2">
         Đáp án
@@ -45,14 +47,14 @@ else
         }
         else
         {
-            <textarea rows="5" class="form-control" name="Answers[0]" disabled>@Model.Question.Answers[0].Content</textarea>
+            <textarea rows="5" class="form-control editor" name="Answers[0]">@Model.Question.Answers[0].Content</textarea>
         }
     </dd>
     <dt class="col-sm-2">
         Nhận xét GV 1
     </dt>
     <dd class="col-sm-7 col-md-8">
-        <textarea rows="5" class="form-control" name="Teacher1Comment" disabled>@Model.Teacher1Comment</textarea>
+        <textarea rows="5" class="form-control editor" name="Teacher1Comment">@Model.Teacher1Comment</textarea>
     </dd>
     <dd class="col-sm-3 col-md-2">
         <p><b>Điểm GV1:</b> @(Model.Mark1?? Single.NaN)</p>
@@ -61,7 +63,7 @@ else
         Nhận xét GV 2
     </dt>
     <dd class="col-sm-7 col-md-8">
-        <textarea rows="5" class="form-control" name="Teacher2Comment" disabled>@Model.Teacher2Comment</textarea>
+        <textarea rows="5" class="form-control editor" name="Teacher2Comment">@Model.Teacher2Comment</textarea>
     </dd>
     <dd class="col-sm-3 col-md-2">
         <p><b>Điểm GV2:</b> @(Model.Mark1?? Single.NaN)</p>

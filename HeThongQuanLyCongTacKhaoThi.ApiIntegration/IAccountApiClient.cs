@@ -12,6 +12,8 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         Task<ApiResult<PagedResult<AccountViewModel>>> GetAccountPaging(GetAccountPagingRequest request);
 
+        Task<ApiResult<PagedResult<AccountViewModel>>> GetTeacherPaging(GetAccountPagingRequest request);
+
         Task<ApiResult<bool>> RegisterAccount(RegisterRequest request);
 
         Task<ApiResult<bool>> UpdateAccount(Guid id, AccountUpdateRequest request);

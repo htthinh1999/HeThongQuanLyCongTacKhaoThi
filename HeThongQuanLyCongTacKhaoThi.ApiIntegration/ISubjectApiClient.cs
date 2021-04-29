@@ -17,12 +17,14 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         Task<ApiResult<List<SubjectViewModel>>> GetSubjectsByAccountID(Guid accountID);
 
-        Task<ApiResult<bool>> SubjectAssign(string subjectID, SubjectAssignRequest request);
+        Task<ApiResult<bool>> SubjectAssign(string subjectID, Guid accountID);
 
         Task<ApiResult<bool>> Create(SubjectCURequest request);
 
         Task<ApiResult<bool>> Update(string id, SubjectCURequest request);
 
         Task<ApiResult<bool>> Delete(string id);
+
+        Task<ApiResult<bool>> UpdateTeacherSubjects(Guid teacherID, List<string> subjectIDs);
     }
 }

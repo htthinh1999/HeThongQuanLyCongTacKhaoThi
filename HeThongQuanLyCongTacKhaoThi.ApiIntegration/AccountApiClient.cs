@@ -55,6 +55,19 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             return accounts;
         }
 
+        public async Task<ApiResult<PagedResult<AccountViewModel>>> GetTeacherPaging(GetAccountPagingRequest request)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/accounts/teachers/paging?pageIndex={request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
+            var body = await response.Content.ReadAsStringAsync();
+            var accounts = JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<AccountViewModel>>>(body);
+
+            return accounts;
+        }
+
         public async Task<ApiResult<AccountViewModel>> GetByID(Guid id)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");

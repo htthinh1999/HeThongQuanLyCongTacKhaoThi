@@ -150,6 +150,58 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             return new ApiSuccessResult<PagedResult<AccountViewModel>>(pagedResult);
         }
 
+        public async Task<ApiResult<PagedResult<AccountViewModel>>> GetTeacherPaging(GetAccountPagingRequest request)
+        {
+            var query = from ur in _context.UserRoles
+                         join r in _context.Roles on ur.RoleId equals r.Id
+                         join a in _context.Accounts on ur.UserId equals a.Id
+                         where r.Name == "Teacher"
+                         select a;
+
+            //var query = _userManager.Users;
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(
+                    x => x.UserName.Contains(request.Keyword)
+                        || x.Name.Contains(request.Keyword)
+                        || x.Birthday.ToString().Contains(request.Keyword)
+                        || x.Email.Contains(request.Keyword)
+                        || ((request.Keyword.Equals("Nam") || request.Keyword.Equals("Nữ")) && (x.Gender == request.Keyword.Equals("Nam")))
+                        || x.PhoneNumber.Contains(request.Keyword)
+                        || x.ClassID.Contains(request.Keyword)
+                        || x.Student_TeacherID.Contains(request.Keyword)
+                        || x.Address.Contains(request.Keyword)
+                    );
+            }
+
+            var data = await query
+            .Skip((request.PageIndex - 1) * request.PageSize)
+            .Take(request.PageSize)
+            .Select(x => new AccountViewModel()
+            {
+                Id = x.Id,
+                Username = x.UserName,
+                Name = x.Name,
+                Email = x.Email,
+                Birthday = x.Birthday,
+                Gender = x.Gender,
+                PhoneNumber = x.PhoneNumber,
+                Student_TeacherID = x.Student_TeacherID,
+                Address = x.Address,
+                ClassID = x.ClassID
+            }).ToListAsync();
+            var totalRow = await query.CountAsync();
+            var pagedResult = new PagedResult<AccountViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data
+            };
+            return new ApiSuccessResult<PagedResult<AccountViewModel>>(pagedResult);
+        }
+
         public async Task<ApiResult<bool>> Update(Guid id, AccountUpdateRequest request)
         {
             if (await _userManager.Users.AnyAsync(x => x.Email == request.Email && x.Id != id))

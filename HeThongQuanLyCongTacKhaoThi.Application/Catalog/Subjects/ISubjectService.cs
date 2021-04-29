@@ -22,6 +22,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
 
         Task<ApiResult<List<SubjectViewModel>>> GetSubjectsByAccountID(Guid accountID);
 
-        Task<ApiResult<bool>> SubjectAssign(string subjectID, SubjectAssignRequest request);
+        Task<ApiResult<bool>> SubjectAssign(string subjectID, Guid accountID);
+
+        Task<ApiResult<bool>> EditTeacherSubjects(Guid teacherID, List<string> subjectIDs);
     }
 }

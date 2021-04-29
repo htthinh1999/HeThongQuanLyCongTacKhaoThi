@@ -90,7 +90,15 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _accountService.GetAccountPaging(request);
             return Ok(result);
         }
-        
+
+        [Authorize(Roles = Roles.Admin)]
+        [HttpGet("teachers/paging")]
+        public async Task<IActionResult> GetAllTeacherPaging([FromQuery] GetAccountPagingRequest request)
+        {
+            var result = await _accountService.GetTeacherPaging(request);
+            return Ok(result);
+        }
+
         [Authorize(Roles = Roles.Admin)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByID(Guid id)

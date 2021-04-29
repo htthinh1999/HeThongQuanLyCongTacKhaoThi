@@ -20,6 +20,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
 
         Task<ApiResult<PagedResult<AccountViewModel>>> GetAccountPaging(GetAccountPagingRequest request);
 
+        Task<ApiResult<PagedResult<AccountViewModel>>> GetTeacherPaging(GetAccountPagingRequest request);
+
         Task<ApiResult<AccountViewModel>> GetByID(Guid id);
 
         Task<ApiResult<AccountViewModel>> GetByUserName(string username);

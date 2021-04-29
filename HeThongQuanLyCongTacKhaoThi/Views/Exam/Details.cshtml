@@ -11,7 +11,7 @@
 <div>
     <form asp-action="Details">
         <dl class="row">
-            @for (int i= 0;i<Model.ExamDetails.Count; i++)
+            @for (int i = 0; i < Model.ExamDetails.Count; i++)
             {
                 <dt class="col-12">
                     <hr>
@@ -23,18 +23,109 @@
                 @await Html.PartialAsync("_QuestionDetail", question);
             }
         </dl>
-        <input type="hidden" asp-for="ID"/>
-        <input type="hidden" asp-for="SubjectID"/>
-        <input type="hidden" asp-for="ContestID"/>
+        <input type="hidden" asp-for="ID" />
+        <input type="hidden" asp-for="SubjectID" />
+        <input type="hidden" asp-for="ContestID" />
         <div class="form-group">
             <input type="submit" value="Nộp bài" class="btn btn-primary" />
         </div>
     </form>
 </div>
-@section Scripts{ 
+
+
+@section Scripts{
+    <script src="/assets/vendor/ckeditor5/build/ckeditor.js"></script>
+
     <script>
-        $(window).bind("beforeunload", function (event) {
-            return "You have unsaved changes";
+        $(document).ready(function () {
+
+            var addEditorDisabled = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {})
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                            newEditor.isReadOnly = true;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+
+            }
+
+            var addEditor = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {
+                            toolbar: {
+                                items: [
+                                    'heading',
+                                    '|',
+                                    'bold',
+                                    'italic',
+                                    'underline',
+                                    'alignment',
+                                    '|',
+                                    'link',
+                                    'bulletedList',
+                                    'numberedList',
+                                    '|',
+                                    'blockQuote',
+                                    'insertTable',
+                                    'undo',
+                                    'redo',
+                                    '-',
+                                    'fontBackgroundColor',
+                                    'fontColor',
+                                    'fontSize',
+                                    'fontFamily',
+                                    'highlight',
+                                    '|',
+                                    'MathType',
+                                    'specialCharacters',
+                                    'ChemType',
+                                    '|',
+                                    'codeBlock',
+                                    'code',
+                                    'htmlEmbed',
+                                    'outdent',
+                                    'indent'
+                                ],
+                                shouldNotGroupWhenFull: true
+                            },
+                            language: 'vi',
+                            table: {
+                                contentToolbar: [
+                                    'tableColumn',
+                                    'tableRow',
+                                    'mergeTableCells'
+                                ]
+                            },
+                            licenseKey: '',
+                        })
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+            }
+
+            addEditorDisabled('.editor-disabled');
+            addEditor('.editor');
         });
     </script>
+
 }

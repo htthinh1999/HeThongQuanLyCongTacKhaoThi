@@ -152,13 +152,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
             return new ApiSuccessResult<List<SubjectViewModel>>(subjects);
         }
 
-        public async Task<ApiResult<bool>> SubjectAssign(string subjectID, SubjectAssignRequest request)
+        public async Task<ApiResult<bool>> SubjectAssign(string subjectID, Guid accountID)
         {
             var subjectAccount = new SubjectAccount()
             {
-                UserID = request.AccountID,
-                SubjectID = subjectID,
-                ClassID = request.ClassID
+                UserID = accountID,
+                SubjectID = subjectID
             };
             _context.SubjectAccounts.Add(subjectAccount);
             _context.Entry(subjectAccount).State = EntityState.Added;
@@ -168,6 +167,33 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
                 return new ApiErrorResult<bool>("Không thể gán môn học cho người dùng");
             }
 
+            return new ApiSuccessResult<bool>();
+        }
+
+        public async Task<ApiResult<bool>> EditTeacherSubjects(Guid teacherID, List<string> subjectIDs)
+        {
+            var teacherSubjects = await _context.SubjectAccounts.Where(x => x.UserID == teacherID).ToListAsync();
+
+            if(teacherSubjects.Count != 0)
+            {
+                _context.SubjectAccounts.RemoveRange(teacherSubjects);
+            }
+
+            foreach(var subjectID in subjectIDs)
+            {
+                _context.SubjectAccounts.Add(new SubjectAccount()
+                {
+                    UserID = teacherID,
+                    SubjectID = subjectID
+                });
+            }
+
+            var result = await _context.SaveChangesAsync();
+            if (result == 0)
+            {
+                return new ApiErrorResult<bool>("Không thể gán môn học cho giảng viên");
+            }
+            
             return new ApiSuccessResult<bool>();
         }
     }

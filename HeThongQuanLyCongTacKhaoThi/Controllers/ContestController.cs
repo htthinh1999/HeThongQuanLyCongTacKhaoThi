@@ -18,14 +18,19 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
 
         public async Task<IActionResult> RandomExamFollowContestID(int contestID)
         {
-            var getExamsBySubjectID = await _examApiClient.GetAllExamsByContestID(contestID);
-            if (!getExamsBySubjectID.IsSuccessed)
+            var getExamsByContestID = await _examApiClient.GetAllExamsByContestID(contestID);
+            if (!getExamsByContestID.IsSuccessed)
             {
-                return BadRequest(getExamsBySubjectID.Message);
+                return BadRequest(getExamsByContestID.Message);
             }
-            var exam = getExamsBySubjectID.ResultObj.Skip(new Random()
-                                          .Next(getExamsBySubjectID.ResultObj.Count))
+            var exam = getExamsByContestID.ResultObj.Skip(new Random()
+                                          .Next(getExamsByContestID.ResultObj.Count))
                                           .FirstOrDefault();
+            if(exam == null)
+            {
+                return BadRequest("Kỳ kiểm tra này chưa có đề thi");
+            }
+
             return RedirectToAction("Details", "Exam", new { examID = exam.ID });
         }
     }

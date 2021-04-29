@@ -21,13 +21,13 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             _subjectApiClient = subjectApiClient;
         }
 
-        public async Task<IActionResult> GetAllSubjects()
+        public async Task<IActionResult> GetAllSubjects(int id)
         {
             var getSubjects = await _subjectApiClient.GetAll();
             var subjects = getSubjects.ResultObj;
 
             ViewData["Subjects"] = new SelectList(subjects, "ID", "Name");
-            return PartialView("_Subject");
+            return PartialView("_Subjects", id);
         }
 
         public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 5)

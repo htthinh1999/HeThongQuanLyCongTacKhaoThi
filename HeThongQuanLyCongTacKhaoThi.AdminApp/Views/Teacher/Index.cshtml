@@ -1,0 +1,177 @@
+﻿@using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
+@using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
+@model PagedResult<AccountViewModel>
+
+@{
+    ViewData["Title"] = "Danh sách giảng viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Danh sách giảng viên</h1>
+
+@if (ViewBag.SuccessMsg != null)
+{
+    <div id="alert-msg" class="alert alert-success" role="alert">
+        @ViewBag.SuccessMsg
+    </div>
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách giảng viên</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <form id="dataTable_filter" class="form-inline" asp-action="Index" method="get">
+                        <div class="form-group mr-sm-3 mb-2">
+                            <label for="keyword" class="sr-only">Tìm kiếm:</label>
+                            <input type="search" id="keyword" name="keyword" class="form-control form-control-sm" placeholder="Nội dung" aria-controls="dataTable">
+                        </div>
+                        <input class="btn btn-primary mb-2 mr-2" type="submit" value="Tìm kiếm" />
+                        <input type="submit" class="btn btn-outline-primary mb-2" value="Tải lại" />
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="table" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Mã giảng viên
+                                    </th>
+                                    <th>
+                                        Tên đăng nhập
+                                    </th>
+                                    <th>
+                                        Tên hiển thị
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Ngày sinh
+                                    </th>
+                                    <th>
+                                        Giới tính
+                                    </th>
+                                    <th>
+                                        Số điện thoại
+                                    </th>
+                                    <th>
+                                        Mã lớp
+                                    </th>
+                                    <th>
+                                        Địa chỉ
+                                    </th>
+                                    <th>
+                                        Môn học giảng dạy
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        Mã giảng viên
+                                    </th>
+                                    <th>
+                                        Tên đăng nhập
+                                    </th>
+                                    <th>
+                                        Tên hiển thị
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Ngày sinh
+                                    </th>
+                                    <th>
+                                        Giới tính
+                                    </th>
+                                    <th>
+                                        Số điện thoại
+                                    </th>
+                                    <th>
+                                        Mã lớp
+                                    </th>
+                                    <th>
+                                        Địa chỉ
+                                    </th>
+                                    <th>
+                                        Môn học giảng dạy
+                                    </th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Student_TeacherID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Username)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Birthday)
+                                        </td>
+                                        <td>
+                                            @((item.Gender == true) ? "Nam" : "Nữ")
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ClassID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Address)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Sửa", "EditTeacherSubjects", new { teacherID = item.Id, teacherName = item.Name }) |
+                                            @Html.ActionLink("Chi tiết", "TeacherSubjects", new { teacherID = item.Id, teacherName = item.Name })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    @await Component.InvokeAsync("Pager", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+    <!-- Page level plugins -->
+    <script src="/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        setTimeout(function () {
+            $("#alert-msg").fadeOut('slow');
+        }, 1500);
+
+        $(document).ready(function () {
+            $('#table').DataTable({
+                "paging": false,
+                "ordering": true,
+                "info": false,
+                "bFilter": false
+            });
+        });
+    </script>
+}

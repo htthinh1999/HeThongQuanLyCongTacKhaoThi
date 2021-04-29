@@ -135,14 +135,35 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             return JsonConvert.DeserializeObject<ApiErrorResult<List<SubjectViewModel>>>(result);
         }
 
-        public async Task<ApiResult<bool>> SubjectAssign(string subjectID, SubjectAssignRequest request)
+        public async Task<ApiResult<bool>> SubjectAssign(string subjectID, Guid accountID)
         {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
-            var json = JsonConvert.SerializeObject(request);
+            var json = JsonConvert.SerializeObject(accountID);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
             var response = await client.PostAsync($"/api/subjects/{subjectID}", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+            }
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+        }
+
+        public async Task<ApiResult<bool>> UpdateTeacherSubjects(Guid teacherID, List<string> subjectIDs)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            var json = JsonConvert.SerializeObject(subjectIDs);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.PutAsync($"/api/subjects/teachers/{teacherID}", httpContent);
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {

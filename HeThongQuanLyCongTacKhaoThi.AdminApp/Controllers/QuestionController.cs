@@ -65,9 +65,19 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(QuestionCURequest request, List<AnswerCURequest> answerCreateUpdateRequests, IFormFile ImageAnswer)
         {
+            // Get subjects
+            var getSubjects = await _subjectApiClient.GetAll();
+            var subjects = getSubjects.ResultObj;
+            request.Subjects = subjects.ToList();
+
+            // Get group questions
+            var getQuestionGroups = await _questionGroupApiClient.GetAll();
+            var questionGroups = getQuestionGroups.ResultObj;
+            request.QuestionGroups = questionGroups;
+
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(request);
             }
 
             // Check has min one right answer if question is multiple choice
@@ -105,6 +115,11 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                     Content = $"/images/{fileName}",
                     IsCorrect = true
                 });
+            }
+            else if (answerCreateUpdateRequests.Count == 0 || string.IsNullOrEmpty(answerCreateUpdateRequests[0].Content))
+            {
+                ModelState.AddModelError("", "Cần phải có đáp án cho câu hỏi");
+                return View(request);
             }
 
             var result = await _questionApiClient.Create(request);
@@ -153,9 +168,19 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(QuestionCURequest request, List<AnswerCURequest> Answers, IFormFile ImageAnswer)
         {
+            // Get subjects
+            var getSubjects = await _subjectApiClient.GetAll();
+            var subjects = getSubjects.ResultObj;
+            request.Subjects = subjects.ToList();
+
+            // Get group questions
+            var getQuestionGroups = await _questionGroupApiClient.GetAll();
+            var questionGroups = getQuestionGroups.ResultObj;
+            request.QuestionGroups = questionGroups;
+
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(request);
             }
 
             request.Answers = Answers.ToList();
@@ -175,17 +200,6 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 if (wrongAnscount == Answers.Count)
                 {
                     ModelState.AddModelError("", "Bạn cần chọn 1 đáp án đúng");
-
-                    // Get subjects
-                    var getSubjects = await _subjectApiClient.GetAll();
-                    var subjects = getSubjects.ResultObj;
-                    request.Subjects = subjects.ToList();
-
-                    // Get group questions
-                    var getQuestionGroups = await _questionGroupApiClient.GetAll();
-                    var questionGroups = getQuestionGroups.ResultObj;
-                    request.QuestionGroups = questionGroups;
-
                     return View(request);
                 }
             }
@@ -256,6 +270,16 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             if (result.ResultObj)
             {
                 return BadRequest(result.Message);
+            }
+
+            if (request.Answers[0].Content.Contains("/images/"))
+            {
+                var fileName = request.Answers[0].Content;
+                var file = Path.Combine(_environment.ContentRootPath, fileName.Remove(0,1));
+                if (System.IO.File.Exists(file))
+                {
+                    System.IO.File.Delete(file);
+                }
             }
 
             TempData["SuccessMsg"] = "Xoá câu hỏi thành công";

@@ -21,3 +21,55 @@
         }
     </div>
 </div>
+
+@section Scripts{
+    <script src="/assets/vendor/ckeditor5/build/ckeditor.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var addEditor = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {
+                            highlight: {
+                                options: [
+                                    {
+                                        model: 'greenMarker',
+                                        class: 'marker-green',
+                                        title: 'Green marker',
+                                        color: 'var(--ck-highlight-marker-green)',
+                                        type: 'marker'
+                                    },
+                                    {
+                                        model: 'redMarker',
+                                        class: 'marker-red',
+                                        title: 'Red marker',
+                                        color: 'var(--ck-highlight-marker-red)',
+                                        type: 'marker'
+                                    }
+                                ]
+                            }
+                        })
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                            newEditor.isReadOnly = true;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+
+            }
+
+            addEditor('.editor');
+
+        });
+    </script>
+
+}

@@ -2,7 +2,10 @@
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -76,10 +79,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Answers
 
         public async Task<ApiResult<bool>> DeleteAllAnswersByQuestionID(int id)
         {
-            var answers = from a in _context.Answers
+            var getAnswers = from a in _context.Answers
                           where a.QuestionID == id
                           select a;
-            _context.Answers.RemoveRange(answers);
+
+            _context.Answers.RemoveRange(getAnswers);
 
             var result = await _context.SaveChangesAsync();
             if (result == 0)

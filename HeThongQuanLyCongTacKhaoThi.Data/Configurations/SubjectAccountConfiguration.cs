@@ -9,14 +9,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
         public void Configure(EntityTypeBuilder<SubjectAccount> builder)
         {
             builder.ToTable("SUBJECT_ACCOUNT");
-            builder.HasKey(x => x.ID);
-            builder.Property(x => x.UserID).IsRequired();
-            builder.Property(x => x.SubjectID).IsRequired().HasMaxLength(10);
-            builder.Property(x => x.ClassID).IsRequired().HasMaxLength(15);
+            builder.HasKey(x => new { x.UserID, x.SubjectID });
+            builder.Property(x => x.UserID);
+            builder.Property(x => x.SubjectID).HasMaxLength(10);
 
             builder.HasOne(x => x.Account).WithMany(a => a.SubjectAccounts).HasForeignKey(x => x.UserID);
             builder.HasOne(x => x.Subject).WithMany(s => s.SubjectAccounts).HasForeignKey(x => x.SubjectID);
-            builder.HasOne(x => x.Class).WithMany(c => c.SubjectAccounts).HasForeignKey(x => x.ClassID);
         }
     }
 }
