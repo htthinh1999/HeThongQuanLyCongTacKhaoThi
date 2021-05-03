@@ -41,10 +41,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
             return new ApiSuccessResult<int>(exam.ID);
         }
 
-        public async Task<ApiResult<bool>> Update(int id, ExamUpdateRequest request)
+        public async Task<ApiResult<int>> Update(int id, ExamUpdateRequest request)
         {
             var exam = await _context.Exams.FindAsync(id);
-            if (exam == null) return new ApiErrorResult<bool>("Không thể tìm thấy đề thi");
+            if (exam == null) return new ApiErrorResult<int>("Không thể tìm thấy đề thi");
 
             _context.Entry(exam).State = EntityState.Modified;
 
@@ -57,10 +57,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
 
             if (result == 0)
             {
-                return new ApiErrorResult<bool>("Không thể chỉnh sửa đề thi");
+                return new ApiErrorResult<int>("Không thể chỉnh sửa đề thi");
             }
 
-            return new ApiSuccessResult<bool>();
+            return new ApiSuccessResult<int>(0);
         }
 
         public async Task<ApiResult<bool>> Delete(int id)
@@ -115,23 +115,23 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
                                    join q in _context.Questions on ed.QuestionID equals q.ID
                                    where ed.ExamID == id
                                    orderby q.IsMultipleChoice
-                                   select q).ToListAsync();
+                                   select new { q, ed }).ToListAsync();
 
             foreach (var quest in questions)
             {
                 var questionViewModel = new QuestionViewModel()
                 {
-                    ID = quest.ID,
-                    SubjectID = quest.SubjectID,
-                    GroupID = quest.GroupID,
-                    Content = quest.Content,
-                    IsMultipleChoice = quest.IsMultipleChoice,
+                    ID = quest.q.ID,
+                    SubjectID = quest.q.SubjectID,
+                    GroupID = quest.q.GroupID,
+                    Content = quest.q.Content,
+                    IsMultipleChoice = quest.q.IsMultipleChoice,
                     Answers = new List<AnswerCURequest>()
                 };
 
                 // Get all answers of question
                 var answers = from a in _context.Answers
-                              where a.QuestionID == quest.ID
+                              where a.QuestionID == quest.q.ID
                               select a;
 
                 foreach (var ans in answers)
@@ -150,6 +150,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
                 {
                     ExamID = id,
                     QuestionID = questionViewModel.ID,
+                    MaxQuestionMark = quest.ed.MaxQuestionMark,
                     Question = questionViewModel
                 });
             }

@@ -4,6 +4,7 @@ using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -71,6 +72,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
                     SubjectID = request.SubjectID,
                     QuestionGroups = request.QuestionGroups.ToList()
                 };
+
                 return await Create(examCreateRequest);
             }
 
@@ -93,6 +95,13 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         public async Task<IActionResult> GetAllExamsByContestID(int contestID)
         {
             var result = await _examService.GetAllExamsByContestID(contestID);
+            return Ok(result);
+        }
+
+        [HttpPut("{examID}/add-question-marks")]
+        public async Task<IActionResult> AddMaxQuestionMark(int examID, List<ExamDetailCURequest> examDetails)
+        {
+            var result = await _examDetailService.AddMaxQuestionMark(examID, examDetails);
             return Ok(result);
         }
     }

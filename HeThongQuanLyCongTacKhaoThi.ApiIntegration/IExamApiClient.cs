@@ -13,10 +13,12 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         Task<ApiResult<int>> Create(ExamCreateRequest request);
 
-        Task<ApiResult<bool>> Update(int id, ExamUpdateRequest request);
+        Task<ApiResult<int>> Update(int id, ExamUpdateRequest request);
 
         Task<ApiResult<bool>> Delete(int id);
 
         Task<ApiResult<List<ExamViewModel>>> GetAllExamsByContestID(int contestID);
+
+        Task<ApiResult<bool>> AddMaxQuestionMark(int examID, List<ExamDetailCURequest> examDetails);
     }
 }

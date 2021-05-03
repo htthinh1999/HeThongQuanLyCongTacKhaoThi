@@ -4,6 +4,7 @@ using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -108,6 +109,26 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails
             if (result == 0)
             {
                 return new ApiErrorResult<bool>("Không thể xoá câu hỏi");
+            }
+
+            return new ApiSuccessResult<bool>();
+        }
+
+        public async Task<ApiResult<bool>> AddMaxQuestionMark(int examID, List<ExamDetailCURequest> examDetails)
+        {
+            foreach (var examDetail in examDetails)
+            {
+                var question = await (from ed in _context.ExamDetails
+                               where ed.ExamID == examID && ed.QuestionID == examDetail.QuestionID
+                               select ed).FirstOrDefaultAsync();
+                question.MaxQuestionMark = examDetail.MaxQuestionMark;
+            }
+
+            var result = await _context.SaveChangesAsync();
+
+            if (result == 0)
+            {
+                return new ApiErrorResult<bool>("Không thể thêm điểm cho câu hỏi");
             }
 
             return new ApiSuccessResult<bool>();

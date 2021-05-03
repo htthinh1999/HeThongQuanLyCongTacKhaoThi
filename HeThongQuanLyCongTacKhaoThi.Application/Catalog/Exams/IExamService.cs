@@ -9,7 +9,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
     {
         Task<ApiResult<int>> Create(ExamCreateRequest request);
 
-        Task<ApiResult<bool>> Update(int id, ExamUpdateRequest request);
+        Task<ApiResult<int>> Update(int id, ExamUpdateRequest request);
 
         Task<ApiResult<bool>> Delete(int id);
 

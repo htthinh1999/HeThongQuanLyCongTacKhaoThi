@@ -1,0 +1,77 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams.ExamViewModel
+
+@{
+    ViewData["Title"] = "Thiết lập điểm cho câu hỏi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Thiết lập điểm cho câu hỏi</h1>
+
+<div>
+    <h4>Chi tiết các câu hỏi</h4>
+    <hr />
+    <form asp-action="AddMaxQuestionMark">
+        <dl class="row">
+            @for (int i = 0; i < Model.ExamDetails.Count; i++)
+            {
+                <dt class="col-12">
+                    <hr>
+                    <h3 class="text-bold h4 text-gray-700">Câu @(i+1)</h3>
+                    <hr>
+                </dt>
+                var question = Model.ExamDetails[i].Question;
+                @await Html.PartialAsync("_QuestionDetail", question);
+                <dt class="col-sm-2">
+                    Điểm câu hỏi
+                </dt>
+                <input type="hidden" name="examDetails[@i].QuestionID" value="@question.ID"/>
+                <dd class="col-sm-10 form-group">
+                    @if (!question.IsMultipleChoice)
+                    {
+                        <input type="number" class="form-control" name="examDetails[@i].MaxQuestionMark" min="0" max="10" value="1" step="0.25" />
+                    }
+                    else
+                    {
+                        <input type="hidden" name="examDetails[@i].MaxQuestionMark" value="0" />
+                    }
+                </dd>
+            }
+        </dl>
+        <div class="form-group">
+            <input type="submit" value="Thiết lập điểm" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="/assets/vendor/ckeditor5/build/ckeditor.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var addEditor = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {})
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                            newEditor.isReadOnly = true;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+
+            }
+
+            addEditor('.content');
+            addEditor('.editor');
+        });
+    </script>
+
+}

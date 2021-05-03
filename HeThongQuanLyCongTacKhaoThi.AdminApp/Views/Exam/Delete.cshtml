@@ -41,14 +41,25 @@
     <dl class="row">
         @for (int i = 0; i < Model.ExamDetails.Count; i++)
         {
+            var question = Model.ExamDetails[i].Question;
             <dt class="col-12">
                 <hr>
                 <h3 class="text-bold h4 text-gray-700">Câu @(i+1)</h3>
                 <hr>
             </dt>
-            var question = Model.ExamDetails[i].Question;
+
+            @if (!question.IsMultipleChoice)
+            {
+                <dt class="col-sm-2">
+                    Điểm câu hỏi
+                </dt>
+                <dd class="col-sm-10">
+                    @(Model.ExamDetails[i].MaxQuestionMark)đ
+                </dd>
+            }
 
             @await Html.PartialAsync("_QuestionDetail", question);
+
         }
     </dl>
 

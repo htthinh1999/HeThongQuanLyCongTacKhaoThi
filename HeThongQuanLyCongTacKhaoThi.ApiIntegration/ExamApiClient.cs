@@ -72,7 +72,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             return JsonConvert.DeserializeObject<ApiErrorResult<int>>(result);
         }
 
-        public async Task<ApiResult<bool>> Update(int id, ExamUpdateRequest request)
+        public async Task<ApiResult<int>> Update(int id, ExamUpdateRequest request)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
@@ -85,9 +85,9 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+                return JsonConvert.DeserializeObject<ApiSuccessResult<int>>(result);
             }
-            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
+            return JsonConvert.DeserializeObject<ApiErrorResult<int>>(result);
         }
 
         public async Task<ApiResult<bool>> Delete(int id)
@@ -120,6 +120,24 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             }
 
             return JsonConvert.DeserializeObject<ApiErrorResult<List<ExamViewModel>>>(body);
+        }
+
+        public async Task<ApiResult<bool>> AddMaxQuestionMark(int examID, List<ExamDetailCURequest> examDetails)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            var json = JsonConvert.SerializeObject(examDetails);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.PutAsync($"/api/exams/{examID}/add-question-marks", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
     }
 }

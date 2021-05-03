@@ -6,6 +6,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams
     {
         public int ExamID { get; set; }
         public int QuestionID { get; set; }
+        public float MaxQuestionMark { get; set; }
         public QuestionViewModel Question { get; set; }
     }
 }

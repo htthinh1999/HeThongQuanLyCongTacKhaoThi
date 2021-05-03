@@ -484,3 +484,4 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Ad
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\TeacherSubjects.cshtml.g.cs
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Teacher\EditTeacherSubjects.cshtml.g.cs
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Subjects.cshtml.g.cs
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Exam\AddMaxQuestionMark.cshtml.g.cs

@@ -77,8 +77,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             var result = await _examApiClient.Create(request);
             if (result.IsSuccessed)
             {
-                TempData["SuccessMsg"] = "Tạo đề thi thành công";
-                return RedirectToAction("Index");
+                TempData["CreateUpdateSuccessMsg"] = "Tạo đề thi thành công";
+                return RedirectToAction("AddMaxQuestionMark", new { examID = result.ResultObj });
             }
 
             ModelState.AddModelError("", result.Message);
@@ -140,6 +140,12 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return View(request);
             }
 
+            if (request.ReRandom)
+            {
+                TempData["CreateUpdateSuccessMsg"] = "Cập nhật đề thi thành công";
+                return RedirectToAction("AddMaxQuestionMark", new { examID = result.ResultObj });
+            }
+
             TempData["SuccessMsg"] = "Cập nhật đề thi thành công";
             return RedirectToAction("Index");
         }
@@ -176,6 +182,32 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             }
 
             TempData["SuccessMsg"] = "Xoá đề thi thành công";
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddMaxQuestionMark(int examID)
+        {
+            var result = await _examApiClient.GetByID(examID);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+
+            TempData["examID"] = examID;
+            return View(result.ResultObj);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMaxQuestionMark(List<ExamDetailCURequest> examDetails)
+        {
+            int examID = (int)TempData["examID"];
+            var result = await _examApiClient.AddMaxQuestionMark(examID, examDetails);
+            if (!result.IsSuccessed)
+            {
+                return BadRequest(result.Message);
+            }
+            TempData["SuccessMsg"] = TempData["CreateUpdateSuccessMsg"];
             return RedirectToAction("Index");
         }
     }
