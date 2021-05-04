@@ -45,21 +45,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
                 return View();
             }
 
-            // Get user's full name
-            var getUser = await _accountApiClient.GetByUserName(User.Identity.Name);
-
-            if (getUser == null)
-            {
-                return RedirectToAction("Login");
-            }
-
-            var user = getUser.ResultObj;
-            (User.Identity as ClaimsIdentity).AddClaim(new Claim("FullName", user.Name));
-            HttpContext.Session.SetString("UserID", user.Id.ToString());
-            HttpContext.Session.SetString("UserFullName", user.Name);
+            string userID = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
+            HttpContext.Session.SetString("UserID", userID);
+            HttpContext.Session.SetString("UserFullName", (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.GivenName).Value);
 
             // Get student' subject
-            var getSubjectsByAccountID = await _subjectApiClient.GetSubjectsByAccountID(user.Id);
+            var getSubjectsByAccountID = await _subjectApiClient.GetSubjectsByAccountID(new Guid(userID));
             var subjects = getSubjectsByAccountID.ResultObj;
             HttpContext.Session.SetString("AccoutSubjects", JsonConvert.SerializeObject(subjects));
 

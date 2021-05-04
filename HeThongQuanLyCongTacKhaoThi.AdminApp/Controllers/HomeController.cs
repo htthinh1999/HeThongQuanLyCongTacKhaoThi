@@ -15,12 +15,10 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IAccountApiClient _accountApiClient;
 
-        public HomeController(ILogger<HomeController> logger, IAccountApiClient accountApiClient)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _accountApiClient = accountApiClient;
         }
 
         public async Task<IActionResult> Index()
@@ -29,16 +27,8 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            var getUser = await _accountApiClient.GetByUserName(User.Identity.Name);
 
-            if(getUser == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            var user = getUser.ResultObj;
-            (User.Identity as ClaimsIdentity).AddClaim(new Claim("FullName", user.Name));
-            HttpContext.Session.SetString("UserFullName", user.Name);
+            HttpContext.Session.SetString("UserFullName", (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.GivenName).Value);
 
             return View();
         }
