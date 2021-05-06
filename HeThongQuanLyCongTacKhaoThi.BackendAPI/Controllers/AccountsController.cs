@@ -1,9 +1,11 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
+using HeThongQuanLyCongTacKhaoThi.BackendAPI.HubServices;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
@@ -14,10 +16,12 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly IAccountService _accountService;
+        private readonly INotificationHubService _notificationService;
 
-        public AccountsController(IAccountService accountService)
+        public AccountsController(IAccountService accountService, INotificationHubService notificationService)
         {
             _accountService = accountService;
+            _notificationService = notificationService;
         }
 
         [HttpPost("authenticate")]
@@ -88,6 +92,11 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         public async Task<IActionResult> GetAllPaging([FromQuery] GetAccountPagingRequest request)
         {
             var result = await _accountService.GetAccountPaging(request);
+
+            // Test notification
+            await _notificationService.StudentSubmited(5, 3);
+
+
             return Ok(result);
         }
 

@@ -15,5 +15,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
         public List<SubjectAccount> SubjectAccounts { get; set; }
         public List<Exam> Exams { get; set; }
         public List<Contest> Contests { get; set; }
+        public List<Notification> Notifications { get; set; }
     }
 }

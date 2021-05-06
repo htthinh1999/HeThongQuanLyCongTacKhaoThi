@@ -12,5 +12,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.TeacherContests
         Task<ApiResult<bool>> Create(TeacherContestCURequest request);
 
         Task<ApiResult<bool>> Delete(int contestID);
+
+        Task<ApiResult<List<string>>> GetAllTeacherIDsInContest(int contestID);
     }
 }

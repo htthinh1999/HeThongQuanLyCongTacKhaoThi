@@ -45,7 +45,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
                 return View();
             }
 
-            string userID = (User.Identity as ClaimsIdentity).FindFirst("UserID").Value;
+            string userID = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.NameIdentifier).Value;
             HttpContext.Session.SetString("UserID", userID);
             HttpContext.Session.SetString("UserFullName", (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.GivenName).Value);
 

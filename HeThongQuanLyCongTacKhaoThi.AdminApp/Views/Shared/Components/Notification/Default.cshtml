@@ -1,0 +1,50 @@
+﻿@model List<HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Notifications.NotificationViewModel>
+
+<li class="nav-item dropdown no-arrow mx-1">
+    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bell fa-fw"></i>
+        <!-- Counter - Alerts -->
+        <span class="badge badge-danger badge-counter">@(Model.Count > 0 ? string.Format("{0}" + (Model.Count == 5? "+" : ""), Model.Count) : "")</span>
+    </a>
+    <!-- Dropdown - Alerts -->
+    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+         aria-labelledby="alertsDropdown">
+        <h6 class="dropdown-header">
+            Thông báo
+        </h6>
+        <div id="alert-items">
+            @foreach (var item in Model)
+            {
+                <a class="dropdown-item d-flex align-items-center alert-item" href="@Url.Action("","", new { studentAnswerID = item.StudentAnswerID })">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-primary">
+                            <i class="fas fa-file-alt text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">
+                            @{
+                                var timeSubtracted = DateTime.Now.Subtract(item.DateTime);
+                                if (timeSubtracted < TimeSpan.FromHours(1))
+                                {
+                                    <span>@((int)timeSubtracted.TotalMinutes) phút trước</span>
+                                }
+                                else if (timeSubtracted < TimeSpan.FromDays(1))
+                                {
+                                    <span>@((int)timeSubtracted.TotalHours) tiếng trước</span>
+                                }
+                                else
+                                {
+                                    <span>@String.Format("{0:d/M/yyyy HH:mm}", item.DateTime)</span>
+                                }
+                            }
+                        </div>
+                        <span class="@(item.IsRead?"":"font-weight-bold")">Đã có học viên nộp bài với mã phách @item.Message</span>
+                    </div>
+                </a>
+            }
+        </div>
+        <a class="dropdown-item text-center small text-gray-500" href="#">Hiển thị tất cả</a>
+    </div>
+</li>

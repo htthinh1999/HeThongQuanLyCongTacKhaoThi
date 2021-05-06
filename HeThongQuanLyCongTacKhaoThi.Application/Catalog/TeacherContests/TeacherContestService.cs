@@ -56,5 +56,14 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.TeacherContests
 
             return new ApiSuccessResult<bool>();
         }
+
+        public async Task<ApiResult<List<string>>> GetAllTeacherIDsInContest(int contestID)
+        {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            var teacherIDs = await _context.TeacherContests.Where(x => x.ContestID == contestID).Select(x => x.TeacherID.ToString().ToLower()).ToListAsync();
+
+            return new ApiSuccessResult<List<string>>(teacherIDs);
+        }
     }
 }

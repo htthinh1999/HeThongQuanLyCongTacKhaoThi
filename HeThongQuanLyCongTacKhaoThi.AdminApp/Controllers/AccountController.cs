@@ -221,6 +221,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             };
 
             HttpContext.Session.SetString("Token", result.ResultObj);
+
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 accountPrincipal,

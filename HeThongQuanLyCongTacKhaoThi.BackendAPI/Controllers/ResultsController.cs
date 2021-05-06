@@ -1,4 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results;
+using HeThongQuanLyCongTacKhaoThi.BackendAPI.HubServices;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -17,10 +18,12 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
     public class ResultsController : ControllerBase
     {
         private readonly IResultService _resultService;
+        private readonly INotificationHubService _notificationService;
 
-        public ResultsController(IResultService resultService)
+        public ResultsController(IResultService resultService, INotificationHubService notificationService)
         {
             _resultService = resultService;
+            _notificationService = notificationService;
         }
 
         [HttpPost("create")]
@@ -28,6 +31,12 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var result = await _resultService.Create(request);
+
+            if (result.IsSuccessed)
+            {
+                await _notificationService.StudentSubmited(request.ContestID, request.StudentAnswerID);
+            }
+
             return Ok(result);
         }
 

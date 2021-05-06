@@ -53,6 +53,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp
             services.AddTransient<IContestApiClient, ContestApiClient>();
             services.AddTransient<ITeacherContestApiClient, TeacherContestApiClient>();
             services.AddTransient<IScoreTypeApiClient, ScoreTypeApiClient>();
+            services.AddTransient<INotificationApiClient, NotificationApiClient>();
 
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");

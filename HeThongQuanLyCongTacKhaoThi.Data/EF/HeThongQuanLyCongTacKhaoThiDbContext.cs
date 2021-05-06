@@ -33,6 +33,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
             modelBuilder.ApplyConfiguration(new SubjectAccountConfiguration());
             modelBuilder.ApplyConfiguration(new TeacherContestConfiguration());
+            modelBuilder.ApplyConfiguration(new NotificationConfiguration());
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("USER_CLAIM");
             modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("USER_ROLE").HasKey(x => new { x.UserId, x.RoleId });
@@ -61,5 +62,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
         public DbSet<Contest> Contests { get; set; }
         public DbSet<TeacherContest> TeacherContests { get; set; }
         public DbSet<IdentityUserRole<Guid>> UserRoles { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
     }
 }

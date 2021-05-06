@@ -14,5 +14,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
 
         public List<StudentAnswerDetail> StudentAnswerDetails { get; set; }
         public List<Result> Results { get; set; }
+        public List<Notification> Notifications { get; set; }
     }
 }

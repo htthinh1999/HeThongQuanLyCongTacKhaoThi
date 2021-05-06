@@ -4,6 +4,7 @@ using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Classes;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams;
+using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Notifications;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.QuestionGroups;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results;
@@ -14,6 +15,8 @@ using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects;
 using HeThongQuanLyCongTacKhaoThi.Application.Catalog.TeacherContests;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Accounts;
 using HeThongQuanLyCongTacKhaoThi.Application.System.Roles;
+using HeThongQuanLyCongTacKhaoThi.BackendAPI.Hubs;
+using HeThongQuanLyCongTacKhaoThi.BackendAPI.HubServices;
 using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
@@ -31,6 +34,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
 {
@@ -65,6 +69,13 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
                 .AddEntityFrameworkStores<HeThongQuanLyCongTacKhaoThiDbContext>()
                 .AddDefaultTokenProviders();
 
+            // Add Cors Policy
+            services.AddCors(options =>
+               options.AddDefaultPolicy(builder => builder.WithOrigins("http://localhost:5002").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+
+            // DI signalR
+            services.AddSignalR();
+
             // Declare DI
             services.AddTransient<IClassService, ClassService>();
             services.AddTransient<UserManager<Account>, UserManager<Account>>();
@@ -84,6 +95,10 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
             services.AddTransient<ITeacherContestService, TeacherContestService>();
             services.AddTransient<IScoreTypeService, ScoreTypeService>();
             services.AddTransient<IResultService, ResultService>();
+            services.AddTransient<INotificationService, NotificationService>();
+
+            // DI Notification Using SignalR
+            services.AddTransient<INotificationHubService, NotificationHubService>();
 
             // Declare Fluent Validator
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
@@ -148,6 +163,27 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
                     ClockSkew = TimeSpan.FromMinutes(5),    // recommend 5 minutes or less
                     IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                 };
+                /*
+                 * Add authenication when use signalR
+                 * https://stackoverflow.com/questions/48119106/signalr-angular-how-to-add-bearer-token-to-http-headers
+                 * 
+                 */
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+
+                        // If the request is for our hub...
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) && (path.StartsWithSegments("/notificationHub")))
+                        {
+                            // Read the token out of the query string
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
 
@@ -178,6 +214,8 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
 
             app.UseAuthentication();
 
+            app.UseCors();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -188,11 +226,18 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger HeThongQuanLyCongTacKhaoThi Solution V1");
             });
 
+            //app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<NotificationHub>("/eventHub");
+            //});
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapHub<NotificationHub>("/notificationHub");
             });
         }
     }
