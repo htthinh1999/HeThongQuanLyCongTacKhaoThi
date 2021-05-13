@@ -111,7 +111,7 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
         {
             var currentAccountID = new Guid(HttpContext.Session.GetString("UserID"));
 
-            var getExamResult = await _resultApiClient.GetExamResult(currentAccountID, contestID);
+            var getExamResult = await _resultApiClient.GetExamResult(accountID: currentAccountID, contestID: contestID);
 
             var examResult = getExamResult.ResultObj;
 

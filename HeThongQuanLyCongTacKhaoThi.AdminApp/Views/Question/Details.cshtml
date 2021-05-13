@@ -27,7 +27,8 @@
             @Html.DisplayNameFor(model => model.Content)
         </dt>
         <dd class="col-sm-10">
-            <textarea rows="5" class="form-control content">@Html.DisplayFor(model => model.Content)</textarea>
+            @*<textarea rows="5" class="form-control content">@Html.DisplayFor(model => model.Content)</textarea>*@
+            @Html.Raw(Model.Content)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsMultipleChoice)
@@ -45,7 +46,8 @@
                     Nội dung đáp án thứ @(i + 1)
                 </dt>
                 <dd class="col-sm-10">
-                    <textarea rows="5" class="editor">@Model.Answers[i].Content</textarea>
+                    @*<textarea rows="5" class="editor">@Model.Answers[i].Content</textarea>*@
+                    @Html.Raw(Model.Answers[i].Content)
                 </dd>
 
                 if (Model.Answers[i].IsCorrect)
@@ -77,7 +79,8 @@
                 }
                 else
                 {
-                    <textarea rows="5" class="editor">@Model.Answers[0].Content</textarea>
+                    @*<textarea rows="5" class="editor">@Model.Answers[0].Content</textarea>*@
+                    @Html.Raw(Model.Answers[0].Content)
                 }
             </dd>
         }
@@ -89,34 +92,8 @@
 </div>
 
 @section Scripts{
-    <script src="/assets/vendor/ckeditor5/build/ckeditor.js"></script>
 
-    <script>
-        $(document).ready(function () {
-
-            var addEditor = function (className) {
-                window.editors = {};
-
-                document.querySelectorAll(className).forEach((node, index) => {
-                    ClassicEditor
-                        .create(node, {})
-                        .then(newEditor => {
-                            window.editors[index] = newEditor;
-                            newEditor.isReadOnly = true;
-                        })
-                        .catch(error => {
-                            console.error('Oops, something went wrong!');
-                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
-                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
-                            console.error(error);
-                        });
-                });
-
-            }
-
-            addEditor('.content');
-            addEditor('.editor');
-        });
-    </script>
-
+    @* Enable MathJax to support render MathML on Chrome and Edge *@
+    <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
 }

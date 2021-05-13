@@ -21,10 +21,10 @@
             <div class="form-check">
                 <input class="form-check-input" type="radio" id="Answer[@Model.Question.ID@i]" value="@Model.Question.Answers[i].ID" @((Model.Question.Answers[i].ID == Model.AnswerID) ? "checked" : "") disabled />
                 @*<div class="form-check-label editor" for="Answer[@Model.Question.ID@i]">
-                    <mark class='@((Model.Question.Answers[i].IsCorrect)?"marker-green":(Model.Question.Answers[i].ID == Model.AnswerID)?"marker-red":"")'>
-                        @Model.Question.Answers[i].Content
-                    </mark>
-                </div>*@
+                        <mark class='@((Model.Question.Answers[i].IsCorrect)?"marker-green":(Model.Question.Answers[i].ID == Model.AnswerID)?"marker-red":"")'>
+                            @Model.Question.Answers[i].Content
+                        </mark>
+                    </div>*@
                 <div class='@((Model.Question.Answers[i].IsCorrect)?"marker-green":(Model.Question.Answers[i].ID == Model.AnswerID)?"marker-red":"")'>
                     @Html.Raw(Model.Question.Answers[i].Content)
                 </div>
@@ -57,26 +57,16 @@ else
         }
     </dd>
     <dt class="col-sm-2">
-        Nhận xét GV 1
+        Nhận xét
     </dt>
-    <dd class="col-sm-7 col-md-8">
+    <dd class="col-sm-10">
         @*<textarea rows="5" class="form-control editor" name="Teacher1Comment">@Model.Teacher1Comment</textarea>*@
         @Html.Raw(Model.Teacher1Comment)
     </dd>
-    <dd class="col-sm-3 col-md-2">
-        <p><b>Điểm GV1:</b> @(Model.Mark1?? Single.NaN)</p>
-    </dd>
     <dt class="col-sm-2">
-        Nhận xét GV 2
+        Điểm
     </dt>
-    <dd class="col-sm-7 col-md-8">
-        @*<textarea rows="5" class="form-control editor" name="Teacher2Comment">@Model.Teacher2Comment</textarea>*@
-        @Html.Raw(Model.Teacher2Comment)
-    </dd>
-    <dd class="col-sm-3 col-md-2">
-        <p><b>Điểm GV2:</b> @(Model.Mark2?? Single.NaN)</p>
-    </dd>
-    <dd class="col-12">
-        <p><b>Điểm kết quả:</b>  @(Model.Mark?? Single.NaN)</p>
+    <dd class="col-sm-10">
+        @(Model.Mark1?? Single.NaN)
     </dd>
 }

@@ -115,5 +115,75 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
 
             return new ApiSuccessResult<ExamResultViewModel>(examResult);
         }
+
+        public async Task<ApiResult<ExamResultViewModel>> GetExamResult(int studentAnswerID)
+        {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            var examResult = await (from rs in _context.Results
+                                    join e in _context.Exams on rs.ExamID equals e.ID
+                                    join ed in _context.ExamDetails on e.ID equals ed.ExamID
+                                    join q in _context.Questions on ed.QuestionID equals q.ID
+                                    where rs.StudentAnswerID == studentAnswerID
+                                    group new { rs, e, q } by new { rs.StudentAnswerID, e.Name } into exam
+                                    select new ExamResultViewModel()
+                                    {
+                                        Name = exam.Key.Name,
+                                        MultipleChoiceQuestionCount = exam.Sum(x => (x.q.IsMultipleChoice) ? 1 : 0),
+                                        EssayQuestionCount = exam.Sum(x => (x.q.IsMultipleChoice) ? 1 : 0),
+                                        StudentAnswerID = exam.Key.StudentAnswerID,
+                                        studentAnswerDetails = new List<StudentAnswerDetailViewModel>()
+                                    }).FirstOrDefaultAsync();
+
+            if (examResult == null)
+            {
+                return new ApiErrorResult<ExamResultViewModel>("Không thể lấy kết quả đề thi");
+            }
+
+            var studentAnswerDetails = await (from stad in _context.StudentAnswerDetails
+                                              join q in _context.Questions on stad.QuestionID equals q.ID
+                                              where stad.StudentAnswerID == examResult.StudentAnswerID
+                                              orderby q.IsMultipleChoice
+                                              select new StudentAnswerDetailViewModel()
+                                              {
+                                                  AnswerID = stad.AnswerID,
+                                                  QuestionID = q.ID,
+                                                  EssayPath = stad.EssayPath,
+                                                  StudentAnswerContent = stad.StudentAnswerContent,
+                                                  Teacher1Comment = stad.Teacher1Comment,
+                                                  Teacher2Comment = stad.Teacher2Comment,
+                                                  Mark1 = stad.Mark1,
+                                                  Mark2 = stad.Mark2,
+                                                  Mark = stad.Mark,
+                                                  Question = new QuestionViewModel()
+                                                  {
+                                                      ID = q.ID,
+                                                      Content = q.Content,
+                                                      IsMultipleChoice = q.IsMultipleChoice,
+                                                      Answers = new List<AnswerCURequest>()
+                                                  }
+                                              }).ToListAsync();
+
+            foreach (var studentAnswerDetail in studentAnswerDetails)
+            {
+                // Get all answers of question
+                var answers = await (from a in _context.Answers
+                                     where a.QuestionID == studentAnswerDetail.QuestionID
+                                     select new AnswerCURequest()
+                                     {
+                                         ID = a.ID,
+                                         QuestionID = a.QuestionID,
+                                         Content = a.Content,
+                                         IsCorrect = a.IsCorrect
+                                     }).ToListAsync();
+
+                studentAnswerDetail.Question.Answers = answers.ToList();
+            }
+
+
+            examResult.studentAnswerDetails = studentAnswerDetails.ToList();
+
+            return new ApiSuccessResult<ExamResultViewModel>(examResult);
+        }
     }
 }

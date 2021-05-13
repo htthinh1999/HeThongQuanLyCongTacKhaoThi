@@ -130,7 +130,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Questions
             var query = _context.Questions.Where(q => q.Content.Contains(""));
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = _context.Questions.Where(q => q.Content.Contains(request.Keyword));
+                query = _context.Questions.Where(q => q.SubjectID.Contains(request.Keyword)
+                                                   || q.Content.Contains(request.Keyword)
+                                                   || q.GroupID.ToString().Contains(request.Keyword));
             }
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)

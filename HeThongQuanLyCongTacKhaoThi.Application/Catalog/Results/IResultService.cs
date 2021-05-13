@@ -13,5 +13,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
         Task<ApiResult<bool>> Create(ResultCURequest request);
 
         Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid accountID, int contestID);
+
+        Task<ApiResult<ExamResultViewModel>> GetExamResult(int studentAnswerID);
     }
 }

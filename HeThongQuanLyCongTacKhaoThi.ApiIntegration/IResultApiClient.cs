@@ -11,6 +11,9 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
     public interface IResultApiClient
     {
         Task<ApiResult<bool>> Create(ResultCURequest request);
+
         Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid accountID, int contestID);
+
+        Task<ApiResult<ExamResultViewModel>> GetExamResult(int studentAnswerID, Guid teacherID);
     }
 }

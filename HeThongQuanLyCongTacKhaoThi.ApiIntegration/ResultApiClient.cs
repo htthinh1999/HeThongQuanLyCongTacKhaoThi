@@ -59,5 +59,21 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<ExamResultViewModel>>(result);
         }
+
+        public async Task<ApiResult<ExamResultViewModel>> GetExamResult(int studentAnswerID, Guid teacherID)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync($"/api/results/get-exam-result-by-student-answer-id?studentAnswerID={studentAnswerID}&teacherID={teacherID}");
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<ExamResultViewModel>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<ExamResultViewModel>>(result);
+        }
     }
 }

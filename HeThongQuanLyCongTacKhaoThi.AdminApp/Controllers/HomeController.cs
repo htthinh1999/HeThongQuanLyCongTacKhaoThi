@@ -28,6 +28,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+            HttpContext.Session.SetString("UserID", (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.NameIdentifier).Value);
             HttpContext.Session.SetString("UserFullName", (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.GivenName).Value);
 
             return View();

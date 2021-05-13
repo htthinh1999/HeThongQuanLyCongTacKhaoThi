@@ -47,5 +47,13 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _resultService.GetExamResult(accountID, contestID);
             return Ok(result);
         }
+
+        [HttpGet("get-exam-result-by-student-answer-id")]
+        public async Task<IActionResult> GetExamResult([FromQuery] int studentAnswerID)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var result = await _resultService.GetExamResult(studentAnswerID);
+            return Ok(result);
+        }
     }
 }
