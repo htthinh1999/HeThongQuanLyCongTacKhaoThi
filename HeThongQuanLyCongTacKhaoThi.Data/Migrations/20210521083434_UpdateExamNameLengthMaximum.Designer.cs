@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 {
     [DbContext(typeof(HeThongQuanLyCongTacKhaoThiDbContext))]
-    [Migration("20210505092226_FixDatetimeNofitication")]
-    partial class FixDatetimeNofitication
+    [Migration("20210521083434_UpdateExamNameLengthMaximum")]
+    partial class UpdateExamNameLengthMaximum
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,7 +106,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Id = new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"),
                             AccessFailedCount = 0,
                             Birthday = new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "14769004-6589-4421-a6ed-7056ea201cc1",
+                            ConcurrencyStamp = "80cfa4eb-9745-47a3-8b0c-aded87136bf0",
                             Email = "keycodemon@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -114,7 +114,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Keycode Mon",
                             NormalizedEmail = "keycodemon@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPIioNTqJ/rQlmI1oKJel7i3Xuv26wFwO3p9zarePd0JWvr4GK5T11+D2pcGmiGQPQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENoV+l0pWD/kzjBPI3Bptz2/OAYpPAKV4EvUqDcbe0OfBHxL9H0iZryBhMJvOvSyJw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -127,7 +127,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Address = "Số 80 - Hai Bà Trưng - Vạn Giã - Vạn Ninh - Khánh Hoà",
                             Birthday = new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ClassID = "DHCN4A",
-                            ConcurrencyStamp = "56c612f9-ba17-4aeb-be8d-322b98324d1c",
+                            ConcurrencyStamp = "9f5c8e36-62c2-4cae-8afd-9e8a925c8667",
                             Email = "htthinh1999@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -135,7 +135,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Huỳnh Tấn Thịnh",
                             NormalizedEmail = "htthinh1999@gmail.com",
                             NormalizedUserName = "htthinh",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEe/XRpPf8r1cwYUaAdqjwIjIoP+Nj86ch+U8iltlW05eFgU2DBsdAxwcyUl8GZwwg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI8JE49PXqxFg6s5OMhnFZAuZVtx8fpFyjDG9dKxtzEgWM8pkDG8CIS6M6AJTwbdig==",
                             PhoneNumber = "0977393641",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -150,7 +150,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Address = "Khánh Hoà",
                             Birthday = new DateTime(2000, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ClassID = "DHCN4A",
-                            ConcurrencyStamp = "79f3c59a-7a10-4f3e-bc30-bc8e2d85c472",
+                            ConcurrencyStamp = "e8fe953c-1ef0-4e6c-8324-dbfd2ee46010",
                             Email = "sv1@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -158,7 +158,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Sinh viên 1",
                             NormalizedEmail = "sv1@gmail.com",
                             NormalizedUserName = "sv1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPJlxzhhh94Itd1MUK7ugg4//ZdpBdl8nW+A5dalrfpRIL2Sxsw0bg+fEEGk3pFw1g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOgRXVCrX7tWPeVkraM9IQ8bWsNi354265WFEbvugzSIeDZvCf/vUSME0lCZ3sZbQQ==",
                             PhoneNumber = "0987333644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -173,7 +173,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Address = "Khánh Hoà",
                             Birthday = new DateTime(2000, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ClassID = "DHCN4A",
-                            ConcurrencyStamp = "eb22da46-d7cb-43f3-97e1-87171800f84e",
+                            ConcurrencyStamp = "e339e03b-89fb-49ad-be79-3c9ac501fbe4",
                             Email = "sv2@gmail.com",
                             EmailConfirmed = true,
                             Gender = true,
@@ -181,7 +181,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                             Name = "Sinh viên 2",
                             NormalizedEmail = "sv2@gmail.com",
                             NormalizedUserName = "sv2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKPRPolEJRoWyAG54O5xNBNGLPRYRYpXc3fIrOZrR2ktzeYZwIgdzXILo4tgE9d6Tg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC0oJfblAcM4tXspBOVuw8WZZlZjH2lf6skxuYofqzfC49Ox62R7IPKqfz5HXOQ4Ww==",
                             PhoneNumber = "0987666644",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
@@ -482,8 +482,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100)
                         .IsUnicode(true);
 
                     b.Property<string>("SubjectID")
@@ -543,13 +543,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("");
 
-                    b.Property<int>("StudentAnswerID")
+                    b.Property<Guid>("StudentAnswerID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(null);
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValue(new Guid("00000000-0000-0000-0000-000000000000"));
 
                     b.Property<string>("SubjectID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
@@ -705,8 +704,8 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.Property<float>("Mark")
                         .HasColumnType("real");
 
-                    b.Property<int>("StudentAnswerID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentAnswerID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SubjectID")
                         .IsRequired()
@@ -763,7 +762,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         new
                         {
                             Id = new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f"),
-                            ConcurrencyStamp = "37636680-7ad8-48d3-b872-0ab67223af8b",
+                            ConcurrencyStamp = "f1db34f7-f762-4270-94fc-0324dc216cf2",
                             Description = "Vai trò quản trị viên",
                             Name = "Admin",
                             NormalizedName = "admin"
@@ -771,7 +770,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         new
                         {
                             Id = new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94"),
-                            ConcurrencyStamp = "803e035b-b25e-4127-afb6-a5eca042e676",
+                            ConcurrencyStamp = "3c6c4652-923c-45dc-afb2-3e817e93abfe",
                             Description = "Vai trò giảng viên",
                             Name = "Teacher",
                             NormalizedName = "teacher"
@@ -779,7 +778,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                         new
                         {
                             Id = new Guid("9a34bdd4-fa97-4e2f-9960-b19a68826be9"),
-                            ConcurrencyStamp = "22cfb2aa-eb8a-49f2-bf34-ebba65c64bee",
+                            ConcurrencyStamp = "6a085597-60d8-492b-b804-4970d853c269",
                             Description = "Vai trò học viên",
                             Name = "Student",
                             NormalizedName = "student"
@@ -1098,10 +1097,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.StudentAnswer", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ExamID")
                         .HasColumnType("int");
@@ -1150,10 +1148,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.Property<string>("StudentAnswerContent")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
+                        .IsUnicode(true)
                         .HasDefaultValue(null);
 
-                    b.Property<int>("StudentAnswerID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentAnswerID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Teacher1Comment")
                         .ValueGeneratedOnAdd()
@@ -1502,8 +1501,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     b.HasOne("HeThongQuanLyCongTacKhaoThi.Data.Entities.Subject", "Subject")
                         .WithMany("Notifications")
                         .HasForeignKey("SubjectID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("HeThongQuanLyCongTacKhaoThi.Data.Entities.Question", b =>

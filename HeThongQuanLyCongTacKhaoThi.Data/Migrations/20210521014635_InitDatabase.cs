@@ -379,8 +379,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 name: "STUDENT_ANSWER",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<Guid>(nullable: false),
                     UserID = table.Column<Guid>(nullable: false),
                     ExamID = table.Column<int>(nullable: false)
                 },
@@ -402,6 +401,40 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NOTIFICATION",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AccountID = table.Column<Guid>(nullable: false),
+                    StudentAnswerID = table.Column<Guid>(nullable: false, defaultValue: new Guid("00000000-0000-0000-0000-000000000000")),
+                    Message = table.Column<string>(nullable: true, defaultValue: ""),
+                    DateTime = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()"),
+                    IsRead = table.Column<bool>(nullable: false, defaultValue: false),
+                    SubjectID = table.Column<string>(maxLength: 10, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NOTIFICATION", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_NOTIFICATION_ACCOUNT_AccountID",
+                        column: x => x.AccountID,
+                        principalTable: "ACCOUNT",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NOTIFICATION_STUDENT_ANSWER_StudentAnswerID",
+                        column: x => x.StudentAnswerID,
+                        principalTable: "STUDENT_ANSWER",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_NOTIFICATION_SUBJECT_SubjectID",
+                        column: x => x.SubjectID,
+                        principalTable: "SUBJECT",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RESULT",
                 columns: table => new
                 {
@@ -411,7 +444,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                     SubjectID = table.Column<string>(maxLength: 10, nullable: false),
                     ContestID = table.Column<int>(nullable: false),
                     ExamID = table.Column<int>(nullable: false),
-                    StudentAnswerID = table.Column<int>(nullable: false),
+                    StudentAnswerID = table.Column<Guid>(nullable: false),
                     Mark = table.Column<float>(nullable: false),
                     Time = table.Column<int>(nullable: false)
                 },
@@ -451,7 +484,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentAnswerID = table.Column<int>(nullable: false),
+                    StudentAnswerID = table.Column<Guid>(nullable: false),
                     QuestionID = table.Column<int>(nullable: false),
                     AnswerID = table.Column<int>(nullable: true),
                     EssayPath = table.Column<string>(nullable: true),
@@ -487,7 +520,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
             migrationBuilder.InsertData(
                 table: "ACCOUNT",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "Birthday", "ClassID", "ConcurrencyStamp", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Student_TeacherID", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"), 0, null, new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "1db7db94-9eb9-457b-8d9c-e07ef973f112", "keycodemon@gmail.com", true, true, false, null, "Keycode Mon", "keycodemon@gmail.com", "admin", "AQAAAAEAACcQAAAAENJ4XbbkVP38iidkuvWm66z2RyRhzvOnAswdeLGXJwqhhBc4X9wU6qOP+SBPR3AKpQ==", null, false, "", null, false, "admin" });
+                values: new object[] { new Guid("efe5c78c-bbc5-40e5-a106-1f07d4b4fcdb"), 0, null, new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "fe0d6fd9-b56d-47a2-a9d2-fd53d51b01f0", "keycodemon@gmail.com", true, true, false, null, "Keycode Mon", "keycodemon@gmail.com", "admin", "AQAAAAEAACcQAAAAED2OjnuFkjkr7i9+sOA+XUz3UQrTiP2ZrhKt4BEqfvEh0d1WvY4NgqosGAFjVl3eVQ==", null, false, "", null, false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "CLASS",
@@ -526,9 +559,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f"), "21e5381e-4ccd-4b07-89d8-3d7229733b12", "Vai trò quản trị viên", "Admin", "admin" },
-                    { new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94"), "926811ae-040b-4bbc-aa66-cd92b617709e", "Vai trò giảng viên", "Teacher", "teacher" },
-                    { new Guid("9a34bdd4-fa97-4e2f-9960-b19a68826be9"), "b2edaa9a-9a13-41a5-a619-d868c765d1f7", "Vai trò học viên", "Student", "student" }
+                    { new Guid("61a4fad5-402c-4ce0-845d-1fbd2b91956f"), "5ecb7e35-fd4f-4057-a2f0-9f31ae1704e6", "Vai trò quản trị viên", "Admin", "admin" },
+                    { new Guid("1e6d489f-1df4-4dab-b873-ce3224d87f94"), "8efadec6-f9b6-41cd-ba4a-359b15bd3205", "Vai trò giảng viên", "Teacher", "teacher" },
+                    { new Guid("9a34bdd4-fa97-4e2f-9960-b19a68826be9"), "d5cc3ef4-3b73-4635-8165-9d62b6c86244", "Vai trò học viên", "Student", "student" }
                 });
 
             migrationBuilder.InsertData(
@@ -564,9 +597,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "Birthday", "ClassID", "ConcurrencyStamp", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Student_TeacherID", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("4a2d9b6e-97c4-41bd-a929-f778972db109"), 0, "Số 80 - Hai Bà Trưng - Vạn Giã - Vạn Ninh - Khánh Hoà", new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "0fdd59b5-f09d-4b86-992e-756a9220327e", "htthinh1999@gmail.com", true, true, false, null, "Huỳnh Tấn Thịnh", "htthinh1999@gmail.com", "htthinh", "AQAAAAEAACcQAAAAEEqut3QJckkParEqwCKP4/Sggkup+CdNYLeeyT7DNsdo7OQoLk5T/eK2PN/vqQ5Vzw==", "0977393641", false, "", "17ĐC027", false, "htthinh" },
-                    { new Guid("9e7773ef-083c-4a8e-8ed2-9e36cd704913"), 0, "Khánh Hoà", new DateTime(2000, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "0b5f6cdf-b6bd-4d25-8c42-39a2cc9622a9", "sv1@gmail.com", true, true, false, null, "Sinh viên 1", "sv1@gmail.com", "sv1", "AQAAAAEAACcQAAAAEJiEHwIfUwpoQnNbpUgKAgyEyopzMPbMs+M6ygR6+bqe5xcpNeeyyxFZr0RlSY+omQ==", "0987333644", false, "", "17ĐC028", false, "sv1" },
-                    { new Guid("8bc30f33-6382-45fd-a54a-0dec677631d9"), 0, "Khánh Hoà", new DateTime(2000, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "b7d97d9d-573c-41c3-ab44-8840a4c16955", "sv2@gmail.com", true, true, false, null, "Sinh viên 2", "sv2@gmail.com", "sv2", "AQAAAAEAACcQAAAAELBUA4LUAcvtHXs+sUpd2b5YKz6hswOCq8dM6KOEPvy7iSIW2BpnK5OwdxZa/Lza9w==", "0987666644", false, "", "17ĐC023", false, "sv2" }
+                    { new Guid("4a2d9b6e-97c4-41bd-a929-f778972db109"), 0, "Số 80 - Hai Bà Trưng - Vạn Giã - Vạn Ninh - Khánh Hoà", new DateTime(1999, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "60aa65bf-92f8-40a4-bd44-c68e466a1f2e", "htthinh1999@gmail.com", true, true, false, null, "Huỳnh Tấn Thịnh", "htthinh1999@gmail.com", "htthinh", "AQAAAAEAACcQAAAAEOhaedMDJ2LDx/Yc0Nhag3x8uvgCmXhJ+shs6AHJZfvG28sYqGGWUOvy+WsO+A6ahg==", "0977393641", false, "", "17ĐC027", false, "htthinh" },
+                    { new Guid("9e7773ef-083c-4a8e-8ed2-9e36cd704913"), 0, "Khánh Hoà", new DateTime(2000, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "3325f9aa-8c17-4090-9cb6-430f45a5dfcf", "sv1@gmail.com", true, true, false, null, "Sinh viên 1", "sv1@gmail.com", "sv1", "AQAAAAEAACcQAAAAENAzwoEybsGMjeZKNYC+nLJgR4GeA1N+N/VQkFhC8rjIr/llXk2Kr3rqp6V47z1s/g==", "0987333644", false, "", "17ĐC028", false, "sv1" },
+                    { new Guid("8bc30f33-6382-45fd-a54a-0dec677631d9"), 0, "Khánh Hoà", new DateTime(2000, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "DHCN4A", "9c28af2d-37ee-44bf-8099-0734373a2dc2", "sv2@gmail.com", true, true, false, null, "Sinh viên 2", "sv2@gmail.com", "sv2", "AQAAAAEAACcQAAAAEFcsOKSDO69SvpRGdjhOoihRVr4wrPh3DE0GMvUDv8EM2MfsLDvT2fcosnUWzft3DA==", "0987666644", false, "", "17ĐC023", false, "sv2" }
                 });
 
             migrationBuilder.InsertData(
@@ -688,6 +721,21 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
                 column: "QuestionID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_NOTIFICATION_AccountID",
+                table: "NOTIFICATION",
+                column: "AccountID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NOTIFICATION_StudentAnswerID",
+                table: "NOTIFICATION",
+                column: "StudentAnswerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NOTIFICATION_SubjectID",
+                table: "NOTIFICATION",
+                column: "SubjectID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_QUESTION_GroupID",
                 table: "QUESTION",
                 column: "GroupID");
@@ -772,6 +820,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "EXAM_DETAIL");
+
+            migrationBuilder.DropTable(
+                name: "NOTIFICATION");
 
             migrationBuilder.DropTable(
                 name: "RESULT");

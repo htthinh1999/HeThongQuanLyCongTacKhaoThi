@@ -8,7 +8,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Notifications
     {
         public int ID { get; set; }
         public Guid AccountID { get; set; }
-        public int StudentAnswerID { get; set; }
+        public Guid StudentAnswerID { get; set; }
         public string Message { get; set; }
         public DateTime DateTime { get; set; }
         public bool IsRead { get; set; }

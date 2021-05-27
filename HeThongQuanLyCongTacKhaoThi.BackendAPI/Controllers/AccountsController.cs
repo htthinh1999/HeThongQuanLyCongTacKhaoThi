@@ -94,7 +94,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _accountService.GetAccountPaging(request);
 
             // Test notification
-            await _notificationService.StudentSubmited(5, 3);
+            await _notificationService.StudentSubmited(5, Guid.NewGuid());
 
 
             return Ok(result);

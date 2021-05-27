@@ -5,6 +5,7 @@ using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,10 +50,19 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         }
 
         [HttpGet("get-exam-result-by-student-answer-id")]
-        public async Task<IActionResult> GetExamResult([FromQuery] int studentAnswerID)
+        public async Task<IActionResult> GetExamResult([FromQuery] Guid studentAnswerID, [FromQuery] Guid teacherID)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var result = await _resultService.GetExamResult(studentAnswerID);
+            var result = await _resultService.GetExamResult(studentAnswerID, teacherID);
+            return Ok(result);
+        }
+
+        [HttpPost("mark-exam")]
+        public async Task<IActionResult> MarkExam([FromQuery]Guid teacherID, [FromBody]MarkExamRequest request)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var result = await _resultService.MarkExam(teacherID, request.StudentAnswerID, request.QuestionMarked, request.QuestionCommented);
             return Ok(result);
         }
     }

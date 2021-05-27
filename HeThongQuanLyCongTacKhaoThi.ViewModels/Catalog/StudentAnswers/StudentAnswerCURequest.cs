@@ -4,9 +4,9 @@ using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.StudentAnswers
 {
-    public class StudentAnswerCreateRequest
+    public class StudentAnswerCURequest
     {
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public Guid AccountID { get; set; }
         public int ExamID { get; set; }
         public List<StudentAnswerDetailCreateRequest> studentAnswerDetails { get; set; }

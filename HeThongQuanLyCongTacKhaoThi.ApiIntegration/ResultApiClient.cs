@@ -60,7 +60,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             return JsonConvert.DeserializeObject<ApiErrorResult<ExamResultViewModel>>(result);
         }
 
-        public async Task<ApiResult<ExamResultViewModel>> GetExamResult(int studentAnswerID, Guid teacherID)
+        public async Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid studentAnswerID, Guid teacherID)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
@@ -74,6 +74,24 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
                 return JsonConvert.DeserializeObject<ApiSuccessResult<ExamResultViewModel>>(result);
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<ExamResultViewModel>>(result);
+        }
+
+        public async Task<ApiResult<bool>> MarkExam(Guid teacherID, MarkExamRequest request)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.PostAsync($"/api/results/mark-exam?teacherID={teacherID}", httpContent);
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<bool>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
     }
 }

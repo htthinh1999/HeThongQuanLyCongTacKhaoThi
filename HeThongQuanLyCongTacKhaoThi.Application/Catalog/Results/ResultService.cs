@@ -46,6 +46,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
             return new ApiSuccessResult<bool>();
         }
 
+        //public async Task<ApiResult<PagedResult<ExamResultViewModel>>> GetExamResultPaging(GetExamResultPagingRequest request)
+        //{
+
+        //}
+
         public async Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid accountID, int contestID)
         {
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
@@ -116,9 +121,19 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
             return new ApiSuccessResult<ExamResultViewModel>(examResult);
         }
 
-        public async Task<ApiResult<ExamResultViewModel>> GetExamResult(int studentAnswerID)
+        public async Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid studentAnswerID, Guid teacherID)
         {
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
+            var teacherExistInContest = await (from rs in _context.Results
+                                               join c in _context.Contests on rs.ContestID equals c.ID
+                                               join tc in _context.TeacherContests on c.ID equals tc.ContestID
+                                               where tc.TeacherID == teacherID && rs.StudentAnswerID == studentAnswerID
+                                               select tc.TeacherID).FirstOrDefaultAsync();
+            if (teacherExistInContest == Guid.Empty)
+            {
+                return new ApiErrorResult<ExamResultViewModel>("Bạn không phải là giảng viên coi thi");
+            }
 
             var examResult = await (from rs in _context.Results
                                     join e in _context.Exams on rs.ExamID equals e.ID
@@ -184,6 +199,52 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
             examResult.studentAnswerDetails = studentAnswerDetails.ToList();
 
             return new ApiSuccessResult<ExamResultViewModel>(examResult);
+        }
+
+        public async Task<ApiResult<bool>> MarkExam(Guid teacherID, Guid studentAnswerID, Dictionary<int, float> questionMarked, Dictionary<int, string> questionCommented)
+        {
+            var studentAnswerDetailsToMark = await (from sad in _context.StudentAnswerDetails
+                                              where sad.StudentAnswerID == studentAnswerID && questionMarked.Keys.Any(x => x == sad.QuestionID)
+                                              select sad).ToListAsync();
+
+            var examResult = await (from r in _context.Results
+                          where r.StudentAnswerID == studentAnswerID
+                          select r).FirstOrDefaultAsync();
+            int contestID = examResult.ContestID;
+
+            List<Guid> teacherIDs = await (from tc in _context.TeacherContests
+                                           where tc.ContestID == contestID
+                                           orderby tc.TeacherID
+                                           select tc.TeacherID).ToListAsync();
+
+            int teacherNumber = (teacherIDs[0] == teacherID) ? 1 : 2;
+
+            foreach (var item in studentAnswerDetailsToMark)
+            {
+                if(teacherNumber == 1)
+                {
+                    item.Mark1 = questionMarked[item.QuestionID];
+                    item.Teacher1Comment = questionCommented[item.QuestionID];
+                }
+                else
+                {
+                    item.Mark2 = questionMarked[item.QuestionID];
+                    item.Teacher2Comment = questionCommented[item.QuestionID];
+                }
+
+                item.Mark = (teacherIDs.Count == 2 && item.Mark1 != null && item.Mark2 != null) ? (item.Mark1 + item.Mark2) / 2 : item.Mark1;
+
+                examResult.Mark += item.Mark ?? 0;
+
+                _context.Entry(item).State = EntityState.Modified;
+            }
+
+            var result = await _context.SaveChangesAsync();
+            if (result == 0)
+            {
+                return new ApiErrorResult<bool>("Không thể thêm điểm cho học viên");
+            }
+            return new ApiSuccessResult<bool>();
         }
     }
 }

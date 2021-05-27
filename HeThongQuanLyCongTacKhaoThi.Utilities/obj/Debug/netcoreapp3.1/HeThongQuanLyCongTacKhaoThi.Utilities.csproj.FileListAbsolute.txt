@@ -6,4 +6,4 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Ut
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Utilities\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.csproj.CoreCompileInputs.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Utilities\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Utilities\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.pdb
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Utilities\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.csprojAssemblyReference.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Utilities\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.csproj.AssemblyReference.cache

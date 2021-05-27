@@ -14,6 +14,8 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid accountID, int contestID);
 
-        Task<ApiResult<ExamResultViewModel>> GetExamResult(int studentAnswerID, Guid teacherID);
+        Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid studentAnswerID, Guid teacherID);
+
+        Task<ApiResult<bool>> MarkExam(Guid teacherID, MarkExamRequest request);
     }
 }

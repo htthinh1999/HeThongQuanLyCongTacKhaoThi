@@ -19,7 +19,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.HubServices
             _teacherContestService = teacherContestService;
         }
 
-        public async Task StudentSubmited(int contestID, int studentAnswerID)
+        public async Task StudentSubmited(int contestID, Guid studentAnswerID)
         {
             var getTeacherIDs = await _teacherContestService.GetAllTeacherIDsInContest(contestID);
             var teacherIDs = getTeacherIDs.ResultObj;

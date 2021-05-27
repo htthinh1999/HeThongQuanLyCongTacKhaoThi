@@ -25,7 +25,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<ApiResult<int>> Create(StudentAnswerCreateRequest request)
+        public async Task<ApiResult<Guid>> Create(StudentAnswerCURequest request)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
@@ -38,9 +38,9 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject<ApiSuccessResult<int>>(result);
+                return JsonConvert.DeserializeObject<ApiSuccessResult<Guid>>(result);
             }
-            return JsonConvert.DeserializeObject<ApiErrorResult<int>>(result);
+            return JsonConvert.DeserializeObject<ApiErrorResult<Guid>>(result);
         }
     }
 }

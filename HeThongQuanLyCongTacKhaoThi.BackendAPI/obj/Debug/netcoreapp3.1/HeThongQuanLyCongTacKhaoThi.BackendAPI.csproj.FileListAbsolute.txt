@@ -79,7 +79,6 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Ba
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.pdb
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.pdb
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.pdb
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.BackendAPI.csprojAssemblyReference.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.BackendAPI.AssemblyInfoInputs.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.BackendAPI.AssemblyInfo.cs
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj.CoreCompileInputs.cache
@@ -121,3 +120,4 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Ba
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netstandard2.0\System.Private.ServiceModel.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Private.ServiceModel.dll
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.BackendAPI\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj.AssemblyReference.cache

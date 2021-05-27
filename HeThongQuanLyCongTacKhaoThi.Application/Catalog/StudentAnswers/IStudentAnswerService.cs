@@ -9,6 +9,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswers
 {
     public interface IStudentAnswerService
     {
-        Task<ApiResult<int>> Create(StudentAnswerCreateRequest request);
+        Task<ApiResult<Guid>> Create(StudentAnswerCURequest request);
     }
 }

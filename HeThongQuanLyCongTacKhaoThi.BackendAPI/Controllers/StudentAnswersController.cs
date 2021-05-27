@@ -27,7 +27,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] StudentAnswerCreateRequest request)
+        public async Task<IActionResult> Create([FromBody] StudentAnswerCURequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 

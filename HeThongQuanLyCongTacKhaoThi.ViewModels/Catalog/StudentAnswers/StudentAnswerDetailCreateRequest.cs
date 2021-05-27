@@ -7,7 +7,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.StudentAnswers
     public class StudentAnswerDetailCreateRequest
     {
         public int ID { get; set; }
-        public int StudentAnswerID { get; set; }
+        public Guid StudentAnswerID { get; set; }
         public int QuestionID { get; set; }
         public int? AnswerID { get; set; }
         public string EssayPath { get; set; }

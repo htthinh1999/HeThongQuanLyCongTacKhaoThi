@@ -14,7 +14,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
             builder.Property(x => x.QuestionID).IsRequired();
             builder.Property(x => x.AnswerID).HasDefaultValue();
             builder.Property(x => x.EssayPath).HasDefaultValue();
-            builder.Property(x => x.StudentAnswerContent).HasDefaultValue();
+            builder.Property(x => x.StudentAnswerContent).HasDefaultValue().IsUnicode();
             builder.Property(x => x.Teacher1Comment).HasDefaultValue("Chưa có nhận xét!");
             builder.Property(x => x.Teacher2Comment).HasDefaultValue("Chưa có nhận xét!");
 

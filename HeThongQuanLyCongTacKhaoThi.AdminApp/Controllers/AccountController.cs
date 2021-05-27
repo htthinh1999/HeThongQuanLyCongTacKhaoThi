@@ -182,6 +182,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
                 {
                     Id = role.Id.ToString(),
                     Name = role.Name,
+                    Description = role.Description,
                     Selected = accountObj.ResultObj.Roles.Contains(role.Name)
                 }); ;
             }

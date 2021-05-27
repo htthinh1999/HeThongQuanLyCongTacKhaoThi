@@ -17,7 +17,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams
         [DisplayName("Số lượng câu hỏi tự luận")]
         public int EssayQuestionCount { get; set; }
 
-        public int StudentAnswerID { get; set; }
+        public Guid StudentAnswerID { get; set; }
 
         public List<StudentAnswerDetailViewModel> studentAnswerDetails { get; set; } = new List<StudentAnswerDetailViewModel>();
         

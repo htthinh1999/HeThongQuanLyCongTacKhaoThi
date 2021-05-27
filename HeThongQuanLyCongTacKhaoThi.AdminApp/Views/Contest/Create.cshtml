@@ -82,8 +82,8 @@
             currentDateTime.setHours(hoursDiff);
             currentDateTime.setMinutes(minutesDiff);
 
-            $("#StartTime").val(currentDateTime.toJSON().slice(0, 19));
-            $("#StartTime").prop("min", currentDateTime.toJSON().slice(0, 19));
+            $("#StartTime").val(currentDateTime.toJSON().slice(0, 16));
+            $("#StartTime").prop("min", currentDateTime.toJSON().slice(0, 16));
         });
     </script>
 }

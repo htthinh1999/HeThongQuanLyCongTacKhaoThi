@@ -7,6 +7,6 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.HubServices
 {
     public interface INotificationHubService
     {
-        public Task StudentSubmited(int contestID, int studentAnswerID);
+        public Task StudentSubmited(int contestID, Guid studentAnswerID);
     }
 }

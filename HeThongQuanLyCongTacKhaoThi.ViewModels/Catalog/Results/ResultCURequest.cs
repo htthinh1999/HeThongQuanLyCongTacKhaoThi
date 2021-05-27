@@ -11,7 +11,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Results
         public string SubjectID { get; set; }
         public int ContestID { get; set; }
         public int ExamID { get; set; }
-        public int StudentAnswerID { get; set; }
+        public Guid StudentAnswerID { get; set; }
         public float Mark { get; set; }
         public int Time { get; set; }
 

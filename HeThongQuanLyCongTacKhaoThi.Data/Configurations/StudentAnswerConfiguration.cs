@@ -10,6 +10,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
         {
             builder.ToTable("STUDENT_ANSWER");
             builder.HasKey(x => x.ID);
+            builder.Property(x => x.ID).ValueGeneratedOnAdd();
             builder.Property(x => x.UserID).IsRequired();
             builder.Property(x => x.ExamID).IsRequired();
 

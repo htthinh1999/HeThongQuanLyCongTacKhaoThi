@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Entities
 {
     public class StudentAnswer
     {
-        public int ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid ID { get; set; }
         public Guid UserID { get; set; }
         public int ExamID { get; set; }
 

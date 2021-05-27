@@ -20,7 +20,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" asp-for="Roles[i].Selected">
                         <label class="form-check-label" asp-for="Roles[i].Selected">
-                            @Model.Roles[i].Name
+                            @Model.Roles[i].Description
                         </label>
                         <input type="hidden" asp-for="Roles[i].Id" class="form-control" />
                         <input type="hidden" asp-for="Roles[i].Name" class="form-control" />

@@ -9,6 +9,6 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 {
     public interface IStudentAnswerApiClient
     {
-        Task<ApiResult<int>> Create(StudentAnswerCreateRequest request);
+        Task<ApiResult<Guid>> Create(StudentAnswerCURequest request);
     }
 }

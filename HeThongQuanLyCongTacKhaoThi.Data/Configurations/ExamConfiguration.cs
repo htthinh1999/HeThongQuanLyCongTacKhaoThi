@@ -10,7 +10,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
         {
             builder.ToTable("EXAM");
             builder.HasKey(x => x.ID);
-            builder.Property(x => x.Name).IsRequired().IsUnicode().HasMaxLength(50);
+            builder.Property(x => x.Name).IsRequired().IsUnicode().HasMaxLength(100);
             builder.Property(x => x.SubjectID).IsRequired().HasMaxLength(10);
             builder.Property(x => x.ContestID).IsRequired();
 

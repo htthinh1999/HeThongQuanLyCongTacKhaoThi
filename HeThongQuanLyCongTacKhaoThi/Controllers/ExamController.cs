@@ -59,7 +59,7 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
         {
             var currentAccountID = new Guid(HttpContext.Session.GetString("UserID"));
 
-            var studentAnswerCreateRequest = new StudentAnswerCreateRequest()
+            var studentAnswerCreateRequest = new StudentAnswerCURequest()
             {
                 AccountID = currentAccountID,
                 ExamID = examViewModel.ID,

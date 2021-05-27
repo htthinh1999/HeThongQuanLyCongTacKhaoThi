@@ -18,7 +18,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswers
             _context = context;
         }
 
-        public async Task<ApiResult<int>> Create(StudentAnswerCreateRequest request)
+        public async Task<ApiResult<Guid>> Create(StudentAnswerCURequest request)
         {
             var studentAnswer = new StudentAnswer()
             {
@@ -32,10 +32,10 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.StudentAnswers
             var result = await _context.SaveChangesAsync();
             if(result == 0)
             {
-                return new ApiErrorResult<int>("Không thể tạo câu trả lời của học viên");
+                return new ApiErrorResult<Guid>("Không thể tạo câu trả lời của học viên");
             }
 
-            return new ApiSuccessResult<int>(studentAnswer.ID);
+            return new ApiSuccessResult<Guid>(studentAnswer.ID);
         }
     }
 }

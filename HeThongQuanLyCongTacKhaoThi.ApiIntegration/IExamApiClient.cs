@@ -20,5 +20,6 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
         Task<ApiResult<List<ExamViewModel>>> GetAllExamsByContestID(int contestID);
 
         Task<ApiResult<bool>> AddMaxQuestionMark(int examID, List<ExamDetailCURequest> examDetails);
+
     }
 }

@@ -5,10 +5,10 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Vi
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.pdb
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\bin\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Utilities.pdb
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csprojAssemblyReference.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.AssemblyInfoInputs.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.AssemblyInfo.cs
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj.CoreCompileInputs.cache
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj.CopyComplete
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.pdb
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj.AssemblyReference.cache

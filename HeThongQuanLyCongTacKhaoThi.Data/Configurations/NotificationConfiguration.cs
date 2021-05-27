@@ -14,7 +14,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
             builder.ToTable("NOTIFICATION");
             builder.HasKey(x => x.ID);
             builder.Property(x => x.AccountID).IsRequired();
-            builder.Property(x => x.StudentAnswerID).HasDefaultValue(0);
+            builder.Property(x => x.StudentAnswerID).HasDefaultValue(Guid.Empty);
             builder.Property(x => x.Message).HasDefaultValue(string.Empty);
             builder.Property(x => x.DateTime).IsRequired().HasDefaultValueSql("getdate()");
             builder.Property(x => x.IsRead).IsRequired().HasDefaultValue(false);
