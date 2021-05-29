@@ -13,11 +13,15 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
     {
         Task<ApiResult<bool>> Create(ResultCURequest request);
 
-        //Task<ApiResult<PagedResult<ExamResultViewModel>>> GetExamResultPaging(GetExamResultPagingRequest request);
+        Task<ApiResult<PagedResult<ExamResultViewModel>>> GetExamResultPaging(GetExamResultPagingRequest request);
 
         Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid accountID, int contestID);
 
         Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid studentAnswerID, Guid teacherID);
+
+        Task<ApiResult<ExamResultViewModel>> GetExamResultToMark(Guid studentAnswerID, Guid teacherID);
+
+        Task<ApiResult<int>> GetTeacherNumber(Guid studentAnswerID, Guid teacherID);
 
         /// <summary>
         /// 
@@ -28,5 +32,6 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
         /// <param name="questionCommented">Key: QuestionID, Value: Comment</param>
         /// <returns>Mark exam succeed or not</returns>
         Task<ApiResult<bool>> MarkExam(Guid teacherID, Guid studentAnswerID, Dictionary<int, float> questionMarked, Dictionary<int, string> questionCommented);
+
     }
 }

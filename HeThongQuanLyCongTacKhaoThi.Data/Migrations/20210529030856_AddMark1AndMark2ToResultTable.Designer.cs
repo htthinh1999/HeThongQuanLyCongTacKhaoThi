@@ -4,14 +4,16 @@ using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Migrations
 {
     [DbContext(typeof(HeThongQuanLyCongTacKhaoThiDbContext))]
-    partial class HeThongQuanLyCongTacKhaoThiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210529030856_AddMark1AndMark2ToResultTable")]
+    partial class AddMark1AndMark2ToResultTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

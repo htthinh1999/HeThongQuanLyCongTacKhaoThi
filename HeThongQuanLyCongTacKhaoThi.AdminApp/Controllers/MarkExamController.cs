@@ -1,4 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Results;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.StudentAnswers;
 using Microsoft.AspNetCore.Http;
@@ -19,16 +20,28 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             _resultApiClient = resultApiClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string keyword = " ", int pageIndex = 1, int pageSize = 5)
         {
-            return View();
+            var teacherID = new Guid(HttpContext.Session.GetString("UserID"));
+            var request = new GetExamResultPagingRequest
+            {
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                TeacherID = teacherID
+            };
+            var data = await _resultApiClient.GetExamResultPaging(request);
+
+            ViewBag.SuccessMsg = TempData["SuccessMsg"];
+            ViewBag.TeacherID = teacherID;
+            return View(data.ResultObj);
         }
 
         [HttpGet]
         public async Task<IActionResult> Mark(Guid id)
         {
             var teacherID = new Guid(HttpContext.Session.GetString("UserID"));
-            var getExamResult = await _resultApiClient.GetExamResult(studentAnswerID: id, teacherID: teacherID);
+            var getExamResult = await _resultApiClient.GetExamResultToMark(studentAnswerID: id, teacherID: teacherID);
 
             if (!getExamResult.IsSuccessed)
             {
@@ -47,11 +60,12 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 
             var result = await _resultApiClient.MarkExam(teacherID, request);
 
-            if (result.IsSuccessed)
+            if (!result.IsSuccessed)
             {
+                return BadRequest(result.Message);
             }
 
-            return BadRequest(result.Message);
+            return RedirectToAction("Index", "MarkExam");
         }
 
         /// <summary>
@@ -64,6 +78,11 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
         {
             var teacherID = new Guid(HttpContext.Session.GetString("UserID"));
             var getExamResult = await _resultApiClient.GetExamResult(studentAnswerID: id, teacherID: teacherID);
+
+            if (!getExamResult.IsSuccessed)
+            {
+                return BadRequest(getExamResult.Message);
+            }
 
             var examResult = getExamResult.ResultObj;
 

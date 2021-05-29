@@ -7,6 +7,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams
 {
     public class GetExamResultPagingRequest : PagingRequestBase
     {
+        public Guid TeacherID { get; set; }
         public string Keyword { get; set; }
     }
 }

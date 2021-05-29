@@ -76,7 +76,7 @@
                     Nhận xét của giảng viên
                 </dt>
                 <dd class="col-sm-10">
-                    <input class="form-control" name="request.QuestionCommented[@(dictionaryIndex)].Value" type="text"/>
+                    <textarea rows="5" class="form-control editor" name="request.QuestionCommented[@(dictionaryIndex)].Value"></textarea>
                 </dd>
                 <dt class="col-sm-2">
                     Điểm của giảng viên
@@ -97,11 +97,81 @@
     @* Enable MathJax to support render MathML on Chrome and Edge *@
     <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };</script>
     <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
+    <script src="/assets/vendor/ckeditor5/build/ckeditor.js"></script>
 
     <script>
         $(document).ready(function () {
             $('.marker-green').css("background-color", "#62f962");
             $('.marker-red').css("background-color", "#ff6666");
+
+
+            
+            var addEditor = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {
+                            toolbar: {
+                                items: [
+                                    'heading',
+                                    '|',
+                                    'bold',
+                                    'italic',
+                                    'underline',
+                                    'alignment',
+                                    '|',
+                                    'link',
+                                    'bulletedList',
+                                    'numberedList',
+                                    '|',
+                                    'blockQuote',
+                                    'insertTable',
+                                    'undo',
+                                    'redo',
+                                    '-',
+                                    'fontBackgroundColor',
+                                    'fontColor',
+                                    'fontSize',
+                                    'fontFamily',
+                                    'highlight',
+                                    '|',
+                                    'MathType',
+                                    'specialCharacters',
+                                    'ChemType',
+                                    '|',
+                                    'codeBlock',
+                                    'code',
+                                    'htmlEmbed',
+                                    'outdent',
+                                    'indent'
+                                ],
+                                shouldNotGroupWhenFull: true
+                            },
+                            language: 'vi',
+                            table: {
+                                contentToolbar: [
+                                    'tableColumn',
+                                    'tableRow',
+                                    'mergeTableCells'
+                                ]
+                            },
+                            licenseKey: '',
+                        })
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+                
+            }
+
+            addEditor('.editor');
         });
     </script>
 

@@ -11,4 +11,4 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Vi
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj.CopyComplete
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.pdb
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj.AssemblyReference.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.ViewModels\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.ViewModels.csprojAssemblyReference.cache

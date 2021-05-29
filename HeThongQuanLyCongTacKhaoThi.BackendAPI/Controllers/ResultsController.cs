@@ -1,6 +1,7 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results;
 using HeThongQuanLyCongTacKhaoThi.BackendAPI.HubServices;
 using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -41,6 +42,13 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("get-exam-result-paging")]
+        public async Task<IActionResult> GetExamResultPaging([FromQuery] GetExamResultPagingRequest request)
+        {
+            var result = await _resultService.GetExamResultPaging(request);
+            return Ok(result);
+        }
+
         [HttpGet("get-exam-result")]
         public async Task<IActionResult> GetExamResult([FromQuery] Guid accountID, [FromQuery] int contestID)
         {
@@ -54,6 +62,22 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var result = await _resultService.GetExamResult(studentAnswerID, teacherID);
+            return Ok(result);
+        }
+
+        [HttpGet("get-exam-result-to-mark")]
+        public async Task<IActionResult> GetExamResultToMark([FromQuery] Guid studentAnswerID, [FromQuery] Guid teacherID)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var result = await _resultService.GetExamResultToMark(studentAnswerID, teacherID);
+            return Ok(result);
+        }
+
+        [HttpGet("get-teacher-number")]
+        public async Task<IActionResult> GetTeacherNumber([FromQuery] Guid studentAnswerID, [FromQuery] Guid teacherID)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var result = await _resultService.GetTeacherNumber(studentAnswerID, teacherID);
             return Ok(result);
         }
 

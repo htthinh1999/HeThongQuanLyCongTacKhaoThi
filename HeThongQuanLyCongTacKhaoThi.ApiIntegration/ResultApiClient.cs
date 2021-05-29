@@ -44,6 +44,22 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
+        public async Task<ApiResult<PagedResult<ExamResultViewModel>>> GetExamResultPaging(GetExamResultPagingRequest request)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync($"/api/results/get-exam-result-paging?pageIndex={request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}&teacherID={request.TeacherID}");
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<ExamResultViewModel>>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<PagedResult<ExamResultViewModel>>>(result);
+        }
+
         public async Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid accountID, int contestID)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
@@ -74,6 +90,38 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
                 return JsonConvert.DeserializeObject<ApiSuccessResult<ExamResultViewModel>>(result);
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<ExamResultViewModel>>(result);
+        }
+
+        public async Task<ApiResult<ExamResultViewModel>> GetExamResultToMark(Guid studentAnswerID, Guid teacherID)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync($"/api/results/get-exam-result-to-mark?studentAnswerID={studentAnswerID}&teacherID={teacherID}");
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<ExamResultViewModel>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<ExamResultViewModel>>(result);
+        }
+
+        public async Task<ApiResult<int>> GetTeacherNumber(Guid studentAnswerID, Guid teacherID)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync($"/api/results/get-teacher-number?studentAnswerID={studentAnswerID}&teacherID={teacherID}");
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<int>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<int>>(result);
         }
 
         public async Task<ApiResult<bool>> MarkExam(Guid teacherID, MarkExamRequest request)

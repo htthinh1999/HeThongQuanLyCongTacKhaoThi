@@ -6,7 +6,6 @@
     @Html.DisplayNameFor(model => model.Question.Content)
 </dt>
 <dd class="col-sm-10">
-    @*<textarea rows="5" class="form-control editor">@Html.DisplayFor(model => model.Question.Content)</textarea>*@
     @Html.Raw(Model.Question.Content)
 </dd>
 
@@ -20,11 +19,6 @@
         {
             <div class="form-check">
                 <input class="form-check-input" type="radio" id="Answer[@Model.Question.ID@i]" value="@Model.Question.Answers[i].ID" @((Model.Question.Answers[i].ID == Model.AnswerID) ? "checked" : "") disabled />
-                @*<div class="form-check-label editor" for="Answer[@Model.Question.ID@i]">
-                        <mark class='@((Model.Question.Answers[i].IsCorrect)?"marker-green":(Model.Question.Answers[i].ID == Model.AnswerID)?"marker-red":"")'>
-                            @Model.Question.Answers[i].Content
-                        </mark>
-                    </div>*@
                 <div class='@((Model.Question.Answers[i].IsCorrect)?"marker-green":(Model.Question.Answers[i].ID == Model.AnswerID)?"marker-red":"")'>
                     @Html.Raw(Model.Question.Answers[i].Content)
                 </div>
@@ -39,7 +33,6 @@ else
         Câu trả lời
     </dt>
     <dd class="col-sm-10">
-        @*<textarea rows="5" class="form-control editor" name="AnswerOfStudent[@Model.Question.ID]">@Model.StudentAnswerContent</textarea>*@
         @Html.Raw(Model.StudentAnswerContent)
     </dd>
     <dt class="col-sm-2">
@@ -52,21 +45,37 @@ else
         }
         else
         {
-            @*<textarea rows="5" class="form-control editor" name="Answers[0]">@Model.Question.Answers[0].Content</textarea>*@
             @Html.Raw(Model.Question.Answers[0].Content)
         }
     </dd>
     <dt class="col-sm-2">
-        Nhận xét
+        Nhận xét giảng viên 1
     </dt>
     <dd class="col-sm-10">
-        @*<textarea rows="5" class="form-control editor" name="Teacher1Comment">@Model.Teacher1Comment</textarea>*@
         @Html.Raw(Model.Teacher1Comment)
     </dd>
     <dt class="col-sm-2">
-        Điểm
+        Điểm giảng viên 1
     </dt>
     <dd class="col-sm-10">
         @(Model.Mark1?? Single.NaN)
+    </dd>
+    <dt class="col-sm-2">
+        Nhận xét giảng viên 2
+    </dt>
+    <dd class="col-sm-10">
+        @Html.Raw(Model.Teacher2Comment)
+    </dd>
+    <dt class="col-sm-2">
+        Điểm giảng viên 2
+    </dt>
+    <dd class="col-sm-10">
+        @(Model.Mark2?? Single.NaN)
+    </dd>
+    <dt class="col-sm-2">
+        Điểm kết quả
+    </dt>
+    <dd class="col-sm-10">
+        @(Model.Mark?? Single.NaN)
     </dd>
 }

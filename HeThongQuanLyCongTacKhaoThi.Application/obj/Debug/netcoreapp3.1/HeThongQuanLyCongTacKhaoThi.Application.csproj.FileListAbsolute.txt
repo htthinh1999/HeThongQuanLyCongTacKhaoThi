@@ -13,4 +13,4 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Ap
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Application.csproj.CopyComplete
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Application.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Application.pdb
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Application.csproj.AssemblyReference.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Application\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Application.csprojAssemblyReference.cache

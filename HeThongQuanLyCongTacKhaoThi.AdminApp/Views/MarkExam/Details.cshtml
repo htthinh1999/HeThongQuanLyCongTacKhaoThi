@@ -1,11 +1,20 @@
 ﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams.ExamResultViewModel
 @{
-    ViewData["Title"] = "Kết quả kiểm tra " + Model.Name;
+    ViewData["Title"] = $"Kết quả kiểm tra bài thi với mã phách '{Model.StudentAnswerID}'";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Kết quả kiểm tra @Model.Name</h1>
+    <h1 class="h3 mb-0 text-gray-800">Kết quả kiểm tra bài thi với mã phách '@Model.StudentAnswerID'</h1>
+</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-2">
+    <h1 class="h5 mb-0 text-gray-600">Điểm giảng viên 1: @(Model.Mark1?? Single.NaN)</h1>
+</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-2">
+    <h1 class="h5 mb-0 text-gray-600">Điểm giảng viên 2: @(Model.Mark2?? Single.NaN)</h1>
+</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-2">
+    <h1 class="h5 mb-0 text-danger font-weight-bold">Điểm bài thi: @(Model.Mark?? Single.NaN)</h1>
 </div>
 
 <div>

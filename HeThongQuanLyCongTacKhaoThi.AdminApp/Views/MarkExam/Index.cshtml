@@ -1,0 +1,209 @@
+﻿@using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
+@using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
+@using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+@model PagedResult<ExamResultViewModel>
+@inject IResultApiClient _resultApiClient
+
+@{
+    ViewData["Title"] = "Danh sách bài thi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Danh sách bài thi</h1>
+
+@if (ViewBag.SuccessMsg != null)
+{
+    <div id="alert-msg" class="alert alert-success" role="alert">
+        @ViewBag.SuccessMsg
+    </div>
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách bài thi</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <form id="dataTable_filter" class="form-inline" asp-action="Index" method="get">
+                        <div class="form-group mr-sm-3 mb-2">
+                            <label for="keyword" class="sr-only">Tìm kiếm:</label>
+                            <input type="search" id="keyword" name="keyword" class="form-control form-control-sm" placeholder="Nội dung" aria-controls="dataTable">
+                        </div>
+                        <input class="btn btn-primary mb-2 mr-2" type="submit" value="Tìm kiếm" />
+                        <input type="submit" class="btn btn-outline-primary mb-2" value="Tải lại" />
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="table" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Mã phách bài thi
+                                    </th>
+                                    <th>
+                                        Tên bài thi
+                                    </th>
+                                    <th>
+                                        Kỳ kiểm tra
+                                    </th>
+                                    <th>
+                                        Số lượng câu hỏi tự luận
+                                    </th>
+                                    <th>
+                                        Số lượng câu hỏi trắc nghiệm
+                                    </th>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <th>
+                                            Điểm giáo viên 1
+                                        </th>
+                                        <th>
+                                            Điểm giáo viên 2
+                                        </th>
+                                        <th>
+                                            Điểm kết quả
+                                        </th>
+                                    }
+                                    else 
+                                    {
+                                        <th>Điểm</th>
+                                    }
+                                    <th>
+                                        Hành động
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        Mã phách bài thi
+                                    </th>
+                                    <th>
+                                        Tên bài thi
+                                    </th>
+                                    <th>
+                                        Kỳ kiểm tra
+                                    </th>
+                                    <th>
+                                        Số lượng câu hỏi tự luận
+                                    </th>
+                                    <th>
+                                        Số lượng câu hỏi trắc nghiệm
+                                    </th>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <th>
+                                            Điểm giảng viên 1
+                                        </th>
+                                        <th>
+                                            Điểm giảng viên 2
+                                        </th>
+                                        <th>
+                                            Điểm kết quả
+                                        </th>
+                                    }
+                                    else 
+                                    {
+                                        <th>Điểm</th>
+                                    }
+                                    <th>
+                                        Hành động
+                                    </th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StudentAnswerID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ContestName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MultipleChoiceQuestionCount)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EssayQuestionCount)
+                                        </td>
+                                        
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Mark1)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Mark2)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Mark)
+                                            </td>
+                                    }
+                                        else 
+                                        {
+                                            ApiResult<int> getTeacherNumber = await _resultApiClient.GetTeacherNumber(item.StudentAnswerID, ViewBag.TeacherID);
+
+                                            if (getTeacherNumber.ResultObj == 1)
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Mark1)
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Mark2)
+                                                </td>
+                                            }
+                                        }
+                                        <td>
+                                            @if(!User.IsInRole("Admin"))
+                                            {    
+                                                @Html.ActionLink("Chấm điểm", "Mark", new { id = item.StudentAnswerID }); <span>|</span>
+                                            }
+                                            @Html.ActionLink("Chi tiết", "Details", new { id = item.StudentAnswerID })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    @await Component.InvokeAsync("Pager", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+    <!-- Page level plugins -->
+    <script src="/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        setTimeout(function () {
+            $("#alert-msg").fadeOut('slow');
+        }, 1500);
+
+        $(document).ready(function () {
+            $('#table').DataTable({
+                "paging": false,
+                "ordering": true,
+                "info": false,
+                "bFilter": false
+            });
+        });
+    </script>
+}

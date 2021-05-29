@@ -12,9 +12,15 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
     {
         Task<ApiResult<bool>> Create(ResultCURequest request);
 
+        Task<ApiResult<PagedResult<ExamResultViewModel>>> GetExamResultPaging(GetExamResultPagingRequest request);
+
         Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid accountID, int contestID);
 
         Task<ApiResult<ExamResultViewModel>> GetExamResult(Guid studentAnswerID, Guid teacherID);
+
+        Task<ApiResult<ExamResultViewModel>> GetExamResultToMark(Guid studentAnswerID, Guid teacherID);
+
+        Task<ApiResult<int>> GetTeacherNumber(Guid studentAnswerID, Guid teacherID);
 
         Task<ApiResult<bool>> MarkExam(Guid teacherID, MarkExamRequest request);
     }
