@@ -152,6 +152,28 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
             return new ApiSuccessResult<List<SubjectViewModel>>(subjects);
         }
 
+        public async Task<ApiResult<List<SubjectViewModel>>> GetSubjectsNotJoinedByAccountID(Guid accountID)
+        {
+            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            var subjectsJoined = await (from sa in _context.SubjectAccounts
+                                  join s in _context.Subjects on sa.SubjectID equals s.ID
+                                  where sa.UserID.ToString() == accountID.ToString()
+                                  select s)
+                                  .ToListAsync();
+
+            var subjectsNotJoined = await (from s in _context.Subjects
+                                           where !subjectsJoined.Contains(s)
+                                           select new SubjectViewModel()
+                                           {
+                                               ID = s.ID,
+                                               Name = s.Name,
+                                               LessonCount = s.LessonCount,
+                                               CreditCount = s.CreditCount
+                                           }).ToListAsync();
+
+            return new ApiSuccessResult<List<SubjectViewModel>>(subjectsNotJoined);
+        }
+
         public async Task<ApiResult<bool>> SubjectAssign(string subjectID, Guid accountID)
         {
             var subjectAccount = new SubjectAccount()

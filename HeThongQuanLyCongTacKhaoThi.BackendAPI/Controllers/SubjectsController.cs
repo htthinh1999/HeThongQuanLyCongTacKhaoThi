@@ -84,6 +84,17 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet("/api/subjects-not-joined/accounts/{accountID}")]
+        public async Task<IActionResult> GetSubjectsNotJoinedByAccountID(Guid accountID)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _subjectService.GetSubjectsNotJoinedByAccountID(accountID);
+            return Ok(result);
+        }
+
         [HttpPost("{subjectID}/assign")]
         public async Task<IActionResult> SubjectAssign(string subjectID, [FromBody]Guid accountID)
         {

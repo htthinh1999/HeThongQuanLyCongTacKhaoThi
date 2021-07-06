@@ -40,7 +40,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if(User.Identity.Name == null)
+            if (string.IsNullOrEmpty(User.Identity.Name))
             {
                 return View();
             }
@@ -49,10 +49,15 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
             HttpContext.Session.SetString("UserID", userID);
             HttpContext.Session.SetString("UserFullName", (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.GivenName).Value);
 
-            // Get student' subject
+            // Get student' subjects
             var getSubjectsByAccountID = await _subjectApiClient.GetSubjectsByAccountID(new Guid(userID));
             var subjects = getSubjectsByAccountID.ResultObj;
             HttpContext.Session.SetString("AccoutSubjects", JsonConvert.SerializeObject(subjects));
+
+            // Get student' subjects not joined
+            var getSubjectsNotJoinedByAccountID = await _subjectApiClient.GetSubjectsNotJoinedByAccountID(new Guid(userID));
+            var subjectsNotJoined = getSubjectsNotJoinedByAccountID.ResultObj;
+            HttpContext.Session.SetString("AccoutSubjectsNotJoined", JsonConvert.SerializeObject(subjectsNotJoined));
 
             return View();
         }

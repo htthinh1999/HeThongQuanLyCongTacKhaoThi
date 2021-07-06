@@ -225,7 +225,15 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
                                     join ed in _context.ExamDetails on e.ID equals ed.ExamID
                                     join q in _context.Questions on ed.QuestionID equals q.ID
                                     where rs.StudentAnswerID == studentAnswerID
-                                    group new { rs, e, q, c } by new { rs.StudentAnswerID, e.Name, ContestName = c.Name, Mark1 = rs.Mark1, Mark2 = rs.Mark2, Mark = rs.Mark } into exam
+                                    group new { rs, e, q, c } by new 
+                                    {
+                                        rs.StudentAnswerID,
+                                        e.Name,
+                                        ContestName = c.Name,
+                                        Mark1 = rs.Mark1,
+                                        Mark2 = rs.Mark2,
+                                        Mark = rs.Mark
+                                    } into exam
                                     select new ExamResultViewModel()
                                     {
                                         Name = exam.Key.Name,
@@ -391,10 +399,12 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
             return new ApiSuccessResult<ExamResultViewModel>(examResult);
         }
 
-        public async Task<ApiResult<bool>> MarkExam(Guid teacherID, Guid studentAnswerID, Dictionary<int, float> questionMarked, Dictionary<int, string> questionCommented)
+        public async Task<ApiResult<bool>> MarkExam(Guid teacherID, Guid studentAnswerID,
+            Dictionary<int, float> questionMarked, Dictionary<int, string> questionCommented)
         {
             var studentAnswerDetailsToMark = await (from sad in _context.StudentAnswerDetails
-                                              where sad.StudentAnswerID == studentAnswerID && questionMarked.Keys.Any(x => x == sad.QuestionID)
+                                              where sad.StudentAnswerID == studentAnswerID 
+                                              && questionMarked.Keys.Any(x => x == sad.QuestionID)
                                               select sad).ToListAsync();
 
             var examResult = await (from r in _context.Results
@@ -433,11 +443,14 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
                     examResult.Mark2 += item.Mark2;
                 }
 
-                item.Mark = (teacherIDs.Count == 2 && item.Mark1 != null && item.Mark2 != null) ? (item.Mark1 + item.Mark2) / 2 : item.Mark1;
+                item.Mark = (teacherIDs.Count == 2 
+                            && item.Mark1 != null 
+                            && item.Mark2 != null) ? (item.Mark1 + item.Mark2) / 2 : item.Mark1;
 
                 if(item.Mark != null)
                 {
-                    examResult.Mark = (examResult.Mark == null) ? item.Mark : examResult.Mark + item.Mark;
+                    examResult.Mark = (examResult.Mark == null) ? item.Mark 
+                                                                : examResult.Mark + item.Mark;
                 }
 
                 _context.Entry(item).State = EntityState.Modified;

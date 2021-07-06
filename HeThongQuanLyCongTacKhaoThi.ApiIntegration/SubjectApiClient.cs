@@ -135,6 +135,22 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             return JsonConvert.DeserializeObject<ApiErrorResult<List<SubjectViewModel>>>(result);
         }
 
+        public async Task<ApiResult<List<SubjectViewModel>>> GetSubjectsNotJoinedByAccountID(Guid accountID)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/subjects-not-joined/accounts/{accountID}");
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<List<SubjectViewModel>>>(result);
+            }
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<List<SubjectViewModel>>>(result);
+        }
+
         public async Task<ApiResult<bool>> SubjectAssign(string subjectID, Guid accountID)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
@@ -144,7 +160,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 
-            var response = await client.PostAsync($"/api/subjects/{subjectID}", httpContent);
+            var response = await client.PostAsync($"/api/subjects/{subjectID}/assign", httpContent);
             var result = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {

@@ -12,4 +12,5 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Da
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.pdb
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.genruntimeconfig.cache
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.csprojAssemblyReference.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.csproj.AssemblyReference.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Data\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.Data.GeneratedMSBuildEditorConfig.editorconfig

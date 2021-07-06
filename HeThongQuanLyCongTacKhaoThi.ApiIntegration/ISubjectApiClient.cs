@@ -17,6 +17,8 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
 
         Task<ApiResult<List<SubjectViewModel>>> GetSubjectsByAccountID(Guid accountID);
 
+        Task<ApiResult<List<SubjectViewModel>>> GetSubjectsNotJoinedByAccountID(Guid accountID);
+
         Task<ApiResult<bool>> SubjectAssign(string subjectID, Guid accountID);
 
         Task<ApiResult<bool>> Create(SubjectCURequest request);

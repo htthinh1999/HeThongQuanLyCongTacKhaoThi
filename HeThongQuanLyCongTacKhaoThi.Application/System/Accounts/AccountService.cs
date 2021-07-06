@@ -44,11 +44,13 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.System.Accounts
             {
                 return new ApiErrorResult<string>("Tên tài khoản hoặc mật khẩu không đúng");
             }
-            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, lockoutOnFailure: false);
             if (!result.Succeeded)
             {
                 return new ApiErrorResult<string>("Tên tài khoản hoặc mật khẩu không đúng");
             }
+
+
 
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]

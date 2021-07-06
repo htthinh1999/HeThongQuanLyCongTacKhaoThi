@@ -48,5 +48,18 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
             return View(list2Contests);
         }
 
+        [HttpGet("JoinSubject/{subjectID}")]
+        public async Task<IActionResult> JoinSubject(string subjectID)
+        {
+            var currentAccountID = new Guid(HttpContext.Session.GetString("UserID"));
+
+            var getJoinSubject = await _subjectApiClient.SubjectAssign(subjectID, currentAccountID);
+            if (getJoinSubject == null || !getJoinSubject.IsSuccessed)
+            {
+                return BadRequest(getJoinSubject.Message);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
