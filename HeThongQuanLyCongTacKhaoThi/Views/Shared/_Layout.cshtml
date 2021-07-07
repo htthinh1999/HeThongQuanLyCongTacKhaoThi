@@ -81,11 +81,13 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Danh sách môn học:</h6>
-                            @foreach (var subject in subjects)
-                            {
-                                <a class="collapse-item" asp-action="Details"
-                                                         asp-controller="Subject"
-                                                         asp-all-route-data="@(new Dictionary<string, string> { { "SubjectID", subject.ID } })">@subject.Name</a>
+                            @if(subjects != null){
+                                foreach (var subject in subjects)
+                                {
+                                    <a class="collapse-item" asp-action="Details"
+                                                                asp-controller="Subject"
+                                                                asp-all-route-data="@(new Dictionary<string, string> { { "SubjectID", subject.ID } })">@subject.Name</a>
+                                }
                             }
                         </div>
                     </div>

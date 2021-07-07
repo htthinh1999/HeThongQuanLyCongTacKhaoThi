@@ -247,13 +247,63 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             return principal;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
+        [HttpGet, AllowAnonymous]
         public async Task<ActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Remove("Token");
             return RedirectToAction("Login", "Account");
+        }
+
+        [HttpGet, AllowAnonymous]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost, AllowAnonymous]
+        public async Task<IActionResult> Register(RegisterRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+
+            var result = await _accountApiClient.RegisterAccount(request);
+
+            if (!result.IsSuccessed)
+            {
+                ModelState.AddModelError("", result.Message);
+                return View(request);
+            }
+
+            var loginResult = await _accountApiClient.Authenticate(new LoginRequest()
+            {
+                Username = request.Username,
+                Password = request.Password,
+                RememberMe = false
+            });
+
+            if (loginResult.ResultObj == null)
+            {
+                return View();
+            }
+
+            var accountPrincipal = ValidateToken(loginResult.ResultObj);
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.AddYears(10),
+                IsPersistent = true,
+                //AllowRefresh = true
+            };
+
+            HttpContext.Session.SetString("Token", loginResult.ResultObj);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                accountPrincipal,
+                authProperties);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -51,8 +51,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
 
             // Get student' subjects
             var getSubjectsByAccountID = await _subjectApiClient.GetSubjectsByAccountID(new Guid(userID));
-            var subjects = getSubjectsByAccountID.ResultObj;
-            HttpContext.Session.SetString("AccoutSubjects", JsonConvert.SerializeObject(subjects));
+            if(getSubjectsByAccountID != null)
+            {
+                var subjects = getSubjectsByAccountID.ResultObj;
+                HttpContext.Session.SetString("AccoutSubjects", JsonConvert.SerializeObject(subjects));
+            }
 
             // Get student' subjects not joined
             var getSubjectsNotJoinedByAccountID = await _subjectApiClient.GetSubjectsNotJoinedByAccountID(new Guid(userID));
@@ -112,6 +115,58 @@ namespace HeThongQuanLyCongTacKhaoThi.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+
+            var result = await _accountApiClient.RegisterAccount(request);
+
+            if (!result.IsSuccessed)
+            {
+                ModelState.AddModelError("", result.Message);
+                return View(request);
+            }
+
+            var loginResult = await _accountApiClient.Authenticate(new LoginRequest()
+            {
+                Username = request.Username,
+                Password = request.Password,
+                RememberMe = false
+            });
+
+            if (loginResult.ResultObj == null)
+            {
+                return View();
+            }
+
+            var accountPrincipal = ValidateToken(loginResult.ResultObj);
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.AddYears(10),
+                IsPersistent = true,
+                //AllowRefresh = true
+            };
+
+            HttpContext.Session.SetString("Token", loginResult.ResultObj);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                accountPrincipal,
+                authProperties);
+
+            return RedirectToAction("Index", "Home");
+        }
+
 
         [HttpGet]
         public async Task<ActionResult> Logout()

@@ -1,7 +1,9 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Results;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.StudentAnswers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 {
+    [Authorize(Policy = Policy.Manager)]
     public class MarkExamController : Controller
     {
         private readonly IResultApiClient _resultApiClient;

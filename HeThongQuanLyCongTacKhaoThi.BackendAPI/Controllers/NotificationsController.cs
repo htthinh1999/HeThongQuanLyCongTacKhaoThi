@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
 {
-    [Authorize(Policy = Policy.All)]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class NotificationsController : ControllerBase
