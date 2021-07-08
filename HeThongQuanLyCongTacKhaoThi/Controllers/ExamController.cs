@@ -41,6 +41,11 @@ namespace HeThongQuanLyCongTacKhaoThi.WebApp.Controllers
                 return BadRequest("Không thể tìm thấy đề thi");
             }
 
+            if(exam.Contest.StartTime >= DateTime.Now)
+            {
+                return BadRequest("Bạn chưa thể tham gia thi, thời gian chưa bắt đầu!");
+            }
+
             questionIDs = new List<int>();
             for (int i = 0; i < exam.ExamDetails.Count; i++)
             {

@@ -33,7 +33,7 @@ namespace HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams
 
         public SubjectViewModel Subject;
 
-        public List<ContestViewModel> Contests;
+        public ContestViewModel Contest { get; set; }
 
         public List<ExamDetailCURequest> ExamDetails { get; set; } = new List<ExamDetailCURequest>();
     }

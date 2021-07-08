@@ -1,6 +1,7 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.EF;
 using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Contests;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Common;
@@ -165,6 +166,23 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Exams
             foreach (var questionGroup in questionGroups)
             {
                 examViewModel.QuestionGroups.Add(questionGroup.ID);
+            }
+
+            var contest = await (from e in _context.Exams
+                                 join c in _context.Contests on e.ContestID equals c.ID
+                                 where e.ID == id
+                                 select new ContestViewModel()
+                                 {
+                                     Name = c.Name,
+                                     Description = c.Description,
+                                     StartTime = c.StartTime,
+                                     Duration = c.Duration,
+                                     SubjectID = c.SubjectID
+                                 }).FirstOrDefaultAsync();
+
+            if(contest != null)
+            {
+                examViewModel.Contest = contest;
             }
 
             return new ApiSuccessResult<ExamViewModel>(examViewModel);

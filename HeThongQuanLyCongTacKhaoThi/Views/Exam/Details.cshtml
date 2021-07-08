@@ -8,8 +8,10 @@
     <h1 class="h3 mb-0 text-gray-800">@Model.Name</h1>
 </div>
 
+<div class="row h3 text-primary font-weight-bold justify-content-center border border-primary rounded-pill" id="countdown"></div>
+
 <div>
-    <form asp-action="Details">
+    <form id="student-answer" asp-action="Details">
         <dl class="row">
             @for (int i = 0; i < Model.ExamDetails.Count; i++)
             {
@@ -44,6 +46,38 @@
 
     <script>
         $(document).ready(function () {
+            // COUNT DOWN TIME
+            // Convert miliseconds to time
+            function msToTime(duration) {
+                var seconds = Math.floor((duration / 1000) % 60),
+                    minutes = Math.floor((duration / (1000 * 60)) % 60),
+                    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+                hours = (hours < 10) ? "0" + hours : hours;
+                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+                return hours + ":" + minutes  + ":" + seconds;
+            }
+            var startTime = new Date("@(Model.Contest.StartTime)");
+            var timeCountDown = @Model.Contest.Duration;
+            var endTime = startTime.getTime() + timeCountDown * 60000;
+            var currentTime = Date.now();
+            var timeRemaining = endTime - currentTime;
+
+            // Submit if time's' up
+            setTimeout(function(){
+                $("#student-answer").submit();
+            }, timeRemaining);
+
+            // Show Time
+            var countDown = setInterval(function(){
+                if(timeRemaining <= 0){
+                    clearInterval(countDown);
+                }
+                $("#countdown").text(msToTime(timeRemaining));
+                timeRemaining -= 1000;
+            }, 1000);
 
             var addEditorDisabled = function (className) {
                 window.editors = {};
