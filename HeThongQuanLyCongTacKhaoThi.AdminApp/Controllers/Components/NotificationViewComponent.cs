@@ -1,4 +1,5 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Notifications;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,6 +25,11 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers.Components
         {
             string accountID = (User.Identity as ClaimsIdentity).FindFirst(ClaimTypes.NameIdentifier).Value;
             var getNotifications = await _notificationApiClient.GetLatestNotifications(new Guid(accountID));
+
+            if(getNotifications == null)
+            {
+                return await Task.FromResult((IViewComponentResult)View("Default", new List<NotificationViewModel>()));
+            }
 
             var notifications = getNotifications.ResultObj;
             return await Task.FromResult((IViewComponentResult)View("Default", notifications));

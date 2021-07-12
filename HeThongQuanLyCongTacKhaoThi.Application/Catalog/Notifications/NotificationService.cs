@@ -90,7 +90,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Notifications
         {
             var notifications = await (from n in _context.Notifications
                                        where n.AccountID == accountID
-                                       orderby n.DateTime, n.IsRead
+                                       orderby n.DateTime descending, n.IsRead descending
                                        select new NotificationViewModel()
                                        {
                                            AccountID = n.AccountID,

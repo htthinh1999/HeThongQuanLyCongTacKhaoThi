@@ -32,6 +32,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
         /// <param name="questionCommented">Key: QuestionID, Value: Comment</param>
         /// <returns>Mark exam succeed or not</returns>
         Task<ApiResult<bool>> MarkExam(Guid teacherID, Guid studentAnswerID, Dictionary<int, float> questionMarked, Dictionary<int, string> questionCommented);
-
+        Task<ApiResult<ScoreListViewModel>> GetScoreList(Guid teacherID);
+        Task<ApiResult<ScoreListViewModel.StudentResult>> GetScoreListByStudentID(Guid studentID);
     }
 }

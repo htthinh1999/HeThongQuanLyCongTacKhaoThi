@@ -89,5 +89,23 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
             var result = await _resultService.MarkExam(teacherID, request.StudentAnswerID, request.QuestionMarked, request.QuestionCommented);
             return Ok(result);
         }
+
+        [HttpGet("score-list")]
+        public async Task<IActionResult> ScoreList([FromQuery] Guid teacherID)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var result = await _resultService.GetScoreList(teacherID);
+            return Ok(result);
+        }
+
+        [HttpGet("score-list/student-id/{studentID}")]
+        public async Task<IActionResult> ScoreListByStudentID(Guid studentID)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var result = await _resultService.GetScoreListByStudentID(studentID);
+            return Ok(result);
+        }
     }
 }

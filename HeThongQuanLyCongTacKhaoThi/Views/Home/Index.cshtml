@@ -17,30 +17,33 @@
     <h2 class="display-3 text-gray-700 font-weight-bold">Hệ thống quản lý công tác khảo thí</h2>
 </div>
 
-<h2 class="h4 mt-5 mb-0 text-gray-800 font-weight-bold">Các môn học chưa tham gia</h2>
-<hr />
-<div class="row">
-    @foreach(var subjectNotJoined in subjectsNotJoined){
-        <div class="col-xl-3 col-md-6 mb-4">
-            <a class="subject-not-joined text-decoration-none" href="#" data-toggle="modal" data-target="#registerSubjectModal">
-                <div class="card border-primary shadow py-2">
-                    <div class="card-body align-items-center d-flex justify-content-center">
-                        <div id="@subjectNotJoined.ID" class="subject-name h5 mb-0 font-weight-bold text-gray-800">
-                            @subjectNotJoined.Name            
+@if(User.Identity.Name != null)
+{
+    <h2 class="h4 mt-5 mb-0 text-gray-800 font-weight-bold">Các môn học chưa tham gia</h2>
+    <hr />
+    <div class="row">
+        @foreach(var subjectNotJoined in subjectsNotJoined){
+            <div class="col-xl-3 col-md-6 mb-4">
+                <a class="subject-not-joined text-decoration-none" href="#" data-toggle="modal" data-target="#registerSubjectModal">
+                    <div class="card border-primary shadow py-2">
+                        <div class="card-body align-items-center d-flex justify-content-center">
+                            <div id="@subjectNotJoined.ID" class="subject-name h5 mb-0 font-weight-bold text-gray-800">
+                                @subjectNotJoined.Name            
+                            </div>
+                        </div>
+                        <div class="card-body pt-0 pb-0 text-sm font-weight-bold text-primary text-uppercase mb-1">
+                            Mã môn học: @subjectNotJoined.ID<br>
+                            Số tiết học: @subjectNotJoined.LessonCount<br>
+                            Số tín chỉ: @subjectNotJoined.CreditCount
                         </div>
                     </div>
-                    <div class="card-body pt-0 pb-0 text-sm font-weight-bold text-primary text-uppercase mb-1">
-                        Mã môn học: @subjectNotJoined.ID<br>
-                        Số tiết học: @subjectNotJoined.LessonCount<br>
-                        Số tín chỉ: @subjectNotJoined.CreditCount
-                    </div>
-                </div>
-            </a>
-        </div>
-    }
-</div>
+                </a>
+            </div>
+        }
+    </div>
+    
 
-<!-- Register Subject Modal-->
+    <!-- Register Subject Modal-->
     <div class="modal fade" id="registerSubjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -59,6 +62,7 @@
             </div>
         </div>
     </div>
+}
 
 @section Scripts{
     <script>

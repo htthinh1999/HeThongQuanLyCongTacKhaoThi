@@ -10,6 +10,14 @@
     <h1 class="h3 mb-0 text-gray-800">Chấm điểm bài kiểm tra với mã phách "@Model.StudentAnswerID"</h1>
 </div>
 
+
+@if (ViewBag.ErrorMsg != null)
+{
+    <div id="alert-msg" class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMsg
+    </div>
+}
+
 <form asp-action="Mark" method="post">
     <input type="hidden" name="request.StudentAnswerID" value="@Model.StudentAnswerID"/>
     <div class="row">
@@ -101,6 +109,11 @@
 
     <script>
         $(document).ready(function () {
+
+            setTimeout(function () {
+                $("#alert-msg").fadeOut('slow');
+            }, 3000);
+
             $('.marker-green').css("background-color", "#62f962");
             $('.marker-red').css("background-color", "#ff6666");
 

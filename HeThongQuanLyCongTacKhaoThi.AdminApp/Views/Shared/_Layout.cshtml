@@ -157,7 +157,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" asp-action="Index" asp-controller="ScoreSystem">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Thống kê điểm thi</span>
                 </a>
@@ -343,7 +343,7 @@
                 toastr.info('Vừa có học viên nộp bài');
 
                 var newNotification =
-                    "<a class='dropdown-item d-flex align-items-center alert-item' href='@Url.Action("","")?studentAnswerID=" + studentAnswerID + "'>" +
+                    "<a class='dropdown-item d-flex align-items-center alert-item' href='@Url.Action("Details","MarkExam")/"+ studentAnswerID + "'>" +
                     "<div class='mr-3'>" +
                     "<div class='icon-circle bg-primary'>" +
                     "<i class='fas fa-file-alt text-white'></i>" +

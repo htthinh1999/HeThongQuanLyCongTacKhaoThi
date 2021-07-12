@@ -53,19 +53,28 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
 
             var examResult = getExamResult.ResultObj;
 
+            ViewBag.ErrorMsg = TempData["ErrorMsg"];
             return View(examResult);
         }
 
         [HttpPost]
         public async Task<IActionResult> Mark(MarkExamRequest request)
         {
+            var totalMark = request.QuestionMarked.Sum(x => x.Value);
+            if (totalMark > 10)
+            {
+                TempData["ErrorMsg"] = "Tổng điểm phải nhỏ hơn hoặc bằng 10 (trong trường hợp không có câu trắc nghiệm)";
+                return RedirectToAction("Mark", request.StudentAnswerID);
+            }
+
             var teacherID = new Guid(HttpContext.Session.GetString("UserID"));
 
             var result = await _resultApiClient.MarkExam(teacherID, request);
 
             if (!result.IsSuccessed)
             {
-                return BadRequest(result.Message);
+                TempData["ErrorMsg"] = result.Message;
+                return RedirectToAction("Mark", request.StudentAnswerID);
             }
 
             return RedirectToAction("Index", "MarkExam");

@@ -488,6 +488,7 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.Ad
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_QuestionResultDetail.cshtml.g.cs
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\MarkExam\Mark.cshtml.g.cs
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\MarkExam\Index.cshtml.g.cs
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AdminApp.csproj.AssemblyReference.cache
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AdminApp.GeneratedMSBuildEditorConfig.editorconfig
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\Razor\Views\ScoreSystem\Index.cshtml.g.cs
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.AdminApp.csprojAssemblyReference.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.AdminApp\obj\Debug\netcoreapp3.1\staticwebassets\HeThongQuanLyCongTacKhaoThi.AdminApp.StaticWebAssets.xml

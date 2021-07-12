@@ -16,7 +16,7 @@
         <div id="alert-items">
             @foreach (var item in Model)
             {
-                <a class="dropdown-item d-flex align-items-center alert-item" href="@Url.Action("","", new { studentAnswerID = item.StudentAnswerID })">
+                <a class="dropdown-item d-flex align-items-center alert-item" href="@Url.Action("Details","MarkExam", new { id = item.StudentAnswerID })">
                     <div class="mr-3">
                         <div class="icon-circle bg-primary">
                             <i class="fas fa-file-alt text-white"></i>
@@ -40,7 +40,7 @@
                                 }
                             }
                         </div>
-                        <span class="@(item.IsRead?"":"font-weight-bold")">Đã có học viên nộp bài với mã phách @item.Message</span>
+                        <span class="@(item.IsRead?"":"font-weight-bold")">@item.Message</span>
                     </div>
                 </a>
             }

@@ -21,7 +21,7 @@ namespace HeThongQuanLyCongTacKhaoThi.AdminApp.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             if (string.IsNullOrEmpty(User.Identity.Name))
             {

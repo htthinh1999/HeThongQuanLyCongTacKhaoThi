@@ -13,6 +13,7 @@ using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.StudentAnswers;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions;
 using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Answers;
 using Microsoft.AspNetCore.Identity;
+using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
 
 namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
 {
@@ -78,7 +79,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
                             Name = exam.Key.Name,
                             ContestName = exam.Key.ContestName,
                             MultipleChoiceQuestionCount = exam.Sum(x => (x.q.IsMultipleChoice) ? 1 : 0),
-                            EssayQuestionCount = exam.Sum(x => (x.q.IsMultipleChoice) ? 1 : 0),
+                            EssayQuestionCount = exam.Sum(x => (x.q.IsMultipleChoice) ? 0 : 1),
                             StudentAnswerID = exam.Key.StudentAnswerID,
                             Mark1 = exam.Key.Mark1,
                             Mark2 = exam.Key.Mark2,
@@ -417,6 +418,18 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
                                            orderby tc.TeacherID
                                            select tc.TeacherID).ToListAsync();
 
+            foreach(var questionID in questionMarked.Keys)
+            {
+                var markLargerMaxMark = await _context.ExamDetails.AsNoTracking()
+                                            .Where(x => x.QuestionID == questionID && x.MaxQuestionMark < questionMarked[questionID])
+                                            .FirstOrDefaultAsync();
+
+                if (markLargerMaxMark != null)
+                {
+                    return new ApiErrorResult<bool>("Không thể chấm điểm cao hơn điểm cho phép!");
+                }
+            }
+
             int teacherNumber = (teacherIDs[0] == teacherID) ? 1 : 2;
 
             if(teacherNumber == 1)
@@ -452,9 +465,17 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
                     examResult.Mark = (examResult.Mark == null) ? item.Mark 
                                                                 : examResult.Mark + item.Mark;
                 }
-
-                _context.Entry(item).State = EntityState.Modified;
             }
+
+            // Total mark of multiple choice question
+            var studentAnswerDetailsWithMultipleChoice = await (from sad in _context.StudentAnswerDetails
+                                                                join q in _context.Questions on sad.QuestionID equals q.ID
+                                                                where q.IsMultipleChoice == true && sad.StudentAnswerID == studentAnswerID
+                                                                select sad).ToListAsync();
+
+            examResult.Mark1 += studentAnswerDetailsWithMultipleChoice.Sum(x => x.Mark1);
+            examResult.Mark2 += studentAnswerDetailsWithMultipleChoice.Sum(x => x.Mark2);
+            examResult.Mark += studentAnswerDetailsWithMultipleChoice.Sum(x => x.Mark);
 
             var result = await _context.SaveChangesAsync();
             if (result == 0)
@@ -462,6 +483,163 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
                 return new ApiErrorResult<bool>("Không thể thêm điểm cho học viên");
             }
             return new ApiSuccessResult<bool>();
+        }
+
+        public async Task<ApiResult<ScoreListViewModel>> GetScoreList(Guid teacherID)
+        {
+            var result = new ScoreListViewModel();
+            var scoreList = await GetScoreListFromDB(teacherID);
+
+            if (scoreList == null)
+            {
+                return new ApiSuccessResult<ScoreListViewModel>(result);
+            }
+
+            var scoreListGroupByStudents = scoreList.GroupBy(x => new { x.StudentID, x.Name })
+                             .Select(scores => scores.ToList())
+                             .ToList();
+
+            foreach(var scoreListGroupByStudent in scoreListGroupByStudents)
+            {
+                var scoreListGroupByStudentAndSubjects = scoreListGroupByStudent.GroupBy(x => x.SubjectName)
+                                                            .Select(score => score.ToList())
+                                                            .ToList();
+                var studentResult = new ScoreListViewModel.StudentResult()
+                {
+                    Name = scoreListGroupByStudent.First().Name,
+                    StudentID = scoreListGroupByStudent.First().StudentID
+                };
+
+                var subjectResults = new List<ScoreListViewModel.SubjectResult>();
+
+                foreach(var scores in scoreListGroupByStudentAndSubjects)
+                {
+                    var subjectResult = new ScoreListViewModel.SubjectResult()
+                    {
+                        Name = scores.First().SubjectName,
+                        FinalScore = null,
+                        Scores = scores.Select(score => new ScoreListViewModel.ScoreModel()
+                        {
+                            Name = score.ScoreName,
+                            Percent = score.Percent,
+                            Score = score.Score
+                        }).ToList()
+                    };
+
+
+                    if (subjectResult.Scores.Count >= 4)
+                    {
+                        subjectResult.FinalScore = subjectResult.Scores.Sum(x => x.Score * x.Percent);
+                    }
+
+                    subjectResults.Add(subjectResult);
+                }
+
+                studentResult.SubjectResults = subjectResults;
+
+                result.StudentResults.Add(studentResult);
+            }
+
+
+            return new ApiSuccessResult<ScoreListViewModel>(result);
+        }
+
+        private async Task<List<ScoreListFromDBModel>> GetScoreListFromDB(Guid teacherID)
+        {
+            if(teacherID == Guid.Empty)
+                return await (from r in _context.Results
+                            join c in _context.Contests on r.ContestID equals c.ID
+                            join s in _context.Subjects on c.SubjectID equals s.ID
+                            join st in _context.ScoreTypes on c.ScoreTypeID equals st.ID
+                            join a in _context.Accounts on r.UserID equals a.Id
+                            join ur in _context.UserRoles on a.Id equals ur.UserId
+                            join role in _context.Roles on ur.RoleId equals role.Id
+                            where role.Name == Roles.Student
+                            group a by new { StudentID = a.Student_TeacherID, a.Name, SubjectName = s.Name, ScoreName = st.Name, st.Percent, Score = r.Mark } into result
+                            select new ScoreListFromDBModel()
+                            {
+                                StudentID = result.Key.StudentID,
+                                Name = result.Key.Name,
+                                SubjectName = result.Key.SubjectName,
+                                ScoreName = result.Key.ScoreName,
+                                Percent = result.Key.Percent,
+                                Score = result.Key.Score }).ToListAsync();
+
+            return await (from r in _context.Results
+                          join c in _context.Contests on r.ContestID equals c.ID
+                          join s in _context.Subjects on c.SubjectID equals s.ID
+                          join sa in _context.SubjectAccounts on s.ID equals sa.SubjectID
+                          join st in _context.ScoreTypes on c.ScoreTypeID equals st.ID
+                          join a in _context.Accounts on r.UserID equals a.Id
+                          join ur in _context.UserRoles on a.Id equals ur.UserId
+                          join role in _context.Roles on ur.RoleId equals role.Id
+                          where role.Name == Roles.Student && sa.UserID == teacherID
+                          group a by new { StudentID = a.Student_TeacherID, a.Name, SubjectName = s.Name, ScoreName = st.Name, st.Percent, Score = r.Mark } into result
+                          select new ScoreListFromDBModel()
+                          {
+                              StudentID = result.Key.StudentID,
+                              Name = result.Key.Name,
+                              SubjectName = result.Key.SubjectName,
+                              ScoreName = result.Key.ScoreName,
+                              Percent = result.Key.Percent,
+                              Score = result.Key.Score
+                          }).ToListAsync();
+        }
+
+        public async Task<ApiResult<ScoreListViewModel.StudentResult>> GetScoreListByStudentID(Guid studentID) 
+        {
+            var studentResult = new ScoreListViewModel.StudentResult();
+            var scoreList = await GetScoreListFromDBByStudentID(studentID);
+
+            if(scoreList == null)
+            {
+                return new ApiSuccessResult<ScoreListViewModel.StudentResult>(studentResult);
+            }
+
+            var scoreGroupBySubject = scoreList.GroupBy(x => x.SubjectName)
+                                                    .Select(score => score.ToList())
+                                                    .ToList();
+            
+            foreach (var scores in scoreGroupBySubject)
+            {
+                var subjectResult = new ScoreListViewModel.SubjectResult()
+                {
+                    Name = scores.First().SubjectName,
+                    FinalScore = null,
+                    Scores = scores.Select(x => new ScoreListViewModel.ScoreModel()
+                            {
+                                Name = x.ScoreName,
+                                Percent = x.Percent,
+                                Score = x.Score
+                            }).ToList()
+                };
+
+                if(subjectResult.Scores.Count >= 4)
+                {
+                    subjectResult.FinalScore = subjectResult.Scores.Sum(x => x.Percent * x.Score);
+                }
+
+                studentResult.SubjectResults.Add(subjectResult);
+            }
+
+            return new ApiSuccessResult<ScoreListViewModel.StudentResult>(studentResult);
+        }
+
+        private async Task<List<ScoreListFromDBModel>> GetScoreListFromDBByStudentID(Guid StudentID)
+        {
+            return await (from r in _context.Results
+                          join c in _context.Contests on r.ContestID equals c.ID
+                          join s in _context.Subjects on c.SubjectID equals s.ID
+                          join st in _context.ScoreTypes on c.ScoreTypeID equals st.ID
+                          where r.UserID == StudentID
+                          group r by new { SubjectName = s.Name, ScoreName = st.Name, st.Percent, Score = r.Mark } into result
+                          select new ScoreListFromDBModel()
+                          {
+                              SubjectName = result.Key.SubjectName,
+                              ScoreName = result.Key.ScoreName,
+                              Percent = result.Key.Percent,
+                              Score = result.Key.Score
+                          }).ToListAsync();
         }
     }
 }

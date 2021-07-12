@@ -189,9 +189,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Contests
                                         .FirstOrDefault()
                        };
 
-            var items = await data.ToListAsync();
+            var items = await data.Skip((request.PageIndex - 1) * request.PageSize)
+                            .Take(request.PageSize)
+                            .AsNoTracking().ToListAsync();
 
-            var totalRow = items.Count;
+            var totalRow = await query.CountAsync();
             var pagedResult = new PagedResult<ContestViewModel>()
             {
                 TotalRecords = totalRow,

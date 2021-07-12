@@ -23,5 +23,9 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
         Task<ApiResult<int>> GetTeacherNumber(Guid studentAnswerID, Guid teacherID);
 
         Task<ApiResult<bool>> MarkExam(Guid teacherID, MarkExamRequest request);
+
+        Task<ApiResult<ScoreListViewModel>> GetScoreList(Guid teacherID);
+
+        Task<ApiResult<ScoreListViewModel.StudentResult>> GetScoreListByStudentID(Guid studentID);
     }
 }

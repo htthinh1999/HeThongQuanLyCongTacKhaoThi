@@ -1,0 +1,158 @@
+﻿@using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects;
+@using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Results;
+@using HeThongQuanLyCongTacKhaoThi.ApiIntegration;
+@model ScoreListViewModel
+@inject ISubjectApiClient _subjectApiClient
+
+@{
+    ViewData["Title"] = "Thống kê điểm môn học";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var getAllSubjects = await _subjectApiClient.GetAll();
+    var allSubjects = getAllSubjects.ResultObj;
+}
+
+<h1>Thống kê điểm môn học</h1>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thống kê điểm môn học</h6>
+    </div>                                            
+    <div class="card-body">
+        <div class="d-flex">
+            <button id="btnExcel" class="ml-auto btn btn-primary mb-3">Xuất tệp Excel</button>
+        </div>
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row" id="tableRow">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered" id="table" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                  <th rowspan=2>
+                                    Mã học viên
+                                  </th>
+                                  <th rowspan=2>
+                                    Tên học viên
+                                  </th>
+                                    @foreach(var item in allSubjects)
+                                    {
+                                        <th colspan=5>
+                                            @item.Name
+                                        </th>
+                                    }
+                                </tr>
+                                <tr>
+                                    @foreach(var item in allSubjects)
+                                    {
+                                        <th>CC</th>
+                                        <th>TT</th>
+                                        <th>GM</th>
+                                        <th>KT</th>
+                                        <th>KQ</th>
+                                    }
+                                </tr>
+                              </thead>
+                            <tbody>
+                                @foreach (var item in Model.StudentResults)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StudentID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>                                        
+                                        @foreach(var subject in allSubjects)
+                                        {
+                                            var scores = item.SubjectResults.Where(x => x.Name == subject.Name).FirstOrDefault();
+                                            if(scores == null)
+                                            {
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            }
+                                            else
+                                            {
+                                                var cc = scores.Scores.Where(x => x.Name == "Điểm chuyên cần").FirstOrDefault();
+                                                var tx = scores.Scores.Where(x => x.Name == "Điểm thường xuyên").FirstOrDefault();
+                                                var gm = scores.Scores.Where(x => x.Name == "Điểm giữa môn").FirstOrDefault();
+                                                var kt = scores.Scores.Where(x => x.Name == "Điểm kết thúc môn").FirstOrDefault();
+                                                var kq = scores.FinalScore;
+                                                if(cc == null) { <td></td> } else { <td>@cc.Score</td> }
+                                                if(tx == null) { <td></td> } else { <td>@tx.Score</td> }
+                                                if(gm == null) { <td></td> } else { <td>@gm.Score</td> }
+                                                if(kt == null) { <td></td> } else { <td>@kt.Score</td> }
+                                                if(kq == null) { <td></td> } else { <td>@kq</td> }
+                                            }
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Ghi chú</h6>
+    </div>                                            
+    <div class="card-body">
+        <table class="table table-bordered" id="table" width="100%" cellspacing="0">
+            <tr>
+                <th>Từ viết tắt</th>    
+                <th>Nghĩa của từ</th>
+            </tr>
+            <tr>
+                <td>CC</td>
+                <td>Điểm chuyên cần</td>
+            </tr>
+            <tr>
+                <td>TX</td>
+                <td>Điểm thường xuyên</td>
+            </tr>
+            <tr>
+                <td>GM</td>
+                <td>Điểm giữa môn</td>
+            </tr>
+            <tr>
+                <td>KT</td>
+                <td>Điểm kết thúc môn</td>
+            </tr>
+            <tr>
+                <td>KQ</td>
+                <td>Điểm kết quả môn học</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="/assets/vendor/table2excel/jquery.table2excel.js"></script>
+
+    <script>
+        $("#btnExcel").click(function(){
+            var current = new Date();
+            var year = current.getFullYear();
+            var month = current.getMonth()+1;
+            var day = current.getDate();
+
+            var date =  (day<10 ? '0' : '') + day + '_' + (month<10 ? '0' : '') + month + '_' + year;
+            var time = current.getHours() + "_" + current.getMinutes() + "_" + current.getSeconds();
+
+          $("#table").table2excel({
+            // exclude CSS class
+            exclude: ".noExl",
+            name: "Thống kê điểm môn học",
+            filename: "Thống kê môn học - " + date + "_" + time, //do not include extension
+            fileext: ".xls", // file extension
+          }); 
+        });
+    </script>
+}

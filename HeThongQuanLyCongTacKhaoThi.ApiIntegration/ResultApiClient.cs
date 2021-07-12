@@ -141,5 +141,38 @@ namespace HeThongQuanLyCongTacKhaoThi.ApiIntegration
             }
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
+
+        public async Task<ApiResult<ScoreListViewModel>> GetScoreList(Guid teacherID)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync($"/api/results/score-list?teacherID={teacherID}");
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<ScoreListViewModel>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<ScoreListViewModel>>(result);
+        }
+
+        public async Task<ApiResult<ScoreListViewModel.StudentResult>> GetScoreListByStudentID(Guid studentID)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+
+            var response = await client.GetAsync($"/api/results/score-list/student-id/{studentID}");
+            var result = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<ApiSuccessResult<ScoreListViewModel.StudentResult>>(result);
+            }
+            return JsonConvert.DeserializeObject<ApiErrorResult<ScoreListViewModel.StudentResult>>(result);
+        }
+
     }
 }
