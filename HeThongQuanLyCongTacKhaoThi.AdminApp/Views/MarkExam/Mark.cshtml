@@ -1,0 +1,191 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams.ExamResultViewModel
+@{
+    ViewData["Title"] = "Chấm điểm bài kiểm tra với mã phách \"" + Model.StudentAnswerID + "\"";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Chấm điểm bài kiểm tra với mã phách "@Model.StudentAnswerID"</h1>
+</div>
+
+
+@if (ViewBag.ErrorMsg != null)
+{
+    <div id="alert-msg" class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMsg
+    </div>
+}
+
+<form asp-action="Mark" method="post">
+    <input type="hidden" name="request.StudentAnswerID" value="@Model.StudentAnswerID"/>
+    <div class="row">
+        @{
+            int dictionaryIndex = 0;
+        }
+        @for (int i = 0; i < Model.studentAnswerDetails.Count; i++)
+        {
+            <dt class="col-12">
+                <hr>
+                <h3 class="text-bold h4 text-gray-700">Câu @(i+1)</h3>
+                <hr>
+            </dt>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.studentAnswerDetails[i].Question.Content)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.Raw(Model.studentAnswerDetails[i].Question.Content)
+            </dd>
+
+            @if (Model.studentAnswerDetails[i].Question.IsMultipleChoice)
+            {
+                <dt class="col-sm-2">
+                    Đáp án
+                </dt>
+                <dd class="col-sm-10">
+                    @for (int j = 0; j < Model.studentAnswerDetails[i].Question.Answers.Count; j++)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="Answer[@Model.studentAnswerDetails[i].Question.ID]" value="@Model.studentAnswerDetails[i].Question.Answers[j].ID" @((Model.studentAnswerDetails[i].Question.Answers[j].ID == Model.studentAnswerDetails[i].AnswerID) ? "checked" : "") disabled />
+                            <div class='@((Model.studentAnswerDetails[i].Question.Answers[j].IsCorrect)?"marker-green":(Model.studentAnswerDetails[i].Question.Answers[j].ID == Model.studentAnswerDetails[i].AnswerID)?"marker-red":"")'>
+                                @Html.Raw(Model.studentAnswerDetails[i].Question.Answers[j].Content)
+                            </div>
+                        </div>
+                    }
+                </dd>
+            }
+            else
+            {
+                <input type="hidden" name="request.QuestionMarked[@dictionaryIndex].Key" value="@Model.studentAnswerDetails[i].QuestionID"/>
+                <input type="hidden" name="request.QuestionCommented[@dictionaryIndex].Key" value="@Model.studentAnswerDetails[i].QuestionID"/>
+
+                <dt class="col-sm-2">
+                    Câu trả lời
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.Raw(Model.studentAnswerDetails[i].StudentAnswerContent)
+                </dd>
+                <dt class="col-sm-2">
+                    Đáp án
+                </dt>
+                <dd class="col-sm-10">
+                    @if (Model.studentAnswerDetails[i].Question.Answers[0].Content.Contains("/images/"))
+                    {
+                        <img src="@Configuration["AdminAddress"]@Model.studentAnswerDetails[i].Question.Answers[0].Content" alt="Đáp án câu hỏi" />
+                    }
+                    else
+                    {
+                        @Html.Raw(Model.studentAnswerDetails[i].Question.Answers[0].Content)
+                    }
+                </dd>
+                <dt class="col-sm-2">
+                    Nhận xét của giảng viên
+                </dt>
+                <dd class="col-sm-10">
+                    <textarea rows="5" class="form-control editor" name="request.QuestionCommented[@(dictionaryIndex)].Value"></textarea>
+                </dd>
+                <dt class="col-sm-2">
+                    Điểm của giảng viên
+                </dt>
+                <dd class="col-sm-10">
+                    <input class="form-control" name="request.QuestionMarked[@(dictionaryIndex++)].Value" type="number" step="0.1"/>
+                </dd>
+            }
+        }
+        <dt class="col-12">
+            <input type="submit" class="btn btn-primary" value="Chấm điểm" />
+        </dt>
+    </div>
+</form>
+
+@section Scripts{
+
+    @* Enable MathJax to support render MathML on Chrome and Edge *@
+    <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
+    <script src="/assets/vendor/ckeditor5/build/ckeditor.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            setTimeout(function () {
+                $("#alert-msg").fadeOut('slow');
+            }, 3000);
+
+            $('.marker-green').css("background-color", "#62f962");
+            $('.marker-red').css("background-color", "#ff6666");
+
+
+            
+            var addEditor = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {
+                            toolbar: {
+                                items: [
+                                    'heading',
+                                    '|',
+                                    'bold',
+                                    'italic',
+                                    'underline',
+                                    'alignment',
+                                    '|',
+                                    'link',
+                                    'bulletedList',
+                                    'numberedList',
+                                    '|',
+                                    'blockQuote',
+                                    'insertTable',
+                                    'undo',
+                                    'redo',
+                                    '-',
+                                    'fontBackgroundColor',
+                                    'fontColor',
+                                    'fontSize',
+                                    'fontFamily',
+                                    'highlight',
+                                    '|',
+                                    'MathType',
+                                    'specialCharacters',
+                                    'ChemType',
+                                    '|',
+                                    'codeBlock',
+                                    'code',
+                                    'htmlEmbed',
+                                    'outdent',
+                                    'indent'
+                                ],
+                                shouldNotGroupWhenFull: true
+                            },
+                            language: 'vi',
+                            table: {
+                                contentToolbar: [
+                                    'tableColumn',
+                                    'tableRow',
+                                    'mergeTableCells'
+                                ]
+                            },
+                            licenseKey: '',
+                        })
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+                
+            }
+
+            addEditor('.editor');
+        });
+    </script>
+
+}

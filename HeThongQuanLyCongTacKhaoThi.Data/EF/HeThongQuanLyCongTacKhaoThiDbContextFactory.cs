@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HeThongQuanLyCongTacKhaoThi.Utilities.Constants;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.EF
 {
@@ -16,7 +14,7 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.EF
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-            string connectionString = configuration.GetConnectionString("HeThongQuanLyCongTacKhaoThiDatabase");
+            string connectionString = configuration.GetConnectionString(SystemConstants.MAIN_CONNECTION_STRING);
 
             var optionsBuilder = new DbContextOptionsBuilder<HeThongQuanLyCongTacKhaoThiDbContext>();
             optionsBuilder.UseSqlServer(connectionString);

@@ -3,11 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi", "HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.csproj", "{F4DF8FB6-167E-435A-921A-F2378F178BDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.WebApp", "HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi.WebApp.csproj", "{F4DF8FB6-167E-435A-921A-F2378F178BDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeThongQuanLyCongTacKhaoThi.Data", "HeThongQuanLyCongTacKhaoThi.Data\HeThongQuanLyCongTacKhaoThi.Data.csproj", "{F463C6E4-8351-4AA8-8492-1F5B56B1B67B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.Data", "HeThongQuanLyCongTacKhaoThi.Data\HeThongQuanLyCongTacKhaoThi.Data.csproj", "{F463C6E4-8351-4AA8-8492-1F5B56B1B67B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeThongQuanLyCongTacKhaoThi.Application", "HeThongQuanLyCongTacKhaoThi.Application\HeThongQuanLyCongTacKhaoThi.Application.csproj", "{5A7D8374-C61C-45B3-ACDC-9500C694DAC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.Application", "HeThongQuanLyCongTacKhaoThi.Application\HeThongQuanLyCongTacKhaoThi.Application.csproj", "{5A7D8374-C61C-45B3-ACDC-9500C694DAC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.ViewModels", "HeThongQuanLyCongTacKhaoThi.ViewModels\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj", "{54A73D2C-2B28-411D-A1F3-593628FE3FA5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.BackendAPI", "HeThongQuanLyCongTacKhaoThi.BackendAPI\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj", "{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.Utilities", "HeThongQuanLyCongTacKhaoThi.Utilities\HeThongQuanLyCongTacKhaoThi.Utilities.csproj", "{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Infrastructure", "1. Infrastructure", "{442FEB35-B834-44D5-91DD-206AE8EC883D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domain", "2. Domain", "{436B4A22-058D-48BA-B5FE-2DC071F27D70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Hosts", "3. Hosts", "{D7CE9111-B6A9-4114-897F-8295430AE14B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeThongQuanLyCongTacKhaoThi.AdminApp", "HeThongQuanLyCongTacKhaoThi.AdminApp\HeThongQuanLyCongTacKhaoThi.AdminApp.csproj", "{832A189C-57A2-41B8-BD97-67143E6C36FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{84138067-FBE5-4C85-9404-6CDF5094B046}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeThongQuanLyCongTacKhaoThi.ApiIntegration", "HeThongQuanLyCongTacKhaoThi.ApiIntegration\HeThongQuanLyCongTacKhaoThi.ApiIntegration.csproj", "{A2BD3F1B-60BF-4CDD-A7C5-9AF65A8066A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +45,39 @@ Global
 		{5A7D8374-C61C-45B3-ACDC-9500C694DAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A7D8374-C61C-45B3-ACDC-9500C694DAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A7D8374-C61C-45B3-ACDC-9500C694DAC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54A73D2C-2B28-411D-A1F3-593628FE3FA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54A73D2C-2B28-411D-A1F3-593628FE3FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54A73D2C-2B28-411D-A1F3-593628FE3FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54A73D2C-2B28-411D-A1F3-593628FE3FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{832A189C-57A2-41B8-BD97-67143E6C36FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832A189C-57A2-41B8-BD97-67143E6C36FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832A189C-57A2-41B8-BD97-67143E6C36FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832A189C-57A2-41B8-BD97-67143E6C36FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BD3F1B-60BF-4CDD-A7C5-9AF65A8066A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BD3F1B-60BF-4CDD-A7C5-9AF65A8066A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BD3F1B-60BF-4CDD-A7C5-9AF65A8066A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BD3F1B-60BF-4CDD-A7C5-9AF65A8066A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F4DF8FB6-167E-435A-921A-F2378F178BDC} = {D7CE9111-B6A9-4114-897F-8295430AE14B}
+		{F463C6E4-8351-4AA8-8492-1F5B56B1B67B} = {436B4A22-058D-48BA-B5FE-2DC071F27D70}
+		{5A7D8374-C61C-45B3-ACDC-9500C694DAC9} = {436B4A22-058D-48BA-B5FE-2DC071F27D70}
+		{54A73D2C-2B28-411D-A1F3-593628FE3FA5} = {442FEB35-B834-44D5-91DD-206AE8EC883D}
+		{6C33B518-A3D8-47D3-93F3-7A7B1488A6C5} = {D7CE9111-B6A9-4114-897F-8295430AE14B}
+		{2D03201D-F367-4DAD-8560-6FCAFDA2DECF} = {442FEB35-B834-44D5-91DD-206AE8EC883D}
+		{832A189C-57A2-41B8-BD97-67143E6C36FE} = {D7CE9111-B6A9-4114-897F-8295430AE14B}
+		{A2BD3F1B-60BF-4CDD-A7C5-9AF65A8066A3} = {D7CE9111-B6A9-4114-897F-8295430AE14B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8436CEF2-F018-4EC6-8644-4DD75822E80C}

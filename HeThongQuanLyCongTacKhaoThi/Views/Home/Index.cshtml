@@ -1,8 +1,79 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects;
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+
+@{ 
+    ViewData["Title"] = "Trang chủ";
+    var subjectsNotJoined = new List<SubjectViewModel>();
+    if (User.Identity.Name != null)
+    {
+        var accoutSubjectsNotJoinedJson = Context.Session.GetString("AccoutSubjectsNotJoined");
+        subjectsNotJoined = JsonConvert.DeserializeObject<List<SubjectViewModel>>(accoutSubjectsNotJoinedJson);
+    }
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4 font-weight-normal">Chào mừng bạn đến với</h1>
+    <h2 class="display-3 text-gray-700 font-weight-bold">Hệ thống quản lý công tác khảo thí</h2>
 </div>
+
+@if(User.Identity.Name != null)
+{
+    <h2 class="h4 mt-5 mb-0 text-gray-800 font-weight-bold">Các môn học chưa tham gia</h2>
+    <hr />
+    <div class="row">
+        @foreach(var subjectNotJoined in subjectsNotJoined){
+            <div class="col-xl-3 col-md-6 mb-4">
+                <a class="subject-not-joined text-decoration-none" href="#" data-toggle="modal" data-target="#registerSubjectModal">
+                    <div class="card border-primary shadow py-2">
+                        <div class="card-body align-items-center d-flex justify-content-center">
+                            <div id="@subjectNotJoined.ID" class="subject-name h5 mb-0 font-weight-bold text-gray-800">
+                                @subjectNotJoined.Name            
+                            </div>
+                        </div>
+                        <div class="card-body pt-0 pb-0 text-sm font-weight-bold text-primary text-uppercase mb-1">
+                            Mã môn học: @subjectNotJoined.ID<br>
+                            Số tiết học: @subjectNotJoined.LessonCount<br>
+                            Số tín chỉ: @subjectNotJoined.CreditCount
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+    
+
+    <!-- Register Subject Modal-->
+    <div class="modal fade" id="registerSubjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tham gia môn học?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Bạn có muốn tham gia môn học subjectNotJoined.Name?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Huỷ</button>
+                    <a class="btn btn-primary" href="JoinSubject/subjectNotJoined.ID">Tham gia môn học</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".subject-not-joined").on("click", function(){
+                var subjectName = $(this).find("div.subject-name").text();
+                $("#registerSubjectModal").find("div.modal-body").text("Bạn có muốn tham gia môn học " + subjectName + "?");
+
+                var subjectID = $(this).find("div.subject-name").attr("id");
+                $("#registerSubjectModal").find("a.btn").attr("href", "JoinSubject/" + subjectID);
+            });
+        });
+    </script>
+}

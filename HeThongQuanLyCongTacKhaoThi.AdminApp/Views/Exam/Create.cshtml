@@ -1,0 +1,93 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams.ExamCreateRequest
+
+@{
+    ViewData["Title"] = "Tạo đề thi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tạo đề thi</h1>
+
+<h4>Mẫu biểu tạo đề thi</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Kỳ kiểm tra</label>
+                <select asp-for="ContestID" class="form-control" asp-items="@(new SelectList(Model.Contests, "ID", "Name"))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubjectID" class="control-label"></label>
+                <input asp-for="SubjectID" class="form-control" readonly />
+                <span asp-validation-for="SubjectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MultipleChoiceQuestionCount" class="control-label"></label>
+                <input asp-for="MultipleChoiceQuestionCount" class="form-control" />
+                <span asp-validation-for="MultipleChoiceQuestionCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EssayQuestionCount" class="control-label"></label>
+                <input asp-for="EssayQuestionCount" class="form-control" />
+                <span asp-validation-for="EssayQuestionCount" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="question-groups">
+            </div>
+            <button type="button" id="add-question-group" class="btn btn-primary mb-3">
+                <i class="fa fa-plus"></i> Thêm nhóm câu hỏi
+            </button>
+            <div class="form-group">
+                <input type="submit" value="Tạo đề thi" class="btn btn-primary" /> |
+                <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách đề thi</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+
+        $(document).ready(function () {
+
+            // Get Subject ID follow Contest ID
+            $("#ContestID").on('change', function () {
+                var contestID = $(this).val();
+                var url = '@Url.Action("GetSubjectIDByContestID", "Contest")?contestID=' + contestID;
+                $.get(url, function (data) {
+                    $("#SubjectID").val(data.subjectID);
+                });
+            });
+
+            // Init & get Question Groups
+            var questionGroupID = 0;
+            $("#add-question-group").on('click', function () {
+                var url = '@Url.Action("GetAllQuestionGroup", "QuestionGroup")/' + questionGroupID++;
+                $.get(url, function (data) {
+                    $("#question-groups").append(data);
+                });
+            });
+
+            $("body").on('click', '#remover-question-group', function () {
+                $(this).parent().parent().remove();
+
+                // Fix element's index of questiongroups to submit
+                var questionGroups = $('select[name^="QuestionGroups"]');
+                $.each(questionGroups, function (index, val){
+                    $(this).prop('name', 'QuestionGroups[' + index + ']');
+                });
+
+                // Fix id when add new element
+                questionGroupID = questionGroups.length;
+            });
+
+        });
+    </script>
+}

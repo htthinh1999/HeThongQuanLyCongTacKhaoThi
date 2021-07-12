@@ -1,0 +1,47 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams.ExamResultViewModel
+@{
+    ViewData["Title"] = $"Kết quả kiểm tra bài thi với mã phách '{Model.StudentAnswerID}'";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Kết quả kiểm tra bài thi với mã phách '@Model.StudentAnswerID'</h1>
+</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-2">
+    <h1 class="h5 mb-0 text-gray-600">Điểm giảng viên 1: @(Model.Mark1?? Single.NaN)</h1>
+</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-2">
+    <h1 class="h5 mb-0 text-gray-600">Điểm giảng viên 2: @(Model.Mark2?? Single.NaN)</h1>
+</div>
+<div class="d-sm-flex align-items-center justify-content-between mb-2">
+    <h1 class="h5 mb-0 text-danger font-weight-bold">Điểm bài thi: @(Model.Mark?? Single.NaN)</h1>
+</div>
+
+<div>
+    <div class="row">
+        @for (int i = 0; i < Model.studentAnswerDetails.Count; i++)
+        {
+            <dt class="col-12">
+                <hr>
+                <h3 class="text-bold h4 text-gray-700">Câu @(i+1)</h3>
+                <hr>
+            </dt>
+            @await Html.PartialAsync("_QuestionResultDetail", Model.studentAnswerDetails[i]);
+        }
+    </div>
+</div>
+
+@section Scripts{
+
+    @* Enable MathJax to support render MathML on Chrome and Edge *@
+    <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.marker-green').css("background-color", "#62f962");
+            $('.marker-red').css("background-color", "#ff6666");
+        });
+    </script>
+
+}

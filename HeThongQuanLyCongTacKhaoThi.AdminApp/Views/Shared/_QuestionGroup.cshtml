@@ -1,0 +1,11 @@
+﻿@model int
+
+<div class="form-group">
+    <label class="control-label">Nhóm câu hỏi</label>
+    <div class="form-inline">
+        <select name="QuestionGroups[@Model]" class="form-control mr-2 col-lg-8 col-xl-10" asp-items="ViewBag.QuestionGroups"></select>
+        <button id="remover-question-group" name="remover-question-group" type="button" class="btn btn-primary">
+            <i class="fa fa-trash"></i>
+        </button>
+    </div>
+</div>

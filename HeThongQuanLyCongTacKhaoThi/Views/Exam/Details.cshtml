@@ -1,0 +1,171 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Exams.ExamViewModel
+@{
+    ViewData["Title"] = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">@Model.Name</h1>
+</div>
+
+<div class="row h3 text-primary font-weight-bold justify-content-center border border-primary rounded-pill" id="countdown"></div>
+
+<div>
+    <form id="student-answer" asp-action="Details">
+        <dl class="row">
+            @for (int i = 0; i < Model.ExamDetails.Count; i++)
+            {
+                <dt class="col-12">
+                    <hr>
+                    <h3 class="text-bold h4 text-gray-700">Câu @(i+1)</h3>
+                    <hr>
+                </dt>
+                var question = Model.ExamDetails[i].Question;
+
+                @await Html.PartialAsync("_QuestionDetail", question);
+            }
+        </dl>
+        <input type="hidden" asp-for="ID" />
+        <input type="hidden" asp-for="SubjectID" />
+        <input type="hidden" asp-for="ContestID" />
+        <div class="form-group">
+            <input type="submit" value="Nộp bài" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+@section Scripts{
+
+    @* Enable MathJax to support render MathML on Chrome and Edge *@
+    <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
+
+
+    <script src="/assets/vendor/ckeditor5/build/ckeditor.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // COUNT DOWN TIME
+            // Convert miliseconds to time
+            function msToTime(duration) {
+                var seconds = Math.floor((duration / 1000) % 60),
+                    minutes = Math.floor((duration / (1000 * 60)) % 60),
+                    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+                hours = (hours < 10) ? "0" + hours : hours;
+                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+                return hours + ":" + minutes  + ":" + seconds;
+            }
+            var startTime = new Date("@(Model.Contest.StartTime)");
+            var timeCountDown = @Model.Contest.Duration;
+            var endTime = startTime.getTime() + timeCountDown * 60000;
+            var currentTime = Date.now();
+            var timeRemaining = endTime - currentTime;
+
+            // Submit if time's' up
+            setTimeout(function(){
+                $("#student-answer").submit();
+            }, timeRemaining);
+
+            // Show Time
+            var countDown = setInterval(function(){
+                if(timeRemaining <= 0){
+                    clearInterval(countDown);
+                }
+                $("#countdown").text(msToTime(timeRemaining));
+                timeRemaining -= 1000;
+            }, 1000);
+
+            var addEditorDisabled = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {})
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                            newEditor.isReadOnly = true;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+
+            }
+
+            var addEditor = function (className) {
+                window.editors = {};
+
+                document.querySelectorAll(className).forEach((node, index) => {
+                    ClassicEditor
+                        .create(node, {
+                            toolbar: {
+                                items: [
+                                    'heading',
+                                    '|',
+                                    'bold',
+                                    'italic',
+                                    'underline',
+                                    'alignment',
+                                    '|',
+                                    'link',
+                                    'bulletedList',
+                                    'numberedList',
+                                    '|',
+                                    'blockQuote',
+                                    'insertTable',
+                                    'undo',
+                                    'redo',
+                                    '-',
+                                    'fontBackgroundColor',
+                                    'fontColor',
+                                    'fontSize',
+                                    'fontFamily',
+                                    'highlight',
+                                    '|',
+                                    'MathType',
+                                    'specialCharacters',
+                                    'ChemType',
+                                    '|',
+                                    'codeBlock',
+                                    'code',
+                                    'htmlEmbed',
+                                    'outdent',
+                                    'indent'
+                                ],
+                                shouldNotGroupWhenFull: true
+                            },
+                            language: 'vi',
+                            table: {
+                                contentToolbar: [
+                                    'tableColumn',
+                                    'tableRow',
+                                    'mergeTableCells'
+                                ]
+                            },
+                            licenseKey: '',
+                        })
+                        .then(newEditor => {
+                            window.editors[index] = newEditor;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: 5eukpjx8rsb5-h2d357uhcalr');
+                            console.error(error);
+                        });
+                });
+            }
+
+            addEditorDisabled('.editor-disabled');
+            addEditor('.editor');
+        });
+    </script>
+
+}

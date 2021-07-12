@@ -1,0 +1,102 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Questions.QuestionViewModel
+
+@{
+    ViewData["Title"] = "Xoá câu hỏi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Xoá câu hỏi</h1>
+
+<h3>Bạn có chắc chắn muốn xoá câu hỏi này?</h3>
+<div>
+    <h4>Thông tin câu hỏi sẽ xoá</h4>
+    <hr />
+    <form asp-action="Delete">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SubjectID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SubjectID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GroupID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.GroupID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Content)
+            </dt>
+            <dd class="col-sm-10">
+                @*<textarea rows="5" class="form-control content">@Html.DisplayFor(model => model.Content)</textarea>*@
+                @Html.Raw(Model.Content)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsMultipleChoice)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IsMultipleChoice)
+            </dd>
+
+            @if (Model.IsMultipleChoice)
+            {
+                List<int> correctAnswers = new List<int>();
+                for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    <dt class="col-sm-2">
+                        Nội dung đáp án thứ @(i + 1)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @*<textarea rows="5" class="editor">@Model.Answers[i].Content</textarea>*@
+                        @Html.Raw(Model.Answers[i].Content)
+                    </dd>
+
+                    if (Model.Answers[i].IsCorrect)
+                    {
+                        correctAnswers.Add(i);
+                    }
+                }
+                <dt class="col-sm-2">
+                    Đáp án đúng
+                </dt>
+                <dd class="col-sm-10">
+                    Đáp án thứ @(correctAnswers[0] + 1)
+                    @for (int i = 1; i < correctAnswers.Count; i++)
+                    {
+                        <span>, đáp án thứ @(correctAnswers[i] + 1)</span>
+                    }
+                </dd>
+            }
+            else
+            {
+
+                <dt class="col-sm-2">
+                    Đáp án câu hỏi
+                </dt>
+                <dd class="col-sm-10">
+                    @if (Model.Answers[0].Content.Contains("/images/"))
+                    {
+                        <img src="@Model.Answers[0].Content" alt="Đáp án câu hỏi" />
+                        <input type="hidden" asp-for="@Model.Answers[0].Content" />
+                    }
+                    else
+                    {
+                        @*<textarea rows="5" class="editor">@Model.Answers[0].Content</textarea>*@
+                        @Html.Raw(Model.Answers[0].Content)
+                    }
+                </dd>
+            }
+        </dl>
+
+        <input type="submit" value="Xoá" class="btn btn-danger" /> |
+        <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách câu hỏi</a>
+    </form>
+</div>
+
+@section Scripts{
+
+    @* Enable MathJax to support render MathML on Chrome and Edge *@
+    <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"] } };</script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
+}

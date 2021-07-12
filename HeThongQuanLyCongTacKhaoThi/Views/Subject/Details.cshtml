@@ -1,0 +1,72 @@
+﻿@using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Contests
+@model Tuple<List<ContestViewModel>, List<ContestViewModel>>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800 font-weight-bolder">Danh sách các kỳ kiểm tra của môn "@ViewData["SubjectName"]"</h1>
+</div>
+<h2 class="h4 mb-0 text-gray-800 font-weight-bold">Kỳ kiểm tra chưa hoàn tất</h2>
+<hr />
+<div class="row mt-4">
+    @foreach (ContestViewModel contest in Model.Item1)
+    {
+        <div class="col-lg-5">
+            <a class="text-decoration-none" asp-action="RandomExamFollowContestID"
+               asp-controller="Contest"
+               asp-all-route-data="@(new Dictionary<string, string> { { "ContestID", contest.ID.ToString() } })">
+                <div class="exam" style="cursor:pointer">
+                    <div class="card border-left-primary shadow mb-4">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="mr-2">
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">@contest.Name</div>
+                                </div>
+                            </div>
+                            <p class="card-text mt-3">
+                                @contest.Description
+                                <br>
+                                Thời gian bắt đầu thi: <span class="font-weight-bold">@contest.StartTime</span>
+                                <br>
+                                Thời gian thi: <span class="font-weight-bold">@contest.Duration phút</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+<h2 class="h4 mb-0 text-gray-800 font-weight-bold">Kỳ kiểm tra đã hoàn tất</h2>
+<hr />
+<div class="row mt-4">
+    @foreach (ContestViewModel contest in Model.Item2)
+    {
+        <div class="col-lg-5">
+            <a class="text-decoration-none" asp-action="GetResult"
+               asp-controller="Exam"
+               asp-all-route-data="@(new Dictionary<string, string> { { "contestID", contest.ID.ToString() } })">
+                <div class="exam" style="cursor:pointer">
+                    <div class="card border-left-success shadow mb-4">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="mr-2">
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">@contest.Name</div>
+                                </div>
+                            </div>
+                            <p class="card-text text-success mt-3">
+                                @contest.Description
+                                <br>
+                                Thời gian bắt đầu thi: <span class="font-weight-bold">@contest.StartTime</span>
+                                <br>
+                                Thời gian thi: <span class="font-weight-bold">@contest.Duration phút</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

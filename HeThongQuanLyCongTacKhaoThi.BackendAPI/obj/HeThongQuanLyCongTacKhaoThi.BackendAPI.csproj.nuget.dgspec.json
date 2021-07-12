@@ -1,0 +1,400 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.BackendAPI\\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj": {}
+  },
+  "projects": {
+    "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\HeThongQuanLyCongTacKhaoThi.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\HeThongQuanLyCongTacKhaoThi.Application.csproj",
+        "projectName": "HeThongQuanLyCongTacKhaoThi.Application",
+        "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\HeThongQuanLyCongTacKhaoThi.Application.csproj",
+        "packagesPath": "C:\\Users\\htthi\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\htthi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj": {
+                "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj"
+              },
+              "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj": {
+                "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "DevExpress.Xpo": {
+              "target": "Package",
+              "version": "[20.1.3, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.BackendAPI\\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.BackendAPI\\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj",
+        "projectName": "HeThongQuanLyCongTacKhaoThi.BackendAPI",
+        "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.BackendAPI\\HeThongQuanLyCongTacKhaoThi.BackendAPI.csproj",
+        "packagesPath": "C:\\Users\\htthi\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.BackendAPI\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\htthi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\HeThongQuanLyCongTacKhaoThi.Application.csproj": {
+                "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Application\\HeThongQuanLyCongTacKhaoThi.Application.csproj"
+              },
+              "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj": {
+                "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj"
+              },
+              "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj": {
+                "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj"
+              },
+              "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj": {
+                "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[9.3.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.10, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.6.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj",
+        "projectName": "HeThongQuanLyCongTacKhaoThi.Data",
+        "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj",
+        "packagesPath": "C:\\Users\\htthi\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\htthi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj": {
+                "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "DevExpress.Xpo": {
+              "target": "Package",
+              "version": "[20.1.3, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.Extensions.Logging.Console": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj",
+        "projectName": "HeThongQuanLyCongTacKhaoThi.Utilities",
+        "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\HeThongQuanLyCongTacKhaoThi.Utilities.csproj",
+        "packagesPath": "C:\\Users\\htthi\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Utilities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\htthi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj",
+        "projectName": "HeThongQuanLyCongTacKhaoThi.ViewModels",
+        "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj",
+        "packagesPath": "C:\\Users\\htthi\\.nuget\\packages\\",
+        "outputPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.ViewModels\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\htthi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj": {
+                "projectPath": "F:\\Projects\\.NET_Core\\HeThongQuanLyCongTacKhaoThi\\HeThongQuanLyCongTacKhaoThi.Data\\HeThongQuanLyCongTacKhaoThi.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[9.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

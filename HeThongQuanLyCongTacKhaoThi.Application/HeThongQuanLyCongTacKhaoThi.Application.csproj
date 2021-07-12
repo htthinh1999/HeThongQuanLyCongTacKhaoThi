@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Xpo" Version="20.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HeThongQuanLyCongTacKhaoThi.Data\HeThongQuanLyCongTacKhaoThi.Data.csproj" />
+    <ProjectReference Include="..\HeThongQuanLyCongTacKhaoThi.ViewModels\HeThongQuanLyCongTacKhaoThi.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>

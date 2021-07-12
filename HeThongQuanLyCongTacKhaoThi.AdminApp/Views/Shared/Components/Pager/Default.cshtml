@@ -1,0 +1,59 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Common.PagedResultBase
+@{
+    var urlTemplate = Url.Action() + "?pageIndex={0}";
+    var request = ViewContext.HttpContext.Request;
+    foreach(var key in request.Query.Keys)
+    {
+        if (key == "pageIndex")
+        {
+            continue;
+        }
+        if(request.Query[key].Count > 1)
+        {
+            foreach(var item in (string[])request.Query[key])
+            {
+                urlTemplate += "&" + key + "=" + item;
+            }
+        }
+        else
+        {
+            urlTemplate += "&" + key + "=" + request.Query[key];
+        }
+    }
+
+    var startIndex = Math.Max(Model.PageIndex - 5, 1);
+    var endIndex = Math.Min(Model.PageIndex + 5, Model.PageCount);
+}
+
+<ul class="pagination">
+    <li class="page-item @((Model.PageIndex == startIndex)?"disabled":"") "><a href="@urlTemplate.Replace("{0}", "1")" title="Trang 1" class="page-link">Đầu</a></li>
+    <li class="page-item @((Model.PageIndex == startIndex)?"disabled":"") "><a href="@urlTemplate.Replace("{0}", (Model.PageIndex - 1).ToString())" title="Trang @{(Model.PageIndex - 1).ToString();} " class="page-link">Trước</a></li>
+
+    @for (var i = startIndex; i <= endIndex; i++)
+    {
+        if (i == Model.PageIndex)
+        {
+            <li class="page-item active"><a href="#" class="page-link">@i</a></li>
+        }
+        else
+        {
+            <li class="page-item"><a href="@urlTemplate.Replace("{0}", i.ToString())" title="Trang @i.ToString()" class="page-link">@i</a></li>
+        }
+    }
+
+    <li class="page-item @((Model.PageIndex == endIndex)?"disabled":"") "><a href="@urlTemplate.Replace("{0}", (Model.PageIndex + 1).ToString())" title="Trang @{(Model.PageIndex + 1).ToString();} " class="page-link">Sau</a></li>
+    <li class="page-item @((Model.PageIndex == endIndex)?"disabled":"") "><a href="@urlTemplate.Replace("{0}", (Model.PageCount).ToString())" title="Trang @Model.PageCount.ToString()" class="page-link">Cuối</a></li>
+
+    <form class="form-inline ml-auto">
+        <div class="form-group">
+
+            <label>Hiển thị </label>
+            <select class="form-control form-control-sm mx-2" onchange="this.form.submit()" asp-for="PageSize">
+                <option selected>5</option>
+                <option>10</option>
+                <option>15</option>
+            </select>
+            bản ghi
+        </div>
+    </form>
+</ul>

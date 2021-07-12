@@ -1,0 +1,75 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.System.Accounts.AccountViewModel
+
+@{
+    ViewData["Title"] = "Xoá tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Xoá thông tin tài khoản</h1>
+
+<h3>Bạn có chắc chắn muốn xoá tài khoản này?</h3>
+<div>
+    <h4>Thông tin tài khoản sẽ xoá</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Birthday)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Birthday)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.Gender ? "Nam" : "Nữ")
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student_TeacherID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student_TeacherID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ClassID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ClassID)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Xoá" class="btn btn-danger" /> |
+        <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách tài khoản</a>
+    </form>
+</div>

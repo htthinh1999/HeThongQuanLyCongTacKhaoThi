@@ -1,9 +1,6 @@
 ﻿using HeThongQuanLyCongTacKhaoThi.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
 {
@@ -13,11 +10,9 @@ namespace HeThongQuanLyCongTacKhaoThi.Data.Configurations
         {
             builder.ToTable("SUBJECT");
             builder.HasKey(x => x.ID);
-            builder.Property(x => x.Name).IsRequired().IsUnicode();
-            builder.Property(x => x.AssiduousScorePercent).IsRequired().HasDefaultValue(0.1f);
-            builder.Property(x => x.FrequentScorePercent).IsRequired().HasDefaultValue(.2f);
-            builder.Property(x => x.MiddleScorePercent).IsRequired().HasDefaultValue(.2f);
-            builder.Property(x => x.FinalScorePercent).IsRequired().HasDefaultValue(.5f);
+            builder.Property(x => x.ID).HasMaxLength(10);
+            builder.Property(x => x.Name).IsRequired().IsUnicode().HasMaxLength(50);
+            builder.Property(x => x.LessonCount).IsRequired();
             builder.Property(x => x.CreditCount).IsRequired();
         }
     }

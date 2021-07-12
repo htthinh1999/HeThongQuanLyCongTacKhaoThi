@@ -1,0 +1,75 @@
+﻿@model HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Contests.ContestViewModel
+
+@{
+    ViewData["Title"] = "Xoá kỳ kiểm tra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Xoá kỳ kiểm tra</h1>
+
+<h3>Bạn có muốn xoá kỳ kiểm tra?</h3>
+<div>
+    <h4>Thông tin kỳ kiểm tra sẽ xoá</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubjectID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubjectID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ScoreTypeID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ScoreTypeID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Teacher1ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Teacher1ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Teacher2ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Teacher2ID)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Xoá" class="btn btn-danger" /> |
+        <a class="btn btn-outline-primary" asp-action="Index">Quay lại danh sách kỳ kiểm tra</a>
+    </form>
+</div>
