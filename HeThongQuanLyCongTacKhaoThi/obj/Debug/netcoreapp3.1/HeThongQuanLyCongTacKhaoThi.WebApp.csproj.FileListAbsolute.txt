@@ -453,5 +453,5 @@ F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bi
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Private.ServiceModel.dll
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\Razor\Views\Home\Register.cshtml.g.cs
 F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\Razor\Views\ScoreSystem\Index.cshtml.g.cs
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.csprojAssemblyReference.cache
-F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\staticwebassets\HeThongQuanLyCongTacKhaoThi.WebApp.StaticWebAssets.xml
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.csproj.AssemblyReference.cache
+F:\Projects\.NET_Core\HeThongQuanLyCongTacKhaoThi\HeThongQuanLyCongTacKhaoThi\obj\Debug\netcoreapp3.1\HeThongQuanLyCongTacKhaoThi.WebApp.GeneratedMSBuildEditorConfig.editorconfig

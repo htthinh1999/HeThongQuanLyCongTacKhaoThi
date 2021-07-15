@@ -74,6 +74,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         }
 
         [HttpGet("accounts/{accountID}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetSubjectsByAccountID(Guid accountID)
         {
             if (!ModelState.IsValid)
@@ -85,6 +86,7 @@ namespace HeThongQuanLyCongTacKhaoThi.BackendAPI.Controllers
         }
 
         [HttpGet("/api/subjects-not-joined/accounts/{accountID}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetSubjectsNotJoinedByAccountID(Guid accountID)
         {
             if (!ModelState.IsValid)

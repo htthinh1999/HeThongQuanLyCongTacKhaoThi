@@ -1,6 +1,7 @@
-﻿@using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects;
+﻿@using HeThongQuanLyCongTacKhaoThi.ViewModels.Catalog.Subjects
 @using Microsoft.AspNetCore.Http
 @using Newtonsoft.Json
+@using HeThongQuanLyCongTacKhaoThi.Utilities.Constants
 
 @{ 
     ViewData["Title"] = "Trang chủ";
@@ -10,6 +11,13 @@
         var accoutSubjectsNotJoinedJson = Context.Session.GetString("AccoutSubjectsNotJoined");
         subjectsNotJoined = JsonConvert.DeserializeObject<List<SubjectViewModel>>(accoutSubjectsNotJoinedJson);
     }
+}
+
+@if(User.Identity.Name != null && !User.IsInRole(Roles.Student))
+{
+    <div id="alert-msg" class="alert alert-danger" role="alert">
+        <b>Bạn chưa được cấp quyền!</b> Vui lòng liên hệ với <b>"Quản trị viên"</b> để được cấp quyền sử dụng!
+    </div>
 }
 
 <div class="text-center">

@@ -1,5 +1,13 @@
-﻿@{
+﻿@using HeThongQuanLyCongTacKhaoThi.Utilities.Constants
+@{
     ViewData["Title"] = "Trang chủ";
+}
+
+@if(User.Identity.Name != null && !User.IsInRole(Roles.Admin) && !User.IsInRole(Roles.Teacher))
+{
+    <div id="alert-msg" class="alert alert-danger" role="alert">
+        <b>Bạn chưa được cấp quyền!</b> Vui lòng liên hệ với <b>"Quản trị viên"</b> để được cấp quyền sử dụng!
+    </div>
 }
 
 <div class="text-center">

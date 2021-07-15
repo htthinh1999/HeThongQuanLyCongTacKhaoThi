@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label class="control-label">Môn học</label>
                         <div class="form-inline">
-                            <select asp-for="@Model[i]" name="subjectIDs[@i]" class="form-control mr-2 col-lg-8 col-xl-10" asp-items="@(new SelectList(ViewBag.Subjects, "ID", "Name"))">
+                            <select asp-for="@Model[i].ID" name="subjectIDs[@i]" class="form-control mr-2 col-lg-8 col-xl-10" asp-items="@(new SelectList(ViewBag.Subjects, "ID", "Name"))">
                             </select>
                             <button id="remover-subject" name="remover-subject" type="button" class="btn btn-primary">
                                 <i class="fa fa-trash"></i>
