@@ -171,6 +171,11 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Subjects
                                                CreditCount = s.CreditCount
                                            }).ToListAsync();
 
+            if(subjectsNotJoined == null)
+            {
+                return new ApiSuccessResult<List<SubjectViewModel>>(new List<SubjectViewModel>());
+            }
+
             return new ApiSuccessResult<List<SubjectViewModel>>(subjectsNotJoined);
         }
 

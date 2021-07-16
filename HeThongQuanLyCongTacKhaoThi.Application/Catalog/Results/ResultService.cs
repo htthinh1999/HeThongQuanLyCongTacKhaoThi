@@ -138,12 +138,15 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.Results
                               join ed in _context.ExamDetails on e.ID equals ed.ExamID
                               join q in _context.Questions on ed.QuestionID equals q.ID
                               where e.ContestID == contestID && rs.UserID == accountID
-                              group new { rs, e, q } by new { rs.StudentAnswerID, e.Name } into exam
+                              group new { rs, e, q } by new { rs.StudentAnswerID, e.Name, rs.Mark1, rs.Mark2, rs.Mark } into exam
                               select new ExamResultViewModel()
                               {
                                   Name = exam.Key.Name,
                                   MultipleChoiceQuestionCount = exam.Sum(x => (x.q.IsMultipleChoice) ? 1 : 0),
                                   EssayQuestionCount = exam.Sum(x => (x.q.IsMultipleChoice) ? 1 : 0),
+                                  Mark1 = exam.Key.Mark1,
+                                  Mark2 = exam.Key.Mark2,
+                                  Mark = exam.Key.Mark,
                                   StudentAnswerID = exam.Key.StudentAnswerID,
                                   studentAnswerDetails = new List<StudentAnswerDetailViewModel>()
                               }).FirstOrDefaultAsync();
