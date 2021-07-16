@@ -116,22 +116,46 @@ namespace HeThongQuanLyCongTacKhaoThi.Application.Catalog.ExamDetails
 
         public async Task<ApiResult<bool>> AddMaxQuestionMark(int examID, List<ExamDetailCURequest> examDetails)
         {
+            bool setMaxMark = true;
+            float totalMark = 0;
+
             foreach (var examDetail in examDetails)
             {
-                var question = await (from ed in _context.ExamDetails
-                               where ed.ExamID == examID && ed.QuestionID == examDetail.QuestionID
-                               select ed).FirstOrDefaultAsync();
-                question.MaxQuestionMark = examDetail.MaxQuestionMark;
+                var essayQuestion = await (from ed in _context.ExamDetails
+                                          join q in _context.Questions on ed.QuestionID equals q.ID
+                                          where ed.ExamID == examID 
+                                                && ed.QuestionID == examDetail.QuestionID
+                                                && !q.IsMultipleChoice
+                                          select ed).FirstOrDefaultAsync();
+
+                if(essayQuestion == null)
+                {
+                    continue;
+                }
+
+                if(examDetail.MaxQuestionMark == 0)
+                {
+                    setMaxMark = false;
+                    break;
+                }
+
+                essayQuestion.MaxQuestionMark = examDetail.MaxQuestionMark;
+                totalMark += examDetail.MaxQuestionMark;
             }
 
-            var result = await _context.SaveChangesAsync();
-
-            if (result == 0)
+            if (setMaxMark)
             {
-                return new ApiErrorResult<bool>("Không thể thêm điểm cho câu hỏi");
+                if(totalMark > 10)
+                {
+                    return new ApiErrorResult<bool>("Tổng điểm không thể quá 10");
+                }
+
+                await _context.SaveChangesAsync();
+
+                return new ApiSuccessResult<bool>();
             }
 
-            return new ApiSuccessResult<bool>();
+            return new ApiErrorResult<bool>("Chưa thiết lập điểm cho câu hỏi");
         }
     }
 }
